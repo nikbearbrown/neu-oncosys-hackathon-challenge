@@ -79,3 +79,9 @@ The focused later reports now have concise decks with full reasoning retained in
 | SNS filter and reconstruction parity | [Report](sns-cohort-control-tower/audit-codex-23484638-pass-03.md) | [PDF](sns-cohort-control-tower/slides-codex-23484638-pass-04.pdf) | [HTML](sns-cohort-control-tower/slides-codex-23484638-pass-04.html) | [Markdown](sns-cohort-control-tower/slides-codex-23484638-pass-04.md) |
 
 The Identity Crisis session-level concerns remain source-derived in this reviewer's pass. The SNS slides separately attribute the parallel reviewer's invented-data reproductions, including positive controls. No official score or representative accuracy estimate is asserted.
+
+## Later Identity Crisis Runtime Reconciliation
+
+Update November 14, 2026, 21:04 UTC: the [source/runtime reconciliation](identity-crisis-control-tower/runtime-reconciliation-codex-23484638.md) adds separately attributed evidence from commit `a544f20`. A fresh browser observed the permissive default; same-path changed fixture data left a stale count until cache invalidation. All 14 checks imported successfully and every required name in the eight built-in cards was present in that test environment.
+
+The signed-review finding is narrower: a deterministic approved-review AppTest route retained the old receipt after intended-use text changed, while a separate Chromium Request more evidence route with navigation withdrew it. Both results matter. The note links the traces, reproduction programs, exact source paths, passing controls and acceptance checks. Optional AI-summary freshness remains source-derived. Earlier reports and decks are preserved as records of their own evidence scope; no official score or extra duplicate finding is added.
