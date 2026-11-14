@@ -53,3 +53,14 @@ The HTML decks are self-contained. For example:
 ```bash
 open "/Users/nik/Documents/agents/neu-oncosys-hackathon-challenge/professor-bear/tripwire/slides-codex-23484638-pass-02.html"
 ```
+
+## Later Evidence And UI Correction
+
+Update after the initial guide snapshot, November 14, 2026, 20:34 UTC:
+
+- **Identity Crisis defaults need a correction.** The callable API defaults to strict missing-check handling, but the browser initializes its permissive setting to on. Earlier companion wording that called the bypass nondefault applies to the API only. The [UI-state follow-through](identity-crisis-control-tower/audit-codex-23484638-pass-03.md) and [separate deck](identity-crisis-control-tower/slides-codex-23484638-pass-03.html) trace the initialization, data-cache identity, optional-summary cache and sign-off applicability checks. These new session-level consequences are source-derived and need targeted runs. No claim is made that every built-in card currently has an unregistered check.
+- **SNS SN-08 and SN-09 now have separate runtime corroboration.** The parallel reviewer published four invented-data CLI/reconstruction cases in [reconstruction-parity.json](sns-cohort-control-tower/evidence/reconstruction-parity.json). The ordinary case retained exact membership. A missing required column exported 40 rows without an eligibility error. The missing-B-clinical and clinical-CSV cases exported 39 rows from the main path but reconstructed 40, adding one member. These are targeted cases with positive controls, not an accuracy estimate. This source reviewer did not execute them.
+- **Busy Beavers BB-01 and BB-02 now have separate runtime corroboration.** The parallel [supplement probes](busy-beavers/evidence/supplement-probes.json) report missed repeated IDs and a rounded-hash miss, with within-tolerance and larger-change controls. The original source report remains a record of its own unexecuted pass.
+- **Studio CS-03 now has a separate warning-policy probe.** The parallel [supplement probes](oncosys-cohort-studio/evidence/supplement-probes.json) report unchanged reconstruction producing eight rows and a changed-manifest rerun warning but continuing to seven rows. Whether exploratory continuation is appropriate remains a product-policy question. A warning does not itself certify faithful reproduction.
+
+Later observations qualify the earlier snapshot only for the paths actually tested. Preserve the positive controls and the distinction between compatibility, adequacy, evidence identity and human approval.
