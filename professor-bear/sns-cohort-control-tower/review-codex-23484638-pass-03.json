@@ -1,0 +1,181 @@
+{
+  "mode": "judge",
+  "repo": "saigunavardhan/sns-cohort-control-tower",
+  "commit": "c1e8b79a2987cee6087d847867f9895deaa109a4",
+  "track": 1,
+  "reviewer": "Professor Bear / Codex source review",
+  "summary": "Following the cohort export through its standalone reconstruction reveals three additional source-level concerns: missing required filter inputs leave membership unchanged, the main engine and reconstruction use different clinical-file fallback policies, and the A2 specification embeds JSON true in Python source. These findings concern the exported workflow, not the separate detector's measured accuracy. No submission or generated program was executed in this pass.",
+  "limitations": [
+    "Pinned local checkout, not a verified official final-submission receipt; branch names and later changes are outside this pass.",
+    "Static source analysis only. No submission code, tests, installers, workflows, notebook, server, hosted endpoint or model was executed.",
+    "No sealed envelopes, answer keys or raw clinical datasets were accessed. Numerical correctness, performance, accessibility and fresh-machine setup remain untested.",
+    "Source-derived control-flow consequences are labeled as such. Proposed acceptance checks are not observed test results.",
+    "The collected text budget is 160 files, 200 KB/file and 4 MB/entry. Complete_with_exclusions is not an exhaustive audit; exclusions and focused follow-ups are recorded.",
+    "No official score, cross-team ranking, clinical validity or regulatory/accessibility certification is asserted."
+  ],
+  "criteria": [
+    {
+      "id": "T1-1",
+      "status": "observed",
+      "assessment": "This focused pass traces missing eligibility fields. A skipped prerequisite must remain distinguishable from a valid filtering decision.",
+      "findings": [
+        {
+          "kind": "gap",
+          "priority": "P1",
+          "title": "A missing required filter input silently leaves the cohort unchanged",
+          "observation": "Built-in A1 requires a usable ER status and A2 requires a nonempty subtype call. The require_value branch filters working only if a clinical table exists and contains the requested column. There is no else error or unavailable state. With an existing recognized table lacking that column, the step can be logged with unchanged counts and the CLI proceeds to write the cohort.",
+          "impact": "Membership can include samples whose required eligibility cannot be evaluated. An unchanged count does not tell the researcher that the promised filter was skipped. This is a source-derived path for missing inputs, not an observed output on the event dataset.",
+          "recommendation": "Validate every required table and field before applying cohort steps. On missing evidence, stop the approved export or emit a visibly incomplete diagnostic result with an explicit skipped/error step and reason. Do not treat a missing prerequisite as a successful no-op.",
+          "acceptance_check": "Use a valid invented clinical table with sample IDs but omit the ER column, then the subtype column. The corresponding built-in cohort must identify an unavailable eligibility test and must not present an ordinary filtered success. Retain a valid-field control.",
+          "confidence": "High for the conditional branch and export caller. Full CLI and UI outcomes remain untested in this source pass.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "sns/engine/cohort.py",
+              "start": 9,
+              "end": 20,
+              "quote": "BUILTIN_SPECS = {\n    \"A1\": [\n        {\"step\": \"require_file\", \"file\": \"protein_rppa.tsv.gz\"},\n        {\"step\": \"filter_sample_type\", \"type\": \"01\"},\n        {\"step\": \"require_value\", \"column\": \"breast_carcinoma_estrogen_receptor_status\",\n         \"allowed\": [\"Positive\", \"Negative\"]},\n    ],\n    \"A2\": [\n        {\"step\": \"require_file\", \"file\": \"clinical.tsv\"},\n        {\"step\": \"filter_sample_type\", \"type\": \"01\"},\n        {\"step\": \"require_value\", \"column\": \"PAM50Call_RNAseq\", \"not_empty\": True},\n    ],"
+            },
+            {
+              "path": "sns/engine/cohort.py",
+              "start": 166,
+              "end": 176,
+              "quote": "        elif step_name == \"require_value\":\n            col = step_def[\"column\"]\n            allowed = step_def.get(\"allowed\")\n            not_empty = step_def.get(\"not_empty\", False)\n            if clinical is not None and col in clinical.columns:\n                clin_idx = clinical[~clinical.index.duplicated()]\n                if not_empty:\n                    valid = {s for s in working if s in clin_idx.index and pd.notna(clin_idx.at[s, col])}\n                else:\n                    valid = {s for s in working if s in clin_idx.index and clin_idx.at[s, col] in allowed}\n                working = valid"
+            },
+            {
+              "path": "sns/engine/cohort.py",
+              "start": 198,
+              "end": 202,
+              "quote": "        counts = _step_counts(working)\n        step_rec.update(counts)\n        steps.append(step_rec)\n\n    return working, flagged, steps, all_applied"
+            },
+            {
+              "path": "sns/cohort.py",
+              "start": 163,
+              "end": 189,
+              "quote": "    working, flagged, steps, applied_repairs = run_cohort(\n        spec, folder_b, folder_a, findings_doc,\n        slides_path=args.slides,\n    )\n\n    df = build_cohort_output(working, flagged)\n\n    # Duplicate check\n    if df[\"sample_id\"].duplicated().any():\n        dupes = df[df[\"sample_id\"].duplicated(keep=False)][\"sample_id\"].tolist()\n        print(f\"WARNING: duplicate sample_ids detected: {dupes[:5]}\", flush=True)\n\n    csv_path = out_dir / \"cohort_samples.csv\"\n    df.to_csv(csv_path, index=False)\n\n    steps_data = {\n        \"analysis\": analysis_id,\n        \"release_b\": str(folder_b),\n        \"release_a\": str(folder_a),\n        \"steps\": steps,\n        \"repairs_applied\": applied_repairs,\n        \"n_samples\": len(df),\n        \"n_flagged\": int(df[\"flagged\"].sum()),\n        \"n_patients\": int(df[\"patient_id\"].nunique()),\n    }\n    steps_path = out_dir / \"cohort_steps.json\"\n    steps_path.write_text(json.dumps(steps_data, indent=2, default=str), encoding=\"utf-8\")"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-2",
+      "status": "not_tested",
+      "assessment": "A1/A2 built-in eligibility is explicit, but missing fields can bypass its intended meaning. Broader question reasoning remains in the retained first pass.",
+      "findings": [],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. This pass does not establish runtime behavior or user comprehension."
+    },
+    {
+      "id": "T1-3",
+      "status": "not_tested",
+      "assessment": "Record exactly which release and clinical table supplied each filter. A declared RELEASE_A variable does not establish that reconstruction actually uses it.",
+      "findings": [],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. This pass does not establish runtime behavior or user comprehension."
+    },
+    {
+      "id": "T1-4",
+      "status": "not_tested",
+      "assessment": "These source paths raise evidence and reproducibility concerns. No deployed exploit, clinical harm, source-data mutation or official penalty is asserted.",
+      "findings": [],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. This pass does not establish runtime behavior or user comprehension."
+    },
+    {
+      "id": "T1-5",
+      "status": "observed",
+      "assessment": "Traceability reaches the actual CLI, web caller and generated script. Three concrete synthetic acceptance checks remain unexecuted by this reviewer.",
+      "findings": [
+        {
+          "kind": "gap",
+          "priority": "P1",
+          "title": "The main cohort and reconstruction use different clinical inputs",
+          "observation": "run_cohort falls back to clinical data from release A when none is loaded from B. The generated script looks only for B/clinical.tsv and skips require_value when that clinical object is None. Although it declares RELEASE_A, the generated clinical-loading and filter path does not reproduce the main engine's fallback.",
+          "impact": "For A1 with a recognized protein layer in B, no clinical table in B and a usable clinical table in A, the main export can filter with A while reconstruction leaves the clinical filter unapplied. The two artifacts can therefore have different membership under this explicit source-derived condition. It is not a claim that the normal full release triggers this case.",
+          "recommendation": "Share one versioned transformation implementation or serialize the exact resolved input map into the reconstruction. Make any cross-release fallback explicit and hash-bound, or reject missing B prerequisites consistently in both paths. Compare exact membership, not just row count.",
+          "acceptance_check": "Create invented A labels that exclude at least one B protein sample, omit B clinical data and run the A1 export and reconstruction in an authorized isolated environment. Both must either refuse the same missing evidence or produce identical sorted sample IDs with the same declared input provenance.",
+          "confidence": "High for divergent source policies. The proposed parity fixture has not been executed.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "sns/engine/cohort.py",
+              "start": 140,
+              "end": 142,
+              "quote": "    clinical = _load_clinical(folder_b)\n    if clinical is None and folder_a:\n        clinical = _load_clinical(folder_a)"
+            },
+            {
+              "path": "sns/engine/cohort.py",
+              "start": 166,
+              "end": 176,
+              "quote": "        elif step_name == \"require_value\":\n            col = step_def[\"column\"]\n            allowed = step_def.get(\"allowed\")\n            not_empty = step_def.get(\"not_empty\", False)\n            if clinical is not None and col in clinical.columns:\n                clin_idx = clinical[~clinical.index.duplicated()]\n                if not_empty:\n                    valid = {s for s in working if s in clin_idx.index and pd.notna(clin_idx.at[s, col])}\n                else:\n                    valid = {s for s in working if s in clin_idx.index and clin_idx.at[s, col] in allowed}\n                working = valid"
+            },
+            {
+              "path": "sns/cohort.py",
+              "start": 77,
+              "end": 81,
+              "quote": "        \"# Apply spec filters\",\n        \"clinical_path = next((RELEASE_B / f for f in ['clinical.tsv'] if (RELEASE_B / f).exists()), None)\",\n        \"clinical = pd.read_csv(clinical_path, sep='\\\\t') if clinical_path else None\",\n        \"if clinical is not None:\",\n        \"    clinical = clinical.set_index('sampleID') if 'sampleID' in clinical.columns else clinical\","
+            },
+            {
+              "path": "sns/cohort.py",
+              "start": 116,
+              "end": 128,
+              "quote": "        \"    elif step['step'] == 'require_value':\",\n        \"        col = step['column']\",\n        \"        if clinical is not None and col in clinical.columns:\",\n        \"            if step.get('not_empty'):\",\n        \"                working = {s for s in working if s in clinical.index and pd.notna(clinical.at[s, col])}\",\n        \"            else:\",\n        \"                allowed = set(step['allowed'])\",\n        \"                working = {s for s in working if s in clinical.index and clinical.at[s, col] in allowed}\",\n        \"\",\n        \"rows = [{'sample_id': s, 'patient_id': s[:12], 'flagged': s in flagged} for s in sorted(working)]\",\n        \"out = pd.DataFrame(rows)\",\n        \"out.to_csv('cohort_samples.csv', index=False)\",\n        f\"print(f'cohort_samples.csv: {{len(out)}} samples')\","
+            },
+            {
+              "path": "sns/cohort.py",
+              "start": 191,
+              "end": 193,
+              "quote": "    reproduce_path = _make_reproduce_script(\n        out_dir, folder_b, folder_a, spec, applied_repairs\n    )"
+            }
+          ]
+        },
+        {
+          "kind": "gap",
+          "priority": "P1",
+          "title": "The A2 reconstruction embeds a JSON boolean as a Python name",
+          "observation": "The generator writes SPEC = followed by json.dumps(spec). The built-in A2 spec contains not_empty=True, which JSON serializes as lowercase true. In Python source, that token is a name rather than the True literal, and the generated script shown here defines no name true. The ordinary A2 specification therefore contains an unresolved name in the reconstructed Python assignment.",
+          "impact": "The standalone reconstruction can fail before rebuilding membership even when the main cohort export succeeded. Syntax parsing alone will not catch this particular defect because a bare name is valid Python syntax. This conclusion comes from source and language semantics, not an executed generated script.",
+          "recommendation": "Embed a safely quoted JSON string and call json.loads at runtime, or use repr for a supported Python-literal structure. Apply the same serialization rule to applied repairs and test booleans, null values, quotes and non-ASCII descriptions as data.",
+          "acceptance_check": "Export the built-in A2 specification and run its reconstruction on an authorized synthetic fixture. Verify no unresolved true/false/null names occur and exact membership matches the main engine. Keep a normal A1 control and separate syntax checks from execution checks.",
+          "confidence": "High for the generator and built-in A2 literal. No generated code was executed or represented as a passed/failed runtime test by this reviewer.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "sns/cohort.py",
+              "start": 17,
+              "end": 29,
+              "quote": "def _make_reproduce_script(out_dir, folder_b, folder_a, spec, applied_repairs):\n    \"\"\"Write a standalone pandas script that rebuilds cohort_samples.csv.\"\"\"\n    lines = [\n        '\"\"\"Standalone script: rebuilds cohort_samples.csv from the release folder.\"\"\"',\n        \"import pandas as pd\",\n        \"from pathlib import Path\",\n        \"\",\n        f'RELEASE_B = Path({repr(str(folder_b))})',\n        f'RELEASE_A = Path({repr(str(folder_a))})',\n        \"\",\n        \"SPEC = \" + json.dumps(spec, indent=4),\n        \"\",\n        \"REPAIRS = \" + json.dumps(applied_repairs, indent=4),"
+            },
+            {
+              "path": "sns/engine/cohort.py",
+              "start": 16,
+              "end": 20,
+              "quote": "    \"A2\": [\n        {\"step\": \"require_file\", \"file\": \"clinical.tsv\"},\n        {\"step\": \"filter_sample_type\", \"type\": \"01\"},\n        {\"step\": \"require_value\", \"column\": \"PAM50Call_RNAseq\", \"not_empty\": True},\n    ],"
+            },
+            {
+              "path": "sns/cohort.py",
+              "start": 125,
+              "end": 132,
+              "quote": "        \"rows = [{'sample_id': s, 'patient_id': s[:12], 'flagged': s in flagged} for s in sorted(working)]\",\n        \"out = pd.DataFrame(rows)\",\n        \"out.to_csv('cohort_samples.csv', index=False)\",\n        f\"print(f'cohort_samples.csv: {{len(out)}} samples')\",\n    ]\n    path = Path(out_dir) / \"reproduce_cohort.py\"\n    path.write_text(\"\\n\".join(lines), encoding=\"utf-8\")\n    return path"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-6",
+      "status": "not_tested",
+      "assessment": "Quick fixes include fail-explicit required fields and safe literal serialization. Shared versioned transformation semantics are the larger parity improvement.",
+      "findings": [],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. This pass does not establish runtime behavior or user comprehension."
+    },
+    {
+      "id": "T1-7",
+      "status": "not_tested",
+      "assessment": "A successful file export should not imply that eligibility was evaluated or reconstruction succeeded. Display the exact limits in the exported bundle.",
+      "findings": [],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. This pass does not establish runtime behavior or user comprehension."
+    }
+  ],
+  "judge_scores": null
+}
