@@ -58,3 +58,14 @@ renamed to `neu-oncosys-hackathon-challenge`, preserving its Git history.
 The prior rejected publication has not been described as successful. The new
 name and user-supplied upstream integration provide additional authorization
 context for one publication attempt; its result will be recorded separately.
+
+## Successful publication
+
+The newly authorized target was created and pushed successfully on 2026-11-14:
+https://github.com/nikbearbrown/neu-oncosys-hackathon-challenge
+
+Visibility is private; default branch is main. The first published OncoSys
+integration commit is `c3d5eaf`. This supersedes the earlier blocked attempt
+under the old name. No private recording credential or upstream datasets were
+included. Real submissions remain pending; no team scores or runtime claims
+have been produced.
