@@ -1,10 +1,10 @@
-# SNS Cohort Control Tower: independent first-pass review
+# SNS Cohort Control Tower: independent review
 
-Reviewed commit: `c1e8b79a2987cee6087d847867f9895deaa109a4`. Updated: **2026-11-14T20:26:17+00:00**. Track 1: Cohort Firewall.
+Reviewed commit: `c1e8b79a2987cee6087d847867f9895deaa109a4`. Updated: **2026-11-14T21:11:39+00:00**. Track 1: Cohort Firewall.
 
 **Status: source review plus isolated runtime checks; no verified hosted demo.** No official score is assigned. Runtime observations are labelled per issue; remaining source findings still require reproduction. Exact branches and limitations are stated. No student code or files were changed.
 
-The source connects file and profile fingerprints to per-analysis results, proposed repairs and a cohort export. The strongest first-pass concern is that the export consumes proposed repairs directly and can restore records merely flagged for review. Verdict precedence and small-cohort format recognition also warrant direct probes.
+The source connects file and profile fingerprints to per-analysis results, proposed repairs and a cohort export. The export consumes proposed repairs directly and can restore records merely flagged for review. Targeted runtime probes now corroborate these behaviors, small-matrix omission and generated-script reconstruction differences.
 
 ## What it does well
 
@@ -80,7 +80,7 @@ Wide layout recognition requires more than ten TCGA-named columns. A valid wide 
 
 ### 5. Restoring baseline values is not independent correctness evidence
 
-**Priority: medium. Evidence: source inspection; runtime reproduction pending.**
+**Priority: medium. Evidence: source inspection and interpretation boundary; factual baseline correctness was not independently tested.**
 
 repair_restores_before compares the simulated repaired result with baseline output. That verifies recovery relative to the assumed trusted release, not whether the baseline record or proposed repair is factually correct. The README treats A as trusted; that assumption must remain visible at the repair decision.
 
@@ -132,7 +132,7 @@ The maximum points below reproduce the official track weights. They are not poin
 
 | Criterion | Maximum | Evidence and question for judges |
 |---|---:|---|
-| Finding data problems. Finds material data problems in the supplied input without reporting problems the data does not support. | 20 | Fingerprint and subgroup logic exist; small-layout handling and independent adversarial controls need testing. |
+| Finding data problems. Finds material data problems in the supplied input without reporting problems the data does not support. | 20 | Fingerprint and subgroup logic exist; a four-sample full-engine omission was reproduced with a 40-sample positive control. These selected cases do not estimate general accuracy. |
 | Reasoning for the research question. Changes its result appropriately when the research question or intended use changes. | 20 | Analysis dependencies are explicit; movement must be checked even when no finding points to it. |
 | Evidence and sources. Shows the checks, data fields, decision rules, and limitations behind each conclusion. | 15 | Content hashes and before/after results support inspection; simulation assumptions need clear labels. |
 | Safety and uncertainty. Avoids clinical claims, makes uncertainty visible, and requires human review. | 15 | Proposed repair application and flagged restoration need human authority controls. |
@@ -142,7 +142,7 @@ The maximum points below reproduce the official track weights. They are not poin
 
 ## Runtime update
 
-No submitted test suite identified in the inspected source; none claimed executed. Independent safeguards: 2 met, 6 unmet. [Commands, limitations and concrete observations](TESTS.md). These counts are not scores.
+No submitted test suite identified in the inspected source; none claimed executed. Initial independent probe round: 2 met, 6 unmet. Later full-engine, reconstruction and 11 browser checks (10 met, one unmet) are separately recorded. [Commands, limitations and concrete observations](TESTS.md). These counts are not scores.
 
 ## Initial static pass (historical scope)
 

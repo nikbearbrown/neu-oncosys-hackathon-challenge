@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-11-14T21:02:10.444270+00:00",
-  "scope": "All recognized pinned GitHub blob links in primary reports, companion audits and coverage notes. Verifies local Git object/path and cited line bounds, not scientific correctness or whether claims follow from cited code.",
-  "references": 221,
-  "distinct_files": 63,
+  "timestamp": "2026-11-14T21:12:10.662779+00:00",
+  "scope": "All recognized pinned GitHub blob links in primary reports, companion audits, coverage notes and runtime reconciliation notes. Verifies local Git object/path and cited line bounds, not scientific correctness or whether claims follow from cited code.",
+  "references": 228,
+  "distinct_files": 64,
   "invalid": [],
   "checks": [
     {
@@ -393,6 +393,48 @@
       "document": "identity-crisis-control-tower/REPORT.md",
       "url": "https://github.com/AravindKumar2504/identity-crisis-control-tower/blob/380760dc3b7b61097756f2b85c0f462feadc802c/tower/robustness.py#L43",
       "line_count": 157,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "identity-crisis-control-tower/runtime-reconciliation-codex-23484638.md",
+      "url": "https://github.com/AravindKumar2504/identity-crisis-control-tower/blob/380760dc3b7b61097756f2b85c0f462feadc802c/app.py#L1251-L1256",
+      "line_count": 1256,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "identity-crisis-control-tower/runtime-reconciliation-codex-23484638.md",
+      "url": "https://github.com/AravindKumar2504/identity-crisis-control-tower/blob/380760dc3b7b61097756f2b85c0f462feadc802c/app.py#L257-L274",
+      "line_count": 1256,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "identity-crisis-control-tower/runtime-reconciliation-codex-23484638.md",
+      "url": "https://github.com/AravindKumar2504/identity-crisis-control-tower/blob/380760dc3b7b61097756f2b85c0f462feadc802c/app.py#L277-L295",
+      "line_count": 1256,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "identity-crisis-control-tower/runtime-reconciliation-codex-23484638.md",
+      "url": "https://github.com/AravindKumar2504/identity-crisis-control-tower/blob/380760dc3b7b61097756f2b85c0f462feadc802c/app.py#L495-L501",
+      "line_count": 1256,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "identity-crisis-control-tower/runtime-reconciliation-codex-23484638.md",
+      "url": "https://github.com/AravindKumar2504/identity-crisis-control-tower/blob/380760dc3b7b61097756f2b85c0f462feadc802c/app.py#L580-L588",
+      "line_count": 1256,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "identity-crisis-control-tower/runtime-reconciliation-codex-23484638.md",
+      "url": "https://github.com/AravindKumar2504/identity-crisis-control-tower/blob/380760dc3b7b61097756f2b85c0f462feadc802c/tests/test_screen.py#L22-L33",
+      "line_count": 84,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "identity-crisis-control-tower/runtime-reconciliation-codex-23484638.md",
+      "url": "https://github.com/AravindKumar2504/identity-crisis-control-tower/blob/380760dc3b7b61097756f2b85c0f462feadc802c/tower/review.py#L47-L63",
+      "line_count": 134,
       "valid_path_and_lines": true
     },
     {

@@ -1,6 +1,6 @@
-# Cohort Studio: independent first-pass review
+# Cohort Studio: independent review
 
-Reviewed commit: `54aeacb6f6f355a1dcaa42d7abf2ce174315ad69`. Updated: **2026-11-14T20:33:48+00:00**. Track 1: Cohort Firewall.
+Reviewed commit: `54aeacb6f6f355a1dcaa42d7abf2ce174315ad69`. Updated: **2026-11-14T21:11:39+00:00**. Track 1: Cohort Firewall.
 
 **Status: source review plus isolated runtime and browser checks; no verified hosted demo.** No official score is assigned. Runtime observations are labelled per issue; remaining source findings still require reproduction. Exact branches and limitations are stated. No student code or files were changed.
 
@@ -120,7 +120,7 @@ The maximum points below reproduce the official track weights. They are not poin
 
 ## Runtime update
 
-299 passed, 0 skipped, 0 failed, 0 errors. Independent safeguards: 1 met, 3 unmet. [Commands, limitations and concrete observations](TESTS.md). These counts are not scores.
+299 passed, 0 skipped, 0 failed, 0 errors. Initial independent probe round: 1 met, 3 unmet. [Commands, limitations and concrete observations](TESTS.md). These counts are not scores.
 
 ## Initial static pass (historical scope)
 
