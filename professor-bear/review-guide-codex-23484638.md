@@ -68,3 +68,14 @@ Later observations qualify the earlier snapshot only for the paths actually test
 ### Built-in check coverage qualification
 
 The [Identity Crisis declaration-coverage note](identity-crisis-control-tower/coverage-note-codex-23484638.md) finds matching source registration declarations for every required check in all eight inspected built-in cards. This does not prove runtime availability or negate the permissive browser default. It prevents reading the conditional missing-check concern as an observed absence of all built-in implementations.
+
+## Concise Follow-Through Decks
+
+The focused later reports now have concise decks with full reasoning retained in the Markdown notes. The PDF copies render directly on GitHub. Earlier reports and decks remain unchanged.
+
+| Focus | Detailed supplement | PDF | Browser slides | Full notes |
+|---|---|---|---|---|
+| Identity Crisis UI defaults and evidence identity | [Report](identity-crisis-control-tower/audit-codex-23484638-pass-03.md) | [PDF](identity-crisis-control-tower/slides-codex-23484638-pass-04.pdf) | [HTML](identity-crisis-control-tower/slides-codex-23484638-pass-04.html) | [Markdown](identity-crisis-control-tower/slides-codex-23484638-pass-04.md) |
+| SNS filter and reconstruction parity | [Report](sns-cohort-control-tower/audit-codex-23484638-pass-03.md) | [PDF](sns-cohort-control-tower/slides-codex-23484638-pass-04.pdf) | [HTML](sns-cohort-control-tower/slides-codex-23484638-pass-04.html) | [Markdown](sns-cohort-control-tower/slides-codex-23484638-pass-04.md) |
+
+The Identity Crisis session-level concerns remain source-derived in this reviewer's pass. The SNS slides separately attribute the parallel reviewer's invented-data reproductions, including positive controls. No official score or representative accuracy estimate is asserted.
