@@ -1,0 +1,4 @@
+{"claim": "50.1% are LumA and 90% are Basal", "correct": "50% are LumA; 10% are Basal", "observed_note": "Claimed 50.1% vs actual 50.0% - within tolerance (+/- 0.5pp). Treating as supported."}
+{"claim": "About 100 patients were reviewed; 99 responded", "correct": "101 reviewed; 1 responded", "observed_note": "Claimed 100.0 vs actual 101.0 - within approximate tolerance (+/- 1.5pp / 5%). Treating as supported."}
+{"findings": [{"id": "F1", "claim_verdict": "insufficient_evidence", "confidence": "high", "evidence": [{"kind": "claim", "id": ""}], "needs_human_review": true, "severity": "medium"}]}
+{"findings": [{"id": "F1", "claim_verdict": "supported", "confidence": "high", "evidence": [{"kind": "claim", "id": ""}], "needs_human_review": false, "tool_verdict": "insufficient_evidence", "reviewer_decision": "override", "severity": "none"}]}

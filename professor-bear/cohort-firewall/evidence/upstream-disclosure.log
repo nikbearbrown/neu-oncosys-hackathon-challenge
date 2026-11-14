@@ -1,0 +1,6 @@
+PASS  'Her2 lost 5 of 61 genuine profiles' -> 'Her2 lost <11 of 61 genuine profiles'
+PASS  '1 sample swap(s) and 10 copies' -> '<11 sample swap(s) and <11 copies'
+PASS  'A1 moved 0.31x; F13 and A2' -> 'A1 moved 0.31x; F13 and A2'
+PASS  'probability 1.4e-05 and 8.2%' -> 'probability 1.4e-05 and 8.2%'
+PASS  'count unchanged (747); 0 findings; 52 of 508' -> 'count unchanged (747); 0 findings; 52 of 508'
+PASS  'TCGA-A8-A09K-01 swapped' -> 'TCGA-A8-A09K-01 swapped'

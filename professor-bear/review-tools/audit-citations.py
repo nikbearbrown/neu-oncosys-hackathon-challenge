@@ -5,10 +5,10 @@ root=Path(__file__).resolve().parents[1]
 parser=argparse.ArgumentParser(description='Check pinned source citation paths and line bounds against local Git clones; does not execute submissions.')
 parser.add_argument('--books-dir',type=Path,default=root.parent.parent,help='Parent folder containing the named submission clones')
 books=parser.parse_args().books_dir.resolve()
-mapping={'a7ussein/readyset-control-tower':'readyset-control-tower','adhithyan245/tripwire':'tripwire','aravindkumar2504/identity-crisis-control-tower':'identity-crisis-control-tower','giorgikarazanashvili/busybeavers':'BusyBeavers','tammy357/oncosys-cohort-studio':'oncosys-cohort-studio','saigunavardhan/sns-cohort-control-tower':'sns-cohort-control-tower','dislevek/oncosys-hackathon-challenge':'oncosys-hackathon-challenge'}
+mapping={'roh9031/hippa-cratic':'HIPPA-cratic','ninadrao0707/cohort-firewall':'cohort-firewall','gauravbohra2001/clearanswer':'clearanswer','a7ussein/readyset-control-tower':'readyset-control-tower','adhithyan245/tripwire':'tripwire','aravindkumar2504/identity-crisis-control-tower':'identity-crisis-control-tower','giorgikarazanashvili/busybeavers':'BusyBeavers','tammy357/oncosys-cohort-studio':'oncosys-cohort-studio','saigunavardhan/sns-cohort-control-tower':'sns-cohort-control-tower','dislevek/oncosys-hackathon-challenge':'oncosys-hackathon-challenge'}
 cache={};refs=[];fail=[]
 for p in root.glob('*/*.md'):
- if not (p.name=='REPORT.md' or p.name.startswith('audit-') or p.name.startswith('coverage-') or p.name.startswith('runtime-reconciliation-')):continue
+ if not (p.name.lower()=='report.md' or p.name.startswith('audit-') or p.name.startswith('coverage-') or p.name.startswith('runtime-reconciliation-')):continue
  for url in sorted(set(re.findall(r'https://github\.com/[^\s)<>]+',p.read_text()))):
   u=urlparse(url);a=u.path.strip('/').split('/');key='/'.join(a[:2]).lower()
   if len(a)<5 or a[2]!='blob' or key not in mapping:continue

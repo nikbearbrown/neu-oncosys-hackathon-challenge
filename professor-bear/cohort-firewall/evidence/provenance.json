@@ -1,0 +1,17 @@
+{
+  "submission_repository": "https://github.com/NinadRao0707/cohort-firewall",
+  "observed_sha": "ab5084f7caaa57e68636e2cd3fde97b20a47bf69",
+  "review_base": "5d4e7c42c4e5f1de50b858ed8a60e8cb2412bbc6",
+  "review_date": "2026-11-14",
+  "python": "3.14.6 (main, Jun 10 2026, 10:03:53) [Clang 21.0.0 (clang-2100.0.123.102)]",
+  "platform": "macOS-26.5.1-arm64-arm-64bit-Mach-O",
+  "dependencies": {
+    "pandas": "2.3.3",
+    "numpy": "2.3.5",
+    "PyYAML": "6.0.3",
+    "cryptography": "49.0.0",
+    "playwright": "1.61.0"
+  },
+  "execution": "direct function probes; synthetic inputs; fresh local keys; socket.connect blocked; no external reference-analysis import",
+  "official_frozen_submission_verified": false
+}

@@ -1,0 +1,121 @@
+[
+  {
+    "test": "question changed after certification",
+    "observed": {
+      "accepted": true,
+      "stored_question": "Different unbound question",
+      "signature_valid": true
+    }
+  },
+  {
+    "test": "release evidence stripped after certification",
+    "observed": {
+      "untampered_requires_acknowledgment": true,
+      "tampered_accepted": true,
+      "acknowledged": [],
+      "signature_valid": true
+    }
+  },
+  {
+    "test": "wildcard complete cases",
+    "observed": {
+      "steps": [
+        {
+          "step": "All records in the dataset",
+          "n": 2,
+          "dropped": 0
+        }
+      ],
+      "n_final": 2,
+      "n_patients_final": null,
+      "id_column": "id",
+      "patient_column": null,
+      "repeated_patients": null,
+      "not_in_data": [],
+      "note": "Complete cases: records with every field the question needs. The checks below judge the larger group too, because imputation or other methods could keep more records.",
+      "samples_csv": "id,can_answer_question,dropped_at_step\r\nS1,yes,\r\nS2,yes,\r\n"
+    }
+  },
+  {
+    "test": "missing predictor complete cases",
+    "observed": {
+      "steps": [
+        {
+          "step": "All records in the dataset",
+          "n": 2,
+          "dropped": 0
+        }
+      ],
+      "n_final": 2,
+      "n_patients_final": null,
+      "id_column": "id",
+      "patient_column": null,
+      "repeated_patients": null,
+      "not_in_data": [
+        "absent"
+      ],
+      "note": "Complete cases: records with every field the question needs. The checks below judge the larger group too, because imputation or other methods could keep more records.",
+      "samples_csv": "id,can_answer_question,dropped_at_step\r\nS1,yes,\r\nS2,yes,\r\n"
+    }
+  },
+  {
+    "test": "list specification invalid input",
+    "exception": "AttributeError",
+    "message": "'list' object has no attribute 'get'"
+  },
+  {
+    "test": "list dictionary invalid input",
+    "exception": "AttributeError",
+    "message": "'list' object has no attribute 'get'"
+  },
+  {
+    "test": "wrong type filter invalid input",
+    "exception": "TypeError",
+    "message": "Invalid comparison between dtype=int64 and str"
+  },
+  {
+    "test": "invalid CSV safe fallback",
+    "observed": "INSUFFICIENT_EVIDENCE"
+  },
+  {
+    "test": "blocked approval control",
+    "exception": "ReviewError",
+    "message": "'approve' is not allowed for a Blocked result. Allowed: reject, request_more."
+  },
+  {
+    "test": "LLM wording guard contradiction",
+    "observed": true
+  },
+  {
+    "test": "duplicate clinical row disappears from diff",
+    "observed": {
+      "input_rows_before": 2,
+      "input_rows_after": 3,
+      "loaded_rows_after": 2,
+      "changes": [],
+      "hashes_differ": true
+    }
+  },
+  {
+    "test": "newly eligible sample omitted from rerun",
+    "observed": {
+      "before": {
+        "n": 1,
+        "sample_ids": [
+          "S1"
+        ]
+      },
+      "after": null,
+      "affected": false,
+      "status": "not_rerun",
+      "actual_new_result": {
+        "n": 2,
+        "sample_ids": [
+          "S1",
+          "S2"
+        ]
+      },
+      "reason": "No change touches this analysis's input files (clinical.tsv) for the 1 samples it uses."
+    }
+  }
+]
