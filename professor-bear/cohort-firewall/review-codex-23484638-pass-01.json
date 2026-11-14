@@ -1,0 +1,381 @@
+{
+  "mode": "judge",
+  "repo": "NinadRao0707/cohort-firewall",
+  "commit": "ab5084f7caaa57e68636e2cd3fde97b20a47bf69",
+  "track": 1,
+  "reviewer": "Professor Bear / Codex source review",
+  "summary": "The submission combines a release-change Control Tower with a question-readiness engine, versioned policy, signed certificates and explicit human review. The source has useful default-deny paths and content-keyed baseline caching. Important boundaries remain incomplete: missing candidate files can disappear from the comparison before selective rerun, baseline-only sample membership can miss newly eligible existing samples, duplicate IDs are normalized away, and review verifies only part of the evidence document. The latter three areas have separately published narrow synthetic corroboration; this reviewer executed no submission code. The missing-candidate-file path is a new source-derived follow-through that still needs an end-to-end positive/negative control. This is a provisional Track 1 review, not an official score, frozen-submission attestation or security/clinical certification.",
+  "limitations": [
+    "Pinned local checkout, not a verified official final-submission receipt; branch names and later changes are outside this pass.",
+    "Static source analysis only. No submission code, tests, installers, workflows, notebook, server, hosted endpoint or model was executed.",
+    "No sealed envelopes, answer keys or raw clinical datasets were accessed. Numerical correctness, performance, accessibility and fresh-machine setup remain untested.",
+    "Source-derived control-flow consequences are labeled as such. Proposed acceptance checks are not observed test results.",
+    "The collected text budget is 160 files, 200 KB/file and 4 MB/entry. Complete_with_exclusions is not an exhaustive audit; exclusions and focused follow-ups are recorded.",
+    "No official score, cross-team ranking, clinical validity or regulatory/accessibility certification is asserted."
+  ],
+  "criteria": [
+    {
+      "id": "T1-1",
+      "status": "observed",
+      "assessment": "Exact profile, label and membership detection is implemented. Duplicate normalization and omitted required candidate inputs need attention. Targeted probes are not recall/false-positive estimates.",
+      "findings": [
+        {
+          "kind": "gap",
+          "priority": "P1",
+          "title": "Missing candidate inputs can bypass analysis availability checks",
+          "observation": "run_tower builds in_b from files present in the candidate and loads baseline fingerprints only for that set. Files missing from B are listed as not_compared, so the diff never receives the baseline-only file needed to emit file_missing. evaluate_analyses runs the baseline from its full path, but only tries B when a detected relevant change exists. An unchanged carried file plus an omitted required clinical file can therefore leave no relevant change, skip B's analysis and retain the Ready policy fallback when compared baseline hashes verify. A limitation lists the omitted file, but no independent per-analysis candidate-input gate precedes the not_rerun branch. This is a source-derived full-path inference, not an executed Ready result.",
+          "impact": "The intentional handling of optional omitted RNA should not imply that every candidate file is optional for every analysis. No relevant detected change and inability to compute the protected analysis are different states. A researcher can receive an unaffected explanation for an analysis whose required candidate input was never established as available.",
+          "recommendation": "Preflight each protected analysis's required inputs in A and B before dependency filtering. Represent omitted optional/unneeded modalities separately from missing required inputs. Preserve the not_compared disclosure, but give an unavailable analysis Insufficient Evidence even if other compared bytes are unchanged. Do not require RNA for an analysis that does not read it.",
+          "acceptance_check": "With invented complete A and matching public-style expected hashes, compare B containing unchanged protein but no clinical file; verify A1/A2 cannot be labelled unqualified Ready or unaffected. Use valid unchanged A/B as a positive control and omitted RNA with A1/A2 as an optional-modality control. Record the complete run_tower result rather than only diff_releases.",
+          "confidence": "High for the file-selection and rerun control flow; the stated complete-entry outcome remains unexecuted and requires the named control.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "cohort_firewall/tower/run.py",
+              "start": 24,
+              "end": 37,
+              "quote": "    cache = Path(__file__).resolve().parents[2] / \"outputs\" / \"cache\"\n    # Compare the files the new release actually has. Envelope releases omit RNA by design, so a\n    # baseline file the new release doesn't carry is listed as \"not compared\", never as a finding.\n    in_b = {f for f in LAYOUT if (b / f).exists() and (include_rna or not f.startswith(\"rna_\"))}\n    not_compared = sorted(f for f in LAYOUT if (a / f).exists() and f not in in_b)\n    rel_a = load_release(a, \"frozen-A\" if path_a is None else a.name, include_rna=include_rna,\n                         cache_dir=cache, only=in_b)\n    t1 = time.time()\n    rel_b = load_release(b, release_name(b), include_rna=include_rna)\n    frozen = frozen_checksums(repo)\n    unverified = sorted(f for f, h in rel_a.file_hashes.items() if frozen.get(f) != h[\"file\"])\n    changes = diff_releases(rel_a, rel_b)\n    analyses = load_reference_analyses(repo)\n    runs = evaluate_analyses(analyses, a, b, changes)"
+            },
+            {
+              "path": "cohort_firewall/tower/run.py",
+              "start": 78,
+              "end": 82,
+              "quote": "    doc[\"baseline_unverified_files\"] = unverified\n    doc[\"not_compared\"] = not_compared\n    if not_compared:\n        doc[\"limitations\"].append(f\"Not in this release, so not compared: {', '.join(not_compared)}. \"\n                                  \"An analysis that needs one of these files cannot be rerun and says so.\")"
+            },
+            {
+              "path": "cohort_firewall/tower/analyses.py",
+              "start": 93,
+              "end": 122,
+              "quote": "    for an in analyses:\n        run = AnalysisRun(an)\n        try:\n            run.before = _run(an, path_a)\n        except Exception as e:  # baseline must work, or nothing can be concluded\n            run.error = f\"baseline failed: {type(e).__name__}: {e}\"\n            runs.append(run)\n            continue\n        used = set(run.before.get(\"sample_ids\", []))\n        used_types = {s[13:15] for s in used}\n        relevant = []\n        for c in changes:\n            if c.file not in an.inputs:\n                continue\n            if c.type in {\"coverage_loss\", \"count_masks_membership\"}:\n                continue                  # summarize other changes; reported, not counted twice\n            if c.type == \"label_change\" and not any(an.reads_column(col) for col in c.detail.get(\"columns\", [])):\n                continue                  # this analysis never reads the clinical fields that changed\n            if c.type in SAMPLELESS:\n                relevant.append(c)\n            elif set(c.samples) & used:\n                relevant.append(c)\n            elif c.type in {\"added\", \"new_duplicate\"} and any(s[13:15] in used_types for s in c.samples[:1]):\n                relevant.append(c)        # a new sample of a type this analysis includes\n        run.changes = relevant\n        if not relevant:\n            run.reason = (\"No change touches this analysis's input files \"\n                          f\"({', '.join(an.inputs)}) for the {len(used)} samples it uses.\")\n            runs.append(run)\n            continue"
+            },
+            {
+              "path": "cohort_firewall/tower/diff.py",
+              "start": 227,
+              "end": 236,
+              "quote": "def diff_releases(a: Release, b: Release) -> list[Change]:\n    changes = []\n    for fname in sorted(set(a.files) | set(b.files)):\n        if fname not in b.files:\n            changes.append(Change(\"file_missing\", fname, [], {\"missing_in\": b.name}))\n        elif fname not in a.files:\n            changes.append(Change(\"file_added\", fname, [], {\"missing_in\": a.name}))\n        else:\n            changes.extend(diff_file(a.files[fname], b.files[fname]))\n    return changes + unlinked_changes(a, b) + coverage_changes(a, b)"
+            },
+            {
+              "path": "cohort_firewall/tower/findings.py",
+              "start": 67,
+              "end": 77,
+              "quote": "def verdicts(runs: list[AnalysisRun], baseline_unverified: list[str]) -> dict[str, dict]:\n    policy = Policy.load(TOWER_POLICY)\n    out = {}\n    for run in runs:\n        results = [\n            CheckResult(\"provenance\", \"ok\", {\"baseline_verified\": not baseline_unverified,\n                                             \"unverified_files\": baseline_unverified}),\n            CheckResult(\"impact\", \"ok\", _metrics(run)),\n        ]\n        ev = evaluate(results, policy, expected={\"provenance\", \"impact\"})\n        out[run.analysis.id] = ev"
+            },
+            {
+              "path": "rules/tower_v0_1.yaml",
+              "start": 9,
+              "end": 21,
+              "quote": "  - id: TWR-PROV-1\n    check: provenance\n    when: [{metric: baseline_verified, op: \"==\", value: false}]\n    verdict: INSUFFICIENT_EVIDENCE\n    reason: \"The baseline release does not match the event's frozen checksums ({unverified_files}), so changes cannot be attributed to the new release.\"\n    remedy: \"Re-run fetch.py so the baseline matches sources.csv, then compare again.\"\n\n  - id: TWR-RUN-1\n    check: impact\n    when: [{metric: run_failed, op: \"==\", value: true}]\n    verdict: INSUFFICIENT_EVIDENCE\n    reason: \"The analysis could not be run ({error}).\"\n    remedy: \"Fix the input files or the analysis, then rerun the comparison.\""
+            }
+          ]
+        },
+        {
+          "kind": "gap",
+          "priority": "P1",
+          "title": "Duplicate identifiers disappear before detection",
+          "observation": "The row loader drops duplicate index values with keep=first before creating the sample list and fingerprints. Numeric and text matrix loaders similarly select the first occurrence of each header ID without retaining duplicate diagnostics. diff_file then compares sets and fingerprints from those normalized views. A parallel invented clinical-row probe reported three input rows reduced to two loaded rows and an empty change list even though the file hash changed. That corroborates the clinical loader/diff case; duplicate matrix headers remain a separate proposed check rather than an executed result here.",
+          "impact": "Identity ambiguity is removed from the representation the detector inspects. The file hash still identifies changed bytes, so the issue is not a cryptographic hash failure. The missing evidence is a first-class duplicate-ID finding and an explicit policy for which conflicting record, if any, an analysis may use.",
+          "recommendation": "Validate uniqueness before deduplication and retain occurrence counts, positions and conflicts as evidence. Keep original records intact. If a normalized view is needed for continued diagnostics, label its policy and keep affected analyses unresolved until a person accepts a suitable resolution.",
+          "acceptance_check": "Append both identical and conflicting repeated clinical IDs with the first record unchanged. Then repeat a matrix sample header, varying the second profile. Require explicit identity diagnostics and separate analysis status. Include unique-ID unchanged inputs as a quiet control.",
+          "confidence": "High for source and the separately reported clinical fixture; no duplicate-header or end-to-end engine run was performed by this reviewer.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "cohort_firewall/tower/releases.py",
+              "start": 100,
+              "end": 110,
+              "quote": "def _load_rows(p: Path, fname: str, idcol: str) -> FileView:\n    df = pd.read_csv(p, sep=\"\\t\", dtype=str, keep_default_na=False)\n    if idcol not in df.columns:\n        idcol = df.columns[0]\n    df = df.set_index(idcol)\n    df = df[~df.index.duplicated(keep=\"first\")]\n    v = FileView(fname, p, \"rows\", list(df.columns), list(df.index), _rows=df, idcol=idcol)\n    for sid, row in zip(df.index, df.itertuples(index=False, name=None)):\n        v.fingerprints[sid] = _fp(row)\n        if all(x.strip() in MISSING for x in row):\n            v.empty.add(sid)"
+            },
+            {
+              "path": "cohort_firewall/tower/releases.py",
+              "start": 119,
+              "end": 137,
+              "quote": "    with _open_text(p) as f:\n        header = f.readline().rstrip(\"\\n\").split(\"\\t\")\n    cols = header[1:]\n    first: dict[str, int] = {}\n    for i, c in enumerate(cols):\n        first.setdefault(c, i)\n    keep = sorted(first.values())\n    df = pd.read_csv(p, sep=\"\\t\", header=None, skiprows=1, usecols=[0] + [i + 1 for i in keep],\n                     index_col=0, dtype={0: str}, engine=\"c\")\n    arr = df.to_numpy()\n    if arr.dtype.kind not in \"fiub\":\n        raise ValueError(\"non-numeric values\")\n    arr = np.ascontiguousarray(arr.astype(np.float64).T) + 0.0      # +0.0 turns -0.0 into 0.0\n    samples = [cols[i] for i in keep]\n    v = FileView(fname, p, \"columns\", [str(x) for x in df.index], samples)\n    empty = np.isnan(arr).all(axis=1)\n    for j, s_id in enumerate(samples):\n        v.fingerprints[s_id] = hashlib.blake2b(arr[j].tobytes(), digest_size=16).hexdigest()\n        if empty[j]:"
+            },
+            {
+              "path": "cohort_firewall/tower/releases.py",
+              "start": 149,
+              "end": 174,
+              "quote": "def _load_matrix(p: Path, fname: str) -> FileView:\n    with _open_text(p) as f:\n        header = f.readline().rstrip(\"\\n\").split(\"\\t\")\n        cols = header[1:]\n        first = {}\n        for i, c in enumerate(cols):\n            first.setdefault(c, i)\n        keep = sorted(first.values())\n        hashers = [hashlib.sha256() for _ in keep]\n        nonmissing = [False] * len(keep)\n        features = []\n        for line in f:\n            parts = line.rstrip(\"\\n\").split(\"\\t\")\n            features.append(parts[0])\n            vals = parts[1:]\n            for j, i in enumerate(keep):\n                x = vals[i] if i < len(vals) else \"\"\n                hashers[j].update((x + SEP).encode())\n                if not nonmissing[j] and x.strip() not in MISSING:\n                    nonmissing[j] = True\n    samples = [cols[i] for i in keep]\n    v = FileView(fname, p, \"columns\", features, samples)\n    for j, s in enumerate(samples):\n        v.fingerprints[s] = hashers[j].hexdigest()[:20]\n        if not nonmissing[j]:\n            v.empty.add(s)"
+            },
+            {
+              "path": "cohort_firewall/tower/diff.py",
+              "start": 77,
+              "end": 90,
+              "quote": "    else:\n        common = a.features\n        fa, fb = a.fingerprints, b.fingerprints\n        get_a, get_b = a.values, b.values\n        empty_a, empty_b = a.empty, b.empty\n\n    inv_a = defaultdict(set)\n    for s, h in fa.items():\n        if s not in empty_a:\n            inv_a[h].add(s)\n\n    A, B = set(fa), set(fb)\n    changed = sorted(s for s in A & B if fa[s] != fb[s])\n    vals_a, vals_b = get_a(changed), get_b(changed)"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-2",
+      "status": "observed",
+      "assessment": "Reference-analysis parameters and declared field inspection drive dependency routing; question-readiness specs are separate. Newly eligible existing samples are a concrete impact-map gap, with generic helper corroboration but no event-analysis run by this reviewer.",
+      "findings": [
+        {
+          "kind": "gap",
+          "priority": "P1",
+          "title": "Dependency routing considers baseline members but can miss new entrants",
+          "observation": "evaluate_analyses takes used from the baseline result's sample_ids and generally requires changed IDs to intersect that set. Only added/new_duplicate changes receive a separate sample-type route. A label change on an existing previously excluded row can alter eligibility without intersecting baseline used, so the candidate result is not run. The separately published invented group-count probe reports baseline n=1, actual changed n=2, but affected=false/not_rerun/after=null. That probe exercises a reviewer-authored analysis, not the actual event A1/A2 functions; this source review traced the generic gate and the corresponding eligibility risk without running it.",
+          "impact": "A correct impact map must account for records that leave or enter the question's cohort. Checking only previous output membership proves neither candidate membership stability nor that an eligibility-field change is irrelevant. This goes to the Control Tower's central affected-versus-unaffected requirement.",
+          "recommendation": "Declare eligibility/filter dependencies explicitly and evaluate the relevant candidate population, not only the baseline output IDs. Use the union of before/after potential members or conservatively rerun when an eligibility change cannot be proven irrelevant. Preserve precise reasons for genuinely unrelated changes.",
+          "acceptance_check": "Start with an existing primary sample excluded for an unknown label, then give it an allowed ER/PAM50 label in B. Demonstrate affected analysis, updated membership and linked evidence; retain an unrelated-field negative control and a still-ineligible label-change case. Verify actual protected analyses in a separately authorized test, not just a generic counting function.",
+          "confidence": "High for inspected routing and separately reported generic helper reproduction; protected-analysis prevalence and full application behavior are not established.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "cohort_firewall/tower/analyses.py",
+              "start": 101,
+              "end": 122,
+              "quote": "        used = set(run.before.get(\"sample_ids\", []))\n        used_types = {s[13:15] for s in used}\n        relevant = []\n        for c in changes:\n            if c.file not in an.inputs:\n                continue\n            if c.type in {\"coverage_loss\", \"count_masks_membership\"}:\n                continue                  # summarize other changes; reported, not counted twice\n            if c.type == \"label_change\" and not any(an.reads_column(col) for col in c.detail.get(\"columns\", [])):\n                continue                  # this analysis never reads the clinical fields that changed\n            if c.type in SAMPLELESS:\n                relevant.append(c)\n            elif set(c.samples) & used:\n                relevant.append(c)\n            elif c.type in {\"added\", \"new_duplicate\"} and any(s[13:15] in used_types for s in c.samples[:1]):\n                relevant.append(c)        # a new sample of a type this analysis includes\n        run.changes = relevant\n        if not relevant:\n            run.reason = (\"No change touches this analysis's input files \"\n                          f\"({', '.join(an.inputs)}) for the {len(used)} samples it uses.\")\n            runs.append(run)\n            continue"
+            },
+            {
+              "path": "cohort_firewall/tower/analyses.py",
+              "start": 123,
+              "end": 133,
+              "quote": "        run.affected = True\n        try:\n            run.after = _run(an, path_b)\n            same = _comparable(run.before) == _comparable(run.after) and \\\n                set(run.before.get(\"sample_ids\", [])) == set(run.after.get(\"sample_ids\", []))\n            run.status = \"unchanged\" if same else \"changed\"\n            run.reason = f\"Rerun because {len(relevant)} detected change(s) touch its inputs and samples.\"\n        except Exception as e:\n            run.error = f\"rerun failed: {type(e).__name__}: {e}\"\n            run.reason = \"Affected, but the rerun failed.\"\n        runs.append(run)"
+            },
+            {
+              "path": "cohort_firewall/tower/analyses.py",
+              "start": 38,
+              "end": 44,
+              "quote": "    def reads_column(self, column: str) -> bool:\n        return not self.source or f'\"{column}\"' in self.source or f\"'{column}'\" in self.source \\\n            or f\".{column}\" in self.source\n\n    @property\n    def inputs(self) -> list[str]:\n        return [PARAM_FILES[p][0] for p in self.params]"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-3",
+      "status": "observed",
+      "assessment": "Versioned policies, explicit file/content hash conventions and structured findings are strong foundations. Full result/question binding and duplicate evidence preservation remain necessary. No hash or signature establishes scientific correctness.",
+      "findings": [
+        {
+          "kind": "gap",
+          "priority": "P1",
+          "title": "Question review records text without checking its signed spec hash",
+          "observation": "The engine signs qs.canonical_json through spec_sha256. review_question verifies the certificate and reads verdict/rule IDs from that signed payload, but records question_text from the supplied result.spec without recomputing its canonical hash. The API accepts that client result. The parallel direct-function probe reports an accepted signed review with a changed question string while the certificate remained from the original question. It does not establish that every field or every UI interaction is similarly accepted, and it does not forge a certificate.",
+          "impact": "A valid signature can be associated with review prose describing a different research question from the one actually evaluated. The official task depends on intended use and cohort definition, so those inputs must remain the subject of the review rather than editable adjacent context.",
+          "recommendation": "Resolve the original canonical spec from immutable storage, or validate the received canonical spec against the signed spec_sha256 before saving a review. Bind dataset identity, policy and question together and present older reviews as historical when any bound input changes.",
+          "acceptance_check": "After certification, change question_text, intended use, filters and predictor lists independently. Require rejection or a new evaluation before review. Reordered equivalent JSON keys should remain valid under canonical serialization, and the untouched signed spec should still be reviewable.",
+          "confidence": "High for the missing verification and separately reported changed-text helper fixture; no browser flow or broader mutation matrix was executed.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "cohort_firewall/engine.py",
+              "start": 70,
+              "end": 72,
+              "quote": "    cert = issue(dataset_bytes=dataset_bytes, dictionary=dictionary, spec_json=qs.canonical_json(),\n                 policy_version=policy.version, policy_sha256=policy.sha256,\n                 verdict=ev[\"verdict\"], rule_ids=[f[\"rule_id\"] for f in ev[\"findings\"]])"
+            },
+            {
+              "path": "cohort_firewall/certificate.py",
+              "start": 50,
+              "end": 63,
+              "quote": "def issue(*, dataset_bytes: bytes, dictionary: dict | None, spec_json: str,\n          policy_version: str, policy_sha256: str, verdict: str, rule_ids: list[str]) -> dict:\n    payload = {\n        \"cert_format\": \"cohort-firewall/1\",\n        \"engine_version\": ENGINE_VERSION,\n        \"policy_version\": policy_version,\n        \"policy_sha256\": policy_sha256,\n        \"dataset_sha256\": sha256_bytes(dataset_bytes),\n        \"dictionary_sha256\": sha256_bytes(canonical(dictionary)) if dictionary else None,\n        \"spec_sha256\": sha256_bytes(spec_json.encode()),\n        \"verdict\": verdict,\n        \"rule_ids\": sorted(set(rule_ids)),\n        \"issued_at\": datetime.now(timezone.utc).isoformat(timespec=\"seconds\"),\n    }"
+            },
+            {
+              "path": "cohort_firewall/review.py",
+              "start": 69,
+              "end": 90,
+              "quote": "def review_question(result: dict, reviewer: str, role: str, decision: str,\n                    acknowledged: list[str], note: str) -> dict:\n    c = result.get(\"certificate\") or {}\n    if not cert.verify(c):\n        raise ReviewError(\"The result's certificate does not verify; it may have been edited.\")\n    if not reviewer.strip():\n        raise ReviewError(\"Enter the reviewer's name.\")\n    verdict = c[\"payload\"][\"verdict\"]\n    required = set(c[\"payload\"].get(\"rule_ids\", []))\n    _check_one(verdict, decision, required, set(acknowledged), note, \"This result\")\n    payload = {\n        \"review_id\": uuid.uuid4().hex[:12], \"type\": \"question\",\n        \"subject\": {\"cert_id\": c[\"cert_id\"], \"verdict\": verdict,\n                    \"question\": (result.get(\"spec\") or {}).get(\"question_text\"),\n                    \"dataset_sha256\": c[\"payload\"][\"dataset_sha256\"],\n                    \"policy_version\": c[\"payload\"][\"policy_version\"]},\n        \"reviewer\": {\"name\": reviewer.strip()[:80], \"role\": role.strip()[:80]},\n        \"decision\": decision, \"acknowledged_findings\": sorted(set(acknowledged) & required),\n        \"note\": note.strip()[:2000],\n        \"created_at\": datetime.now(timezone.utc).isoformat(timespec=\"seconds\"),\n    }\n    return _save(_sign(payload))"
+            },
+            {
+              "path": "api/main.py",
+              "start": 281,
+              "end": 299,
+              "quote": "class QuestionReview(BaseModel):\n    result: dict\n    reviewer: str\n    role: str = \"\"\n    decision: str\n    acknowledged: list[str] = []\n    note: str = \"\"\n\n\n@app.post(\"/review/question\")\ndef post_question_review(req: QuestionReview):\n    try:\n        rec = review_question(req.result, req.reviewer, req.role, req.decision, req.acknowledged, req.note)\n        r = rec[\"review\"]\n        rec[\"ledger\"] = ledger.append(\"review\", {\"review_id\": r[\"review_id\"], \"cert_id\": r[\"subject\"][\"cert_id\"],\n                                                 \"decision\": r[\"decision\"], \"reviewer\": r[\"reviewer\"][\"name\"]})\n        return rec\n    except ReviewError as e:\n        raise HTTPException(400, str(e))"
+            }
+          ]
+        },
+        {
+          "kind": "strength",
+          "priority": "P2",
+          "title": "Baseline cache identity includes current file-content hashes",
+          "observation": "The release cache key combines a cache-version token with file_sha256 for every selected present file. A same-path content change therefore selects a different cache entry rather than reusing a path-only result. The loader also records both compressed-file and decompressed-content hashes, and the run checks compared baseline file hashes against the frozen checksum map. The verification scope is the selected compared-file set, not a proof of all required candidate inputs or of scientific truth.",
+          "impact": "This is a useful provenance control and a direct contrast to path-only caches. It helps make cache reuse reproducible and explains why a data hash must be interpreted with its hash_of convention. CFT-01 still needs an independent availability gate.",
+          "recommendation": "Keep content-bound cache keys and explicit hash conventions. Record the selected-file scope and include required-input availability before judging compatibility. Treat a matching hash as byte identity, not confirmation that an analysis or baseline is scientifically suitable.",
+          "acceptance_check": "With invented inputs, reuse an unchanged release, replace a file at the same path, and change only compression metadata. Confirm cache and provenance behavior match the declared file/content conventions. Verify omitted required files are still handled by CFT-01's separate gate.",
+          "confidence": "High for complete cache-key and hash code; no cache read/write or dataset load occurred in this review.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "cohort_firewall/tower/releases.py",
+              "start": 181,
+              "end": 201,
+              "quote": "def load_release(path: str | Path, name: str | None = None, include_rna: bool = True,\n                 cache_dir: Path | None = None, only: set[str] | None = None) -> Release:\n    \"\"\"Load and fingerprint a release. With cache_dir, a release whose files are byte-identical\n    to a previous load (same sha256 per file) is read from the cache instead of re-fingerprinted.\"\"\"\n    import pickle\n    path = Path(path)\n    if cache_dir is not None:\n        present = [f for f in LAYOUT if (path / f).exists() and (include_rna or not f.startswith(\"rna_\"))\n                   and (only is None or f in only)]\n        key = hashlib.sha256(\"|\".join([CACHE_VERSION] + [f\"{f}:{file_sha256(path / f)}\" for f in present])\n                             .encode()).hexdigest()[:24]\n        cached = Path(cache_dir) / f\"release-{key}.pkl\"\n        if cached.exists():\n            rel = pickle.loads(cached.read_bytes())\n            rel.name, rel.path = name or path.name, path\n            for v in rel.files.values():\n                v.path = path / v.name\n            return rel\n        rel = load_release(path, name, include_rna, only=only)\n        Path(cache_dir).mkdir(parents=True, exist_ok=True)\n        cached.write_bytes(pickle.dumps(rel))"
+            },
+            {
+              "path": "cohort_firewall/tower/releases.py",
+              "start": 208,
+              "end": 219,
+              "quote": "    def work(job):\n        fname, orient, idcol = job\n        p = path / fname\n        view = _load_rows(p, fname, idcol) if orient == \"rows\" else _load_any_matrix(p, fname)\n        return fname, {\"file\": file_sha256(p), \"content\": content_sha256(p)}, view\n\n    # Files are read in parallel: decompression and pandas' parser release the GIL for most of the work.\n    with ThreadPoolExecutor(max_workers=max(1, min(6, len(jobs)))) as pool:\n        results = list(pool.map(work, jobs))\n    files = {f: v for f, _, v in results}\n    hashes = {f: h for f, h, _ in results}\n    return Release(name or path.name, path, files, hashes)"
+            },
+            {
+              "path": "cohort_firewall/tower/run.py",
+              "start": 27,
+              "end": 35,
+              "quote": "    in_b = {f for f in LAYOUT if (b / f).exists() and (include_rna or not f.startswith(\"rna_\"))}\n    not_compared = sorted(f for f in LAYOUT if (a / f).exists() and f not in in_b)\n    rel_a = load_release(a, \"frozen-A\" if path_a is None else a.name, include_rna=include_rna,\n                         cache_dir=cache, only=in_b)\n    t1 = time.time()\n    rel_b = load_release(b, release_name(b), include_rna=include_rna)\n    frozen = frozen_checksums(repo)\n    unverified = sorted(f for f, h in rel_a.file_hashes.items() if frozen.get(f) != h[\"file\"])\n    changes = diff_releases(rel_a, rel_b)"
+            },
+            {
+              "path": "cohort_firewall/tower/findings.py",
+              "start": 264,
+              "end": 268,
+              "quote": "        \"data\": {\"dataset\": \"TCGA-BRCA\", \"releases\": [\n            {\"name\": rel_a.name, \"files\": [{\"file\": f, \"sha256\": h[\"file\"], \"hash_of\": \"file\"}\n                                           for f, h in sorted(rel_a.file_hashes.items())]},\n            {\"name\": rel_b.name, \"files\": [{\"file\": f, \"sha256\": h[\"content\"], \"hash_of\": \"content\"}\n                                           for f, h in sorted(rel_b.file_hashes.items())]},"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-4",
+      "status": "observed",
+      "assessment": "Default-deny and signed-verdict decision rules are constructive. Partial review-subject binding can undermine acknowledgments; the separate main report also records malformed-input and optional-wording concerns not rerun here.",
+      "findings": [
+        {
+          "kind": "gap",
+          "priority": "P1",
+          "title": "Release review checks verdict binding but not the full evidence document",
+          "observation": "tower_binding contains the question and analysis IDs/verdicts only. Certificate creation uses that binding, while review_release derives required acknowledgments from client-supplied findings and affected_by arrays that are not covered by it. The API passes the supplied findings document directly to the review function. The parallel synthetic probe reports that original Conditional evidence required F1 acknowledgment, but stripping findings/affected_by while retaining the valid certificate allowed a signed approve_with_conditions record with no acknowledgments. The Blocked-verdict guard still rejected approval; no private key was forged and no HTTP/browser exploit was reproduced.",
+          "impact": "Cryptographic validity establishes exactly what the payload covers, not authenticity of every adjacent field. An evidence-acknowledgment requirement can be reduced through unsigned portions of the submitted document while its verdict remains unchanged. A verified review signature can then describe an incomplete review.",
+          "recommendation": "Review an immutable server-side result selected by certificate ID, or bind and verify the complete canonical document used for decisions, including findings, analysis evidence, affected_by, repairs and release identity. Reject changed decision inputs before constructing the review. Keep the current signed-verdict restrictions and note requirements.",
+          "acceptance_check": "Change findings, affected_by, before/after values, repairs and release metadata independently after issuing a certificate. Each changed review request should be rejected or clearly treated as a new unsigned result. The original Conditional result with all required acknowledgments and note is the positive control; Blocked approval must remain rejected.",
+          "confidence": "High for the partial binding and separately reported direct-function reproduction; no application request or key material was accessed.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "cohort_firewall/review.py",
+              "start": 35,
+              "end": 39,
+              "quote": "def tower_binding(question: str, analyses: list[dict]) -> str:\n    \"\"\"What a Control Tower certificate's spec hash covers: the question and each analysis verdict.\"\"\"\n    return json.dumps({\"question\": question,\n                       \"analyses\": [{\"id\": a[\"id\"], \"verdict\": a[\"verdict\"]} for a in analyses]},\n                      sort_keys=True, separators=(\",\", \":\"))"
+            },
+            {
+              "path": "cohort_firewall/review.py",
+              "start": 93,
+              "end": 112,
+              "quote": "def review_release(doc: dict, reviewer: str, role: str, decisions: dict[str, str],\n                   acknowledged: list[str], note: str) -> dict:\n    c = doc.get(\"certificate\") or {}\n    if not cert.verify(c):\n        raise ReviewError(\"The findings' certificate does not verify; it may have been edited.\")\n    analyses = doc.get(\"analyses\") or []\n    bound = hashlib.sha256(tower_binding(doc.get(\"question\", \"\"), analyses).encode()).hexdigest()\n    if bound != c[\"payload\"][\"spec_sha256\"]:\n        raise ReviewError(\"The analysis verdicts do not match the signed record; they may have been edited.\")\n    if not reviewer.strip():\n        raise ReviewError(\"Enter the reviewer's name.\")\n    finding_ids = {f[\"id\"] for f in doc.get(\"findings\", [])}\n    per = []\n    for a in analyses:\n        d = decisions.get(a[\"id\"])\n        if not d:\n            raise ReviewError(f\"Choose a decision for {a['id']}.\")\n        required = set(a.get(\"affected_by\", [])) & finding_ids\n        _check_one(LABEL[a[\"verdict\"]], d, required, set(acknowledged), note, a[\"id\"])\n        per.append({\"analysis\": a[\"id\"], \"verdict\": a[\"verdict\"], \"decision\": d})"
+            },
+            {
+              "path": "cohort_firewall/tower/findings.py",
+              "start": 285,
+              "end": 291,
+              "quote": "    hashes = json.dumps(doc[\"data\"], sort_keys=True).encode()\n    from ..review import tower_binding\n    doc[\"certificate\"] = issue(dataset_bytes=hashes, dictionary=None,\n                               spec_json=tower_binding(question, analyses),\n                               policy_version=Policy.load(TOWER_POLICY).version,\n                               policy_sha256=Policy.load(TOWER_POLICY).sha256, verdict=overall,\n                               rule_ids=[f[\"rule_id\"] for e in vds.values() for f in e[\"findings\"]])"
+            },
+            {
+              "path": "api/main.py",
+              "start": 302,
+              "end": 321,
+              "quote": "class ReleaseReview(BaseModel):\n    findings: dict\n    reviewer: str\n    role: str = \"\"\n    decisions: dict[str, str]\n    acknowledged: list[str] = []\n    note: str = \"\"\n\n\n@app.post(\"/review/release\")\ndef post_release_review(req: ReleaseReview):\n    try:\n        rec = review_release(req.findings, req.reviewer, req.role, req.decisions, req.acknowledged, req.note)\n        r = rec[\"review\"]\n        rec[\"ledger\"] = ledger.append(\"review\", {\"review_id\": r[\"review_id\"], \"cert_id\": r[\"subject\"][\"cert_id\"],\n                                                 \"decision\": {d[\"analysis\"]: d[\"decision\"] for d in r[\"decisions\"]},\n                                                 \"reviewer\": r[\"reviewer\"][\"name\"]})\n        return rec\n    except ReviewError as e:\n        raise HTTPException(400, str(e))"
+            }
+          ]
+        },
+        {
+          "kind": "strength",
+          "priority": "P2",
+          "title": "Policy separates measurements from versioned rules and missing-check states",
+          "observation": "Policy loads YAML with safe_load and records the rule-file hash. Evaluation produces explicit Insufficient Evidence for missing expected checks, not-evaluable checks and rule references to absent metrics. Conditions use a fixed operator mapping rather than eval. Accepted limitations apply only to allowed Conditional findings, and ignored acceptances remain visible. These paths are useful controls, not a guarantee that all input shapes or metric values are valid.",
+          "impact": "A reviewer can inspect which measured condition triggered a verdict and distinguish unavailable evidence from an actual negative finding. Constraining accepted limitations prevents an ordinary acceptance list from waiving Blocked findings.",
+          "recommendation": "Retain the policy/measurement separation, version hash and explicit unavailable states. Keep malformed-input validation separate and test None/type mismatches rather than assuming the generic evaluator covers every shape. Preserve the parallel report's distinct malformed-input findings.",
+          "acceptance_check": "Omit an expected check, return not_evaluable, remove a referenced metric and submit an unrecognized acceptance. Verify each has a visible and distinct result. Confirm a permitted Conditional acceptance works while Blocked cannot be waived. Do not infer success from source definitions alone.",
+          "confidence": "High for inspected evaluator controls; no policy tests were run in this pass.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "cohort_firewall/policy.py",
+              "start": 32,
+              "end": 37,
+              "quote": "    @classmethod\n    def load(cls, path: str | Path) -> \"Policy\":\n        raw = Path(path).read_bytes()\n        doc = yaml.safe_load(raw)\n        return cls(doc[\"version\"], doc.get(\"parameters\", {}), doc[\"rules\"],\n                   hashlib.sha256(raw).hexdigest(), doc.get(\"acceptable\", {}) or {})"
+            },
+            {
+              "path": "cohort_firewall/policy.py",
+              "start": 53,
+              "end": 66,
+              "quote": "def evaluate(results: list[CheckResult], policy: Policy, expected: set[str] | None = None,\n             accepted: set[str] | None = None) -> dict:\n    by_name = {r.check: r for r in results}\n    findings = []\n    expected = EXPECTED_CHECKS if expected is None else expected\n\n    for name in sorted(expected - set(by_name)):\n        findings.append({\"rule_id\": \"DEFAULT-DENY\", \"check\": name, \"verdict\": \"INSUFFICIENT_EVIDENCE\",\n                         \"reason\": f\"Check '{name}' did not report.\", \"remedy\": \"Investigate the engine.\"})\n    for r in results:\n        if r.status == \"not_evaluable\":\n            findings.append({\"rule_id\": \"DEFAULT-DENY\", \"check\": r.check, \"verdict\": \"INSUFFICIENT_EVIDENCE\",\n                             \"reason\": f\"Check '{r.check}' could not be evaluated. {r.note}\".strip(),\n                             \"remedy\": \"Supply the missing data or metadata this check needs.\"})"
+            },
+            {
+              "path": "cohort_firewall/policy.py",
+              "start": 68,
+              "end": 87,
+              "quote": "    for rule in policy.rules:\n        r = by_name.get(rule[\"check\"])\n        if r is None or r.status != \"ok\":\n            continue  # already covered by DEFAULT-DENY or skipped (not applicable)\n        fired, broken = True, False\n        for cond in rule[\"when\"]:\n            if cond[\"metric\"] not in r.metrics:\n                broken = True\n                break\n            v = r.metrics[cond[\"metric\"]]\n            if v is None:\n                fired = False\n                break\n            if not OPS[cond[\"op\"]](v, cond[\"value\"]):\n                fired = False\n                break\n        if broken:\n            findings.append({\"rule_id\": rule[\"id\"], \"check\": rule[\"check\"], \"verdict\": \"INSUFFICIENT_EVIDENCE\",\n                             \"reason\": f\"Rule {rule['id']} references a metric the check did not produce.\",\n                             \"remedy\": \"Fix the rule/engine mismatch.\"})"
+            },
+            {
+              "path": "cohort_firewall/policy.py",
+              "start": 99,
+              "end": 114,
+              "quote": "    accepted = set(accepted or set())\n    allowed = set((policy.acceptable or {}).keys())\n    ignored_acceptances = sorted(accepted - allowed)\n    for f in findings:\n        if f[\"rule_id\"] in accepted and f[\"rule_id\"] in allowed and f[\"verdict\"] == \"CONDITIONAL\":\n            f[\"accepted\"] = True\n            f[\"accepted_as\"] = policy.acceptable[f[\"rule_id\"]]\n\n    verdict = \"READY\"\n    counted = [f for f in findings if not f.get(\"accepted\")]\n    for v in PRECEDENCE:\n        if any(f[\"verdict\"] == v for f in counted):\n            verdict = v\n            break\n    findings.sort(key=lambda f: (PRECEDENCE.index(f[\"verdict\"]), bool(f.get(\"accepted\"))))\n    return {\"verdict\": verdict, \"findings\": findings, \"ignored_acceptances\": ignored_acceptances}"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-5",
+      "status": "not_tested",
+      "assessment": "README documents API, CLI and web setup. This source reviewer executed none of them. The parallel report's 12 narrow synthetic probes and six disclosure cases are not a full submitted suite, build, browser or hosted validation.",
+      "findings": [],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. This pass does not establish runtime behavior or user comprehension."
+    },
+    {
+      "id": "T1-6",
+      "status": "observed",
+      "assessment": "Repairs are proposals and approval policy distinguishes unresolved evidence. Verify complete evidence identity before trusting a signed decision or repair simulation, and preserve the researcher's judgment of source correctness.",
+      "findings": [
+        {
+          "kind": "strength",
+          "priority": "P2",
+          "title": "Approval policy distinguishes unavailable results and explicit conditions",
+          "observation": "Allowed decisions depend on the signed verdict. Blocked and Insufficient Evidence allow reject/request_more but no approval; Conditional allows approve_with_conditions. Approval requires the relevant acknowledgments and nontrivial notes under the inspected policy, and release review requires a decision for every supplied analysis. The published Blocked-approval synthetic control was rejected. These are meaningful safeguards even though CFT-04/05 show that surrounding document binding is incomplete. Reviewer names are self-attested strings, not authenticated identity.",
+          "impact": "The review handoff makes unresolved evidence a separate action rather than equating any recorded interaction with approval. It gives the researcher concrete conditions and a signed record to retain after fixing the evidence-binding boundary.",
+          "recommendation": "Preserve the decision matrix and original records. Bind the complete reviewed subject before applying those rules, and surface ledger-write errors distinctly from a successfully recorded decision. Keep the documented end-truncation limitation visible when presenting the hash-chained ledger.",
+          "acceptance_check": "Exercise each verdict/decision pair with missing versus complete acknowledgments and notes. Retain the rejected Blocked-approval control. Then verify the resulting review subject matches the immutable evidence and that a logging failure is visible without claiming a complete ledger.",
+          "confidence": "High for source decision controls and separately reported narrow rejection control; authentication, multi-process persistence and full API behavior remain untested.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "cohort_firewall/review.py",
+              "start": 19,
+              "end": 27,
+              "quote": "LABEL = {\"Ready\": \"READY\", \"Conditional\": \"CONDITIONAL\", \"Blocked\": \"BLOCKED\",\n         \"Insufficient Evidence\": \"INSUFFICIENT_EVIDENCE\"}\nALLOWED = {\n    \"READY\": {\"approve\", \"reject\", \"request_more\"},\n    \"CONDITIONAL\": {\"approve_with_conditions\", \"reject\", \"request_more\"},\n    \"BLOCKED\": {\"reject\", \"request_more\"},\n    \"INSUFFICIENT_EVIDENCE\": {\"reject\", \"request_more\"},\n}\nAPPROVALS = {\"approve\", \"approve_with_conditions\"}"
+            },
+            {
+              "path": "cohort_firewall/review.py",
+              "start": 42,
+              "end": 51,
+              "quote": "def _check_one(verdict: str, decision: str, required: set[str], acknowledged: set[str], note: str, who: str):\n    if decision not in ALLOWED[verdict]:\n        raise ReviewError(f\"'{decision}' is not allowed for a {verdict.replace('_', ' ').title()} result. \"\n                          f\"Allowed: {', '.join(sorted(ALLOWED[verdict]))}.\")\n    if decision in APPROVALS and not required <= acknowledged:\n        missing = \", \".join(sorted(required - acknowledged))\n        raise ReviewError(f\"{who}: approving requires confirming you reviewed the evidence for {missing}.\")\n    if (decision != \"approve\" or required) and len(note.strip()) < 10:\n        raise ReviewError(f\"{who}: write a short note (why the findings are acceptable, what conditions apply, \"\n                          \"or what evidence is needed).\")"
+            },
+            {
+              "path": "cohort_firewall/review.py",
+              "start": 102,
+              "end": 122,
+              "quote": "    if not reviewer.strip():\n        raise ReviewError(\"Enter the reviewer's name.\")\n    finding_ids = {f[\"id\"] for f in doc.get(\"findings\", [])}\n    per = []\n    for a in analyses:\n        d = decisions.get(a[\"id\"])\n        if not d:\n            raise ReviewError(f\"Choose a decision for {a['id']}.\")\n        required = set(a.get(\"affected_by\", [])) & finding_ids\n        _check_one(LABEL[a[\"verdict\"]], d, required, set(acknowledged), note, a[\"id\"])\n        per.append({\"analysis\": a[\"id\"], \"verdict\": a[\"verdict\"], \"decision\": d})\n    payload = {\n        \"review_id\": uuid.uuid4().hex[:12], \"type\": \"release\",\n        \"subject\": {\"cert_id\": c[\"cert_id\"], \"overall_verdict\": c[\"payload\"][\"verdict\"],\n                    \"releases\": [r[\"name\"] for r in doc[\"data\"][\"releases\"]],\n                    \"policy_version\": c[\"payload\"][\"policy_version\"]},\n        \"reviewer\": {\"name\": reviewer.strip()[:80], \"role\": role.strip()[:80]},\n        \"decisions\": per, \"acknowledged_findings\": sorted(set(acknowledged) & finding_ids),\n        \"note\": note.strip()[:2000],\n        \"created_at\": datetime.now(timezone.utc).isoformat(timespec=\"seconds\"),\n    }"
+            },
+            {
+              "path": "cohort_firewall/ledger.py",
+              "start": 47,
+              "end": 67,
+              "quote": "def append(event: str, subject: dict) -> dict:\n    \"\"\"Add one entry and return {seq, hash}. Never raises: the ledger must not break a check.\"\"\"\n    try:\n        with _lock:\n            p = path()\n            p.parent.mkdir(parents=True, exist_ok=True)\n            last = None\n            if p.exists():\n                lines = [x for x in p.read_text().splitlines() if x.strip()]\n                last = json.loads(lines[-1]) if lines else None\n            entry = {\"seq\": (last[\"seq\"] + 1) if last else 1,\n                     \"ts\": datetime.now(timezone.utc).isoformat(timespec=\"seconds\"),\n                     \"event\": event, \"subject\": subject,\n                     \"prev\": last[\"hash\"] if last else GENESIS}\n            entry[\"hash\"] = _hash(entry)\n            entry[\"sig\"] = base64.b64encode(cert._load_key().sign(bytes.fromhex(entry[\"hash\"]))).decode()\n            with p.open(\"a\") as f:\n                f.write(json.dumps(entry, sort_keys=True) + \"\\n\")\n            return {\"seq\": entry[\"seq\"], \"hash\": entry[\"hash\"]}\n    except Exception as e:  # pragma: no cover\n        return {\"error\": f\"ledger not written: {e}\"}"
+            },
+            {
+              "path": "cohort_firewall/ledger.py",
+              "start": 1,
+              "end": 8,
+              "quote": "\"\"\"Tamper-evident audit ledger: a hash-chained, signed record of every check and every human decision.\n\nEach entry holds its sequence number, time, event, a short subject (certificate id, verdicts, reviewer),\nthe previous entry's hash, its own hash, and an Ed25519 signature of that hash. Editing, deleting,\ninserting or reordering any past entry breaks the chain, and verify() names the first entry affected.\n\nLimitation: removing entries from the END leaves a valid shorter chain. Record the head hash somewhere\nelse (the review note, a ticket, an email) to detect that, as Certificate Transparency logs do."
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-7",
+      "status": "not_tested",
+      "assessment": "Plain summaries, limitations and structured next steps are implemented. Omitted-file disclosures should agree with per-analysis availability; no user-comprehension or accessibility claim is established.",
+      "findings": [],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. This pass does not establish runtime behavior or user comprehension."
+    }
+  ],
+  "judge_scores": null
+}
