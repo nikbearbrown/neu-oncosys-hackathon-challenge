@@ -1,0 +1,314 @@
+{
+  "mode": "judge",
+  "repo": "roh9031/HIPPA-cratic",
+  "commit": "9f0ad46f32a1a76af25baf1aa621ab862f991c45",
+  "track": 1,
+  "reviewer": "Professor Bear / Codex source review",
+  "summary": "This is a Cohort Studio, not a release-change Control Tower. Its source supports editable cohort operations, distinct row/sample/patient counts, checks for cross-sample links and inflating joins, carefully differentiated fixes, and a separately translated DuckDB verification path. The main concerns are reproducibility and evidence identity: a generated rebuild records steps without binding the selected release or hashes, a prior SQL success is keyed only to step text, and custom-data activation changes process-wide state. A separate generated-source boundary interpolates request text into a Python docstring. These are source-derived findings, not executed failures. The repository's submission tag matches the inspected main commit; no organizer freeze receipt or claimed test result was independently verified.",
+  "limitations": [
+    "Pinned local checkout, not a verified official final-submission receipt; branch names and later changes are outside this pass.",
+    "Static source analysis only. No submission code, tests, installers, workflows, notebook, server, hosted endpoint or model was executed.",
+    "No sealed envelopes, answer keys or raw clinical datasets were accessed. Numerical correctness, performance, accessibility and fresh-machine setup remain untested.",
+    "Source-derived control-flow consequences are labeled as such. Proposed acceptance checks are not observed test results.",
+    "The collected text budget is 160 files, 200 KB/file and 4 MB/entry. Complete_with_exclusions is not an exhaustive audit; exclusions and focused follow-ups are recorded.",
+    "No official score, cross-team ranking, clinical validity or regulatory/accessibility certification is asserted."
+  ],
+  "criteria": [
+    {
+      "id": "T1-1",
+      "status": "observed",
+      "assessment": "Source supports per-step inflation, cross-sample and some missingness/selection checks. Author-reported test counts are not independently observed accuracy, and answer-bearing trap material was excluded.",
+      "findings": [
+        {
+          "kind": "strength",
+          "priority": "P2",
+          "title": "Join checks distinguish duplicate rows from wrong-sample links",
+          "observation": "The engine records row/sample/patient counts at each step and checks both increases in repeated sample rows and patient-key joins attaching another sample's record. Semi/anti joins also warn when membership is obtained only through a different sample, unless an explicit constrained allow_cross_sample policy applies. The inflation fix offers a semi-join only for inner joins; it avoids silently dropping unmatched samples from a left join. These are distinct checks rather than a generic row-count warning.",
+          "impact": "This directly supports the Cohort Studio task: a superficially correct unique sample count cannot by itself establish that the joined records belong to those samples. Separate findings and fixes help a researcher understand the actual identity error.",
+          "recommendation": "Retain these separate checks and the left-join caveat. Keep counts and sample examples attached to the precise step, and demonstrate that a chosen fix removes the relevant problem rather than just its visible duplicates.",
+          "acceptance_check": "With invented patients having tumor/normal specimens and multiple slides, compare inner, left, semi and anti joins on sample versus patient IDs. Show row inflation, wrong-sample membership and an explicit patient-level existence policy separately. Confirm a valid sample-key control remains quiet.",
+          "confidence": "High for the source paths; numerical results and the author's demonstration were not rerun.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "cohort_studio/engine.py",
+              "start": 440,
+              "end": 465,
+              "quote": "    if how in (\"semi\", \"anti\"):\n        hit = df[on].isin(right[on])\n        out = df[hit] if how == \"semi\" else df[~hit]\n        if on == \"patient_id\" and not allow_cross_sample and \"sample_id\" in right.columns:\n            by_sample = df[\"sample_id\"].isin(right[\"sample_id\"])\n            only_via_patient = df[hit & ~by_sample]\n            if len(only_via_patient):\n                if how == \"semi\":\n                    message = (\n                        f\"{only_via_patient['sample_id'].nunique()} samples were kept only because a *different* \"\n                        f\"sample of the same patient has a matching {table} record (e.g. a normal-tissue slide). \"\n                        \"Records should link to a sample only when the sample barcode matches.\"\n                    )\n                else:\n                    message = (\n                        f\"{only_via_patient['sample_id'].nunique()} samples were excluded only because a *different* \"\n                        f\"sample of the same patient has a matching {table} record. \"\n                        \"Records should link to a sample only when the sample barcode matches.\"\n                    )\n                warns.append(Warning_(\n                    \"cross_sample\", \"problem\",\n                    message,\n                    examples=only_via_patient[[\"sample_id\", \"patient_id\"]].head(10).to_dict(\"records\"),\n                    fixes=[{\"label\": \"Match on sample_id instead of patient_id\",\n                            \"steps\": _with_step(steps, i, on=\"sample_id\")}],\n                ))"
+            },
+            {
+              "path": "cohort_studio/engine.py",
+              "start": 468,
+              "end": 483,
+              "quote": "    right = _prepare_right(df, right, table, on)\n    out = df.merge(right, on=on, how=how)\n    if on == \"patient_id\" and not allow_cross_sample:\n        other = f\"sample_id__{table}\"\n        if other in out.columns:\n            bad = out[out[other].notna() & (out[other] != out[\"sample_id\"])]\n            if len(bad):\n                warns.append(Warning_(\n                    \"cross_sample\", \"problem\",\n                    f\"{len(bad)} joined rows attach a {table} record from a *different sample* of the same \"\n                    f\"patient (for example a normal-tissue record on a tumor sample). \"\n                    f\"Join on sample_id so each record belongs to the sample it describes.\",\n                    examples=bad[[\"sample_id\", other]].head(10).to_dict(\"records\"),\n                    fixes=[{\"label\": \"Join on sample_id instead of patient_id\",\n                            \"steps\": _with_step(steps, i, on=\"sample_id\")}],\n                ))"
+            },
+            {
+              "path": "cohort_studio/engine.py",
+              "start": 508,
+              "end": 530,
+              "quote": "def _inflation_check(before, after, step, i, steps) -> list[Warning_]:\n    extra_before = len(before) - before[\"sample_id\"].nunique()\n    extra_after = len(after) - after[\"sample_id\"].nunique()\n    if extra_after <= extra_before:\n        return []\n    vc = after[\"sample_id\"].value_counts()\n    dup = vc[vc > 1]\n    fixes = []\n    if step[\"op\"] == \"join\":\n        # A semi-join only keeps samples that have a match. That's the same cohort as an inner join, but for a\n        # left join it would silently drop samples with no match, so only offer it for inner joins.\n        if step.get(\"how\", \"inner\") == \"inner\":\n            fixes.append({\"label\": \"Keep each sample once if it has a match (semi-join)\",\n                          \"steps\": _with_step(steps, i, how=\"semi\")})\n        fixes.append({\"label\": \"Keep the joined columns, then collapse to one row per sample\",\n                      \"steps\": _insert_after(steps, i, {\"op\": \"collapse\", \"level\": \"sample\"})})\n    return [Warning_(\n        \"inflation\", \"problem\",\n        f\"Rows grew faster than samples: {len(after):,} rows but only {after['sample_id'].nunique():,} distinct \"\n        f\"samples. {len(dup):,} samples now appear more than once (up to {int(dup.max())}x), so counting rows \"\n        f\"here overstates the cohort by {extra_after:,}.\",\n        examples=[{\"sample_id\": s, \"rows\": int(n)} for s, n in dup.head(10).items()],\n        fixes=fixes,"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-2",
+      "status": "observed",
+      "assessment": "Editable steps, explicit join policies and SQL comparison support question-aware reasoning. Agreement between two executions does not prove the steps match a natural-language request.",
+      "findings": [
+        {
+          "kind": "strength",
+          "priority": "P2",
+          "title": "A second execution path compares exact membership and step counts",
+          "observation": "The SQL verifier builds DuckDB views from resolved source files and translates the cohort steps into SQL rather than reusing the pandas output. verify compares final sample-ID sets and row/sample/patient counts at every paired step, returning differences and the query. The app explicitly says this checks execution of the steps, not whether those steps express the research question. Shared file resolution and policy assumptions still limit the independence of the check.",
+          "impact": "A matching final count can conceal swapped membership or intermediate inflation. Exact membership plus per-step comparisons gives a much more useful execution cross-check, while the explicit semantic limitation leaves the research decision with a person.",
+          "recommendation": "Preserve the query and exact-set comparison, and bind its result to the input identity as in HC-03. Assert matching step counts before pairing them and keep independently designed expected cohort cases separate from compiler agreement.",
+          "acceptance_check": "Inject an invented translation/execution discrepancy that preserves the total number of samples but changes one ID; verify the set mismatch is reported. Exercise an intermediate duplicate-row difference with the same final cohort. Confirm an agreed result still requires human review of intended meaning.",
+          "confidence": "High for the separate SQL construction and comparisons; no DuckDB or student test was executed.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "cohort_studio/sqlcheck.py",
+              "start": 24,
+              "end": 45,
+              "quote": "    if data.is_custom(ddir):                  # the user's own tables (custom.py): one plain view per CSV\n        con = duckdb.connect()\n        con.sql(f\"CREATE VIEW samples AS SELECT * FROM read_csv({_lit(data.file_path(data.BASE_FILE, ddir).as_posix())})\")\n        for name, meta in data.TABLES.items():\n            if name != \"samples\":\n                con.sql(f\"CREATE VIEW {_q(name)} AS SELECT * FROM read_csv(\"\n                        f\"{_lit(data.file_path(meta['file'], ddir).as_posix())})\")\n        return con\n\n    # Only *which* file to read comes from data.py (so a chosen release is used, see data.file_path); the\n    # reading itself is DuckDB's, independent of the engine's loaders.\n    f = {rel: data.file_path(rel, ddir).as_posix() for rel in\n         (\"sample_manifest.csv\", \"slide_manifest.csv\", \"raw/survival.tsv\", \"raw/clinical.tsv\",\n          \"raw/mutation_gene_level.tsv.gz\")}\n    con = duckdb.connect()\n    con.sql(f\"CREATE VIEW samples  AS SELECT * FROM read_csv({_lit(f['sample_manifest.csv'])})\")\n    con.sql(f\"CREATE VIEW slides   AS SELECT * FROM read_csv({_lit(f['slide_manifest.csv'])})\")\n    con.sql(f\"CREATE VIEW survival AS SELECT sample AS sample_id, _PATIENT AS patient_id, * \"\n            f\"FROM read_csv({_lit(f['raw/survival.tsv'])}, delim='\\t')\")\n    # clinical.tsv's own patient_id is a 4-char suffix; the real key is the sample barcode.\n    con.sql(f\"CREATE VIEW clinical AS SELECT sampleID AS sample_id, left(sampleID, 12) AS patient_id, \"\n            f\"* EXCLUDE (patient_id) FROM read_csv({_lit(f['raw/clinical.tsv'])}, delim='\\t', all_varchar=true)\")"
+            },
+            {
+              "path": "cohort_studio/sqlcheck.py",
+              "start": 218,
+              "end": 234,
+              "quote": "def verify(steps: list[dict], engine_df, results, ddir: str | None = None) -> dict:\n    \"\"\"Run the SQL version and compare it with the engine, step by step and sample by sample.\"\"\"\n    con = connect(ddir)\n    try:\n        con.sql(\"SET threads TO 1\")  # keeps row_number() OVER () in file order, for patient-level collapse\n        sql = steps_to_sql(steps, con)\n        ids = {r[0] for r in con.sql(sql).fetchall()}\n        counts = con.sql(_counts_sql(steps, con)).fetchall()\n    finally:\n        con.close()\n    eng_ids = set(engine_df[\"sample_id\"])\n    by_step = [{\"step\": r.index, \"engine rows\": r.rows, \"SQL rows\": c[1], \"engine samples\": r.samples,\n                \"SQL samples\": c[2], \"match\": \"\u2705\" if (r.rows, r.samples, r.patients) == tuple(c[1:]) else \"\u274c\"}\n               for r, c in zip(results, counts)]\n    return {\"sql\": sql, \"by_step\": by_step, \"sql_samples\": len(ids), \"engine_samples\": len(eng_ids),\n            \"only_engine\": sorted(eng_ids - ids), \"only_sql\": sorted(ids - eng_ids),\n            \"match\": ids == eng_ids and all(b[\"match\"] == \"\u2705\" for b in by_step)}"
+            },
+            {
+              "path": "app.py",
+              "start": 430,
+              "end": 444,
+              "quote": "            if v[\"match\"]:\n                st.success(f\"\u2705 **Match.** Engine: **{v['engine_samples']:,}** samples \u00b7 independent SQL: \"\n                           f\"**{v['sql_samples']:,}** samples. Same sample IDs, and the same rows, samples and \"\n                           f\"patients after every step.\")\n                if problems:\n                    st.warning(\"Both agree on the numbers, **including the problems flagged above**. \"\n                               \"Apply a fix first, then verify again.\")\n            else:\n                st.error(f\"\u274c **Mismatch.** Engine: {v['engine_samples']:,} samples \u00b7 SQL: {v['sql_samples']:,}. \"\n                         f\"Don't use this cohort until someone finds out why.\")\n                if v[\"only_engine\"] or v[\"only_sql\"]:\n                    st.write(\"Only in the engine:\", v[\"only_engine\"][:20], \"Only in SQL:\", v[\"only_sql\"][:20])\n            st.dataframe(pd.DataFrame(v[\"by_step\"]), hide_index=True)\n            st.caption(\"This checks that the steps were *carried out* correctly. It can't tell you whether the \"\n                       \"steps match your research question: that's the human review below.\")"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-3",
+      "status": "observed",
+      "assessment": "Definitions contain input fingerprints and exact SQL membership comparison is implemented. The rebuild and live verification identities do not consistently bind those inputs; HC-01 and HC-03 are priority follow-ups.",
+      "findings": [
+        {
+          "kind": "gap",
+          "priority": "P1",
+          "title": "The rebuild script does not bind the exported cohort's data release",
+          "observation": "cohort_definition records data_dir, release and input_sha256, but rebuild_script accepts only steps and request and emits run(STEPS) without the recorded location, release or expected hashes. That call resolves data through the new process's environment and defaults. A colleague running the script in a fresh shell can therefore use the original release rather than the changed release used for export, or lack the custom table registry entirely. The existing rebuild tests inherit the current environment and exercise two fixed default-data examples; their definitions do not establish changed-release or custom-data reconstruction. This is a source-derived reproduction gap, not an observed membership mismatch.",
+          "impact": "The organizer product requires a script or notebook that reproduces the exported cohort exactly. The separate JSON definition is useful provenance, but it does not make a standalone script consume the same bytes. An apparently successful rerun can construct a different cohort without first establishing input equivalence.",
+          "recommendation": "Generate a rebuild entry point from the complete exported definition. Resolve required table mappings and release overlays explicitly, verify expected content fingerprints before calculation, and record the exact sample membership digest. Make missing or changed inputs an explicit failure unless the user intentionally creates a new version. For custom data, export the registry and a documented way to supply the referenced files without embedding sensitive records.",
+          "acceptance_check": "Using invented data, export from a changed release and from a custom-data folder. Start a clean process with release/data environment variables absent and different defaults present. The script must either select the recorded inputs and reproduce exact sample IDs or fail with a precise missing/version-mismatch reason. Keep an unchanged default-data positive control and compare IDs, not just row counts.",
+          "confidence": "High for the missing binding in the complete generated script; the resulting runtime membership depends on the data and execution environment and was not exercised.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "cohort_studio/export.py",
+              "start": 21,
+              "end": 33,
+              "quote": "def cohort_definition(steps, request: str, results) -> dict:\n    return {\n        \"tool\": TOOL,\n        \"version\": VERSION,\n        \"created\": dt.datetime.now(dt.timezone.utc).isoformat(timespec=\"seconds\"),\n        \"request\": request,\n        \"data_dir\": str(data.data_dir()),\n        \"release\": str(data.release_dir()) if data.release_dir() else None,   # changed raw files, if any\n        \"input_sha256\": data.file_fingerprints(),\n        \"steps\": steps,\n        \"funnel\": [{\"step\": r.index, \"label\": r.label, \"rows\": r.rows, \"samples\": r.samples,\n                    \"patients\": r.patients} for r in results],\n    }"
+            },
+            {
+              "path": "cohort_studio/export.py",
+              "start": 36,
+              "end": 55,
+              "quote": "def rebuild_script(steps, request: str) -> str:\n    steps_json = json.dumps(steps, indent=2)\n    return f'''\"\"\"Rebuild a cohort exported by {TOOL} {VERSION}.\n\nRequest: {request or \"(none given)\"}\n\nSave this file in the cohort-studio repo root and run:\n    python rebuild_cohort.py\nIt writes cohort_samples.csv and prints the step-by-step funnel.\n\"\"\"\nimport json, sys, pathlib\nsys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))\nfrom cohort_studio.engine import run, unresolved_problems\nfrom cohort_studio.export import cohort_samples\n\nSTEPS = json.loads(r\"\"\"\n{steps_json}\n\"\"\")\n\ndf, results = run(STEPS)"
+            },
+            {
+              "path": "cohort_studio/data.py",
+              "start": 82,
+              "end": 101,
+              "quote": "def location(ddir: str | Path | None = None) -> Path:\n    \"\"\"The folder data is read from: a data folder, or a release folder of changed raw files.\"\"\"\n    if ddir:\n        return Path(ddir).expanduser().resolve()\n    base = _configured_base()\n    rel = os.environ.get(\"ONCOSYS_RELEASE\", \"\").strip()\n    if rel:\n        r = Path(rel).expanduser()\n        if not r.exists():\n            r = _split(base)[0] / \"releases\" / rel\n        return r.resolve()\n    return base\n\n\ndef data_dir(ddir: str | Path | None = None) -> Path:\n    return _split(location(ddir))[0]\n\n\ndef release_dir(ddir: str | Path | None = None) -> Path | None:\n    return _split(location(ddir))[1]"
+            },
+            {
+              "path": "tests/test_rebuild.py",
+              "start": 32,
+              "end": 47,
+              "quote": "@pytest.mark.parametrize(\"name,steps,n\", [(\"demo\", _fixed_demo(), 731), (\"survival_trap\", _fixed_survival_trap(), 807)])\ndef test_rebuild_script_reproduces_export(tmp_path, name, steps, n):\n    df, _ = run(steps)\n    expected = cohort_samples(df)\n\n    script = tmp_path / \"rebuild_cohort.py\"\n    script.write_text(rebuild_script(steps, f\"test {name}\"), encoding=\"utf-8\")\n    env = {**os.environ, \"PYTHONPATH\": str(ROOT), \"PYTHONIOENCODING\": \"utf-8\"}\n    proc = subprocess.run([sys.executable, str(script)], cwd=tmp_path, env=env,\n                          capture_output=True, text=True, encoding=\"utf-8\", timeout=120)\n    assert proc.returncode == 0, proc.stderr[-2000:]\n\n    rebuilt = pd.read_csv(tmp_path / \"cohort_samples.csv\")\n    assert len(rebuilt) == n\n    assert list(rebuilt[\"sample_id\"]) == list(expected[\"sample_id\"])\n    assert rebuilt.equals(expected.reset_index(drop=True))"
+            }
+          ]
+        },
+        {
+          "kind": "gap",
+          "priority": "P1",
+          "title": "A SQL success can remain attached to unchanged steps after data changes",
+          "observation": "run_sql_check saves its result in session state with only ss.steps_text. The display accepts that result whenever the step text still matches. Release selection changes a process environment variable, clears Streamlit data caches and reruns, but does not clear this session-state verification record. The engine recomputes its current result, while the old SQL result can still be presented as Match for the same steps. The session's version history similarly uses only serialized steps as its key and returns the prior record immediately when those steps are unchanged. No current dataset fingerprint participates in either identity check.",
+          "impact": "An independent computation is valuable only for the inputs it actually checked. A stored green success can mislead a user after a release switch, even if the engine itself loads the new path correctly. Historical membership comparison can likewise describe an earlier dataset while the current table has changed.",
+          "recommendation": "Bind SQL verification and cohort versions to canonical steps plus resolved data/release identity and input hashes. Clear or mark prior checks historical when those inputs change, including custom-data activation. Keep the old result as history rather than relabelling it as a fresh verification.",
+          "acceptance_check": "Verify an invented release A, switch to release B with the same steps but different eligible membership, and confirm the old Match is withdrawn until a new SQL run completes. Inspect the stored version IDs and membership. Repeat a same-path content change and an unchanged-input control. Preserve the existing per-step/final-membership comparison.",
+          "confidence": "High for the inspected session-state and key logic; no live Streamlit session was run.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "app.py",
+              "start": 95,
+              "end": 103,
+              "quote": "        wanted = None if pick == options[0] else pick\n        if wanted != (None if not current else (current.name if current.name in releases else str(current))):\n            if wanted:\n                os.environ[\"ONCOSYS_RELEASE\"] = wanted\n            else:\n                os.environ.pop(\"ONCOSYS_RELEASE\", None)\n            st.cache_data.clear()\n            st.rerun()\n    status = data.check_data(str(data.location()))"
+            },
+            {
+              "path": "app.py",
+              "start": 408,
+              "end": 425,
+              "quote": "def run_sql_check():\n    try:\n        from cohort_studio.sqlcheck import verify\n        ss.sql_check = (ss.steps_text, verify(steps, df, results))\n    except ImportError:\n        ss.sql_check = (ss.steps_text, {\"error\": \"DuckDB isn't installed: run `pip install -r requirements.txt`.\"})\n    except Exception as e:  # show what DuckDB said rather than crash the page\n        ss.sql_check = (ss.steps_text, {\"error\": f\"The SQL version couldn't run: {e}\"})\n\n\nwith st.container(border=True):\n    v1, v2 = st.columns([3, 1])\n    v1.markdown(\"**Independent check.** Rebuild this cohort a second way: the same steps written as one \"\n                \"DuckDB SQL query over the raw files, without the app's engine. Both should give the same samples.\")\n    v2.button(\"\ud83d\udd0e Verify with SQL\", on_click=run_sql_check, width=\"stretch\",\n              disabled=any(r.error for r in results))\n    chk = ss.get(\"sql_check\")\n    if chk and chk[0] == ss.steps_text:"
+            },
+            {
+              "path": "app.py",
+              "start": 430,
+              "end": 449,
+              "quote": "            if v[\"match\"]:\n                st.success(f\"\u2705 **Match.** Engine: **{v['engine_samples']:,}** samples \u00b7 independent SQL: \"\n                           f\"**{v['sql_samples']:,}** samples. Same sample IDs, and the same rows, samples and \"\n                           f\"patients after every step.\")\n                if problems:\n                    st.warning(\"Both agree on the numbers, **including the problems flagged above**. \"\n                               \"Apply a fix first, then verify again.\")\n            else:\n                st.error(f\"\u274c **Mismatch.** Engine: {v['engine_samples']:,} samples \u00b7 SQL: {v['sql_samples']:,}. \"\n                         f\"Don't use this cohort until someone finds out why.\")\n                if v[\"only_engine\"] or v[\"only_sql\"]:\n                    st.write(\"Only in the engine:\", v[\"only_engine\"][:20], \"Only in SQL:\", v[\"only_sql\"][:20])\n            st.dataframe(pd.DataFrame(v[\"by_step\"]), hide_index=True)\n            st.caption(\"This checks that the steps were *carried out* correctly. It can't tell you whether the \"\n                       \"steps match your research question: that's the human review below.\")\n            with st.expander(\"Show the SQL (copy it, or download and run `python scripts/sql.py -f cohort.sql`)\"):\n                st.code(v[\"sql\"], language=\"sql\")\n                st.download_button(\"cohort.sql\", v[\"sql\"], \"cohort.sql\", \"text/plain\")\n    elif chk:\n        st.caption(\"The steps changed since the last check. Click **Verify with SQL** again.\")"
+            },
+            {
+              "path": "cohort_studio/versions.py",
+              "start": 33,
+              "end": 49,
+              "quote": "def record(steps: list[dict], df: pd.DataFrame) -> list[dict]:\n    \"\"\"Remember this cohort if the steps changed. Returns every version, newest first.\"\"\"\n    ss = st.session_state\n    history: list[dict] = ss.get(\"versions\", [])\n    key = json.dumps(steps, sort_keys=True)\n    if history and history[0][\"key\"] == key:\n        return history\n\n    samples = sorted(df[\"sample_id\"].astype(str).unique())\n    n = ss.get(\"version_counter\", 0) + 1\n    ss.version_counter = n\n    version = {\"key\": key, \"n\": n, \"steps\": steps, \"samples\": samples,\n               \"rows\": len(df), \"patients\": df[\"patient_id\"].nunique(),\n               \"label\": _label(n, steps, len(samples), len(df))}\n    # An earlier identical cohort is dropped, so the list reads as the distinct cohorts tried.\n    history = [version] + [h for h in history if h[\"key\"] != key]\n    ss.versions = history[:MAX_VERSIONS]"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-4",
+      "status": "observed",
+      "assessment": "Human-review notices, error states and an unresolved-export acknowledgment are visible in source. Generated-source serialization and process-global dataset selection need controlled checks. No privacy incident, clinical validity or production suitability is established.",
+      "findings": [
+        {
+          "kind": "gap",
+          "priority": "P2",
+          "title": "Request text enters generated Python without serialization",
+          "observation": "rebuild_script inserts the raw request into an opening triple-quoted Python docstring. A request containing the closing delimiter can terminate that string, producing invalid syntax or additional source text in the downloaded script. The app passes its editable request directly into this generator. The inspected route downloads source; it does not itself execute the generated script, so this is not evidence of automatic server execution or a demonstrated compromise.",
+          "impact": "Ordinary quoted research text should remain data. A malformed generated script undermines the required rerunnable export; executing a manually edited or untrusted generated program adds a separate trust risk. The review should not exaggerate this into an observed exploit.",
+          "recommendation": "Serialize the request as a Python literal or JSON data and keep it outside source delimiters. Generate source through fixed templates with data encoded separately, then parse the result before offering it. Apply the same boundary discipline to all user-controlled fields included in executable exports.",
+          "acceptance_check": "Prepare harmless requests containing triple quotes, backslashes, newlines and Unicode. Without executing the submission or generated program, an authorized follow-up can parse each generated source file and verify it contains only the intended fixed statements and the exact request value. Run ordinary reconstruction controls separately in an approved environment.",
+          "confidence": "High for direct unescaped interpolation; no generated-source execution or exploit was attempted.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "cohort_studio/export.py",
+              "start": 36,
+              "end": 53,
+              "quote": "def rebuild_script(steps, request: str) -> str:\n    steps_json = json.dumps(steps, indent=2)\n    return f'''\"\"\"Rebuild a cohort exported by {TOOL} {VERSION}.\n\nRequest: {request or \"(none given)\"}\n\nSave this file in the cohort-studio repo root and run:\n    python rebuild_cohort.py\nIt writes cohort_samples.csv and prints the step-by-step funnel.\n\"\"\"\nimport json, sys, pathlib\nsys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))\nfrom cohort_studio.engine import run, unresolved_problems\nfrom cohort_studio.export import cohort_samples\n\nSTEPS = json.loads(r\"\"\"\n{steps_json}\n\"\"\")"
+            },
+            {
+              "path": "app.py",
+              "start": 458,
+              "end": 466,
+              "quote": "out = export.cohort_samples(df)\ndefn = export.cohort_definition(steps, ss.request, results)\ne1, e2, e3 = st.columns(3)\ne1.download_button(\"cohort_samples.csv\", out.to_csv(index=False), \"cohort_samples.csv\", \"text/csv\",\n                   disabled=not ok, width=\"stretch\")\ne2.download_button(\"cohort.json (definition + funnel)\", json.dumps(defn, indent=2), \"cohort.json\",\n                   \"application/json\", disabled=not ok, width=\"stretch\")\ne3.download_button(\"rebuild_cohort.py\", export.rebuild_script(steps, ss.request), \"rebuild_cohort.py\",\n                   \"text/x-python\", disabled=not ok, width=\"stretch\")"
+            }
+          ]
+        },
+        {
+          "kind": "gap",
+          "priority": "P1",
+          "title": "Custom-data selection is process-wide rather than session-local",
+          "observation": "custom.activate clears and replaces the module-global data.TABLES and sets ONCOSYS_DATA in os.environ; deactivate restores those same global objects. The UI stores the original setting in one browser's session state but calls these global mutators. The engine and loaders resolve their inputs from those globals unless a location is explicitly supplied. In a server process hosting multiple sessions, selecting custom data in one session can therefore change the inputs or available tables used by another. This is a conditional concurrency/isolation risk, not an observed disclosure or a claim that a single-user local demonstration is broken.",
+          "impact": "The uploaded tables may belong to one researcher while all browser sessions share the process. A session boundary in the interface does not isolate a module dictionary or environment variable. Correct counts and provenance can be lost if another session changes those settings between operations.",
+          "recommendation": "Keep an immutable dataset context in each session and pass it explicitly to the engine, loader, SQL verifier and exporter. Avoid changing process environment and shared registries on a browser action. If the prototype supports only one local user, state and enforce that limit rather than implying multi-user isolation.",
+          "acceptance_check": "Use two independent local browser sessions and two invented datasets with unmistakably different schemas/IDs. Alternate activation, engine execution, SQL verification and export; each session must retain its own context. Test returning one session to TCGA mode without changing the other. No real participant data is needed.",
+          "confidence": "High that the mutation is process-global; actual cross-session effects require the stated controlled test.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "cohort_studio/custom.py",
+              "start": 163,
+              "end": 181,
+              "quote": "def activate(folder: str | Path) -> None:\n    \"\"\"Use the custom data folder for everything from now on (this process).\"\"\"\n    import json\n    folder = Path(folder)\n    meta = json.loads((folder / \"tables.json\").read_text(encoding=\"utf-8\"))\n    data.TABLES.clear()\n    data.TABLES.update(meta)\n    os.environ[\"ONCOSYS_DATA\"] = str(folder)\n    os.environ.pop(\"ONCOSYS_RELEASE\", None)\n\n\ndef deactivate(original_data: str | None) -> None:\n    \"\"\"Back to TCGA-BRCA.\"\"\"\n    data.TABLES.clear()\n    data.TABLES.update(copy.deepcopy(TCGA_TABLES))\n    if original_data:\n        os.environ[\"ONCOSYS_DATA\"] = original_data\n    else:\n        os.environ.pop(\"ONCOSYS_DATA\", None)"
+            },
+            {
+              "path": "app.py",
+              "start": 162,
+              "end": 173,
+              "quote": "            if st.button(\"Use this data\", type=\"primary\", width=\"stretch\"):\n                try:\n                    folder = custom.build(tables, base, keys)\n                    if not CUSTOM:\n                        ss.byod_original_data = os.environ.get(\"ONCOSYS_DATA\")\n                    custom.activate(folder)\n                    forget_session_history()\n                    st.cache_data.clear()\n                    ss.request = \"\"\n                    ss.ai_notes = None\n                    set_steps([])\n                    st.rerun()"
+            },
+            {
+              "path": "cohort_studio/data.py",
+              "start": 82,
+              "end": 93,
+              "quote": "def location(ddir: str | Path | None = None) -> Path:\n    \"\"\"The folder data is read from: a data folder, or a release folder of changed raw files.\"\"\"\n    if ddir:\n        return Path(ddir).expanduser().resolve()\n    base = _configured_base()\n    rel = os.environ.get(\"ONCOSYS_RELEASE\", \"\").strip()\n    if rel:\n        r = Path(rel).expanduser()\n        if not r.exists():\n            r = _split(base)[0] / \"releases\" / rel\n        return r.resolve()\n    return base"
+            },
+            {
+              "path": "cohort_studio/data.py",
+              "start": 222,
+              "end": 225,
+              "quote": "def load(name: str, ddir: str | None = None) -> pd.DataFrame:\n    \"\"\"Return a copy so callers can't mutate the cache. The cache key is the resolved location, so\n    switching release (ONCOSYS_RELEASE) never serves the old files.\"\"\"\n    return _load(name, str(location(ddir))).copy()"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-5",
+      "status": "not_tested",
+      "assessment": "README documents CLI/app setup, release overlays and a submission tag matching this pin. No install, app, test, SQL query, hosted deployment or provider call was run by this reviewer; fresh-machine and changed-release reconstruction remain untested.",
+      "findings": [],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. This pass does not establish runtime behavior or user comprehension."
+    },
+    {
+      "id": "T1-6",
+      "status": "observed",
+      "assessment": "Fix recommendations discriminate identity correction from row de-duplication and disclose tradeoffs. Confirm chosen fixes and diagnostic export limitations survive in durable records.",
+      "findings": [
+        {
+          "kind": "strength",
+          "priority": "P2",
+          "title": "Fix advice explains when de-duplication leaves the real problem",
+          "observation": "Advice classifies a proposed fix by the actual step change. For a cross-sample problem it recommends matching sample_id; an inflation-only collapse is explicitly not enough. For a left join it distinguishes collapse from a semi-join that would change membership. Judgment calls such as excluding redacted records or selecting one patient specimen receive no automatic recommendation. The app also displays human-review/quality limits and requires an explicit override before exporting unresolved problems.",
+          "impact": "The interface gives a specific next step with an explanation of what that step does and does not solve. This is more useful than treating every warning as equivalent or equating a unique CSV with a correct research cohort.",
+          "recommendation": "Keep the causal explanation of each fix and the explicit judgment boundary. Ensure diagnostic exports preserve unresolved status and the user's override in a machine-readable companion, rather than relying only on a transient checkbox.",
+          "acceptance_check": "Show a cross-sample join, choose a collapse and demonstrate that its unresolved warning persists; then choose a sample-key repair. For an unresolved diagnostic export, inspect the standalone CSV and companion definition to confirm their status cannot be mistaken for approval.",
+          "confidence": "High for inspected recommendation rules and controls; user comprehension and override persistence were not tested.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "cohort_studio/advice.py",
+              "start": 50,
+              "end": 55,
+              "quote": "def advise(result, steps: list[dict]) -> dict[tuple[int, int], tuple[bool, str]]:\n    \"\"\"{(warning index, fix index): (is recommended, what to know about it)}.\n\n    Only problems with a demonstrably right answer get a recommendation. Judgement calls\n    (exclude redacted records, collapse to one patient per row) deliberately get none.\n    \"\"\""
+            },
+            {
+              "path": "cohort_studio/advice.py",
+              "start": 70,
+              "end": 84,
+              "quote": "            effect = _effect(fix, index, steps)\n            if \"cross_sample\" in kinds:\n                # The wrong record is attached to the sample. Nothing else fixes that.\n                if effect == \"on:sample_id\":\n                    out[(w_i, f_i)] = (True, WHY[\"sample_id\"])\n                elif w.kind == \"inflation\":\n                    out[(w_i, f_i)] = (False, WHY[\"still_cross\"])\n            elif w.kind == \"inflation\" and step.get(\"op\") == \"join\":\n                how = step.get(\"how\", \"inner\")\n                if how == \"inner\" and effect == \"how:semi\":\n                    out[(w_i, f_i)] = (True, WHY[\"semi\"])\n                elif how == \"left\" and effect == \"collapse\":\n                    out[(w_i, f_i)] = (True, WHY[\"collapse_left\"])\n                elif how == \"inner\" and effect == \"collapse\":\n                    out[(w_i, f_i)] = (False, WHY[\"arbitrary_row\"])"
+            },
+            {
+              "path": "app.py",
+              "start": 380,
+              "end": 388,
+              "quote": "if CUSTOM:\n    st.warning(\"**Human review required.** A person should confirm the steps match the research question \"\n               \"before this cohort is used. **Limitation:** your tables are used as uploaded: values aren't \"\n               \"quality-checked, and samples and patients are linked only through the ID columns you chose.\")\nelse:\n    st.warning(\"**Human review required.** A person should confirm the steps match the research question before \"\n               \"this cohort is used. **Limitation:** layer membership (`has_*`) comes from the sample manifest. \"\n               \"This tool doesn't check the quality of values inside each layer. It joins the clinical, survival, \"\n               \"slide and gene-level mutation tables; RNA, protein and copy-number values can't be filtered on.\")"
+            },
+            {
+              "path": "app.py",
+              "start": 451,
+              "end": 466,
+              "quote": "if problems:\n    st.error(\"Not ready to export:\\n\\n\" + \"\\n\".join(f\"- {p}\" for p in problems))\n    ok = st.checkbox(\"I understand: export anyway. cohort_samples.csv will still contain each sample only once.\")\nelse:\n    st.success(\"No unresolved problems: one row per sample, and every joined record belongs to its own sample.\")\n    ok = True\n\nout = export.cohort_samples(df)\ndefn = export.cohort_definition(steps, ss.request, results)\ne1, e2, e3 = st.columns(3)\ne1.download_button(\"cohort_samples.csv\", out.to_csv(index=False), \"cohort_samples.csv\", \"text/csv\",\n                   disabled=not ok, width=\"stretch\")\ne2.download_button(\"cohort.json (definition + funnel)\", json.dumps(defn, indent=2), \"cohort.json\",\n                   \"application/json\", disabled=not ok, width=\"stretch\")\ne3.download_button(\"rebuild_cohort.py\", export.rebuild_script(steps, ss.request), \"rebuild_cohort.py\",\n                   \"text/x-python\", disabled=not ok, width=\"stretch\")"
+            },
+            {
+              "path": "cohort_studio/engine.py",
+              "start": 550,
+              "end": 562,
+              "quote": "def unresolved_problems(results: list[StepResult]) -> list[str]:\n    \"\"\"Problems still visible in the final cohort (an inflation fixed by a later collapse doesn't count).\"\"\"\n    out = []\n    final = results[-1]\n    if final.error or any(r.error for r in results):\n        out.append(\"A step failed to run.\")\n    if final.rows != final.samples:\n        out.append(f\"The final table has {final.rows - final.samples:,} duplicate sample rows.\")\n    for r in results:\n        for w in r.warnings:\n            if w.kind == \"cross_sample\":\n                out.append(f\"Step {r.index}: records linked through a different sample of the same patient.\")\n    return out"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-7",
+      "status": "not_tested",
+      "assessment": "Step counts and visible review/quality limitations address the intended non-coding researcher. No unguided use, keyboard, screen-reader, responsive-layout or time-pressure task was observed in this pass.",
+      "findings": [],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. This pass does not establish runtime behavior or user comprehension."
+    }
+  ],
+  "judge_scores": null
+}
