@@ -132,3 +132,7 @@ Work through the issues above in order. Use the supplied reproductions for confi
 A statistician should review adequacy thresholds, interval assumptions and claims of bias or representativeness. A domain expert should review clinical meaning. Neither source inspection nor passing software tests establishes clinical validity.
 
 Latest unchanged-public-input control: verified frozen Release A versus itself returned Ready and zero findings. [Scope and aggregate evidence](TESTS.md#frozen-public-baseline-control). This does not invalidate the synthetic missing-input or small-matrix findings.
+
+## Companion source audit
+
+A separate reviewer supplied [a detailed source audit](audit-codex-23484638-pass-01.md) and [an issue deck](slides-codex-23484638-pass-01.html) ([Markdown version](slides-codex-23484638-pass-01.md)), committed 2026-11-14T14:59:17-05:00. The companion adds duplicate-ID ordering and rounded-hash concerns. These are linked separately; targeted runtime corroboration is being recorded. Conditional versus Blocked remains a question-policy judgment, not a universal clinical threshold. The companion's “not run” statements describe that reviewer's pass, not all testing in this folder. [Cross-review status](../REVIEW-STATUS.md) explains the relationship.

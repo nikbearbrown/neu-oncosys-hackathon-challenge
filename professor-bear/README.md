@@ -18,3 +18,16 @@ Submitted-suite results: ReadySet **107 passed**; Tripwire **404 passed / 1 skip
 The latest three public-data runs used [six checksum-verified frozen files](review-tools/PUBLIC-RELEASE.md). No sealed judging inputs were opened. The tests do not establish clinical validity, unseen-input performance, production security or full accessibility. Each TESTS.md records the independent reproductions and remaining limits.
 
 Latest additions: SNS small-matrix behavior reproduced through the full engine; A2 generated-script NameError reproduced with an A1 passing control; Cohort Studio automatic fixes and local-only routing checked; Tripwire rounding and consent controls checked. All six now have at least a public-release test or unchanged-input control, with the distinct scope documented.
+
+## Companion source audits
+
+These independently authored supplements are preserved alongside the main runtime reviews. Their source-only scope is explicit; later execution results live in each TESTS.md. [Read the cross-review status](REVIEW-STATUS.md) before interpreting differences.
+
+| Submission | Commit timestamp | Source audit | Companion deck |
+|---|---|---|---|
+| busy-beavers | 2026-11-14T14:59:17-05:00 | [Audit](busy-beavers/audit-codex-23484638-pass-01.md) | [HTML deck](busy-beavers/slides-codex-23484638-pass-01.html) · [Markdown](busy-beavers/slides-codex-23484638-pass-01.md) |
+| identity-crisis-control-tower | 2026-11-14T15:04:09-05:00 | [Audit](identity-crisis-control-tower/audit-codex-23484638-pass-01.md) | [HTML deck](identity-crisis-control-tower/slides-codex-23484638-pass-01.html) · [Markdown](identity-crisis-control-tower/slides-codex-23484638-pass-01.md) |
+| oncosys-cohort-studio | 2026-11-14T15:08:02-05:00 | [Audit](oncosys-cohort-studio/audit-codex-23484638-pass-01.md) | [HTML deck](oncosys-cohort-studio/slides-codex-23484638-pass-01.html) · [Markdown](oncosys-cohort-studio/slides-codex-23484638-pass-01.md) |
+| readyset-control-tower | 2026-11-14T14:53:45-05:00 | [Audit](readyset-control-tower/audit-codex-23484638-pass-01.md) | [HTML deck](readyset-control-tower/slides-codex-23484638-pass-01.html) · [Markdown](readyset-control-tower/slides-codex-23484638-pass-01.md) |
+| sns-cohort-control-tower | 2026-11-14T15:09:22-05:00 | [Audit](sns-cohort-control-tower/audit-codex-23484638-pass-01.md) | [HTML deck](sns-cohort-control-tower/slides-codex-23484638-pass-01.html) · [Markdown](sns-cohort-control-tower/slides-codex-23484638-pass-01.md) |
+| tripwire | 2026-11-14T15:03:44-05:00 | [Audit](tripwire/audit-codex-23484638-pass-01.md) | [HTML deck](tripwire/slides-codex-23484638-pass-01.html) · [Markdown](tripwire/slides-codex-23484638-pass-01.md) |

@@ -142,3 +142,7 @@ Latest unchanged-public-input control: verified frozen Release A versus itself r
 ## Observed interface workflow
 
 The localhost browser smoke test passed 10 of 11 checks with invented records: saved-release selection, full analysis, evidence display, A1/A2 cohort export and theme switching worked. No browser execution errors occurred. A 390-pixel viewport had horizontal overflow with fallback fonts; review responsive panels and long values before claiming mobile accessibility. [Exact checks and screenshots](TESTS.md#browser-smoke-test-with-invented-data). This is not a hosted-deployment or screen-reader verification.
+
+## Companion source audit
+
+A separate reviewer supplied [a detailed source audit](audit-codex-23484638-pass-01.md) and [an issue deck](slides-codex-23484638-pass-01.html) ([Markdown version](slides-codex-23484638-pass-01.md)), committed 2026-11-14T15:09:22-05:00. The companion is a source review with attributed helper probes. Later main-report evidence adds the full small-matrix engine reproduction, the generated A2-script failure and a synthetic browser smoke test. The companion's “not run” statements describe that reviewer's pass, not all testing in this folder. [Cross-review status](../REVIEW-STATUS.md) explains the relationship.
