@@ -1,0 +1,109 @@
+{
+  "timestamp": "2026-11-14T21:14:04.247622+00:00",
+  "scope": "Current six primary review packages; source-only companion decks retain separate QA and review scope. Hashes identify these artifact bytes, not an official submission freeze.",
+  "review_repository_base_commit": "fd027a853879d2535539c992f8a46320c5828490",
+  "packages": [
+    {
+      "submission": "busy-beavers",
+      "pinned_commit": "bfb369f231bf97a1d3aa21abade3ba4b1406a355",
+      "slides": 9,
+      "pdf_pages": 9,
+      "all_pdf_pages_nonempty": true,
+      "html_overflow_checks_pass": true,
+      "browser_script_errors": [],
+      "visual_review_record": "Visually inspected 2026-11-14 20:46 UTC: nine slides, no observed clipping.",
+      "artifacts": {
+        "REPORT.md": "621eb62ac3938234889c691a1eb35d61f09b8ff604b87aabfe2b59eb437a7ade",
+        "TESTS.md": "77736ddf3e71acb99a7db7b225916f43e2d82f681c9db983cb1e5b7118c5b4c1",
+        "slides.json": "96b7c954df98bf9206b938bc408e4e8ddfd022907c4f99570be0b07d2da528e8",
+        "slides.html": "574d4d0e11154a287b9979b6dd36f3c4a51020175a37eec5bfd3a397a9c613e6",
+        "slides.pdf": "488187c05a65cff3f810d54c2ae8102748fdcca2af2ed0c87bee77060190c398"
+      }
+    },
+    {
+      "submission": "identity-crisis-control-tower",
+      "pinned_commit": "380760dc3b7b61097756f2b85c0f462feadc802c",
+      "slides": 9,
+      "pdf_pages": 9,
+      "all_pdf_pages_nonempty": true,
+      "html_overflow_checks_pass": true,
+      "browser_script_errors": [],
+      "visual_review_record": "Visually inspected 2026-11-14 20:58 UTC: nine slides; no observed clipping.",
+      "artifacts": {
+        "REPORT.md": "6c0f32f798bfb9101dd2855bda3e4ecc43bb2201672e998d9cf81e910808531d",
+        "TESTS.md": "7d0dbd87e660f32d9508cb8eea7c1a3e63d5c64eb7eb329d66e436e4159b040c",
+        "slides.json": "fc0059359415378374e2b316338bd74f9ebfcba48c18f1ea482e92ad5dde229b",
+        "slides.html": "ec71eda1e867ab467dfa3784a7db667e9f574311dcef820750a0fce887ef94ce",
+        "slides.pdf": "dc42b3db322bedff9b51b02ebe130cb31ad65a3493e917397d9ebba5b694121b"
+      }
+    },
+    {
+      "submission": "oncosys-cohort-studio",
+      "pinned_commit": "54aeacb6f6f355a1dcaa42d7abf2ce174315ad69",
+      "slides": 8,
+      "pdf_pages": 8,
+      "all_pdf_pages_nonempty": true,
+      "html_overflow_checks_pass": true,
+      "browser_script_errors": [],
+      "visual_review_record": "Contact sheet visually inspected 2026-11-14 20:41 UTC; all pages visible, no clipping observed.",
+      "artifacts": {
+        "REPORT.md": "6db6b2a9a05eea222601676ce79405a1ca04c3bebad3299d5872972fce308e57",
+        "TESTS.md": "26d9440cc6807da69b368d7982e201a3852c214a721e66171e533899d1faf684",
+        "slides.json": "a67c4f69cd2d01c4e9f3ec2ae9ae8dc3aa4d411557e164d0736705a89786627e",
+        "slides.html": "1a14f6ce1bc8388373324da7f1fad0bfee8093426c138e6f312ce98374fab1a1",
+        "slides.pdf": "87cb9454f59ec03ea4a0a54fb3df990675d319add746f734cbf06f74ceb0c367"
+      }
+    },
+    {
+      "submission": "readyset-control-tower",
+      "pinned_commit": "4dd07736e99f96dd46cb6199c32bea32465bd20e",
+      "slides": 15,
+      "pdf_pages": 15,
+      "all_pdf_pages_nonempty": true,
+      "html_overflow_checks_pass": true,
+      "browser_script_errors": [],
+      "visual_review_record": "All 15 slides inspected in the rendered contact sheet; no overlapping or clipped content observed.",
+      "artifacts": {
+        "REPORT.md": "26f10f14fe1c1cd5ee241bdf157d833618d93bb1fd1313398e21b7273b3d64eb",
+        "TESTS.md": "9a10c74b73d7838dcbcaeeb18ef7330e3642e531e8d32c1c7a95cac42cbff28b",
+        "slides.json": "721422b2ad2b432cff2b877782e562fdbee5cec05771be460f84fb1e228acbf8",
+        "slides.html": "01a4d31365c29fd179b2b1b9773f02ada805ae49efec837ff6d3f37895c3e4bd",
+        "slides.pdf": "42fb47f913fafae8c10b59896e190aaa825ac852a29b0e072e370dfd5fe50c33"
+      }
+    },
+    {
+      "submission": "sns-cohort-control-tower",
+      "pinned_commit": "c1e8b79a2987cee6087d847867f9895deaa109a4",
+      "slides": 10,
+      "pdf_pages": 10,
+      "all_pdf_pages_nonempty": true,
+      "html_overflow_checks_pass": true,
+      "browser_script_errors": [],
+      "visual_review_record": "All ten rendered slides inspected; no clipped or overlapping content observed.",
+      "artifacts": {
+        "REPORT.md": "0413e65b6e2ad57d6f6d198baf533f977fe084b7c95a8e3c402c1a3d61ed914e",
+        "TESTS.md": "5f479e8a3d7e6af595f69e6eea97e6167b306208b4c22de0f26a64e605a51311",
+        "slides.json": "be41f8aa51fdccac862f0274f247f76ea9116fa9a449226452fa0af268d72ac8",
+        "slides.html": "0024765b652c4d998912af23fc6aefe7b2c340af76ce176a6425ea330e05b3bc",
+        "slides.pdf": "2c215629005b06052375d3f83f50b8e77f230a811f045a44f6fc7f225de26fb8"
+      }
+    },
+    {
+      "submission": "tripwire",
+      "pinned_commit": "45df43640836025b40e89fc190f913ad694a6011",
+      "slides": 7,
+      "pdf_pages": 7,
+      "all_pdf_pages_nonempty": true,
+      "html_overflow_checks_pass": true,
+      "browser_script_errors": [],
+      "visual_review_record": "All seven slides inspected in rendered contact sheet; no clipping or overlap observed. 2026-11-14T21:07:19.306191+00:00",
+      "artifacts": {
+        "REPORT.md": "3e9cb9ddbb23841e94e0d8d320746fc0e9c7127484cde0331b8a2bad1886e334",
+        "TESTS.md": "c3242f7fde057fa568275dfecead48a4ec0a58e70387a668089192c30ec3806f",
+        "slides.json": "5f6aa516e231e027585e09adb9306030fe6937b470b987ace2422281181dc196",
+        "slides.html": "a8b2e78047507db8e946d9e5aefcf480a5dfbe8c59c9d3aa8ba26280cdfac567",
+        "slides.pdf": "2bb436fe1f1a587903481d57b7446d45fe67bf07e3eae5a048b64d073fc33a4a"
+      }
+    }
+  ]
+}

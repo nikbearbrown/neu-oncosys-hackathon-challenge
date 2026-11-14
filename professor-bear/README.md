@@ -62,3 +62,5 @@ Focused companion decks now have direct GitHub PDF previews: [Identity UI/eviden
 Latest Tripwire browser pass: 12 of 13 proposed checks met; evidence requests remain correctly exported but the interface reports zero open reviews. A failed new comparison clears old results. A separate [citation audit](review-tools/citation-audit.json) verified 228 pinned file/line references with no invalid paths or line bounds; this is not a correctness judgment.
 
 [Identity Crisis source/runtime reconciliation](identity-crisis-control-tower/runtime-reconciliation-codex-23484638.md) explains the path-dependent receipt finding and passing controls. Browser screenshots for Identity and Busy Beavers were refreshed with their original tracked theme configurations; behavioral results were unchanged.
+
+[Review-package verification](VERIFICATION.md) records deck completeness, source traceability, toolkit tests and the limits of those checks.
