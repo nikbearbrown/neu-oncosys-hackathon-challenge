@@ -1,0 +1,247 @@
+{
+  "mode": "judge",
+  "repo": "Adhithyan245/tripwire",
+  "commit": "45df43640836025b40e89fc190f913ad694a6011",
+  "track": 1,
+  "reviewer": "Professor Bear / Codex source review",
+  "summary": "Driftwire separates release compatibility from question-specific readiness, checks declared dependencies and can verify supposedly unaffected analyses. The strongest unresolved issues in this source pass are a local adequacy-precedence defect, unresolved review states being counted as decided, and calculation rounding before movement classification. The retained parallel runtime review independently corroborates the first two at helper level, but its tiny-release full API control was Blocked. This supplement therefore does not claim that every undersized cohort is labeled Ready or that the whole application was bypassed.",
+  "limitations": [
+    "Pinned local checkout, not a verified official final-submission receipt; branch names and later changes are outside this pass.",
+    "Static source analysis only. No submission code, tests, installers, workflows, notebook, server, hosted endpoint or model was executed.",
+    "No sealed envelopes, answer keys or raw clinical datasets were accessed. Numerical correctness, performance, accessibility and fresh-machine setup remain untested.",
+    "Source-derived control-flow consequences are labeled as such. Proposed acceptance checks are not observed test results.",
+    "The collected text budget is 160 files, 200 KB/file and 4 MB/entry. Complete_with_exclusions is not an exhaustive audit; exclusions and focused follow-ups are recorded.",
+    "No official score, cross-team ranking, clinical validity or regulatory/accessibility certification is asserted."
+  ],
+  "criteria": [
+    {
+      "id": "T1-1",
+      "status": "observed",
+      "assessment": "Required-file, field and empty-cohort guards are source-supported. No unseen-data recall or false-positive estimate was produced.",
+      "findings": [
+        {
+          "kind": "strength",
+          "priority": "P2",
+          "title": "Missing inputs and empty cohorts are not silently passed",
+          "observation": "Before analytical execution, the builder checks required files in both releases, required fields and nonempty eligible cohorts. Each failure appends an explicit Insufficient Evidence analysis result and continues. This is separate from the undersized-but-nonempty adequacy issue above.",
+          "impact": "A missing modality, dropped target field or empty cohort has an interpretable evidence-gap route rather than being equated with no detected change. The distinction prevents overgeneralizing TW-01 into a missing-input claim that the source contradicts.",
+          "recommendation": "Retain these guards and expose their reasons in every consumer. Extend explicit checks to finite measurement counts and clarify where group-level adequacy belongs.",
+          "acceptance_check": "Independently omit a required file, drop ERALPHA, remove all eligible samples and supply valid inputs. Verify the first three name the missing evidence and the valid control reaches analysis execution.",
+          "confidence": "High for the inspected preflight branches; runtime behavior was not exercised here.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "tripwire/findings.py",
+              "start": 153,
+              "end": 173,
+              "quote": "        rerun = imp.affected or verify\n        if not all(release_a.has(f) and release_b.has(f) for f in a.files):\n            analyses_out.append({\"id\": a.id, \"status\": \"not_rerun\", \"verdict\": \"Insufficient Evidence\",\n                                 \"why\": f\"Missing input file(s): {a.files}\", \"title\": a.title})\n            verdicts[a.id] = \"Insufficient Evidence\"\n            continue\n        gaps = [f\"release {r.name} has no {g}\" for r in (release_a, release_b) for g in missing_inputs(a, r)]\n        if gaps:  # a field this analysis needs was dropped: say so instead of crashing\n            analyses_out.append({\"id\": a.id, \"status\": \"not_rerun\", \"verdict\": \"Insufficient Evidence\",\n                                 \"why\": f\"Can't rerun {a.id}: \" + \"; \".join(gaps) + \".\", \"title\": a.title,\n                                 \"impact\": impacts[a.id].why(len(changes)), \"inputs\": a.files, \"cohort\": a.cohort})\n            verdicts[a.id] = \"Insufficient Evidence\"\n            continue\n        empty = [r.name for r in (release_a, release_b) if not _eligible(a, r)]\n        if empty:  # nothing to analyse is not evidence that nothing changed: never Ready on an empty cohort\n            analyses_out.append({\"id\": a.id, \"status\": \"not_rerun\", \"verdict\": \"Insufficient Evidence\",\n                                 \"why\": f\"Can't rerun {a.id}: no samples in its cohort ({a.cohort}) in release \"\n                                        f\"{' or '.join(empty)}.\", \"title\": a.title,\n                                 \"impact\": impacts[a.id].why(len(changes)), \"inputs\": a.files, \"cohort\": a.cohort})\n            verdicts[a.id] = \"Insufficient Evidence\"\n            continue"
+            },
+            {
+              "path": "tripwire/analyses.py",
+              "start": 26,
+              "end": 34,
+              "quote": "def missing_inputs(a: \"Analysis\", r: Release) -> list[str]:\n    \"\"\"Fields an analysis needs that this release doesn't have, e.g. 'protein_rppa.tsv.gz: ERALPHA'.\"\"\"\n    out = []\n    for name, need in a.fields.items():\n        if not need or not r.has(name):\n            continue\n        have = set(r.clinical.columns) if name == \"clinical.tsv\" else set(r.table(name).index)\n        out += [f\"{name}: {f}\" for f in sorted(set(need) - have)]\n    return out"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-2",
+      "status": "observed",
+      "assessment": "Question cards, dependency mapping and verification reruns are meaningful strengths. Local compatibility versus adequacy and precision policy need explicit interpretation.",
+      "findings": [
+        {
+          "kind": "gap",
+          "priority": "P1",
+          "title": "Local compatibility can be Ready before adequacy is checked",
+          "observation": "release_verdict handles the unaffected branch before movement.insufficient. With an unmoved result and unchanged input slice it returns Ready even if the movement object reports insufficient samples. The builder rejects missing files, missing fields and empty cohorts first, and question readiness is separate. This is a local compatibility-field issue, not evidence that all small-cohort end-to-end results are Ready.",
+          "impact": "A consumer reading only an analysis compatibility field could interpret stability as adequate evidence. The parallel reviewer reproduced this helper behavior but observed Blocked in its tiny-release full API control, so the broader bypass is not established.",
+          "recommendation": "Either check adequacy before compatibility returns or export compatibility and adequacy as distinct, explicitly labeled dimensions. Preserve the outer guards and question checks rather than conflating their meanings.",
+          "acceptance_check": "Trace an unchanged nonempty cohort below the configured minimum through the helper, A1/A2 fields, selected question and overall output. Require a visible adequacy warning wherever compatibility is Ready, and retain a sufficiently sized unchanged control.",
+          "confidence": "High for branch ordering; end-to-end generalization is explicitly limited by the retained counterexample.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "tripwire/verdicts.py",
+              "start": 24,
+              "end": 45,
+              "quote": "def release_verdict(affected: bool, movement: Movement | None, inputs=None) -> AnalysisVerdict:\n    \"\"\"movement is None when the analysis wasn't rerun. inputs: a SliceDiff of exactly what it reads, if computed.\"\"\"\n    if movement is None:\n        return AnalysisVerdict(\"Ready\", \"Nothing this analysis uses changed; not rerun.\")\n    if not affected:\n        if movement.moved:\n            return AnalysisVerdict(\"Blocked\", \"The result moved although no detected change touches this \"\n                                   f\"analysis: something changed that the detector didn't report ({movement.magnitude}).\")\n        if inputs is not None and inputs.any:\n            return AnalysisVerdict(\"Conditional\", \"Data this analysis reads changed with no detected change to explain it, \"\n                                   f\"though the result didn't move ({movement.magnitude}).\")\n        same = f\"the {inputs.identical} samples it reads are identical in both releases; \" if inputs is not None else \"\"\n        return AnalysisVerdict(\"Ready\", f\"Nothing this analysis uses changed: {same}a check rerun confirms it ({movement.magnitude}).\")\n    if movement.insufficient:\n        return AnalysisVerdict(\"Insufficient Evidence\", f\"Too few samples left in a group after the change ({movement.magnitude}).\")\n    if movement.flipped:\n        return AnalysisVerdict(\"Blocked\", f\"The conclusion flipped ({movement.magnitude}).\")\n    if movement.beyond_tolerance:\n        return AnalysisVerdict(\"Blocked\", f\"The result moved beyond tolerance ({movement.magnitude}).\")\n    if movement.moved:\n        return AnalysisVerdict(\"Conditional\", f\"Inputs changed; the result moved within tolerance ({movement.magnitude}).\")\n    return AnalysisVerdict(\"Conditional\", f\"Inputs changed but the result did not move ({movement.magnitude}).\")"
+            },
+            {
+              "path": "tripwire/findings.py",
+              "start": 153,
+              "end": 173,
+              "quote": "        rerun = imp.affected or verify\n        if not all(release_a.has(f) and release_b.has(f) for f in a.files):\n            analyses_out.append({\"id\": a.id, \"status\": \"not_rerun\", \"verdict\": \"Insufficient Evidence\",\n                                 \"why\": f\"Missing input file(s): {a.files}\", \"title\": a.title})\n            verdicts[a.id] = \"Insufficient Evidence\"\n            continue\n        gaps = [f\"release {r.name} has no {g}\" for r in (release_a, release_b) for g in missing_inputs(a, r)]\n        if gaps:  # a field this analysis needs was dropped: say so instead of crashing\n            analyses_out.append({\"id\": a.id, \"status\": \"not_rerun\", \"verdict\": \"Insufficient Evidence\",\n                                 \"why\": f\"Can't rerun {a.id}: \" + \"; \".join(gaps) + \".\", \"title\": a.title,\n                                 \"impact\": impacts[a.id].why(len(changes)), \"inputs\": a.files, \"cohort\": a.cohort})\n            verdicts[a.id] = \"Insufficient Evidence\"\n            continue\n        empty = [r.name for r in (release_a, release_b) if not _eligible(a, r)]\n        if empty:  # nothing to analyse is not evidence that nothing changed: never Ready on an empty cohort\n            analyses_out.append({\"id\": a.id, \"status\": \"not_rerun\", \"verdict\": \"Insufficient Evidence\",\n                                 \"why\": f\"Can't rerun {a.id}: no samples in its cohort ({a.cohort}) in release \"\n                                        f\"{' or '.join(empty)}.\", \"title\": a.title,\n                                 \"impact\": impacts[a.id].why(len(changes)), \"inputs\": a.files, \"cohort\": a.cohort})\n            verdicts[a.id] = \"Insufficient Evidence\"\n            continue"
+            },
+            {
+              "path": "tripwire/analyses.py",
+              "start": 119,
+              "end": 127,
+              "quote": "def a1_compare(b: dict, a: dict) -> Movement:\n    db, da = b[\"difference\"], a[\"difference\"]\n    rel = abs(da - db) / abs(db) if db else float(\"inf\")\n    tol = CONFIG[\"A1_difference_rel_tolerance\"]\n    flipped = (db > 0) != (da > 0)\n    moved = _strip(b) != _strip(a) or set(b[\"sample_ids\"]) != set(a[\"sample_ids\"])\n    insufficient = min(a[\"n_positive\"], a[\"n_negative\"]) < CONFIG[\"min_samples_per_group\"]\n    return Movement(moved, rel > tol, flipped, insufficient,\n                    f\"difference {db} -> {da} ({rel:.1%} relative; tolerance {tol:.0%})\")"
+            },
+            {
+              "path": "tripwire/config.py",
+              "start": 5,
+              "end": 10,
+              "quote": "    # A1: relative change in the Positive-minus-Negative ER-alpha difference that still counts as \"moved within tolerance\"\n    \"A1_difference_rel_tolerance\": 0.05,\n    # A2: largest shift in any subtype's share, in percentage points\n    \"A2_percent_pp_tolerance\": 1.0,\n    # Fewer than this many samples in any compared group -> Insufficient Evidence\n    \"min_samples_per_group\": 20,"
+            }
+          ]
+        },
+        {
+          "kind": "strength",
+          "priority": "P2",
+          "title": "Unaffected analyses have a transparent verification route",
+          "observation": "The impact map evaluates relevant files, fields and the union of eligible samples from both releases. verify_unaffected defaults to true, so the builder can rerun supposedly unaffected analyses and compare actual slices. Exported rerun_reason distinguishes affected execution from verification rather than disguising verification as required work.",
+          "impact": "This can detect a missed dependency when an allegedly unaffected result moves. Extra verification work is an intentional cross-check here, not by itself a failure to understand selective recomputation.",
+          "recommendation": "Keep the explicit reason and expose the verification toggle and its cost. Add an input-slice digest and regression controls when analyses or cohort policies change.",
+          "acceptance_check": "Change an unused field, then an A1 field in an eligible sample. Compare runs with verification enabled and disabled; show which executions were necessary, which were cross-checks, and how unexplained movement is surfaced.",
+          "confidence": "High for dependency and rerun structure; performance and detection coverage remain unmeasured.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "tripwire/impact.py",
+              "start": 47,
+              "end": 66,
+              "quote": "def touches(ch: Change, a: Analysis, eligible: set[str]) -> tuple[bool, str]:\n    if ch.file not in a.files:\n        return False, f\"in a file it doesn't read ({ch.file})\"\n    used = a.fields.get(ch.file, set())  # None = reads every row of that file\n    if ch.fields and used is not None and not (set(ch.fields) & used):\n        return False, f\"change fields it doesn't use ({ch.file}: {', '.join(sorted(ch.fields))[:80]})\"\n    if not (_ids(ch) & eligible):\n        return False, \"are samples outside its cohort\"\n    return True, \"\"\n\n\ndef _eligible(a: Analysis, r: Release) -> set[str]:\n    \"\"\"The analysis cohort in one release, or empty when that release lacks its inputs. A missing file or field\n    is reported later as Insufficient Evidence with the reason (findings.build); it must not crash the map.\"\"\"\n    if not all(r.has(f) for f in a.files):\n        return set()\n    try:\n        return a.eligible(r)\n    except (KeyError, ValueError, OSError):\n        return set()"
+            },
+            {
+              "path": "tripwire/impact.py",
+              "start": 69,
+              "end": 82,
+              "quote": "def map_impact(changes: list[Change], release_a: Release, release_b: Release,\n               analyses: list[Analysis] = ANALYSES) -> dict[str, Impact]:\n    out = {}\n    for a in analyses:\n        eligible = _eligible(a, release_a) | _eligible(a, release_b)\n        imp = Impact(a)\n        for i, ch in enumerate(changes):\n            hit, reason = touches(ch, a, eligible)\n            if hit:\n                imp.touched_by.append(i)\n            else:\n                imp.skipped[reason] += 1\n        out[a.id] = imp\n    return out"
+            },
+            {
+              "path": "tripwire/config.py",
+              "start": 19,
+              "end": 21,
+              "quote": "    # Rerun the analyses the impact map says are unaffected, to check the map. If one moved anyway,\n    # something changed that the detector didn't report, and the analysis is Blocked.\n    \"verify_unaffected\": True,"
+            },
+            {
+              "path": "tripwire/findings.py",
+              "start": 174,
+              "end": 190,
+              "quote": "        before = after = mv = sd = None\n        if rerun:\n            before, after = a.run(release_a), a.run(release_b)\n            mv = a.compare(before, after)\n            sd = slice_diff(a.slice(release_a), a.slice(release_b))\n        v = release_verdict(imp.affected, mv, sd)\n        verdicts[a.id] = v.verdict\n        if mv is not None and not imp.affected and (mv.moved or sd.any):\n            unexplained.append((a, mv, sd))\n        entry = {\"id\": a.id, \"status\": \"not_rerun\" if mv is None else (\"changed\" if mv.moved else \"unchanged\"),\n                 \"title\": a.title, \"verdict\": v.verdict, \"why\": v.reason, \"impact\": imp.why(len(changes)),\n                 \"inputs\": a.files, \"cohort\": a.cohort}\n        if mv is not None:\n            entry[\"before\"], entry[\"after\"] = public(before), public(after)\n            entry[\"rerun_reason\"] = \"affected by detected changes\" if imp.affected else \\\n                \"verification rerun: the impact map said unaffected\"\n            entry[\"input_changes\"] = sd.counts()  # sample by sample, exactly what it reads"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-3",
+      "status": "observed",
+      "assessment": "Pinned source references and input-slice evidence improve traceability. Rounded calculation fields should not control full-precision scientific conclusions.",
+      "findings": [
+        {
+          "kind": "gap",
+          "priority": "P2",
+          "title": "Display precision participates in analytical decisions",
+          "observation": "A1 rounds means and the group difference to three decimals before a1_compare computes relative movement and direction. Its input slice retains repr of the numeric value, so a slice change can still be visible even when the displayed analytical difference is quantized. The concern is classification fidelity, not a claim that every small input change is wholly undetected.",
+          "impact": "Near-zero effects can cross a sign or relative-tolerance boundary because of rounding, while other changes can disappear from the numerical summary. Input-change evidence does not restore the lost full-precision effect used in the verdict.",
+          "recommendation": "Keep full-precision analytical fields and format display text separately. Define absolute as well as relative tolerances near zero, and document whether baseline adequacy is assumed or assessed.",
+          "acceptance_check": "Compare full-precision near-zero effects on either side of a tolerance and a zero-crossing boundary. Changing display precision must not change classification, and input-slice evidence must remain visible even when the final aggregate is unchanged.",
+          "confidence": "High for precision flow; no numerical fixture or organizer parity test was executed by this reviewer.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "tripwire/analyses.py",
+              "start": 91,
+              "end": 110,
+              "quote": "def a1_run(r: Release) -> dict:\n    er = _clinical(r).set_index(\"sampleID\")[ER_COL]\n    samples = [s for s in r.protein.columns if is_primary(s) and er.get(s) in (\"Positive\", \"Negative\")]\n    vals = r.protein.loc[\"ERALPHA\", samples]\n    pos = vals[[s for s in samples if er[s] == \"Positive\"]]\n    neg = vals[[s for s in samples if er[s] == \"Negative\"]]\n    mp, mn = float(pos.mean()), float(neg.mean())\n    return {\"n_samples\": len(samples), \"n_positive\": int(pos.size), \"n_negative\": int(neg.size),\n            \"mean_positive\": round(mp, 3), \"mean_negative\": round(mn, 3), \"difference\": round(mp - mn, 3),\n            \"sample_ids\": sorted(samples)}\n\n\ndef a1_slice(r: Release) -> dict[str, tuple]:\n    er = _clinical(r).set_index(\"sampleID\")[ER_COL]\n    row = r.protein.loc[\"ERALPHA\"]\n    out = {}\n    for s in r.protein.columns:\n        if is_primary(s) and er.get(s) in (\"Positive\", \"Negative\"):\n            v = float(row[s])\n            out[s] = ((er[s], repr(v)), f\"ER {er[s]}, ERALPHA {v:.3f}\")"
+            },
+            {
+              "path": "tripwire/analyses.py",
+              "start": 119,
+              "end": 127,
+              "quote": "def a1_compare(b: dict, a: dict) -> Movement:\n    db, da = b[\"difference\"], a[\"difference\"]\n    rel = abs(da - db) / abs(db) if db else float(\"inf\")\n    tol = CONFIG[\"A1_difference_rel_tolerance\"]\n    flipped = (db > 0) != (da > 0)\n    moved = _strip(b) != _strip(a) or set(b[\"sample_ids\"]) != set(a[\"sample_ids\"])\n    insufficient = min(a[\"n_positive\"], a[\"n_negative\"]) < CONFIG[\"min_samples_per_group\"]\n    return Movement(moved, rel > tol, flipped, insufficient,\n                    f\"difference {db} -> {da} ({rel:.1%} relative; tolerance {tol:.0%})\")"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-4",
+      "status": "observed",
+      "assessment": "Missing required question checks become unavailable rather than pass. Review activity must remain distinguishable from resolved evidence and approval.",
+      "findings": [
+        {
+          "kind": "gap",
+          "priority": "P1",
+          "title": "Recorded review activity is not the same as resolved evidence",
+          "observation": "review_status considers any repair ID appearing in decisions to be decided, regardless of whether its decision is request_more_evidence. A flagged finding with no linked repair also disappears from open because all over an empty list is true. apply_decisions explicitly permits request_more_evidence. These are helper semantics; a user-interface approval bypass was not established here.",
+          "impact": "The open list can conceal a continuing evidence obligation or a finding without a repair. A record of reviewer activity should not imply that the underlying concern has been resolved or approved.",
+          "recommendation": "Represent reviewed, awaiting evidence, rejected, approved and unresolved finding states separately. Require an explicit finding-level disposition when no repair exists and keep evidence requests open until their stated conditions are satisfied.",
+          "acceptance_check": "Use synthetic documents with a flagged finding and no repair, then a linked repair with request_more_evidence, reject and approve. Verify each exported state communicates its distinct meaning and that requesting evidence never appears as authorization to proceed.",
+          "confidence": "High for the inspected list construction; parallel helper reproductions are attributed in the retained TESTS.md.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "tripwire/review.py",
+              "start": 10,
+              "end": 17,
+              "quote": "DECISIONS = (\"approve\", \"reject\", \"request_more_evidence\")\nLABELS = {\"approve\": \"Approve\", \"reject\": \"Reject\", \"request_more_evidence\": \"Request more evidence\"}\n\n\ndef apply_decisions(doc: dict, decisions: dict[str, dict]) -> dict:\n    \"\"\"decisions: repair_id -> {\"decision\", \"reason\", \"reviewer_role\"}. Returns a new document; the input is untouched.\n\n    Raises ValueError for an unknown repair, an unknown decision, or a missing reason or role.\"\"\""
+            },
+            {
+              "path": "tripwire/review.py",
+              "start": 21,
+              "end": 34,
+              "quote": "        if rid not in repairs:\n            raise ValueError(f\"unknown repair {rid!r}\")\n        if d.get(\"decision\") not in DECISIONS:\n            raise ValueError(f\"{rid}: decision must be one of {DECISIONS}\")\n        reason, role = (d.get(\"reason\") or \"\").strip(), (d.get(\"reviewer_role\") or \"\").strip()\n        if not reason:\n            raise ValueError(f\"{rid}: a reason is required\")\n        if not role:\n            raise ValueError(f\"{rid}: the reviewer's role is required\")\n        out.append({\"repair_id\": rid, \"decision\": d[\"decision\"], \"reason\": reason, \"reviewer_role\": role,\n                    \"original_preserved\": True})\n    new = copy.deepcopy(doc)\n    new[\"decisions\"] = sorted(out, key=lambda x: [r[\"id\"] for r in doc[\"repairs\"]].index(x[\"repair_id\"]))\n    return new"
+            },
+            {
+              "path": "tripwire/review.py",
+              "start": 37,
+              "end": 46,
+              "quote": "def review_status(doc: dict) -> dict:\n    \"\"\"Which findings flagged for review still have an undecided repair.\"\"\"\n    decided = {d[\"repair_id\"] for d in doc.get(\"decisions\", [])}\n    by_finding: dict[str, list[str]] = {}\n    for r in doc.get(\"repairs\", []):\n        for f in r.get(\"addresses\", []):\n            by_finding.setdefault(f, []).append(r[\"id\"])\n    flagged = [f[\"id\"] for f in doc.get(\"findings\", []) if f.get(\"needs_human_review\")]\n    open_ = [f for f in flagged if not all(rid in decided for rid in by_finding.get(f, []))]\n    return {\"flagged\": flagged, \"open\": open_, \"decided_repairs\": sorted(decided)}"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-5",
+      "status": "not_tested",
+      "assessment": "Another agent's retained TESTS.md reports a passing submitted suite with skips and limits. This source reviewer did not execute the app, reproduce that suite or verify a hosted demo.",
+      "findings": [],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. This pass does not establish runtime behavior or user comprehension."
+    },
+    {
+      "id": "T1-6",
+      "status": "observed",
+      "assessment": "Validated repair decisions preserve originals. State semantics and evidence-bound review history remain important follow-ups.",
+      "findings": [
+        {
+          "kind": "strength",
+          "priority": "P2",
+          "title": "Repair decisions require a reason and reviewer role",
+          "observation": "apply_decisions rejects unknown repair IDs, unsupported decisions, blank reasons and blank reviewer roles. It deep-copies the document and records original_preserved without applying the repair to source data. The resulting decisions field is a current snapshot, not an immutable history.",
+          "impact": "The helper has a useful human accountability boundary and avoids silently mutating input evidence. Its benefit should be retained while adding the unresolved-evidence states identified in TW-02.",
+          "recommendation": "Preserve reason and role validation. For repeated reviews, add timestamped evidence-bound events and derive the current snapshot separately; do not present a role string as authenticated identity.",
+          "acceptance_check": "Attempt an unknown repair and blank reason/role, then record an authorized decision. Verify invalid requests fail, the original document remains unchanged, and later revisions preserve a distinguishable history if history is claimed.",
+          "confidence": "High for helper validation and copying; authentication, persistence and UI behavior remain untested.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "tripwire/review.py",
+              "start": 14,
+              "end": 34,
+              "quote": "def apply_decisions(doc: dict, decisions: dict[str, dict]) -> dict:\n    \"\"\"decisions: repair_id -> {\"decision\", \"reason\", \"reviewer_role\"}. Returns a new document; the input is untouched.\n\n    Raises ValueError for an unknown repair, an unknown decision, or a missing reason or role.\"\"\"\n    repairs = {r[\"id\"] for r in doc.get(\"repairs\", [])}\n    out = []\n    for rid, d in decisions.items():\n        if rid not in repairs:\n            raise ValueError(f\"unknown repair {rid!r}\")\n        if d.get(\"decision\") not in DECISIONS:\n            raise ValueError(f\"{rid}: decision must be one of {DECISIONS}\")\n        reason, role = (d.get(\"reason\") or \"\").strip(), (d.get(\"reviewer_role\") or \"\").strip()\n        if not reason:\n            raise ValueError(f\"{rid}: a reason is required\")\n        if not role:\n            raise ValueError(f\"{rid}: the reviewer's role is required\")\n        out.append({\"repair_id\": rid, \"decision\": d[\"decision\"], \"reason\": reason, \"reviewer_role\": role,\n                    \"original_preserved\": True})\n    new = copy.deepcopy(doc)\n    new[\"decisions\"] = sorted(out, key=lambda x: [r[\"id\"] for r in doc[\"repairs\"]].index(x[\"repair_id\"]))\n    return new"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-7",
+      "status": "not_tested",
+      "assessment": "Communicate compatibility, evidence adequacy and question readiness separately. User comprehension and accessibility are untested in this pass.",
+      "findings": [],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. This pass does not establish runtime behavior or user comprehension."
+    }
+  ],
+  "judge_scores": null
+}
