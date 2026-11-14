@@ -31,3 +31,7 @@ These independently authored supplements are preserved alongside the main runtim
 | readyset-control-tower | 2026-11-14T14:53:45-05:00 | [Audit](readyset-control-tower/audit-codex-23484638-pass-01.md) | [HTML deck](readyset-control-tower/slides-codex-23484638-pass-01.html) · [Markdown](readyset-control-tower/slides-codex-23484638-pass-01.md) |
 | sns-cohort-control-tower | 2026-11-14T15:09:22-05:00 | [Audit](sns-cohort-control-tower/audit-codex-23484638-pass-01.md) | [HTML deck](sns-cohort-control-tower/slides-codex-23484638-pass-01.html) · [Markdown](sns-cohort-control-tower/slides-codex-23484638-pass-01.md) |
 | tripwire | 2026-11-14T15:03:44-05:00 | [Audit](tripwire/audit-codex-23484638-pass-01.md) | [HTML deck](tripwire/slides-codex-23484638-pass-01.html) · [Markdown](tripwire/slides-codex-23484638-pass-01.md) |
+
+## Concise companion decks
+
+[Companion reading guide and concise revision-2 decks](review-guide-codex-23484638.md) links all six entries and reconciles later evidence. It also links the separate SNS reconstruction follow-through. Earlier reports and decks remain preserved.
