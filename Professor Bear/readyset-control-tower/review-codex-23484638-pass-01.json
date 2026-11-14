@@ -1,0 +1,235 @@
+{
+  "mode": "judge",
+  "repo": "a7ussein/readyset-control-tower",
+  "commit": "4dd07736e99f96dd46cb6199c32bea32465bd20e",
+  "track": 1,
+  "reviewer": "Professor Bear / Codex source review",
+  "summary": "A focused, standard-library comparison engine with unusually explicit evidence, question-specific impact mapping and per-finding counterfactual effects. The principal first-pass concern is that absence or unreadability shared by both releases can bypass the changed-file path and still lead to Ready. Input selection by modification time also weakens reproducibility. These are static source findings, not results of an executed demo.",
+  "limitations": [
+    "Pinned local checkout, not a verified official final-submission receipt; branch names and later changes are outside this pass.",
+    "Static source analysis only. No submission code, tests, installers, workflows, notebook, server, hosted endpoint or model was executed.",
+    "No sealed envelopes, answer keys or raw clinical datasets were accessed. Numerical correctness, performance, accessibility and fresh-machine setup remain untested.",
+    "Source-derived control-flow consequences are labeled as such. Proposed acceptance checks are not observed test results.",
+    "The collected text budget is 160 files, 200 KB/file and 4 MB/entry. Complete_with_exclusions is not an exhaustive audit; exclusions and focused follow-ups are recorded.",
+    "No official score, cross-team ranking, clinical validity or regulatory/accessibility certification is asserted."
+  ],
+  "criteria": [
+    {
+      "id": "T1-1",
+      "status": "observed",
+      "assessment": "Changed-file detection and evidence construction are implemented, but shared missing inputs need an independent readiness gate. No sensitivity, specificity or unseen-input result was measured in this audit.",
+      "findings": [
+        {
+          "kind": "gap",
+          "priority": "P1",
+          "title": "Required files absent from both releases do not make the verdict insufficient",
+          "observation": "The file loop records an absent file and immediately continues when both paths are missing. The insufficient flag remains false. An analysis with no mapped finding is not rerun, and the final fallback verdict is Ready. MeanByGroup.used also turns missing inputs into an empty set. Together these paths permit an empty or equally incomplete pair of release folders to look unchanged rather than unassessable. This is a source-derived control-flow conclusion, not an executed reproduction.",
+          "impact": "A judge or researcher could interpret Ready as usable inputs even though the selected analysis cannot be calculated. This affects data-problem detection and the distinction between missing evidence and an unchanged valid result.",
+          "recommendation": "Preflight the mandatory inputs for every selected analysis in each release independently of the diff. Record unavailable inputs as evidence and produce Insufficient Evidence before selective rerun logic. Preserve the intentional optional-RNA exception only for questions that genuinely do not need RNA.",
+          "acceptance_check": "Using authorized synthetic fixtures, compare two empty folders, two folders both missing protein for A1, and two valid unchanged releases. The first two should be Insufficient Evidence with named inputs; the third may be Ready. Repeat with A2-only and optional RNA absent.",
+          "confidence": "High for the inspected control flow; runtime and CLI-level handling remain untested.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "control_tower/compare.py",
+              "start": 75,
+              "end": 82,
+              "quote": "    insufficient = False\n\n    describe = _describer(folder_a, folder_b)\n    for file in FILES:\n        pa, pb = release.path_of(folder_a, file), release.path_of(folder_b, file)\n        if not pa and not pb:\n            files_info.append({\"file\": file, \"status\": \"absent\", \"opened\": False})\n            continue"
+            },
+            {
+              "path": "control_tower/compare.py",
+              "start": 153,
+              "end": 162,
+              "quote": "    # Rerun only the analyses a finding touches.\n    analyses, status_of, blocked = [], {}, False\n    for a in chosen:\n        because = [i for i, f in enumerate(raw) if a.id in f[\"affects\"]]\n        if not because:\n            status_of[a.id] = \"not_rerun\"\n            analyses.append({\"id\": a.id, \"status\": \"not_rerun\",\n                             \"note\": f\"Not rerun: no finding touches a file, column, row or sample that {a.id} \"\n                                     f\"({a.title}) reads.\"})\n            continue"
+            },
+            {
+              "path": "control_tower/compare.py",
+              "start": 220,
+              "end": 227,
+              "quote": "    if insufficient:\n        verdict = \"Insufficient Evidence\"\n    elif blocked:\n        verdict = \"Blocked\"\n    elif any(f[\"affects_analyses\"] for f in findings):\n        verdict = \"Conditional\"\n    else:\n        verdict = \"Ready\"                # nothing changed, or nothing that changed is read by the question's analyses"
+            },
+            {
+              "path": "control_tower/analyses.py",
+              "start": 107,
+              "end": 113,
+              "quote": "    def used(self, folder):\n        \"\"\"The samples this analysis reads in this release.\"\"\"\n        try:\n            clinical, samples, _ = self.inputs(folder)\n        except (CannotRun, release.Unreadable, OSError, EOFError, UnicodeDecodeError):\n            return set()\n        return set(self._used(clinical, samples))"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-2",
+      "status": "observed",
+      "assessment": "The selected analysis changes the impact map and isolated-effect calculation. Confirm numeric results and an A1/A2 question switch in a live authorized run.",
+      "findings": [
+        {
+          "kind": "strength",
+          "priority": "P2",
+          "title": "Changes are mapped to the selected analysis before rerunning",
+          "observation": "Each finding is mapped through the analysis's touched_by function with used samples and per-file samples from both releases. Analyses without a mapped finding receive a not_rerun explanation; affected analyses are calculated before and after.",
+          "impact": "This directly supports the Control Tower requirement to distinguish affected from unaffected analyses rather than rerunning everything or treating equal row counts as sufficient.",
+          "recommendation": "Retain the explicit impact explanation and selective rerun path. Add the independent input-validity gate described above without removing this separation.",
+          "acceptance_check": "Change a protein value outside A1's cohort and then a value inside it. Demonstrate different affected-analysis decisions and preserve an unchanged A2 result with an evidence-backed reason.",
+          "confidence": "High for implementation structure; numerical equivalence to organizer analyses has not been executed here.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "control_tower/compare.py",
+              "start": 138,
+              "end": 151,
+              "quote": "    # Which analyses does each finding touch?\n    used = {a.id: a.used(folder_a) | a.used(folder_b) for a in chosen}\n    in_file = {a.id: a.file_samples(folder_a) | a.file_samples(folder_b) for a in chosen}\n    for f in raw:\n        f[\"affects\"] = [a.id for a in chosen\n                        if any(a.touched_by(ch, used[a.id], in_file[a.id]) for ch in f[\"changes\"])]\n    # Severity must not depend on which analyses the question names, so \"is read by an analysis\" is asked of every\n    # registered analysis as well as the ones in the question.\n    others = [a for a in REGISTRY if a not in chosen]\n    used_o = {a.id: a.used(folder_a) | a.used(folder_b) for a in others}\n    in_file_o = {a.id: a.file_samples(folder_a) | a.file_samples(folder_b) for a in others}\n    for f in raw:\n        f[\"read_by_any\"] = bool(f[\"affects\"]) or any(\n            a.touched_by(ch, used_o[a.id], in_file_o[a.id]) for a in others for ch in f[\"changes\"])"
+            },
+            {
+              "path": "control_tower/compare.py",
+              "start": 153,
+              "end": 171,
+              "quote": "    # Rerun only the analyses a finding touches.\n    analyses, status_of, blocked = [], {}, False\n    for a in chosen:\n        because = [i for i, f in enumerate(raw) if a.id in f[\"affects\"]]\n        if not because:\n            status_of[a.id] = \"not_rerun\"\n            analyses.append({\"id\": a.id, \"status\": \"not_rerun\",\n                             \"note\": f\"Not rerun: no finding touches a file, column, row or sample that {a.id} \"\n                                     f\"({a.title}) reads.\"})\n            continue\n        entry = {\"id\": a.id}\n        try:\n            before = a.run(folder_a)\n            entry[\"before\"] = _clean(before)\n        except (CannotRun, release.Unreadable, OSError, EOFError, UnicodeDecodeError) as e:\n            before = None\n            entry[\"note\"] = f\"Could not be run on {rel_a}: {e}.\"\n        try:\n            after = a.run(folder_b)"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-3",
+      "status": "observed",
+      "assessment": "Rules, effects, witnesses and hashes give a useful audit trail. Resolve ambiguous physical file selection and bind validity to the chosen input hashes.",
+      "findings": [
+        {
+          "kind": "gap",
+          "priority": "P2",
+          "title": "Ambiguous file variants are resolved by filesystem modification time",
+          "observation": "path_of accepts compressed TSV, uncompressed TSV, CSV, XLSX and TXT candidates and chooses the one with the newest modification time. The choice is not made from an explicit release manifest or an ambiguity error.",
+          "impact": "Copying or unzipping the same directory can change timestamps and therefore which physical file is analyzed. A recorded hash helps identify what was read, but does not make this selection rule reproducible before the run.",
+          "recommendation": "Reject multiple variants by default or require an explicit file map. Include the resolved relative path and the selection rule alongside the content hash in the evidence receipt.",
+          "acceptance_check": "Provide different compressed and uncompressed versions of one synthetic table, change only their timestamps, and confirm the tool either refuses ambiguity or selects the same explicitly configured file. Export the selected physical path.",
+          "confidence": "High; the selection rule is explicit. Cross-machine behavior was not exercised.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "control_tower/release.py",
+              "start": 33,
+              "end": 40,
+              "quote": "def path_of(folder, name):\n    \"\"\"Where a release's file is in a folder. A packed file may have been unpacked by whoever edited it, so\n    `x.tsv` stands in for `x.tsv.gz`; when both are there, the one changed most recently is the one meant.\"\"\"\n    stem = name[:-3] if name.endswith(\".gz\") else name\n    stem = stem[:-4] if stem.endswith(\".tsv\") else stem\n    names = [name, stem + \".tsv\"] + [stem + ext for ext in (\".csv\", \".xlsx\", \".txt\")]\n    found = [p for p in dict.fromkeys(os.path.join(folder, n) for n in names) if os.path.isfile(p)]\n    return max(found, key=os.path.getmtime) if found else None"
+            },
+            {
+              "path": "control_tower/compare.py",
+              "start": 229,
+              "end": 234,
+              "quote": "    return {\n        \"format_version\": \"0.2\",\n        \"producer\": dict(PRODUCER),\n        \"data\": {\"dataset\": \"TCGA-BRCA (event frozen release)\",\n                 \"releases\": [{\"name\": rel_a, \"files\": hashes[rel_a]}, {\"name\": rel_b, \"files\": hashes[rel_b]}]},\n        \"question\": f\"Did anything change between release {rel_a} and release {rel_b} that affects analysis \""
+            }
+          ]
+        },
+        {
+          "kind": "strength",
+          "priority": "P2",
+          "title": "The export retains evidence rules and isolated per-finding effects",
+          "observation": "The engine computes an analysis on the trusted inputs and again with only one finding's changes applied, then stores before, after, size, measure and relative movement. The export includes rules, effects, file summaries and witness data in x_readyset.",
+          "impact": "Reviewers can inspect why a finding matters and distinguish an isolated effect from the net effect of several changes. This is stronger evidence design than an unexplained severity label.",
+          "recommendation": "Keep the counterfactual calculation and expose its exact assumptions. State when effects cannot be computed and avoid implying that isolated effects add linearly.",
+          "acceptance_check": "Use two synthetic changes with opposing effects. Show each isolated effect, the combined result and an unavailable-effect case; confirm the displayed claims distinguish these quantities.",
+          "confidence": "High for the code and exported fields; the calculations have not been independently rerun.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "control_tower/compare.py",
+              "start": 342,
+              "end": 365,
+              "quote": "def _effects(raw, findings, chosen, folder_a, folder_b):\n    \"\"\"What each finding does to each analysis on its own: the analysis recomputed on the trusted release with only\n    that finding's changes applied.\"\"\"\n    inputs = {}\n    for a in chosen:\n        try:\n            inputs[a.id] = (a.inputs(folder_a), a.inputs(folder_b))\n        except (CannotRun, release.Unreadable, OSError, EOFError, UnicodeDecodeError):\n            inputs[a.id] = None\n    wrap = lambda v: v if isinstance(v, tuple) else (v,)\n    effects = {}\n    for f, raw_f in zip(findings, raw):\n        for a in chosen:\n            if a.id not in raw_f[\"affects\"] or not inputs[a.id]:\n                continue\n            before_in, after_in = inputs[a.id]\n            try:\n                before = _clean(a.compute(*wrap(before_in)))\n                alone = _clean(a.compute(*wrap(a.with_only(before_in, after_in, raw_f[\"changes\"]))))\n            except (CannotRun, ValueError, KeyError, TypeError):\n                continue\n            size, measure, by = _size(before, alone)\n            effects.setdefault(f[\"id\"], {})[a.id] = {\"before\": before, \"after\": alone, \"size\": size,\n                                                     \"measure\": measure, \"moved_by\": by}"
+            },
+            {
+              "path": "control_tower/compare.py",
+              "start": 249,
+              "end": 255,
+              "quote": "            \"notes\": notes,\n            \"rules\": rules,\n            \"effects\": effects,\n            \"repair_priority\": priority,\n            \"files\": files_info,\n            \"witness\": witness,\n            \"scope\": SCOPE},"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-4",
+      "status": "observed",
+      "assessment": "Limitations and mandatory human-review fields are present. Identical-invalid and equally-incomplete inputs are the priority fail-closed checks.",
+      "findings": [
+        {
+          "kind": "gap",
+          "priority": "P1",
+          "title": "Identical content is skipped before readability or analytical validity is established",
+          "observation": "The comparison skips a file immediately when its content hash matches. The later unreadable-table handler only covers compare_file on changed content. Thus identical malformed or empty contents do not traverse that handler. Existing empty-input tests mutate only the new release, so their successful definitions do not establish coverage of identical bad inputs.",
+          "impact": "Equality of two byte streams is not evidence that either is a valid analysis input. A missing baseline-validity gate can conceal shared corruption or an empty analytical cohort.",
+          "recommendation": "Validate the baseline and candidate against the selected question before using the equality shortcut, or reuse a validity receipt bound to the exact content hash and question. Keep file equality and analysis readiness as separate states.",
+          "acceptance_check": "Create identical zero-byte clinical files, identical invalid tables and identical valid files with no eligible ER group. None should receive an unqualified Ready verdict. Include a valid identical positive control and verify that a cached validity receipt is invalidated by input or question changes.",
+          "confidence": "High that the shortcut precedes changed-file parsing; actual end-to-end outcomes require the stated follow-up.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "control_tower/compare.py",
+              "start": 114,
+              "end": 136,
+              "quote": "        try:\n            ha, hb = release.content_hash(pa), release.content_hash(pb)\n        except release.Unreadable as e:\n            files_info.append({\"file\": file, \"status\": \"unreadable\", \"opened\": False})\n            insufficient = True\n            raw.append(_unreadable(file, rel_b, str(e)))\n            continue\n        hashes[rel_a].append({\"file\": file, \"sha256\": ha, \"hash_of\": \"content\"})\n        hashes[rel_b].append({\"file\": file, \"sha256\": hb, \"hash_of\": \"content\"})\n        if ha == hb:\n            files_info.append({\"file\": file, \"status\": \"unchanged\", \"opened\": False})\n            continue\n        try:\n            found = compare_file(file, pa, pb, rel_a, rel_b, describe)\n            raw += found\n            info = {\"file\": file, \"status\": \"changed\", \"opened\": True}\n            if not found:\n                info[\"note\"] = SAME_VALUES\n            files_info.append(info)\n        except release.Unreadable as e:\n            files_info.append({\"file\": file, \"status\": \"unreadable\", \"opened\": True})\n            insufficient = True\n            raw.append(_unreadable(file, rel_b, str(e)))"
+            },
+            {
+              "path": "tests/test_empty_inputs.py",
+              "start": 22,
+              "end": 37,
+              "quote": "class EmptyInputs(unittest.TestCase):\n    def changed(self, file, change):\n        d = tempfile.mkdtemp()\n        a = TinyRelease()\n        folder_a, folder_b = a.write(os.path.join(d, \"A\")), a.copy().write(os.path.join(d, \"B\"))\n        path = os.path.join(folder_b, file)\n        write(path, change(read(path)))\n        return compare(folder_a, folder_b)\n\n    def test_a_file_with_nothing_in_it_is_reported_and_the_verdict_is_insufficient_evidence(self):\n        for file, empty in ((PROTEIN, \"\"), (PROTEIN, \"\\n\\n\"), (CLINICAL, \"\"), (MUTATION, \"\")):\n            doc = self.changed(file, lambda text: empty)\n            self.assertEqual(doc[\"verdict\"], \"Insufficient Evidence\", (file, empty))\n            self.assertEqual(len(doc[\"findings\"]), 1)\n            self.assertIn(f\"{file} could not be read\", doc[\"findings\"][0][\"summary\"])\n            self.assertIn(\"is empty\", doc[\"findings\"][0][\"summary\"])"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-5",
+      "status": "not_tested",
+      "assessment": "Setup instructions and empty-input test definitions were inspected; no installer, submission test, server, hosted demo or organizer validator was run. A fresh-machine demonstration is still needed.",
+      "findings": [],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. This pass does not establish runtime behavior or user comprehension."
+    },
+    {
+      "id": "T1-6",
+      "status": "observed",
+      "assessment": "The source implements differentiated repair priorities. A reviewer should verify that proposals, decisions and the original analysis remain distinct in the live workflow.",
+      "findings": [
+        {
+          "kind": "strength",
+          "priority": "P2",
+          "title": "Repair urgency is tied to both measured effect and uncertainty",
+          "observation": "The priority function distinguishes changes outside the question, unavailable reruns, large isolated effects, identity swaps/copies and smaller effects. Findings require human review and carry limitations, and repairs refer back to the finding they address.",
+          "impact": "The review handoff names a useful next action instead of merely enumerating anomalies. Uncertainty about whether a changed release is correct is not replaced with automatic source-data editing in this inspected path.",
+          "recommendation": "Retain these explanations and require a live reviewer to demonstrate approval, rejection and unresolved evidence before sign-off. Treat the half-percent convention as a configurable research rule, not a validated universal threshold.",
+          "acceptance_check": "Show one unrelated finding, one noncomputable result and one small effect. Check that their repair urgency differs and that the exported findings and original input hashes are preserved through review.",
+          "confidence": "High for the priority and export construction; human-review UI behavior is not tested.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "control_tower/compare.py",
+              "start": 186,
+              "end": 200,
+              "quote": "    # Number the findings, set severity, attach repairs.\n    findings, repairs = [], []\n    for i, f in enumerate(raw, 1):\n        fid = f\"F{i}\"\n        moved = [a for a in f[\"affects\"] if status_of[a] in (\"changed\", \"blocked\")]\n        findings.append({\n            \"id\": fid, \"kind\": f[\"kind\"], \"summary\": f[\"summary\"], \"severity\": \"low\",       # set below, from its effect\n            \"confidence\": f[\"confidence\"], \"evidence\": f[\"evidence\"],\n            \"affects_analyses\": f[\"affects\"],\n            \"not_affected_analyses\": [a.id for a in chosen if a.id not in f[\"affects\"]],\n            \"limitation\": f[\"limitation\"], \"needs_human_review\": True})\n        for r in (f.get(\"repair\"), f.get(\"extra_repair\")):\n            if r:\n                repairs.append({\"id\": f\"R{len(repairs) + 1}\", \"action\": r[\"action\"], \"targets\": r[\"targets\"],\n                                \"justification\": r[\"justification\"], \"addresses\": [fid]})"
+            },
+            {
+              "path": "control_tower/compare.py",
+              "start": 369,
+              "end": 391,
+              "quote": "def _priority(findings, repairs, effects):\n    \"\"\"How urgently each suggested fix is needed, sized by its finding's own effect.\"\"\"\n    priority = {}\n    for r in repairs:\n        fid = r[\"addresses\"][0]\n        f = next(x for x in findings if x[\"id\"] == fid)\n        sizes = [e[\"size\"] for e in effects.get(fid, {}).values()]\n        if not f[\"affects_analyses\"]:\n            priority[r[\"id\"]] = {\"level\": \"for the record\", \"why\": \"Nothing in the question reads what this finding touches.\"}\n        elif not sizes:\n            priority[r[\"id\"]] = {\"level\": \"before use\", \"why\": \"An analysis you rely on cannot be rerun until this is resolved.\"}\n        elif \"large\" in sizes:\n            priority[r[\"id\"]] = {\"level\": \"before use\", \"why\": \"On its own this finding clearly moves a result you rely on.\"}\n        elif f[\"kind\"] in (\"sample_swap\", \"duplicate\"):\n            priority[r[\"id\"]] = {\"level\": \"before use\", \"why\": \"These samples carry another sample's data. The effect on this \"\n                                 \"result is small or none, but anything else computed from them is wrong too.\"}\n        elif \"small\" in sizes:\n            priority[r[\"id\"]] = {\"level\": \"small effect\", \"why\": \"On its own this finding moves no headline number of a result by \"\n                                 \"half a percent or more. Confirm it with the data provider; if you use the release \"\n                                 \"anyway, say so in your methods.\"}\n        else:\n            priority[r[\"id\"]] = {\"level\": \"no effect on the result\", \"why\": \"It touches samples a result reads, but on its own \"\n                                 \"the result is the same. Fix it when convenient.\"}"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-7",
+      "status": "not_tested",
+      "assessment": "README wording explains precomputed hosted comparison versus local live comparison. Unguided usability, keyboard access and comprehension remain untested.",
+      "findings": [],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. This pass does not establish runtime behavior or user comprehension."
+    }
+  ],
+  "judge_scores": null
+}
