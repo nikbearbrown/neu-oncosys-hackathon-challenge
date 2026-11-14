@@ -1,8 +1,8 @@
 # Identity Crisis Control Tower: independent first-pass review
 
-Reviewed commit: `380760dc3b7b61097756f2b85c0f462feadc802c`. Updated: **2026-11-14T19:40:03+00:00**. Track 1: Cohort Firewall.
+Reviewed commit: `380760dc3b7b61097756f2b85c0f462feadc802c`. Updated: **2026-11-14T19:51:28+00:00**. Track 1: Cohort Firewall.
 
-**Status: source review, not a verified live demo.** No official score is assigned. Source findings below are hypotheses about reachable runtime behavior unless labelled otherwise; exact branches and limitations are stated. No student code or files were changed.
+**Status: source review plus isolated runtime checks; no verified hosted demo.** No official score is assigned. Runtime observations are labelled per issue; remaining source findings still require reproduction. Exact branches and limitations are stated. No student code or files were changed.
 
 This submission goes beyond change detection: research-question cards, baseline checks, measured effects, uncertainty estimates and fingerprinted review receipts are visible in source. The main first-pass concerns are a sign-off path that permits a missing validator, an explicit development bypass for missing checks, and silent loss of optional robustness evidence.
 
@@ -24,7 +24,9 @@ Sign-off records the reviewer, time, decision and digests of both findings and r
 
 ### 1. Missing validator does not stop review-file publication
 
-**Priority: high. Evidence: source inspection; runtime reproduction pending.**
+**Priority: high. Evidence: source and isolated runtime reproduction.**
+
+**Runtime update:** A synthetic sign-off passed to save with a nonexistent validator wrote readiness.signed.json. The returned message explicitly said the findings were not checked. This is a fail-open save policy, not a hidden claim that validation ran. See [test evidence](TESTS.md).
 
 validate returns None when the organizer validator is absent. save rejects only ok is False, then writes the signed readiness and review files for None as well. The UI subsequently records the sign-off. This differs from the stated requirement that sign-off counts only after validation passes.
 
@@ -48,7 +50,9 @@ allow_missing=True marks unknown checks nonmaterial. assess starts at Ready and 
 
 ### 3. Robustness failures disappear into empty objects
 
-**Priority: medium. Evidence: source inspection; runtime reproduction pending.**
+**Priority: medium. Evidence: source and isolated runtime reproduction.**
+
+**Runtime update:** Injected a ValueError into the robustness calculation only. assess returned a document with no explicit occurrence of the failure or reason. This is controlled fault injection, not evidence that the ordinary calculation always crashes. See [test evidence](TESTS.md).
 
 Exceptions from the conclusion/uncertainty calculation and error-budget calculation are replaced by empty dictionaries. These calculations may be optional, so failing them need not invalidate every use; silently omitting them does not show whether they ran.
 
@@ -96,7 +100,11 @@ The maximum points below reproduce the official track weights. They are not poin
 | Useful next steps. Suggested fixes are specific and match the size and importance of the problem. | 10 | Next steps include evidence needed; preserve that distinction when proposing restored values. |
 | Communication. Someone without specialist knowledge can understand the result and next step. | 5 | Glossary and staged views are described; denominators and incomplete results need plain-language labels. |
 
-## Checks actually performed
+## Runtime update
+
+81 passed, 18 skipped, 0 failed, 0 errors. Independent safeguards: 0 met, 2 unmet. [Commands, limitations and concrete observations](TESTS.md). These counts are not scores.
+
+## Checks actually performed at first pass
 
 - Pinned and read source at `380760dc3b7b61097756f2b85c0f462feadc802c`; original checkout was clean when inspected.
 - Parsed **36/36** selected Python source files with `ast.parse`; **0** syntax failures. Parsing does not execute or validate behavior.

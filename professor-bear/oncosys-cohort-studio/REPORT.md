@@ -1,8 +1,8 @@
 # Cohort Studio: independent first-pass review
 
-Reviewed commit: `54aeacb6f6f355a1dcaa42d7abf2ce174315ad69`. Updated: **2026-11-14T19:40:03+00:00**. Track 1: Cohort Firewall.
+Reviewed commit: `54aeacb6f6f355a1dcaa42d7abf2ce174315ad69`. Updated: **2026-11-14T19:51:28+00:00**. Track 1: Cohort Firewall.
 
-**Status: source review, not a verified live demo.** No official score is assigned. Source findings below are hypotheses about reachable runtime behavior unless labelled otherwise; exact branches and limitations are stated. No student code or files were changed.
+**Status: source review plus isolated runtime checks; no verified hosted demo.** No official score is assigned. Runtime observations are labelled per issue; remaining source findings still require reproduction. Exact branches and limitations are stated. No student code or files were changed.
 
 This is a cohort-construction product, not a release-difference tower. Its strongest source features are explicit steps, row/sample/patient counts, join-inflation detection, composition shifts and reproducible exports. The first-pass review focuses on provenance truthfulness, safe generation of reproduction scripts and explicit approval of automated changes.
 
@@ -24,7 +24,9 @@ The generated script records expected source hashes and copies the actual operat
 
 ### 1. Unknown checksum verification is counted as a pass
 
-**Priority: high. Evidence: source inspection; runtime reproduction pending.**
+**Priority: high. Evidence: source and isolated runtime reproduction.**
+
+**Runtime update:** Removed sources.csv from an invented test fixture. clinical.tsv had verified=null, but the frozen-checksum check returned pass and claimed every raw file matched sources.csv. The overall verdict was Blocked because the synthetic cohort was small; the false checksum pass is independently wrong even when another check blocks release. See [test evidence](TESTS.md).
 
 When sources.csv or an expected entry is missing, file_status retains verified=None. The verdict rejects only verified is False; otherwise it claims every used raw file matches the frozen checksums. Missing verification and successful verification are not equivalent. Committed manifests are separately marked unverified.
 
@@ -36,7 +38,9 @@ When sources.csv or an expected entry is missing, file_status retains verified=N
 
 ### 2. Request text is inserted into generated Python source
 
-**Priority: high. Evidence: source inspection; runtime reproduction pending.**
+**Priority: high. Evidence: source and isolated runtime reproduction.**
+
+**Runtime update:** A normal generated reproduction script parsed successfully. A request containing triple quotes produced invalid Python; a second harmless delimiter example placed a review_marker assignment in the generated program AST. These generated examples were parsed only and never executed. See [test evidence](TESTS.md).
 
 The reproduction script inserts the raw request inside a triple-quoted module docstring. A request containing triple quotes can terminate that string, damage the script or introduce Python source. This is a source-identified code-generation hazard; no malicious generated file was executed.
 
@@ -96,7 +100,11 @@ The maximum points below reproduce the official track weights. They are not poin
 | Useful next steps. Suggested fixes are specific and match the size and importance of the problem. | 10 | Fixes and per-step losses are concrete; retain user choice and blocked-export context. |
 | Communication. Someone without specialist knowledge can understand the result and next step. | 5 | Show rows versus independent patients clearly; give provenance states distinct labels. |
 
-## Checks actually performed
+## Runtime update
+
+279 passed, 20 skipped, 0 failed, 0 errors. Independent safeguards: 1 met, 3 unmet. [Commands, limitations and concrete observations](TESTS.md). These counts are not scores.
+
+## Checks actually performed at first pass
 
 - Pinned and read source at `54aeacb6f6f355a1dcaa42d7abf2ce174315ad69`; original checkout was clean when inspected.
 - Parsed **65/65** selected Python source files with `ast.parse`; **0** syntax failures. Parsing does not execute or validate behavior.

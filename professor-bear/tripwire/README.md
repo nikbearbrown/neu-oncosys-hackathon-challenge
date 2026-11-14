@@ -8,3 +8,7 @@ Pinned source: `45df43640836025b40e89fc190f913ad694a6011`. Updated 2026-11-14T19
 - [Actual static checks](evidence/static-checks.json).
 
 First pass: no runtime tests or live-site verification. No official score. Work through the issues one at a time, then update this evidence at a stated commit.
+
+## Runtime update
+
+399 passed, 6 skipped, 0 failed, 0 errors. [Detailed tests and independent reproductions](TESTS.md). No official score.

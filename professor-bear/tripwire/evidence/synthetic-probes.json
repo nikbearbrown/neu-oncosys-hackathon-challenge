@@ -1,0 +1,56 @@
+[
+  {
+    "check": "Insufficient unchanged movement is not Ready",
+    "expected": "Insufficient Evidence",
+    "observed": "Ready",
+    "safeguard_met": false
+  },
+  {
+    "check": "Affected insufficient movement is rejected",
+    "expected": "Insufficient Evidence",
+    "observed": "Insufficient Evidence",
+    "safeguard_met": true
+  },
+  {
+    "check": "Unexplained movement blocks",
+    "expected": "Blocked",
+    "observed": "Blocked",
+    "safeguard_met": true
+  },
+  {
+    "check": "Flagged finding without repair stays open",
+    "expected": [
+      "F1"
+    ],
+    "observed": [],
+    "safeguard_met": false
+  },
+  {
+    "check": "Request-more-evidence stays unresolved",
+    "expected": [
+      "F1"
+    ],
+    "observed": [],
+    "safeguard_met": false
+  },
+  {
+    "check": "End-to-end unchanged tiny release is not Ready",
+    "expected": false,
+    "observed": false,
+    "safeguard_met": true
+  },
+  {
+    "observation": "tiny release verdicts",
+    "overall": "Blocked",
+    "analyses": {
+      "A1": "Blocked",
+      "A2": "Ready"
+    }
+  },
+  {
+    "check": "Empty readiness checks do not pass",
+    "expected": "Insufficient Evidence",
+    "observed": "Insufficient Evidence",
+    "safeguard_met": true
+  }
+]

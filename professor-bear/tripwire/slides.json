@@ -1,16 +1,16 @@
 {
   "title": "Tripwire / Driftwire",
   "commit": "45df43640836025b40e89fc190f913ad694a6011",
-  "updated": "2026-11-14T19:40:03+00:00",
+  "updated": "2026-11-14T19:51:28+00:00",
   "slides": [
     {
       "title": "Tripwire / Driftwire",
-      "before": "Independent first pass",
+      "before": "Independent review",
       "after": "Evidence before a score",
       "fix": "Professor Bear \u00b7 14 November 2026",
       "source": "REPORT.md",
-      "notes": "Pinned commit 45df43640836025b40e89fc190f913ad694a6011. Source review only; no live demonstration or official score.",
-      "status": "SOURCE REVIEW",
+      "notes": "Pinned source; isolated tests and detailed limits in TESTS.md. No hosted demo or official score.",
+      "status": "SOURCE + SYNTHETIC CHECKS",
       "kind": "cover"
     },
     {
@@ -19,8 +19,8 @@
       "after": "Insufficient flag bypassed",
       "fix": "Evaluate insufficiency before the unaffected return, or return separate compatibility and adequacy results with an explicit trusted-baseline requirement.",
       "source": "https://github.com/Adhithyan245/tripwire/blob/45df43640836025b40e89fc190f913ad694a6011/tripwire/verdicts.py#L24",
-      "notes": "release_verdict returns Ready for an unaffected, unmoved result before it tests movement.insufficient. Thus the helper can report compatibility as Ready even when its movement object says the sample evidence is insufficient. The outer build guards empty cohorts, but an undersized nonempty cohort is a separate case. This is a source-identified path; an end-to-end reproduction is still needed. Acceptance: Use an unchanged nonempty cohort below the configured per-group minimum. Confirm the result names insufficient evidence; retain a sufficiently large unchanged control.",
-      "status": "SOURCE FINDING \u00b7 HIGH",
+      "notes": "Direct helper reproduction returned Ready for an unmoved Movement with insufficient=True. Positive controls return Insufficient Evidence when affected=True and Blocked for unexplained movement. The first full API tiny-fixture control returned Blocked (A1 Blocked, A2 Ready), so this result proves the helper precedence defect, not that every small cohort escapes the outer guards.",
+      "status": "REPRODUCED \u00b7 SEE SCOPE",
       "kind": "compare"
     },
     {
@@ -29,8 +29,8 @@
       "after": "No repair \u2192 not open",
       "fix": "Require an explicit finding-level disposition when no repair exists, and distinguish request_more_evidence from approval to proceed.",
       "source": "https://github.com/Adhithyan245/tripwire/blob/45df43640836025b40e89fc190f913ad694a6011/tripwire/review.py#L37",
-      "notes": "review_status defines open findings using all(...) over associated repairs. For a flagged finding with no associated repair, all([]) is true, so it is excluded from the open list. This matters for imported findings and future checks even if the current builder normally emits a repair for each finding. Acceptance: A synthetic needs_human_review finding with no repair must remain open. A request for evidence should remain visibly unresolved until the required evidence is recorded.",
-      "status": "SOURCE FINDING \u00b7 HIGH",
+      "notes": "Direct review_status calls returned an empty open list for a flagged finding without repairs and for a repair marked request_more_evidence. These are helper-level reproductions with invented review documents; no UI bypass was tested.",
+      "status": "REPRODUCED \u00b7 SEE SCOPE",
       "kind": "compare"
     },
     {
@@ -65,11 +65,11 @@
     },
     {
       "title": "What is verified so far",
-      "before": "91 source files parsed",
-      "after": "Runtime tests pending",
-      "fix": "Read the report; reproduce each issue with a positive control.",
-      "source": "REPORT.md",
-      "notes": "Parsing is not testing. No hosted app, clinical claims, real data or sealed inputs were verified. No numeric score.",
+      "before": "399 tests passed",
+      "after": "3 unmet safeguards",
+      "fix": "Read TESTS.md for skips, positive controls and limits.",
+      "source": "TESTS.md",
+      "notes": "399 passed, 6 skipped, 0 failed, 0 errors; independent safeguards are targeted probes, not a score.",
       "status": "LIMITS",
       "kind": "compare"
     }

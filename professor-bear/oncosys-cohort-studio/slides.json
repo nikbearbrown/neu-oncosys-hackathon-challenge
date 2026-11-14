@@ -1,16 +1,16 @@
 {
   "title": "Cohort Studio",
   "commit": "54aeacb6f6f355a1dcaa42d7abf2ce174315ad69",
-  "updated": "2026-11-14T19:40:03+00:00",
+  "updated": "2026-11-14T19:51:28+00:00",
   "slides": [
     {
       "title": "Cohort Studio",
-      "before": "Independent first pass",
+      "before": "Independent review",
       "after": "Evidence before a score",
       "fix": "Professor Bear \u00b7 14 November 2026",
       "source": "REPORT.md",
-      "notes": "Pinned commit 54aeacb6f6f355a1dcaa42d7abf2ce174315ad69. Source review only; no live demonstration or official score.",
-      "status": "SOURCE REVIEW",
+      "notes": "Pinned source; isolated tests and detailed limits in TESTS.md. No hosted demo or official score.",
+      "status": "SOURCE + SYNTHETIC CHECKS",
       "kind": "cover"
     },
     {
@@ -19,8 +19,8 @@
       "after": "Claim: matches checksum",
       "fix": "Use a three-state check: verified True, mismatch False, and unavailable/unknown.",
       "source": "https://github.com/tammy357/oncosys-cohort-studio/blob/54aeacb6f6f355a1dcaa42d7abf2ce174315ad69/cohort_studio/data.py#L64",
-      "notes": "When sources.csv or an expected entry is missing, file_status retains verified=None. The verdict rejects only verified is False; otherwise it claims every used raw file matches the frozen checksums. Missing verification and successful verification are not equivalent. Committed manifests are separately marked unverified. Acceptance: Remove only the expected checksum entry from a synthetic fixture. The provenance check must become unknown without inventing a mismatch or pass.",
-      "status": "SOURCE FINDING \u00b7 HIGH",
+      "notes": "Removed sources.csv from an invented test fixture. clinical.tsv had verified=null, but the frozen-checksum check returned pass and claimed every raw file matched sources.csv. The overall verdict was Blocked because the synthetic cohort was small; the false checksum pass is independently wrong even when another check blocks release.",
+      "status": "REPRODUCED \u00b7 SEE SCOPE",
       "kind": "compare"
     },
     {
@@ -29,8 +29,8 @@
       "after": "Inside Python delimiter",
       "fix": "Serialize request text as a Python string literal with repr or a JSON value, rather than interpolating it into source delimiters.",
       "source": "https://github.com/tammy357/oncosys-cohort-studio/blob/54aeacb6f6f355a1dcaa42d7abf2ce174315ad69/cohort_studio/exports.py#L158",
-      "notes": "The reproduction script inserts the raw request inside a triple-quoted module docstring. A request containing triple quotes can terminate that string, damage the script or introduce Python source. This is a source-identified code-generation hazard; no malicious generated file was executed. Acceptance: Use quotes, backslashes, newlines and a harmless marker as request text. Parse the output with ast.parse and verify the request remains data only.",
-      "status": "SOURCE FINDING \u00b7 HIGH",
+      "notes": "A normal generated reproduction script parsed successfully. A request containing triple quotes produced invalid Python; a second harmless delimiter example placed a review_marker assignment in the generated program AST. These generated examples were parsed only and never executed.",
+      "status": "REPRODUCED \u00b7 SEE SCOPE",
       "kind": "compare"
     },
     {
@@ -65,11 +65,11 @@
     },
     {
       "title": "What is verified so far",
-      "before": "65 source files parsed",
-      "after": "Runtime tests pending",
-      "fix": "Read the report; reproduce each issue with a positive control.",
-      "source": "REPORT.md",
-      "notes": "Parsing is not testing. No hosted app, clinical claims, real data or sealed inputs were verified. No numeric score.",
+      "before": "279 tests passed",
+      "after": "3 unmet safeguards",
+      "fix": "Read TESTS.md for skips, positive controls and limits.",
+      "source": "TESTS.md",
+      "notes": "279 passed, 20 skipped, 0 failed, 0 errors; independent safeguards are targeted probes, not a score.",
       "status": "LIMITS",
       "kind": "compare"
     }

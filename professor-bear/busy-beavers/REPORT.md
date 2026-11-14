@@ -1,8 +1,8 @@
 # Busy Beavers Cohort Firewall: independent first-pass review
 
-Reviewed commit: `bfb369f231bf97a1d3aa21abade3ba4b1406a355`. Updated: **2026-11-14T19:40:03+00:00**. Track 1: Cohort Firewall.
+Reviewed commit: `bfb369f231bf97a1d3aa21abade3ba4b1406a355`. Updated: **2026-11-14T19:51:28+00:00**. Track 1: Cohort Firewall.
 
-**Status: source review, not a verified live demo.** No official score is assigned. Source findings below are hypotheses about reachable runtime behavior unless labelled otherwise; exact branches and limitations are stated. No student code or files were changed.
+**Status: source review plus isolated runtime checks; no verified hosted demo.** No official score is assigned. Runtime observations are labelled per issue; remaining source findings still require reproduction. Exact branches and limitations are stated. No student code or files were changed.
 
 The architecture distinguishes detector output, validated API exports, labelled mocks and dashboard presentation. The most consequential first-pass findings concern the verdict logic, required-input preflight, and the route that turns proposed exclusions into a downloadable modified dataset.
 
@@ -24,7 +24,9 @@ Events produce evidence pointers, limitations, proposed repairs and per-analysis
 
 ### 1. The detector cannot return Blocked
 
-**Priority: high. Evidence: source inspection; runtime reproduction pending.**
+**Priority: high. Evidence: source and isolated runtime reproduction.**
+
+**Runtime update:** The real analyze_releases engine returned Conditional for a synthetic 40-sample example whose A1 difference changed from +2.0 to −8.0. Both groups retained 20 samples. The change was detected and rerun, but the verdict never became Blocked. See [test evidence](TESTS.md).
 
 The final decision is Insufficient Evidence on rerun failure, Conditional for any finding affecting an analysis, and Ready otherwise. No branch returns Blocked, even if a rerun succeeds but its conclusion changes substantially. The track offers four verdicts; the absence needs a deliberate question-specific policy, not an implicit collapse.
 
@@ -36,7 +38,9 @@ The final decision is Insufficient Evidence on rerun failure, Conditional for an
 
 ### 2. The unchanged-file shortcut lacks required-input validation
 
-**Priority: high. Evidence: source inspection; runtime reproduction pending.**
+**Priority: high. Evidence: source and isolated runtime reproduction.**
+
+**Runtime update:** The real analyze_releases engine returned Ready for two empty directories and again for two directories with identical zero-byte clinical.tsv and protein_rppa.tsv.gz. Both analyses were marked not_rerun with an identical-input explanation. The inspected reference-analysis Python module was present; it was not a missing-dependency failure. See [test evidence](TESTS.md).
 
 changed_stems examines the union of files found. Two absent required files produce no changed stem. compare then says analysis inputs are byte-identical without loading them. The engine can reach Ready when no rerun failed and no affecting finding exists. Reproduction is still pending; source logic does not establish baseline fitness.
 
@@ -96,7 +100,11 @@ The maximum points below reproduce the official track weights. They are not poin
 | Useful next steps. Suggested fixes are specific and match the size and importance of the problem. | 10 | Repair ZIPs are practical, but proposals must not imply approved corrections. |
 | Communication. Someone without specialist knowledge can understand the result and next step. | 5 | README demo placeholder and upstream clone instructions should be reconciled with the submitted repository. |
 
-## Checks actually performed
+## Runtime update
+
+65 passed, 0 skipped, 0 failed, 0 errors. Independent safeguards: 0 met, 3 unmet. [Commands, limitations and concrete observations](TESTS.md). These counts are not scores.
+
+## Checks actually performed at first pass
 
 - Pinned and read source at `bfb369f231bf97a1d3aa21abade3ba4b1406a355`; original checkout was clean when inspected.
 - Parsed **45/45** selected Python source files with `ast.parse`; **0** syntax failures. Parsing does not execute or validate behavior.

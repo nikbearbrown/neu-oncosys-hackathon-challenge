@@ -1,16 +1,16 @@
 {
   "title": "Identity Crisis Control Tower",
   "commit": "380760dc3b7b61097756f2b85c0f462feadc802c",
-  "updated": "2026-11-14T19:40:03+00:00",
+  "updated": "2026-11-14T19:51:28+00:00",
   "slides": [
     {
       "title": "Identity Crisis Control Tower",
-      "before": "Independent first pass",
+      "before": "Independent review",
       "after": "Evidence before a score",
       "fix": "Professor Bear \u00b7 14 November 2026",
       "source": "REPORT.md",
-      "notes": "Pinned commit 380760dc3b7b61097756f2b85c0f462feadc802c. Source review only; no live demonstration or official score.",
-      "status": "SOURCE REVIEW",
+      "notes": "Pinned source; isolated tests and detailed limits in TESTS.md. No hosted demo or official score.",
+      "status": "SOURCE + SYNTHETIC CHECKS",
       "kind": "cover"
     },
     {
@@ -19,8 +19,8 @@
       "after": "Signed files still written",
       "fix": "Require ok is True before a validated sign-off.",
       "source": "https://github.com/AravindKumar2504/identity-crisis-control-tower/blob/380760dc3b7b61097756f2b85c0f462feadc802c/tower/review.py#L103",
-      "notes": "validate returns None when the organizer validator is absent. save rejects only ok is False, then writes the signed readiness and review files for None as well. The UI subsequently records the sign-off. This differs from the stated requirement that sign-off counts only after validation passes. Acceptance: Run with an absent validator and confirm no validated sign-off is persisted; then use passing and failing validators as controls.",
-      "status": "SOURCE FINDING \u00b7 HIGH",
+      "notes": "A synthetic sign-off passed to save with a nonexistent validator wrote readiness.signed.json. The returned message explicitly said the findings were not checked. This is a fail-open save policy, not a hidden claim that validation ran.",
+      "status": "REPRODUCED \u00b7 SEE SCOPE",
       "kind": "compare"
     },
     {
@@ -39,8 +39,8 @@
       "after": "Empty object, no reason",
       "fix": "Record not-run, error type and affected claim as explicit evidence states.",
       "source": "https://github.com/AravindKumar2504/identity-crisis-control-tower/blob/380760dc3b7b61097756f2b85c0f462feadc802c/tower/readiness.py#L113",
-      "notes": "Exceptions from the conclusion/uncertainty calculation and error-budget calculation are replaced by empty dictionaries. These calculations may be optional, so failing them need not invalidate every use; silently omitting them does not show whether they ran. Acceptance: Inject a controlled calculation failure and verify the report shows the missing result and its consequence rather than merely omitting the panel.",
-      "status": "SOURCE FINDING \u00b7 MEDIUM",
+      "notes": "Injected a ValueError into the robustness calculation only. assess returned a document with no explicit occurrence of the failure or reason. This is controlled fault injection, not evidence that the ordinary calculation always crashes.",
+      "status": "REPRODUCED \u00b7 SEE SCOPE",
       "kind": "compare"
     },
     {
@@ -65,11 +65,11 @@
     },
     {
       "title": "What is verified so far",
-      "before": "36 source files parsed",
-      "after": "Runtime tests pending",
-      "fix": "Read the report; reproduce each issue with a positive control.",
-      "source": "REPORT.md",
-      "notes": "Parsing is not testing. No hosted app, clinical claims, real data or sealed inputs were verified. No numeric score.",
+      "before": "81 tests passed",
+      "after": "2 unmet safeguards",
+      "fix": "Read TESTS.md for skips, positive controls and limits.",
+      "source": "TESTS.md",
+      "notes": "81 passed, 18 skipped, 0 failed, 0 errors; independent safeguards are targeted probes, not a score.",
       "status": "LIMITS",
       "kind": "compare"
     }

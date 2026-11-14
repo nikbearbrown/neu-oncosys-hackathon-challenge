@@ -1,0 +1,22 @@
+[
+  {
+    "check": "Missing validator prevents validated sign-off artifacts",
+    "expected": false,
+    "observed": true,
+    "safeguard_met": false
+  },
+  {
+    "observation": "save return explicitly discloses missing validator",
+    "message": "findings.reviewed.json was not checked: the organizers' validator wasn't found"
+  },
+  {
+    "observation": "pending-check test deferred",
+    "reason": "Requires card-shape-specific construction; no runtime claim made"
+  },
+  {
+    "check": "Robustness exception has explicit error state",
+    "expected": true,
+    "observed": false,
+    "safeguard_met": false
+  }
+]

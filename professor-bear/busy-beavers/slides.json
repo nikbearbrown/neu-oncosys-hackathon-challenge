@@ -1,16 +1,16 @@
 {
   "title": "Busy Beavers Cohort Firewall",
   "commit": "bfb369f231bf97a1d3aa21abade3ba4b1406a355",
-  "updated": "2026-11-14T19:40:03+00:00",
+  "updated": "2026-11-14T19:51:28+00:00",
   "slides": [
     {
       "title": "Busy Beavers Cohort Firewall",
-      "before": "Independent first pass",
+      "before": "Independent review",
       "after": "Evidence before a score",
       "fix": "Professor Bear \u00b7 14 November 2026",
       "source": "REPORT.md",
-      "notes": "Pinned commit bfb369f231bf97a1d3aa21abade3ba4b1406a355. Source review only; no live demonstration or official score.",
-      "status": "SOURCE REVIEW",
+      "notes": "Pinned source; isolated tests and detailed limits in TESTS.md. No hosted demo or official score.",
+      "status": "SOURCE + SYNTHETIC CHECKS",
       "kind": "cover"
     },
     {
@@ -19,8 +19,8 @@
       "after": "Conditional only",
       "fix": "Add explicit blocking conditions tied to the research question, measured effects and unresolved integrity failures.",
       "source": "https://github.com/GiorgiKarazanashvili/BusyBeavers/blob/bfb369f231bf97a1d3aa21abade3ba4b1406a355/detection/engine.py#L270",
-      "notes": "The final decision is Insufficient Evidence on rerun failure, Conditional for any finding affecting an analysis, and Ready otherwise. No branch returns Blocked, even if a rerun succeeds but its conclusion changes substantially. The track offers four verdicts; the absence needs a deliberate question-specific policy, not an implicit collapse. Acceptance: Use a synthetic change that reverses the relevant conclusion; explain why its result is Blocked or document a defensible narrower meaning for Conditional.",
-      "status": "SOURCE FINDING \u00b7 HIGH",
+      "notes": "The real analyze_releases engine returned Conditional for a synthetic 40-sample example whose A1 difference changed from +2.0 to \u22128.0. Both groups retained 20 samples. The change was detected and rerun, but the verdict never became Blocked.",
+      "status": "REPRODUCED \u00b7 SEE SCOPE",
       "kind": "compare"
     },
     {
@@ -29,8 +29,8 @@
       "after": "Treated as unchanged",
       "fix": "Check required-file presence, decodability and required columns before any equality shortcut.",
       "source": "https://github.com/GiorgiKarazanashvili/BusyBeavers/blob/bfb369f231bf97a1d3aa21abade3ba4b1406a355/cfw/compare.py#L34",
-      "notes": "changed_stems examines the union of files found. Two absent required files produce no changed stem. compare then says analysis inputs are byte-identical without loading them. The engine can reach Ready when no rerun failed and no affecting finding exists. Reproduction is still pending; source logic does not establish baseline fitness. Acceptance: Two empty folders and identical corrupt files must never return Ready; a valid unchanged release remains a control.",
-      "status": "SOURCE FINDING \u00b7 HIGH",
+      "notes": "The real analyze_releases engine returned Ready for two empty directories and again for two directories with identical zero-byte clinical.tsv and protein_rppa.tsv.gz. Both analyses were marked not_rerun with an identical-input explanation. The inspected reference-analysis Python module was present; it was not a missing-dependency failure.",
+      "status": "REPRODUCED \u00b7 SEE SCOPE",
       "kind": "compare"
     },
     {
@@ -65,11 +65,11 @@
     },
     {
       "title": "What is verified so far",
-      "before": "45 source files parsed",
-      "after": "Runtime tests pending",
-      "fix": "Read the report; reproduce each issue with a positive control.",
-      "source": "REPORT.md",
-      "notes": "Parsing is not testing. No hosted app, clinical claims, real data or sealed inputs were verified. No numeric score.",
+      "before": "65 tests passed",
+      "after": "3 unmet safeguards",
+      "fix": "Read TESTS.md for skips, positive controls and limits.",
+      "source": "TESTS.md",
+      "notes": "65 passed, 0 skipped, 0 failed, 0 errors; independent safeguards are targeted probes, not a score.",
       "status": "LIMITS",
       "kind": "compare"
     }

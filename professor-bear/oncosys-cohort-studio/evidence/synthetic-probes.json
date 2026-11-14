@@ -1,0 +1,35 @@
+[
+  {
+    "check": "Absent expected checksum is unknown",
+    "expected": "unknown",
+    "observed": "pass",
+    "safeguard_met": false
+  },
+  {
+    "observation": "unknown checksum detail",
+    "detail": "Every raw file used matches sources.csv (manifests are the committed versions).",
+    "overall_verdict": "Blocked",
+    "clinical_verified": null
+  },
+  {
+    "check": "Ordinary generated reproduction script parses",
+    "expected": true,
+    "observed": true,
+    "safeguard_met": true
+  },
+  {
+    "check": "Quoted request still produces valid Python",
+    "expected": true,
+    "observed": false,
+    "safeguard_met": false
+  },
+  {
+    "check": "Request text cannot become executable statement",
+    "expected": false,
+    "observed": true,
+    "safeguard_met": false
+  },
+  {
+    "observation": "generated malformed/injected scripts were parsed only, never executed"
+  }
+]
