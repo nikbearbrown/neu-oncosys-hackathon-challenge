@@ -1,4 +1,4 @@
-# NEU AI Healthcare Hackathon
+# NEU OncoSys Hackathon Challenge
 
 Review final GitHub submissions and give students specific, evidence-backed
 feedback for the November 11–14, 2026 AI Healthcare Hackathon at Northeastern.
@@ -12,6 +12,7 @@ from keywords or pretend that source inspection proves a working demo.
 
 ## Start here
 
+- [Actual challenge repository and product checks](docs/oncosys-challenge.md).
 - [Tutorial](docs/tutorial.md): inspect one repository or an entire submission list.
 - [Review method](docs/review-method.md): evidence, priorities, scoring and limitations.
 - [Reviewer prompt](prompts/reviewer.md): use with Claude Code, Codex or a human reviewer.
@@ -37,6 +38,8 @@ evidence, limitations and optional explicitly human-reviewed proposed scores.
 and acceptance checks; no scoring section. Students can review their own
 work repeatedly at new commit SHAs. Judge-only notes belong in separate files,
 never in a student record.
+
+The upstream challenge is linked at a pinned commit in [upstream/challenge.json](upstream/challenge.json). It is reference material, not a team submission.
 
 No actual final submission list has been supplied. The example manifest is
 empty deliberately. No team has been reviewed or scored by this repository.

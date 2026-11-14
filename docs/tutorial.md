@@ -18,11 +18,16 @@ Copy `templates/submissions.example.json` to `submissions.json` and add entries:
       "id": "team-slug",
       "repo": "OWNER/REPOSITORY",
       "commit": "REPLACE_WITH_THE_REAL_40_CHARACTER_COMMIT_SHA",
-      "track": 1
+      "track": 1,
+      "product": "cohort-control-tower"
     }
   ]
 }
 ```
+
+Product is optional; use `python3 review.py challenge` for the supported slugs.
+Use `custom` for an organizer-approved custom product. Product/track conflicts
+produce an incomplete record until resolved.
 
 This is a placeholder, not a real team. Use `"mode": "judge"` for judge aids.
 For offline testing or a repository already on your machine, add

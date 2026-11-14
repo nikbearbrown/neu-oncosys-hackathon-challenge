@@ -86,4 +86,21 @@ class ReviewTests(unittest.TestCase):
   subprocess.run(['git','-c','user.name=Fixture','-c','user.email=fixture@example.invalid','-c','core.hooksPath=/dev/null','commit','-qm','Execution fixture'],cwd=self.repo,check=True)
   sha=subprocess.check_output(['git','rev-parse','HEAD'],cwd=self.repo).decode().strip()
   review.read_snapshot(self.sub|{'commit':sha});self.assertFalse(marker.exists())
+ def test_product_context(self):
+  packet=review.read_snapshot(self.sub|{'product':'cohort-studio'})
+  self.assertEqual(packet['challenge']['commit'],review.CHALLENGE['commit'])
+  self.assertIn('cohort_samples.csv',packet['product_check'])
+  self.assertIn('cohort-studio',review.render(packet,review.review_template(packet,'student')))
+ def test_wrong_product_track(self):
+  for name in ['evidence-copilot','unknown']:
+   with self.assertRaises(ValueError):review.read_snapshot(self.sub|{'product':name})
+ def test_custom_product(self):
+  packet=review.read_snapshot(self.sub|{'product':'custom'})
+  self.assertIn('organizer-confirmed',packet['product_check'])
+ def test_index_traversal(self):
+  work=self.base/'work';work.mkdir();(work/'index.json').write_text('[{"id":"../outside"}]')
+  with self.assertRaises(ValueError):review.report_all(work,self.base/'reports')
+ def test_no_sealed_or_key_collection(self):
+  for name in ['envelopes/README.md','sealed/E01.json','answer-keys/results.md','config.secret.py']:
+   self.assertIsNotNone(review.excluded(name))
 if __name__=='__main__':unittest.main()

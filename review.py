@@ -17,6 +17,8 @@ from urllib.parse import quote
 ROOT = Path(__file__).resolve().parent
 RUBRICS = json.loads((ROOT / 'rubrics.json').read_text())
 RULES = json.loads((ROOT / 'rule-index.json').read_text())
+CHALLENGE = json.loads((ROOT / 'upstream/challenge.json').read_text())
+PRODUCTS = json.loads((ROOT / 'upstream/products.json').read_text())
 MAX_FILE = 200_000
 MAX_TOTAL = 4_000_000
 MAX_FILES = 160
@@ -77,6 +79,10 @@ def excluded(path):
 
 
 def read_snapshot(sub):
+    product = sub.get('product')
+    if product is not None:
+        if product not in PRODUCTS: raise ValueError('Unknown product; use a documented slug or custom')
+        if PRODUCTS[product]['track'] not in (None, sub['track']): raise ValueError('Product and track disagree; confirm with organizers')
     sha = sub['commit']
     if not re.fullmatch(r'[a-f0-9]{40}',sha): raise ValueError('commit must be a full lowercase 40-character Git SHA')
     repo = sub.get('repo','')
@@ -108,6 +114,9 @@ def read_snapshot(sub):
             'collected_at':datetime.now(timezone.utc).isoformat(),'collection':'partial' if truncated else 'complete_with_exclusions',
             'tree_truncated':truncated,'files':{},'skipped':[],'limits':{'file_bytes':MAX_FILE,'total_bytes':MAX_TOTAL,'files':MAX_FILES},
             'runtime':'not_tested','claims':'Source evidence only; no installs, builds, tests, images, datasets or demos executed.'}
+    packet['challenge']={'repo':CHALLENGE['repository'],'commit':CHALLENGE['commit']}
+    packet['product']=product
+    packet['product_check']=PRODUCTS[product]['check'] if product else 'Product not specified. Confirm the intended workflow before applying product-specific requirements.'
     total=0
     for e in sorted(tree,key=lambda e:e['path']):
         if e['type']=='tree': continue
@@ -138,7 +147,7 @@ def read_snapshot(sub):
 
 def review_template(packet,mode):
     return {'mode':mode,'repo':packet['repo'],'commit':packet['commit'],'track':packet['track'],
-            'reviewer':'','summary':'Review not yet performed.','limitations':['Runtime, accessibility, data correctness, demonstrations and unseen inputs have not been tested.'],
+            'reviewer':'','summary':'Review not yet performed.','limitations':['Runtime, accessibility, data correctness, demonstrations and unseen inputs have not been tested.', packet.get('product_check','Product not specified.')],
             'criteria':[{'id':c['id'],'status':'not_tested','assessment':'Not reviewed yet.','findings':[],
                          'next_check':'Inspect implementation and evidence for: '+c['criterion']} for c in RUBRICS[str(packet['track'])]],
             'judge_scores':None}
@@ -219,6 +228,9 @@ def render(packet,review):
          '', '**Not an official result. Source review does not establish runtime behavior.**','',safe_text(review['summary']),'',
          '## Coverage and limitations','',f'Collection: {packet["collection"]}; {len(packet["files"])} text files; {len(packet["skipped"])} excluded entries; recursive tree truncated: {packet["tree_truncated"]}.',
          'Runtime: not tested by this toolkit. Git blob identity and evidence line/quote consistency were checked.', '']
+    if packet.get('challenge'):
+        challenge=packet['challenge']
+        out += [f'Challenge reference: https://github.com/{challenge["repo"]}/tree/{challenge["commit"]}', '', 'Product: '+safe_text(packet.get('product') or 'not specified'), '', 'Product review route: '+safe_text(packet['product_check']), '']
     out.extend('- '+safe_text(x) for x in review['limitations'])
     out+=['','## Priorities','']
     findings=[(c,f) for c in review['criteria'] for f in c['findings']]
@@ -257,7 +269,10 @@ def report_all(work,out):
     if out.exists(): raise ValueError('Use a new report directory.')
     out.mkdir(parents=True);index=['# Submission review index','','No automatic ranking or official scores.','']
     for entry in json.loads((work/'index.json').read_text()):
-        name=entry['id']; folder=work/name
+        name=entry['id']
+        if not isinstance(name,str) or not re.fullmatch(r'[a-z0-9]+(?:-[a-z0-9]+)*',name): raise ValueError('Unsafe submission ID in index')
+        folder=work/name
+        if folder.is_symlink(): raise ValueError('Symlink submission folder is not allowed')
         try:
             if (folder/'error.json').exists(): raise ValueError('Source unavailable; review incomplete')
             report(folder/'packet.json',folder/'review.json',out/(name+'.md'))
@@ -271,12 +286,17 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     sp=p.add_subparsers(dest='cmd')
     sp.add_parser('help',help='Show overview and tutorial location')
+    sp.add_parser('challenge',help='Show pinned challenge and product review routes without fetching data')
     a=sp.add_parser('inspect',help='Read pinned Git objects without checkout or execution');a.add_argument('--manifest',required=True);a.add_argument('--out',required=True)
     a=sp.add_parser('report',help='Validate evidence and render a reviewer-completed record');a.add_argument('--packet',required=True);a.add_argument('--review',required=True);a.add_argument('--out',required=True)
     a=sp.add_parser('report-all',help='Render all completed records and an index');a.add_argument('--work',required=True);a.add_argument('--out',required=True)
     args=p.parse_args()
     try:
-        if args.cmd=='inspect': inspect(args.manifest,args.out)
+        if args.cmd=='challenge':
+            print(f'Challenge: https://github.com/{CHALLENGE["repository"]}/tree/{CHALLENGE["commit"]}')
+            for name,product in PRODUCTS.items(): print(f'\n{name} (track {product["track"] or "as approved"}): {product["check"]}')
+            print('\nRead docs/oncosys-challenge.md. No data downloaded or code executed.')
+        elif args.cmd=='inspect': inspect(args.manifest,args.out)
         elif args.cmd=='report': report(args.packet,args.review,args.out)
         elif args.cmd=='report-all': report_all(args.work,args.out)
         else:

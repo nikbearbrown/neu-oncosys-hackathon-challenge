@@ -1,0 +1,9 @@
+{
+  "cohort-control-tower": {"track": 1, "check": "Trace changes between releases to affected analyses, preserve unaffected analyses with reasons, and inspect findings.json in shared format v0.2. Equal row counts do not establish equal membership."},
+  "cohort-studio": {"track": 1, "check": "Inspect editable filters and joins, distinct patient/sample counts at every step, rerunnable export, and cohort_samples.csv with unique sample_id values. Test join inflation without assuming every row is a patient."},
+  "multimodal-case-room": {"track": 2, "check": "Trace case-to-slide and molecular links through documented identifiers; inspect missing and conflicting evidence, sentence-level brief sources, and export. An ambiguous link must not attach the wrong image."},
+  "evidence-copilot": {"track": 2, "check": "Trace bounded queries on actual files, release/checksums, filters, denominators, calculation, rerun/filter interactions, and supported refusals. A plausible answer is not evidence of execution."},
+  "research-claim-auditor": {"track": 2, "check": "Trace report sentence to claim to calculation to human confirmation/override. Inspect audit.json in shared format with one claim_check per claim, claim_text, claim_verdict and correct_value where contradicted."},
+  "repair-review-desk": {"track": 2, "check": "Trace validated findings import, independent recomputation of proposed repair effects, approve/reject/request-more-evidence with reason and role, and exported decisions retaining original analyses."},
+  "custom": {"track": null, "check": "Ask for the organizer-confirmed product, user, workflow and data scope. Apply the selected track rubric; do not require another product's outputs or assume an organizer answer key exists."}
+}

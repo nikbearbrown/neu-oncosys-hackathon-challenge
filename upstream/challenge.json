@@ -1,0 +1,130 @@
+{
+  "repository": "disleveK/oncosys-hackathon-challenge",
+  "commit": "6e15a399a64ffbf80778db0b462ac239e70086b9",
+  "inspected_date": "2026-11-14",
+  "integration": "Pinned documentation references, not a fork or data copy",
+  "documents": [
+    {
+      "path": "README.md",
+      "sha256": "ac71138c9e2434e758902300c53b3e987e258c27220c7a903021713ae9dee822",
+      "bytes": 8966,
+      "url": "https://github.com/disleveK/oncosys-hackathon-challenge/blob/6e15a399a64ffbf80778db0b462ac239e70086b9/README.md"
+    },
+    {
+      "path": "RULES.md",
+      "sha256": "869c33691c41c1bbf71d81d1cafd8f22bd54790df45bf3bfaeee1111d8ec44f1",
+      "bytes": 2181,
+      "url": "https://github.com/disleveK/oncosys-hackathon-challenge/blob/6e15a399a64ffbf80778db0b462ac239e70086b9/RULES.md"
+    },
+    {
+      "path": "DATA_LICENSES.md",
+      "sha256": "428f13fa6206e6904010abf78ad826868a83d4ab7c4d91e746ee07084830fb9d",
+      "bytes": 4121,
+      "url": "https://github.com/disleveK/oncosys-hackathon-challenge/blob/6e15a399a64ffbf80778db0b462ac239e70086b9/DATA_LICENSES.md"
+    },
+    {
+      "path": "SUBMISSION_CHECKLIST.md",
+      "sha256": "abe753c52753849da220b98bf426b21c6ce47bf8d8fedb45abe76367947a15c5",
+      "bytes": 2736,
+      "url": "https://github.com/disleveK/oncosys-hackathon-challenge/blob/6e15a399a64ffbf80778db0b462ac239e70086b9/SUBMISSION_CHECKLIST.md"
+    },
+    {
+      "path": "products/README.md",
+      "sha256": "cd4f56af657f7fda64b58401129654599c871c4fcdbf5eaac97b42c4f70f156e",
+      "bytes": 3617,
+      "url": "https://github.com/disleveK/oncosys-hackathon-challenge/blob/6e15a399a64ffbf80778db0b462ac239e70086b9/products/README.md"
+    },
+    {
+      "path": "format/README.md",
+      "sha256": "751abb5be4bbd0b1b57494b3cce112d776c3254a27eb2e9e74ab3b9a5dfbbd1d",
+      "bytes": 2270,
+      "url": "https://github.com/disleveK/oncosys-hackathon-challenge/blob/6e15a399a64ffbf80778db0b462ac239e70086b9/format/README.md"
+    },
+    {
+      "path": "data/README.md",
+      "sha256": "0c3374b57c9a40f2aeeb25c12fa7eac8fbccd15995b2e9d0540bb7a5de010764",
+      "bytes": 3567,
+      "url": "https://github.com/disleveK/oncosys-hackathon-challenge/blob/6e15a399a64ffbf80778db0b462ac239e70086b9/data/README.md"
+    },
+    {
+      "path": "products/cohort-control-tower.md",
+      "sha256": "933ed1790df3e1c4ec840b7d22971ade4c46815a58ac7e71c8c66d88a007d4ee",
+      "bytes": 2321,
+      "url": "https://github.com/disleveK/oncosys-hackathon-challenge/blob/6e15a399a64ffbf80778db0b462ac239e70086b9/products/cohort-control-tower.md"
+    },
+    {
+      "path": "products/cohort-studio.md",
+      "sha256": "c975913d524e51c35ffde77ffe5a559ffe79c5bbc4f36c64edf956f85f897150",
+      "bytes": 2221,
+      "url": "https://github.com/disleveK/oncosys-hackathon-challenge/blob/6e15a399a64ffbf80778db0b462ac239e70086b9/products/cohort-studio.md"
+    },
+    {
+      "path": "products/multimodal-case-room.md",
+      "sha256": "b78d12716f68925213c29f69dd892db8b89cad4d188c49fb284fb182907579f8",
+      "bytes": 1969,
+      "url": "https://github.com/disleveK/oncosys-hackathon-challenge/blob/6e15a399a64ffbf80778db0b462ac239e70086b9/products/multimodal-case-room.md"
+    },
+    {
+      "path": "products/evidence-copilot.md",
+      "sha256": "16169fe5da15db3bf32a94397cadc371aabb9b73bc627c70a2da94e560f12a6b",
+      "bytes": 2073,
+      "url": "https://github.com/disleveK/oncosys-hackathon-challenge/blob/6e15a399a64ffbf80778db0b462ac239e70086b9/products/evidence-copilot.md"
+    },
+    {
+      "path": "products/research-claim-auditor.md",
+      "sha256": "83b8f85e5c216d98ca5971ea219e98f7c0fa34c2725f2d0d64d8d9dcf64d8f32",
+      "bytes": 2095,
+      "url": "https://github.com/disleveK/oncosys-hackathon-challenge/blob/6e15a399a64ffbf80778db0b462ac239e70086b9/products/research-claim-auditor.md"
+    },
+    {
+      "path": "products/repair-review-desk.md",
+      "sha256": "f1c43539ab15c9da8d4caaa33aa26b4e56ddd8be27f0f05abd0e8ca450a85da9",
+      "bytes": 2061,
+      "url": "https://github.com/disleveK/oncosys-hackathon-challenge/blob/6e15a399a64ffbf80778db0b462ac239e70086b9/products/repair-review-desk.md"
+    },
+    {
+      "path": "data/tcga-brca/README.md",
+      "sha256": "e46468ad7b6cc619b1c5aa56785a9a54af147f0356edae8a1b2db8816e6168ed",
+      "bytes": 3394,
+      "url": "https://github.com/disleveK/oncosys-hackathon-challenge/blob/6e15a399a64ffbf80778db0b462ac239e70086b9/data/tcga-brca/README.md"
+    },
+    {
+      "path": "data/pathmnist/README.md",
+      "sha256": "f8bc6a99bf5cac724d39a0bd0a43ed10ab478b443fd12da2dff530b91a69964b",
+      "bytes": 3322,
+      "url": "https://github.com/disleveK/oncosys-hackathon-challenge/blob/6e15a399a64ffbf80778db0b462ac239e70086b9/data/pathmnist/README.md"
+    },
+    {
+      "path": "data/cptac/README.md",
+      "sha256": "1e85f6961b6555878714e712f2eb2a9bbb5f6b922960f87d3c97eafa945c34ca",
+      "bytes": 2450,
+      "url": "https://github.com/disleveK/oncosys-hackathon-challenge/blob/6e15a399a64ffbf80778db0b462ac239e70086b9/data/cptac/README.md"
+    },
+    {
+      "path": "data/lidc-idri/README.md",
+      "sha256": "1da499a0c06d24f120a099ef6023084f7ebe6a2d18492b6f6792cf1d044be0c1",
+      "bytes": 1708,
+      "url": "https://github.com/disleveK/oncosys-hackathon-challenge/blob/6e15a399a64ffbf80778db0b462ac239e70086b9/data/lidc-idri/README.md"
+    },
+    {
+      "path": "data/depmap/README.md",
+      "sha256": "202023fc50f1975f83b1ae1cd022955bacd6404d7eb7089bf37146ae946fa1f6",
+      "bytes": 1612,
+      "url": "https://github.com/disleveK/oncosys-hackathon-challenge/blob/6e15a399a64ffbf80778db0b462ac239e70086b9/data/depmap/README.md"
+    },
+    {
+      "path": "data/clinical-trials/README.md",
+      "sha256": "3476c12065471e5ca07d81758381b06e20396d4a053ad052efe1e262030c3dd1",
+      "bytes": 1461,
+      "url": "https://github.com/disleveK/oncosys-hackathon-challenge/blob/6e15a399a64ffbf80778db0b462ac239e70086b9/data/clinical-trials/README.md"
+    },
+    {
+      "path": "data/camelyon17/README.md",
+      "sha256": "872486a5ad8aa8aa529e05b1b9f6859865bf335cd2c8dcb8021146b2dfeb40f2",
+      "bytes": 1556,
+      "url": "https://github.com/disleveK/oncosys-hackathon-challenge/blob/6e15a399a64ffbf80778db0b462ac239e70086b9/data/camelyon17/README.md"
+    }
+  ],
+  "license_note": "No repository-wide LICENSE found in inspected tree; DATA_LICENSES.md supplies individual data-source terms. No upstream code or data redistributed.",
+  "execution": "No upstream scripts, notebooks, fetchers or envelope tools run."
+}

@@ -14,3 +14,8 @@ participant submissions. No endorsement or organizer affiliation is implied.
 The toolkit is initially private. Confirm redistribution rights before making
 the source snapshots public. Access to GitHub is not a license to republish
 participants' code. Review packets retain only bounded text for review.
+
+The OncoSys integration contains original review guidance and pinned links to
+`disleveK/oncosys-hackathon-challenge`, not a redistribution of its code or data.
+The absence of a repository-wide LICENSE at the inspected revision is recorded
+in upstream/challenge.json. Individual data-source terms remain applicable.
