@@ -146,9 +146,9 @@
       "title": "The next review needs real evidence",
       "before": "Seven official criteria",
       "after": "No invented score",
-      "fix": "Real-data and unseen-input runs remain unverified.",
+      "fix": "Unseen-input performance and clinical validity remain unverified.",
       "source": "REPORT.md",
-      "notes": "Judges apply the Cohort Firewall rubric. Review all findings with the team, rerun acceptance checks and inspect organizer-authorized inputs. No clinical or accessibility certification.",
+      "notes": "Frozen public A versus itself returned Ready with zero findings through the identical-file shortcut. No sealed judging input or clinical validity was tested.",
       "status": "LIMITS",
       "kind": "compare"
     }

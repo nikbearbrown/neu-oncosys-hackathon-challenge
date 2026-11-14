@@ -1,0 +1,56 @@
+{
+  "data": "Invented TCGA-ZZ fixtures only; no event patient data or sealed inputs",
+  "checks": [
+    {
+      "check": "Synthetic saved release selectable",
+      "passed": true
+    },
+    {
+      "check": "Full run API succeeded",
+      "passed": true
+    },
+    {
+      "check": "Synthetic sign change displayed as Blocked",
+      "passed": true
+    },
+    {
+      "check": "Evidence view present",
+      "passed": true
+    },
+    {
+      "check": "A1 cohort export API succeeded",
+      "passed": true
+    },
+    {
+      "check": "A1 cohort has unique samples",
+      "passed": true
+    },
+    {
+      "check": "A2 cohort export API succeeded",
+      "passed": true
+    },
+    {
+      "check": "A2 cohort has unique samples",
+      "passed": true
+    },
+    {
+      "check": "Theme switch works",
+      "passed": true
+    },
+    {
+      "check": "Mobile page has no document horizontal overflow",
+      "passed": false
+    },
+    {
+      "check": "No browser execution errors",
+      "passed": true
+    }
+  ],
+  "passed": 10,
+  "failed": 1,
+  "browser_errors": [],
+  "blocked_outbound_requests": [
+    "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+  ],
+  "limitations": "Smoke test only; no screen reader, hosted deployment, auth or clinical validity verification. CDN scripts served from recorded fixed local files; fonts blocked."
+}

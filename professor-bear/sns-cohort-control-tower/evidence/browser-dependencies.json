@@ -1,0 +1,22 @@
+[
+  {
+    "url": "https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js",
+    "bytes": 10751,
+    "sha256": "d949f1c3687aedadcedac85261865f29b17cd273997e7f6b2bfc53b2f9d4c4dd"
+  },
+  {
+    "url": "https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js",
+    "bytes": 131835,
+    "sha256": "35f4f974f4b2bcd44da73963347f8952e341f83909e4498227d4e26b98f66f0d"
+  },
+  {
+    "url": "https://cdn.jsdelivr.net/npm/htm@3.1.1/dist/htm.umd.js",
+    "bytes": 1364,
+    "sha256": "7a31776e04bd4afde0d4308177d26f377716fcf7e4bd70be590746d6aa594f08"
+  },
+  {
+    "url": "https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js",
+    "bytes": 4558696,
+    "sha256": "6d21266ce1bd7d9e5ab4e115989c70c20de0382fd973a8f26ab58619eba4d603"
+  }
+]

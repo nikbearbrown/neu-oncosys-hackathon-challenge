@@ -1,7 +1,7 @@
 {
   "title": "Busy Beavers Cohort Firewall",
   "commit": "bfb369f231bf97a1d3aa21abade3ba4b1406a355",
-  "updated": "2026-11-14T20:04:21+00:00",
+  "updated": "2026-11-14T20:11:00+00:00",
   "slides": [
     {
       "title": "Busy Beavers Cohort Firewall",
@@ -59,8 +59,8 @@
       "after": "Possible external provider",
       "fix": "Show the active provider and exact outbound categories before the first free-text request.",
       "source": "https://github.com/GiorgiKarazanashvili/BusyBeavers/blob/bfb369f231bf97a1d3aa21abade3ba4b1406a355/detection/qa.py#L48",
-      "notes": "build_context includes up to 40 sample identifiers and ten evidence notes per finding, and a configured OpenAI route sends the context with the question. This is source evidence of payload construction, not an observed transmission or privacy breach. A local model route also exists. Acceptance: Use a mocked transport and synthetic markers to verify the payload and consent path. Do not test with real records or credentials.",
-      "status": "SOURCE FINDING \u00b7 MEDIUM",
+      "notes": "build_context retained a synthetic sample identifier and its synthetic evidence note. Known-ID validation rejected an invented citation and accepted a real fixture citation. No provider transport was called. This verifies payload construction and citation-ID checks, not a privacy breach or semantic factual correctness.",
+      "status": "REPRODUCED \u00b7 SEE SCOPE",
       "kind": "compare"
     },
     {

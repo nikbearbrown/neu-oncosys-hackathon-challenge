@@ -1,0 +1,119 @@
+[
+  {
+    "observation": "default API fix",
+    "original_steps": [
+      {
+        "op": "sample_type",
+        "values": [
+          "Primary Tumor"
+        ]
+      },
+      {
+        "op": "join",
+        "table": "clinical",
+        "key": "patient_id",
+        "mode": "rows"
+      }
+    ],
+    "returned_steps": [
+      {
+        "op": "sample_type",
+        "values": [
+          "Primary Tumor"
+        ]
+      },
+      {
+        "op": "join",
+        "table": "clinical",
+        "key": "sample_id",
+        "mode": "rows"
+      }
+    ],
+    "fixes": [
+      "Step 2: Match each sample to its own record by sample barcode. Joining on the patient barcode also matches the patient's other samples (for example a normal-tissue sample)."
+    ],
+    "first_inflated": true,
+    "final_inflated": false,
+    "verdict": "Blocked",
+    "route": "definition"
+  },
+  {
+    "check": "Default API preserves proposed operation until acceptance",
+    "expected": [
+      {
+        "op": "sample_type",
+        "values": [
+          "Primary Tumor"
+        ]
+      },
+      {
+        "op": "join",
+        "table": "clinical",
+        "key": "patient_id",
+        "mode": "rows"
+      }
+    ],
+    "observed": [
+      {
+        "op": "sample_type",
+        "values": [
+          "Primary Tumor"
+        ]
+      },
+      {
+        "op": "join",
+        "table": "clinical",
+        "key": "sample_id",
+        "mode": "rows"
+      }
+    ],
+    "safeguard_met": false
+  },
+  {
+    "check": "Explicit fix=False preserves operation",
+    "expected": [
+      {
+        "op": "sample_type",
+        "values": [
+          "Primary Tumor"
+        ]
+      },
+      {
+        "op": "join",
+        "table": "clinical",
+        "key": "patient_id",
+        "mode": "rows"
+      }
+    ],
+    "observed": [
+      {
+        "op": "sample_type",
+        "values": [
+          "Primary Tumor"
+        ]
+      },
+      {
+        "op": "join",
+        "table": "clinical",
+        "key": "patient_id",
+        "mode": "rows"
+      }
+    ],
+    "safeguard_met": true
+  },
+  {
+    "check": "AI-off calls no provider",
+    "expected": [],
+    "observed": [],
+    "safeguard_met": true
+  },
+  {
+    "observation": "auto routing with mocked providers",
+    "calls": [
+      "own",
+      "hosted"
+    ],
+    "route": "hosted",
+    "actual_network_calls": 0
+  }
+]

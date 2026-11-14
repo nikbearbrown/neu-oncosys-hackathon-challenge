@@ -1,7 +1,7 @@
 {
   "title": "Tripwire / Driftwire",
   "commit": "45df43640836025b40e89fc190f913ad694a6011",
-  "updated": "2026-11-14T20:04:21+00:00",
+  "updated": "2026-11-14T20:11:00+00:00",
   "slides": [
     {
       "title": "Tripwire / Driftwire",
@@ -39,8 +39,8 @@
       "after": "Rounded before comparison",
       "fix": "Keep full-precision calculation fields and format separate display values.",
       "source": "https://github.com/Adhithyan245/tripwire/blob/45df43640836025b40e89fc190f913ad694a6011/tripwire/analyses.py#L98",
-      "notes": "A1 returns means and differences rounded to three decimals before movement is computed. Small changes and near-zero effects can be hidden or disproportionately changed by display precision. This is not evidence that the published practice result is wrong. Acceptance: Probe near-zero values and changes on each side of the tolerance at full precision; ensure changing display precision cannot change the verdict.",
-      "status": "SOURCE FINDING \u00b7 MEDIUM",
+      "notes": "A synthetic increase of 0.0004 in every positive-group measurement left the rounded mean and difference unchanged. a1_compare reported moved=False and 0.0% relative change. The full check API still returned Conditional because its input-level detector caught the change; this is an effect-precision limitation, not a demonstrated overall Ready bypass.",
+      "status": "REPRODUCED \u00b7 SEE SCOPE",
       "kind": "compare"
     },
     {
@@ -59,8 +59,8 @@
       "after": "Optional AI intake exists",
       "fix": "Scope the claim to the deterministic core and explain the optional intake route, transmitted metadata, and opt-in control.",
       "source": "https://github.com/Adhithyan245/tripwire/blob/45df43640836025b40e89fc190f913ad694a6011/README.md#L343",
-      "notes": "The README says there are no AI features or AI-service calls, while the optional intake prototype implements consent-gated OpenAI mapping suggestions. The consent gate is a positive control; its presence makes the blanket claim inaccurate. No network call was made in this review. Acceptance: Documentation and UI agree about which route sends information; a no-consent test verifies no request occurs.",
-      "status": "SOURCE FINDING \u00b7 LOW",
+      "notes": "With consent=False, suggest_mappings raised ValueError before the mocked transport was called. Zero provider calls occurred. This confirms the consent guard; the remaining issue is the README blanket claim.",
+      "status": "REPRODUCED \u00b7 SEE SCOPE",
       "kind": "compare"
     },
     {

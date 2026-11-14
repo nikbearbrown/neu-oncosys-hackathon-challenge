@@ -1,6 +1,6 @@
 # Cohort Studio: independent first-pass review
 
-Reviewed commit: `54aeacb6f6f355a1dcaa42d7abf2ce174315ad69`. Updated: **2026-11-14T20:04:21+00:00**. Track 1: Cohort Firewall.
+Reviewed commit: `54aeacb6f6f355a1dcaa42d7abf2ce174315ad69`. Updated: **2026-11-14T20:11:00+00:00**. Track 1: Cohort Firewall.
 
 **Status: source review plus isolated runtime checks; no verified hosted demo.** No official score is assigned. Runtime observations are labelled per issue; remaining source findings still require reproduction. Exact branches and limitations are stated. No student code or files were changed.
 
@@ -52,7 +52,9 @@ The reproduction script inserts the raw request inside a triple-quoted module do
 
 ### 3. Automatic fixes are enabled by default in the API
 
-**Priority: medium. Evidence: source inspection; runtime reproduction pending.**
+**Priority: medium. Evidence: source and isolated runtime reproduction.**
+
+**Runtime update:** Calling build_cohort with its default fix=True changed a synthetic clinical join from patient_id to sample_id, removed the observed inflation, and retained the original run and an explanatory fix log. Explicit fix=False preserved the requested operation. The correction is documented and useful; the recommendation is to distinguish automatic preview from a human-approved change. [Exact observations](evidence/synthetic-probes-round3.json).
 
 build_cohort defaults fix=True, applies inflation fixes and exports the resulting cohort. The first result and fix log are retained, which is useful. CLI/MCP consumers can nevertheless receive a changed analysis without an explicit per-change acceptance step. This is an authority and communication improvement, not a claim that all inflation fixes are wrong.
 
@@ -78,7 +80,9 @@ write_all writes cohort_samples.csv regardless of the verdict; the verdict is in
 
 ### 5. Automatic drafting can use a hosted service by default
 
-**Priority: medium. Evidence: source inspection; runtime reproduction pending.**
+**Priority: medium. Evidence: source and isolated runtime reproduction.**
+
+**Runtime update:** Mocked own/hosted providers showed that ai=off called neither route; ai=auto tried own configuration and then the hosted route. No network request occurred. This verifies routing behavior and the local-only control; it does not establish what a first-time user understands from the interface. [Exact observations](evidence/synthetic-probes-round3.json).
 
 ai=auto tries an own model, then the hosted service, then rules. The README explains this and --rules provides a local-only route; it is not hidden in documentation. A scientist may still reasonably assume a local CLI will not transmit their typed question.
 
@@ -122,3 +126,7 @@ The maximum points below reproduce the official track weights. They are not poin
 Work through the issues above in order. Use the supplied reproductions for confirmed issues; reproduce the remaining source-only concerns in isolation with positive controls. Retain the recorded commit when comparing results. Changes after this review require a new commit-specific update; they do not retroactively change the evidence.
 
 A statistician should review adequacy thresholds, interval assumptions and claims of bias or representativeness. A domain expert should review clinical meaning. Neither source inspection nor passing software tests establishes clinical validity.
+
+## Companion source audit
+
+A separate reviewer supplied [a detailed source audit](audit-codex-23484638-pass-01.md) and [an issue deck](slides-codex-23484638-pass-01.html) ([Markdown version](slides-codex-23484638-pass-01.md)), committed 2026-11-14T15:08:02-05:00. The companion adds reconstruction after a hash mismatch. It distinguishes a permissive warning policy from strict reproducibility. The main report separately tests request serialization and unknown checksum states; these are different issues. The companion's “not run” statements describe that reviewer's pass, not all testing in this folder. [Cross-review status](../REVIEW-STATUS.md) explains the relationship.

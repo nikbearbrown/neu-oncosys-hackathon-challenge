@@ -14,3 +14,7 @@ First pass: no runtime tests or live-site verification. No official score. Work 
 No submitted test suite identified in the inspected source; none claimed executed. [Detailed tests and independent reproductions](TESTS.md). No official score.
 
 [PDF deck](slides.pdf) — view directly on GitHub. The HTML version includes presenter notes and keyboard navigation.
+
+## Companion source audit
+
+A separate reviewer supplied [a detailed source audit](audit-codex-23484638-pass-01.md) and [an issue deck](slides-codex-23484638-pass-01.html) ([Markdown version](slides-codex-23484638-pass-01.md)), committed 2026-11-14T15:09:22-05:00. The companion is a source review with attributed helper probes. Later main-report evidence adds the full small-matrix engine reproduction, the generated A2-script failure and a synthetic browser smoke test. The companion's “not run” statements describe that reviewer's pass, not all testing in this folder. [Cross-review status](../REVIEW-STATUS.md) explains the relationship.

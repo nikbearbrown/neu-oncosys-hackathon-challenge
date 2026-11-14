@@ -1,6 +1,6 @@
 # SNS Cohort Control Tower: independent first-pass review
 
-Reviewed commit: `c1e8b79a2987cee6087d847867f9895deaa109a4`. Updated: **2026-11-14T19:51:28+00:00**. Track 1: Cohort Firewall.
+Reviewed commit: `c1e8b79a2987cee6087d847867f9895deaa109a4`. Updated: **2026-11-14T20:11:00+00:00**. Track 1: Cohort Firewall.
 
 **Status: source review plus isolated runtime checks; no verified hosted demo.** No official score is assigned. Runtime observations are labelled per issue; remaining source findings still require reproduction. Exact branches and limitations are stated. No student code or files were changed.
 
@@ -54,7 +54,7 @@ If a flagged record is absent from B but found in A, _apply_file_repairs adds it
 
 **Priority: high. Evidence: source and isolated runtime reproduction.**
 
-**Runtime update:** Direct verdict_for calls returned Ready for an undersized group and for an unexplained sign change when affected_by was empty. The same sign change returned Blocked with affected_by=[F1], confirming the branch distinction. This is helper-level evidence, not a full UI run. See [test evidence](TESTS.md).
+**Runtime update:** Full load → diff → assess → build_document execution on four synthetic samples returned Ready even when the reference A1 difference changed from +2 to −8. The protein matrix was omitted by layout recognition, leaving zero affecting findings despite the rerun showing changed output. A 40-sample sign-change control returned Blocked, and an unchanged 40-sample control returned Ready. This extends the earlier helper probe into a full engine reproduction. [Exact observations](evidence/synthetic-probes-round3.json).
 
 verdict_for returns Ready when affected_by is empty before comparing before/after values or sample adequacy. The report says unaffected analyses were rerun to confirm they did not move, but this branch does not enforce that confirmation. A detector miss or undersized unchanged cohort can therefore escape those safeguards at helper level.
 
@@ -68,7 +68,7 @@ verdict_for returns Ready when affected_by is empty before comparing before/afte
 
 **Priority: medium. Evidence: source and isolated runtime reproduction.**
 
-**Runtime update:** Valid invented wide matrices with 1 and 10 samples returned None from load_layer; an otherwise equivalent 11-sample matrix was recognized. This confirms the hard size boundary. See [test evidence](TESTS.md).
+**Runtime update:** The full pipeline recognized only clinical.tsv for the four-sample fixture. It recognized both clinical and protein files for the 40-sample control. Consequently, the small-matrix omission can bypass the finding-dependent verdict path; it is not merely a display issue. [Exact observations](evidence/synthetic-probes-round3.json).
 
 Wide layout recognition requires more than ten TCGA-named columns. A valid wide file with ten or fewer samples falls through to long-layout detection and may return None, after which load_release omits it. Small cohorts are precisely where explicit insufficient-evidence handling matters.
 
@@ -90,6 +90,18 @@ repair_restores_before compares the simulated repaired result with baseline outp
 
 **Acceptance check:** Demonstrate a documented correction in B: the tool should preserve uncertainty about A rather than recommend automatic reversal solely to recover the old number.
 
+### 6. The generated A2 reproduction script fails on JSON booleans
+
+**Priority: high. Evidence: source and isolated runtime reproduction.**
+
+The generator places json.dumps(spec) directly into Python source. The built-in A2 specification contains not_empty=True, which JSON serializes as lowercase true. The generated script parses but fails when executed with NameError: name 'true' is not defined. A1 is a positive control: its generated script executes successfully. Both tests used invented 40-sample data; the generated imports were inspected before execution inside the same restricted sandbox.
+
+**Evidence:** [sns/cohort.py:27](https://github.com/saigunavardhan/sns-cohort-control-tower/blob/c1e8b79a2987cee6087d847867f9895deaa109a4/sns/cohort.py#L27); [runtime observations](evidence/synthetic-probes-round3.json).
+
+**Concrete change:** Serialize Python literals with repr, or embed a safely quoted JSON string and load it with json.loads. Handle booleans and null consistently. Then compare regenerated sample sets and flags against the original export.
+
+**Acceptance check:** Execute the generated scripts for both built-in A1 and A2 and custom specs containing true/false/null equivalents. Syntax parsing alone is insufficient because lowercase true is a valid Python name.
+
 ## Exact official rubric: evidence, not scores
 
 The maximum points below reproduce the official track weights. They are not points awarded. Supplemental dashboard and data-quality rules do not add scoring criteria.
@@ -108,14 +120,14 @@ The maximum points below reproduce the official track weights. They are not poin
 
 No submitted test suite identified in the inspected source; none claimed executed. Independent safeguards: 2 met, 6 unmet. [Commands, limitations and concrete observations](TESTS.md). These counts are not scores.
 
-## Checks actually performed at first pass
+## Initial static pass (historical scope)
 
 - Pinned and read source at `c1e8b79a2987cee6087d847867f9895deaa109a4`; original checkout was clean when inspected.
 - Parsed **19/19** selected Python source files with `ast.parse`; **0** syntax failures. Parsing does not execute or validate behavior.
 - Counted **0** `test_` function definitions in the inspected source set. This is a source count, not collected tests or passed tests.
 - Validated every cited source path and starting line against the pinned commit.
 - Rendered deck QA is recorded separately in `evidence/deck-qa.json` after rendering.
-- No application builds, dependency installs, submitted runtime tests, live deployment checks, real-data evaluation, sealed-envelope runs or model-provider calls in this first pass.
+- The initial pass was static. Later full engine and generated-script executions are recorded in TESTS.md. No hosted deployment or sealed-envelope result was verified.
 
 [Machine-readable static checks](evidence/static-checks.json). No raw TCGA records, answer keys or credentials are included.
 
@@ -124,3 +136,13 @@ No submitted test suite identified in the inspected source; none claimed execute
 Work through the issues above in order. Reproduce them in an isolated copy with invented inputs, including positive controls. Retain the recorded commit when comparing results. Changes after this review require a new commit-specific update; they do not retroactively change the evidence.
 
 A statistician should review adequacy thresholds, interval assumptions and claims of bias or representativeness. A domain expert should review clinical meaning. Neither source inspection nor passing software tests establishes clinical validity.
+
+Latest unchanged-public-input control: verified frozen Release A versus itself returned Ready and zero findings. [Scope and aggregate evidence](TESTS.md#frozen-public-baseline-control). This does not invalidate the synthetic missing-input or small-matrix findings.
+
+## Observed interface workflow
+
+The localhost browser smoke test passed 10 of 11 checks with invented records: saved-release selection, full analysis, evidence display, A1/A2 cohort export and theme switching worked. No browser execution errors occurred. A 390-pixel viewport had horizontal overflow with fallback fonts; review responsive panels and long values before claiming mobile accessibility. [Exact checks and screenshots](TESTS.md#browser-smoke-test-with-invented-data). This is not a hosted-deployment or screen-reader verification.
+
+## Companion source audit
+
+A separate reviewer supplied [a detailed source audit](audit-codex-23484638-pass-01.md) and [an issue deck](slides-codex-23484638-pass-01.html) ([Markdown version](slides-codex-23484638-pass-01.md)), committed 2026-11-14T15:09:22-05:00. The companion is a source review with attributed helper probes. Later main-report evidence adds the full small-matrix engine reproduction, the generated A2-script failure and a synthetic browser smoke test. The companion's “not run” statements describe that reviewer's pass, not all testing in this folder. [Cross-review status](../REVIEW-STATUS.md) explains the relationship.

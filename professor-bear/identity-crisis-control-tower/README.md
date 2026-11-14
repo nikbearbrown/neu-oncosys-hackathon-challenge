@@ -14,3 +14,7 @@ The initial pass was static; current runtime evidence is linked below. No hosted
 96 passed, 3 skipped, 0 failed, 0 errors. [Detailed tests and independent reproductions](TESTS.md). No official score.
 
 [PDF deck](slides.pdf) — view directly on GitHub. The HTML version includes presenter notes and keyboard navigation.
+
+## Companion source audit
+
+A separate reviewer supplied [a detailed source audit](audit-codex-23484638-pass-01.md) and [an issue deck](slides-codex-23484638-pass-01.html) ([Markdown version](slides-codex-23484638-pass-01.md)), committed 2026-11-14T15:04:09-05:00. The companion source findings and later runtime probes agree. Current suite counts are 96 passed and three skipped; development bypass is non-default and the default unknown-check path fails closed. The companion's “not run” statements describe that reviewer's pass, not all testing in this folder. [Cross-review status](../REVIEW-STATUS.md) explains the relationship.

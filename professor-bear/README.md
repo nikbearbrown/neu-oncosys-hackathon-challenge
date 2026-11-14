@@ -11,8 +11,23 @@ Read each detailed report and issue-by-issue deck together. Work through the iss
 | Cohort Studio | [Report](oncosys-cohort-studio/REPORT.md) | [PDF](oncosys-cohort-studio/slides.pdf) | [HTML](oncosys-cohort-studio/slides.html) | [Tests](oncosys-cohort-studio/TESTS.md) |
 | SNS Control Tower | [Report](sns-cohort-control-tower/REPORT.md) | [PDF](sns-cohort-control-tower/slides.pdf) | [HTML](sns-cohort-control-tower/slides.html) | [Tests](sns-cohort-control-tower/TESTS.md) |
 
-Updated 2026-11-14T20:04:21+00:00. Download HTML decks to open them locally; GitHub renders the PDFs directly. Each deck presents one issue at a time. No official numerical scores are assigned.
+Updated 2026-11-14T20:11:00+00:00. Download HTML decks to open them locally; GitHub renders the PDFs directly. Each deck presents one issue at a time. No official numerical scores are assigned.
 
 Submitted-suite results: ReadySet **107 passed**; Tripwire **404 passed / 1 skipped**; Identity Crisis **96 passed / 3 skipped**; Busy Beavers **65 passed**; Cohort Studio **299 passed**. No submitted SNS test suite was found; its independent synthetic checks are documented. These suites cover different assertions and are not a ranking.
 
 The latest three public-data runs used [six checksum-verified frozen files](review-tools/PUBLIC-RELEASE.md). No sealed judging inputs were opened. The tests do not establish clinical validity, unseen-input performance, production security or full accessibility. Each TESTS.md records the independent reproductions and remaining limits.
+
+Latest additions: SNS small-matrix behavior reproduced through the full engine; A2 generated-script NameError reproduced with an A1 passing control; Cohort Studio automatic fixes and local-only routing checked; Tripwire rounding and consent controls checked. All six now have at least a public-release test or unchanged-input control, with the distinct scope documented.
+
+## Companion source audits
+
+These independently authored supplements are preserved alongside the main runtime reviews. Their source-only scope is explicit; later execution results live in each TESTS.md. [Read the cross-review status](REVIEW-STATUS.md) before interpreting differences.
+
+| Submission | Commit timestamp | Source audit | Companion deck |
+|---|---|---|---|
+| busy-beavers | 2026-11-14T14:59:17-05:00 | [Audit](busy-beavers/audit-codex-23484638-pass-01.md) | [HTML deck](busy-beavers/slides-codex-23484638-pass-01.html) · [Markdown](busy-beavers/slides-codex-23484638-pass-01.md) |
+| identity-crisis-control-tower | 2026-11-14T15:04:09-05:00 | [Audit](identity-crisis-control-tower/audit-codex-23484638-pass-01.md) | [HTML deck](identity-crisis-control-tower/slides-codex-23484638-pass-01.html) · [Markdown](identity-crisis-control-tower/slides-codex-23484638-pass-01.md) |
+| oncosys-cohort-studio | 2026-11-14T15:08:02-05:00 | [Audit](oncosys-cohort-studio/audit-codex-23484638-pass-01.md) | [HTML deck](oncosys-cohort-studio/slides-codex-23484638-pass-01.html) · [Markdown](oncosys-cohort-studio/slides-codex-23484638-pass-01.md) |
+| readyset-control-tower | 2026-11-14T14:53:45-05:00 | [Audit](readyset-control-tower/audit-codex-23484638-pass-01.md) | [HTML deck](readyset-control-tower/slides-codex-23484638-pass-01.html) · [Markdown](readyset-control-tower/slides-codex-23484638-pass-01.md) |
+| sns-cohort-control-tower | 2026-11-14T15:09:22-05:00 | [Audit](sns-cohort-control-tower/audit-codex-23484638-pass-01.md) | [HTML deck](sns-cohort-control-tower/slides-codex-23484638-pass-01.html) · [Markdown](sns-cohort-control-tower/slides-codex-23484638-pass-01.md) |
+| tripwire | 2026-11-14T15:03:44-05:00 | [Audit](tripwire/audit-codex-23484638-pass-01.md) | [HTML deck](tripwire/slides-codex-23484638-pass-01.html) · [Markdown](tripwire/slides-codex-23484638-pass-01.md) |

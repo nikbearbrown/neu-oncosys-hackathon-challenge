@@ -41,3 +41,17 @@ The following are targeted recommendations and controls, not additional official
 | Original file preserved | true | true | Yes |
 
 For Tripwire, release compatibility and question adequacy are distinct outputs. For Identity Crisis, the bypass is explicitly non-default. For export checks, a diagnostic export can be legitimate when its restrictions remain clear. See REPORT.md for these interpretation limits.
+
+## Third independent round
+
+[Exact observations](evidence/synthetic-probes-round3.json) · [Inspected reproduction script](../review-tools/synthetic-probes-round3.py). Provider transports were mocked; no model API was called. SNS generated scripts used invented fixtures, inspected imports and the same sandbox.
+
+| Check | Proposed safeguard met? |
+|---|---|
+| Context omits sample identifiers by default | No |
+| Known-id check rejects invented citation | Yes |
+| Known-id check accepts existing citation | Yes |
+
+## Frozen public baseline control
+
+The verified public Release A compared with itself returned Ready and zero findings. [Aggregate result](evidence/public-baseline.json) · [reproduction](../review-tools/public-baseline.py) · [input hashes](../review-tools/PUBLIC-RELEASE.md). ReadySet and Busy Beavers used their identical-file shortcut (analyses not rerun); SNS reran its reference analyses. This is an unchanged-input control, not an independent clinical-data audit or a sealed-input test. No record-level output is published.

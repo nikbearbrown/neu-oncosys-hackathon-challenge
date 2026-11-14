@@ -1,0 +1,26 @@
+[
+  {
+    "observation": "model context construction",
+    "synthetic_id_present": true,
+    "synthetic_note_present": true,
+    "actual_network_calls": 0
+  },
+  {
+    "check": "Context omits sample identifiers by default",
+    "expected": false,
+    "observed": true,
+    "safeguard_met": false
+  },
+  {
+    "check": "Known-id check rejects invented citation",
+    "expected": true,
+    "observed": true,
+    "safeguard_met": true
+  },
+  {
+    "check": "Known-id check accepts existing citation",
+    "expected": null,
+    "observed": null,
+    "safeguard_met": true
+  }
+]

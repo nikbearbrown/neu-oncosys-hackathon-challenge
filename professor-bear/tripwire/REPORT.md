@@ -1,6 +1,6 @@
 # Tripwire / Driftwire: independent first-pass review
 
-Reviewed commit: `45df43640836025b40e89fc190f913ad694a6011`. Updated: **2026-11-14T20:04:21+00:00**. Track 1: Cohort Firewall.
+Reviewed commit: `45df43640836025b40e89fc190f913ad694a6011`. Updated: **2026-11-14T20:11:00+00:00**. Track 1: Cohort Firewall.
 
 **Status: source review plus isolated runtime checks; no verified hosted demo.** No official score is assigned. Runtime observations are labelled per issue; remaining source findings still require reproduction. Exact branches and limitations are stated. No student code or files were changed.
 
@@ -52,7 +52,9 @@ review_status defines open findings using all(...) over associated repairs. For 
 
 ### 3. Analysis rounding precedes effect classification
 
-**Priority: medium. Evidence: source inspection; runtime reproduction pending.**
+**Priority: medium. Evidence: source and isolated runtime reproduction.**
+
+**Runtime update:** A synthetic increase of 0.0004 in every positive-group measurement left the rounded mean and difference unchanged. a1_compare reported moved=False and 0.0% relative change. The full check API still returned Conditional because its input-level detector caught the change; this is an effect-precision limitation, not a demonstrated overall Ready bypass. [Exact observations](evidence/synthetic-probes-round3.json).
 
 A1 returns means and differences rounded to three decimals before movement is computed. Small changes and near-zero effects can be hidden or disproportionately changed by display precision. This is not evidence that the published practice result is wrong.
 
@@ -78,7 +80,9 @@ apply_decisions creates a new decisions list from the supplied mapping and repla
 
 ### 5. The no-AI statement is broader than the repository
 
-**Priority: low. Evidence: source inspection; runtime reproduction pending.**
+**Priority: low. Evidence: source and isolated runtime reproduction.**
+
+**Runtime update:** With consent=False, suggest_mappings raised ValueError before the mocked transport was called. Zero provider calls occurred. This confirms the consent guard; the remaining issue is the README blanket claim. [Exact observations](evidence/synthetic-probes-round3.json).
 
 The README says there are no AI features or AI-service calls, while the optional intake prototype implements consent-gated OpenAI mapping suggestions. The consent gate is a positive control; its presence makes the blanket claim inaccurate. No network call was made in this review.
 
@@ -126,3 +130,7 @@ The maximum points below reproduce the official track weights. They are not poin
 Work through the issues above in order. Use the supplied reproductions for confirmed issues; reproduce the remaining source-only concerns in isolation with positive controls. Retain the recorded commit when comparing results. Changes after this review require a new commit-specific update; they do not retroactively change the evidence.
 
 A statistician should review adequacy thresholds, interval assumptions and claims of bias or representativeness. A domain expert should review clinical meaning. Neither source inspection nor passing software tests establishes clinical validity.
+
+## Companion source audit
+
+A separate reviewer supplied [a detailed source audit](audit-codex-23484638-pass-01.md) and [an issue deck](slides-codex-23484638-pass-01.html) ([Markdown version](slides-codex-23484638-pass-01.md)), committed 2026-11-14T15:03:44-05:00. The companion predates the corrected four-sample full API case. The latest runtime evidence confirms Ready release compatibility alongside Insufficient Evidence question adequacy; it does not claim that the separate question checker ignores size. The companion's “not run” statements describe that reviewer's pass, not all testing in this folder. [Cross-review status](../REVIEW-STATUS.md) explains the relationship.

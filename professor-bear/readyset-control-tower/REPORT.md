@@ -15,7 +15,7 @@ This review uses source evidence plus execution of a pinned disposable copy. The
 
 Tests ran on macOS 26.5.1 ARM64, Python 3.14.6, Node 25.9.0 and headless Chrome 157.0.8103.51. A macOS sandbox denied private user-file contents, external networking and writes outside the temporary review folder. Credentials were absent. Loopback was allowed for server tests, with the usual local model port blocked. Browser checks used a fresh unsigned-in profile and blocked non-loopback page requests. Dependency installation used the lockfile, disabled lifecycle scripts, and empty npm config files. Build execution then ran without external networking.
 
-No organizer sealed envelope was opened. Two submitted envelope tests use synthetic fake unsealing scripts in temporary folders; those passed. The 15 recipe files under tests/releases require event data and a separate scoring workflow and were not executed. No real dataset fetcher, real-data performance test, live deployment, external model service, clinical evaluation or full accessibility audit was run. Screenshots and reproduced values here use invented samples.
+No organizer sealed envelope was opened. Two submitted envelope tests use synthetic fake unsealing scripts in temporary folders; those passed. The 15 recipe files under tests/releases require event data and a separate scoring workflow and were not executed. The initial run did not fetch real data. The later verified public A-versus-A control is documented below; no altered-real-data performance test, live deployment, external model service, clinical evaluation or full accessibility audit was run. Screenshots and reproduced values here use invented samples.
 
 ## What works well
 
@@ -120,7 +120,7 @@ Weights below are the official maxima, not awarded points. No numerical score is
 | Reasoning for the research question | 20 | A1/A2 selection changes verdict in observed browser test | Null-result availability and task-specific adequacy; severity helper limitations |
 | Evidence and sources | 15 | Hashes, witnesses, limitations and affected/unaffected analyses | Explicit physical filename selection; baseline receipt; preserved review events |
 | Safety and uncertainty | 15 | Clinical refusal tests, named UI review, visible limitations | Backend blank identity; Ready on absent evidence; broader interpretation of baseline fitness |
-| Working tool and clear setup | 15 | 107 tests, build and browser smoke checks pass locally | Real event-data run, unseen exercise and other operating systems remain unverified |
+| Working tool and clear setup | 15 | 107 tests, build and browser smoke checks pass locally | Verified public A-versus-A control now exists; unseen exercise and other operating systems remain unverified |
 | Useful next steps | 10 | Concrete suggested repairs and priority explanations visible | Availability-specific remediation, traceable actor/event records, threshold justification |
 | Communication | 5 | Plain-language synthetic walkthrough, source-linked evidence | Separate change compatibility, baseline quality and statistical adequacy clearly |
 
@@ -135,3 +135,9 @@ Weights below are the official maxima, not awarded points. No numerical score is
 Ask the team to show an empty comparison, a missing target measurement, conflicting file variants and a direct blank-name request. Then ask them to explain what Ready guarantees and show a historical decision after it has been changed. These are review suggestions, not additional official scoring rules.
 
 This is a promising working comparison prototype with concrete, fixable gaps. It is suitable for evidence-based judging with those limits visible. Data fitness, clinical suitability, accessibility conformance and production readiness have not been established by this review.
+
+Latest unchanged-public-input control: verified frozen Release A versus itself returned Ready and zero findings. [Scope and aggregate evidence](TESTS.md#frozen-public-baseline-control). This does not invalidate the synthetic missing-input or small-matrix findings.
+
+## Companion source audit
+
+A separate reviewer supplied [a detailed source audit](audit-codex-23484638-pass-01.md) and [an issue deck](slides-codex-23484638-pass-01.html) ([Markdown version](slides-codex-23484638-pass-01.md)), committed 2026-11-14T14:53:45-05:00. The companion is a source audit. The main report adds 107 submitted tests, synthetic regressions, a production build and browser checks, plus the later public unchanged-input control. The companion's “not run” statements describe that reviewer's pass, not all testing in this folder. [Cross-review status](../REVIEW-STATUS.md) explains the relationship.

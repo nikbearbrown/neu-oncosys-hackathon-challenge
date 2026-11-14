@@ -1,0 +1,17 @@
+{
+  "source": "readyset-control-tower",
+  "input": "verified frozen public A compared with itself",
+  "uses_sealed_input": false,
+  "verdict": "Ready",
+  "finding_count": 0,
+  "analyses": [
+    {
+      "id": "A1",
+      "status": "not_rerun"
+    },
+    {
+      "id": "A2",
+      "status": "not_rerun"
+    }
+  ]
+}
