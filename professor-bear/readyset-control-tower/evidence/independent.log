@@ -1,0 +1,15 @@
+FAIL empty-folders {"verdict": "Ready", "findings": 0, "analyses": [{"id": "A1", "status": "not_rerun"}, {"id": "A2", "status": "not_rerun"}]}
+FAIL missing-required-both {"verdict": "Ready", "findings": 0, "analyses": [{"id": "A1", "status": "not_rerun"}, {"id": "A2", "status": "not_rerun"}]}
+FAIL identical-zero-byte {"verdict": "Ready", "findings": 0, "analyses": [{"id": "A1", "status": "not_rerun"}, {"id": "A2", "status": "not_rerun"}]}
+FAIL identical-invalid-bytes {"verdict": "Ready", "findings": 0, "analyses": [{"id": "A1", "status": "not_rerun"}, {"id": "A2", "status": "not_rerun"}]}
+FAIL preexisting-duplicate {"verdict": "Ready", "findings": 0, "analyses": [{"id": "A1", "status": "not_rerun"}, {"id": "A2", "status": "not_rerun"}]}
+FAIL blank-measurement {"verdict": "Conditional", "findings": 1, "analyses": [{"id": "A1", "after": {"n_samples": 5, "n_positive": 3, "n_negative": 2, "mean_positive": null, "mean_negative": null, "difference": null}, "status": "changed"}, {"id": "A2", "status": "not_rerun"}]}
+FAIL zero-baseline {"size_measure_fraction": ["large", "difference", 1.0]}
+FAIL sample-count-collapse {"size_measure_fraction": ["small", "n_samples", 0.999]}
+FAIL rounding-before-comparison {"true_positive_mean_change": 0.0004, "display_before": 2.0, "display_after": 2.0, "size": ["none", null, 0.0]}
+FAIL mtime-choice {"first_choice": "protein_rppa.tsv", "first_verdict": "Ready", "second_choice": "protein_rppa.tsv.gz", "second_verdict": "Conditional", "file_contents_changed_between_runs": false}
+FAIL anonymous-review {"http_status": 200, "stored_reviewer": "", "needs_human_review": false}
+FAIL review-history {"records_after_replacement": 1, "records_after_clear": 0}
+PASS cloud-routing-observation {"typed_text_present": true, "findings_attached": false, "external_network_used": false}
+PASS positive-swap {"verdict": "Conditional", "kinds": ["sample_swap"], "affected": [["A1"]]}
+SUMMARY 14 checks; 2 pass; 12 fail

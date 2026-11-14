@@ -1,0 +1,37 @@
+[
+  {
+    "case": "blank-measurement",
+    "schema_valid": true,
+    "errors": []
+  },
+  {
+    "case": "empty-folders",
+    "schema_valid": true,
+    "errors": []
+  },
+  {
+    "case": "identical-invalid-bytes",
+    "schema_valid": true,
+    "errors": []
+  },
+  {
+    "case": "identical-zero-byte",
+    "schema_valid": true,
+    "errors": []
+  },
+  {
+    "case": "missing-required-both",
+    "schema_valid": true,
+    "errors": []
+  },
+  {
+    "case": "positive-swap",
+    "schema_valid": true,
+    "errors": []
+  },
+  {
+    "case": "preexisting-duplicate",
+    "schema_valid": true,
+    "errors": []
+  }
+]

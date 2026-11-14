@@ -12,6 +12,8 @@ from keywords or pretend that source inspection proves a working demo.
 
 ## Start here
 
+- [Professor Bear: published submission reviews and issue-by-issue decks](professor-bear/README.md).
+
 - [Actual challenge repository and product checks](docs/oncosys-challenge.md).
 - [Tutorial](docs/tutorial.md): inspect one repository or an entire submission list.
 - [Review method](docs/review-method.md): evidence, priorities, scoring and limitations.
@@ -41,8 +43,9 @@ never in a student record.
 
 The upstream challenge is linked at a pinned commit in [upstream/challenge.json](upstream/challenge.json). It is reference material, not a team submission.
 
-No actual final submission list has been supplied. The example manifest is
-empty deliberately. No team has been reviewed or scored by this repository.
+Named submissions are being reviewed one at a time in [Professor Bear](professor-bear/README.md).
+The example batch manifest remains empty; it is not an official finals roster.
+Published reviews do not assign official scores.
 To review finals, provide each GitHub owner/repository, final commit SHA and
 track (1 or 2). Default collection limits and exclusions are recorded in every
 packet. Large repositories may need a focused follow-up inspection.
@@ -58,8 +61,8 @@ redaction. The two rulebooks are supplemental review lenses, not extra scoring
 weights. The original medical rulebook includes research/clinical examples
 that must not be executed as hackathon instructions; see the caveats.
 
-The repository starts private. Generated submissions, reports and review
-packets are ignored by Git. Review their contents before sharing: automatic
+This repository is public at the owner’s request. Generated submissions, reports
+and review packets are ignored by Git unless explicitly curated for publication. Review their contents before sharing: automatic
 secret masking is a limited safeguard, not a privacy certification.
 
 There is no blanket license on supplied third-party material. See

@@ -1,0 +1,37 @@
+import json
+from pathlib import Path
+from playwright.sync_api import sync_playwright
+w=Path('/tmp/readyset-review-e9dm0ymh');base='http://127.0.0.1:'+(w/'browser-port.txt').read_text().strip();checks=[]
+def check(name,ok,detail=''):checks.append({'check':name,'passed':bool(ok),'detail':detail})
+with sync_playwright() as p:
+ browser=p.chromium.launch(channel='chrome',headless=True);ctx=browser.new_context(viewport={'width':1440,'height':1000},reduced_motion='reduce')
+ ctx.route('**/*',lambda r:r.continue_() if r.request.url.startswith(base+'/') else r.abort())
+ page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)));page.goto(base,wait_until='networkidle')
+ check('synthetic-swap-visible','Verdict: Conditional' in page.locator('body').inner_text())
+ page.screenshot(path=str(w/'logs/ui-synthetic-swap.png'))
+ check('name-required-in-ui',page.get_by_role('button',name='This is a real problem',exact=True).is_disabled())
+ page.get_by_role('switch',name='Leave out ER-alpha protein by clinical ER status',exact=True).click()
+ page.get_by_text('Verdict: Ready',exact=True).wait_for()
+ check('question-changes-verdict',True,'Only A2 selected: Ready; unrelated swap remains visible')
+ page.get_by_role('switch',name='Include ER-alpha protein by clinical ER status',exact=True).click()
+ page.get_by_text('Verdict: Conditional',exact=True).wait_for()
+ check('question-toggle-reversible',True)
+ page.get_by_role('button',name='Ask about this release',exact=True).click()
+ # Use an actual visible preset button, avoiding any cloud model.
+ chips=page.locator('.ask-chip');labels=chips.all_text_contents();chips.first.click()
+ page.locator('.ask-a').first.wait_for()
+ check('assistant-answer-from-findings','Not yet' in page.locator('.ask-a').first.inner_text(),labels[0])
+ page.get_by_role('button',name='Close',exact=True).click()
+ page.locator('#review-name').fill('Synthetic Reviewer');page.locator('#review-role').fill('Research engineer')
+ page.get_by_role('button',name='This is a real problem',exact=True).click()
+ page.get_by_text('1 of 1 decided',exact=True).wait_for()
+ check('ui-review-persists',True)
+ page.reload(wait_until='networkidle');check('review-survives-reload','1 of 1 decided' in page.locator('body').inner_text())
+ page.keyboard.press('Tab');focus=page.evaluate('document.activeElement.tagName')
+ check('keyboard-can-focus-control',focus in ['A','BUTTON','INPUT','SUMMARY'],focus)
+ page.set_viewport_size({'width':390,'height':844});page.screenshot(path=str(w/'logs/ui-mobile.png'))
+ sizes=page.evaluate('({scroll:document.documentElement.scrollWidth, viewport:innerWidth})')
+ check('mobile-no-page-horizontal-overflow',sizes['scroll']<=sizes['viewport'],str(sizes))
+ check('no-browser-script-errors',not errors,str(errors))
+ (w/'logs/browser-checks.json').write_text(json.dumps({'browser':browser.version,'data':'synthetic only','checks':checks,'passed':sum(x['passed'] for x in checks),'failed':sum(not x['passed'] for x in checks),'limits':'Smoke checks, not full accessibility or usability conformance'},indent=2)+'\n')
+ print(json.dumps(checks,indent=2));browser.close()
