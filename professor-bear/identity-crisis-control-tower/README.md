@@ -29,3 +29,5 @@ The earlier nondefault-bypass wording describes the callable API. The browser in
 The [declaration-coverage note](coverage-note-codex-23484638.md) finds matching source declarations for every required check in eight built-in cards. That bounds the missing-check concern without proving runtime availability. Preserve the strict API control and test a fresh UI session separately.
 
 Latest concise follow-through: [PDF](slides-codex-23484638-pass-04.pdf) · [HTML](slides-codex-23484638-pass-04.html) · [full notes](slides-codex-23484638-pass-04.md). This companion preserves its stated source-review scope; current runtime evidence is in [TESTS.md](TESTS.md).
+
+[Source/runtime reconciliation (21:04 UTC)](runtime-reconciliation-codex-23484638.md) preserves the distinction between the browser controls and the approved-review AppTest path.

@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-14T20:52:42.379656+00:00",
+  "timestamp": "2026-11-14T21:08:32.984684+00:00",
   "commit": "380760dc3b7b61097756f2b85c0f462feadc802c",
   "browser": "157.0.8103.51",
   "checks": [
@@ -51,7 +51,7 @@
   "observations": {
     "permissive_initial": true,
     "signed_decision": "Request more evidence",
-    "signed_input_digest": "748cbfc1bed6b94eddf6a17864220729b55c937a84ad10494fba0b82fd0da8c5",
+    "signed_input_digest": "03af7887cf49a8826c932c3b64eac565778f8ce6f31f1ce28527828f47e677fe",
     "revised_context_visible": true,
     "signoff_after_card_context_change_still_visible": false,
     "before_mutation_count": "114",

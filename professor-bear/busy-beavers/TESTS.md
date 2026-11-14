@@ -67,3 +67,7 @@ The verified public Release A compared with itself returned Ready and zero findi
 [Exact checks and observations](evidence/browser-qa.json) · [desktop viewport](evidence/results-synthetic.png) · [review state](evidence/next-steps-synthetic.png) · [mobile viewport](evidence/mobile-synthetic.png) · [browser script](../review-tools/busy-browser-qa.py) · [synthetic server setup](../review-tools/busy-browser-server.py).
 
 No page script errors or document-level horizontal overflow were observed at 390 px. The mobile navigation occupies substantial vertical space; that remains a usability consideration. Screenshots are viewport observations, not a full responsive/accessibility audit. No hosted service or model provider was called. A first screenshot/check was refined to verify the expanded evidence panel itself; counts describe the final run, not retries. Streamlit's extracted-package development-mode heuristic required an explicit false setting in the test command; this was environment setup, not an application failure. Both temporary servers were stopped after testing.
+
+### Theme-faithful browser rerun
+
+On 2026-11-14T21:09:27+00:00, restored the original tracked `.streamlit/config.toml` in the disposable copy and reran the complete recorded browser workflow. Counts and behavioral findings were unchanged; the linked screenshots and browser JSON now show that rerun. This corrects the initial harness omission of the theme file, not a submission change. No style-related failure was inferred from the earlier configuration.
