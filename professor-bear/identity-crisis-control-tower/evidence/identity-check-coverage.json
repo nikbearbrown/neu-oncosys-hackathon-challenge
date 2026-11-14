@@ -1,0 +1,101 @@
+{
+  "timestamp": "2026-11-14T20:55:02.427946+00:00",
+  "registered_checks": [
+    "a2_robustness",
+    "endpoint_suitability",
+    "her2_field_conflict",
+    "inputs_present",
+    "label_derivation",
+    "leakage_columns",
+    "missing_values",
+    "outcome_available",
+    "patient_double_count",
+    "site_shift",
+    "subtype_columns_disagree",
+    "subtype_missing",
+    "survival_redacted",
+    "survival_zero_time"
+  ],
+  "load_errors": {},
+  "cards": [
+    {
+      "id": "er-alpha-by-er",
+      "required": [
+        "inputs_present",
+        "missing_values",
+        "site_shift"
+      ],
+      "missing_registered": []
+    },
+    {
+      "id": "esr1-expression-vs-er",
+      "required": [
+        "inputs_present",
+        "missing_values"
+      ],
+      "missing_registered": []
+    },
+    {
+      "id": "her2-positive-protein",
+      "required": [
+        "inputs_present",
+        "her2_field_conflict",
+        "missing_values",
+        "site_shift"
+      ],
+      "missing_registered": []
+    },
+    {
+      "id": "hormone-therapy-response",
+      "required": [
+        "inputs_present",
+        "outcome_available"
+      ],
+      "missing_registered": []
+    },
+    {
+      "id": "os-luminal-a",
+      "required": [
+        "inputs_present",
+        "endpoint_suitability",
+        "survival_redacted",
+        "survival_zero_time",
+        "patient_double_count",
+        "subtype_columns_disagree"
+      ],
+      "missing_registered": []
+    },
+    {
+      "id": "pfi-luminal-a",
+      "required": [
+        "inputs_present",
+        "endpoint_suitability",
+        "survival_redacted",
+        "survival_zero_time",
+        "patient_double_count",
+        "subtype_columns_disagree"
+      ],
+      "missing_registered": []
+    },
+    {
+      "id": "subtype-classifier-rna",
+      "required": [
+        "inputs_present",
+        "label_derivation",
+        "leakage_columns"
+      ],
+      "missing_registered": []
+    },
+    {
+      "id": "subtype-mix",
+      "required": [
+        "inputs_present",
+        "subtype_columns_disagree",
+        "subtype_missing",
+        "a2_robustness"
+      ],
+      "missing_registered": []
+    }
+  ],
+  "scope": "Actual module imports in isolated Python3.14.6 test environment; availability is not correctness of each check."
+}

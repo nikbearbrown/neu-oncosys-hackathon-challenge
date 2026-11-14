@@ -21,3 +21,5 @@ The [third probe round](synthetic-probes-round3.py) adds full SNS engine cases, 
 [Sampling-unit audit](independence-audit.py) reports aggregate A1 sample/patient-prefix counts and an invented repeated-specimen control. It publishes no participant identifiers and qualifies a conditional statistical limitation.
 
 [Busy Beavers browser checks](busy-browser-qa.py) and [synthetic server setup](busy-browser-server.py) reproduce an invented sample swap through the actual local interface. They require the documented isolated environment and are not general safe executors.
+
+Identity Crisis follow-through: [browser checks](identity-browser-qa.py), [fixture setup](identity-browser-setup.py), [deterministic state probe](identity-state-probe.py), and [runtime registration control](identity-check-coverage.py). These require the same isolated environment and do not open sealed inputs.

@@ -1,6 +1,6 @@
 # Tests and evidence: identity-crisis-control-tower
 
-Updated 2026-11-14T19:51:28+00:00. The fixed source commit remains the one in [REPORT.md](REPORT.md).
+Updated 2026-11-14T20:56:16+00:00. The fixed source commit remains the one in [REPORT.md](REPORT.md).
 
 ## Submitted tests
 
@@ -48,3 +48,13 @@ For Tripwire, release compatibility and question adequacy are distinct outputs. 
 [Aggregate-only audit](evidence/independence-audit.json) · [Probe source](../review-tools/independence-audit.py). The checksum-verified public A1 selection contained 698 eligible samples and 698 distinct 12-character patient barcode prefixes; none had multiple eligible samples. All 698 values were measured (529 positive and 169 negative). This is an identifier-based check, not external verification of identity. It does not identify the repeated-patient problem in this actual cohort.
 
 A separate invented six-patient-per-group fixture repeated each value into ten specimens. The unchanged submitted resampling function produced a narrower interval (width 1.25 instead of 4.00) despite no additional independent patients. This supports documenting its sampling-unit assumption for future inputs; it is not an extra official failure or evidence of an invalid current interval. No raw patient record or identifier was published.
+
+## Browser workflow and evidence identity
+
+**11 final browser checks: 9 met, 2 did not meet the proposed safeguard.** Actual local Chromium/Streamlit, invented 120-primary-tumor plus four-normal fixtures, no external model calls. The fresh browser starts permissive for unavailable checks; a same-path removal left 114 displayed until a cache-argument change revealed 113. Reviewer identity, repair rejection reasons, schema validation and exports worked in the tested workflow. [Exact results](evidence/browser-qa.json) · [overview](evidence/overview-synthetic.png) · [review controls](evidence/signed-synthetic.png) · [browser script](../review-tools/identity-browser-qa.py) · [fixture setup](../review-tools/identity-browser-setup.py).
+
+The browser route with Request more evidence and page navigation withdrew the receipt after a question-context change. A separate deterministic AppTest approved-review route did not: revised intended use was rendered while the old signed context/digest remained current, without warnings. [State trace](evidence/identity-state-probe.json) · [runner](../review-tools/identity-state-probe.py). These paths are reported separately; they do not support a claim that all context changes either always withdraw or always retain sign-off. The unchanged live signature explains the failing path.
+
+An availability control imported all **14 check registrations**, with **zero load errors** and **zero missing required registrations across eight built-in cards**. [Runtime coverage](evidence/identity-check-coverage.json) · [runner](../review-tools/identity-check-coverage.py). Availability is not proof that every check is correct. The browser-default concern applies to a future/custom/unavailable required check, not a demonstrated omission in these built-ins.
+
+Harness corrections used the actual switch role, keyboard activation and observed navigation links; only the completed run is counted. The first AppTest attempt used an inaccessible working directory and did not reach the app; the corrected command ran in the disposable copy. Question text and fixture bytes were restored in finally blocks. A stub refuses envelope access; no sealed input exists in this test copy. The actual organizer validator and reference-analysis source were supplied. No student source changes, hosted tests, clinical validation or full accessibility audit.

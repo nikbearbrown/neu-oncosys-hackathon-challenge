@@ -1,7 +1,7 @@
 {
   "title": "Identity Crisis Control Tower",
   "commit": "380760dc3b7b61097756f2b85c0f462feadc802c",
-  "updated": "2026-11-14T20:35:36+00:00",
+  "updated": "2026-11-14T20:56:16+00:00",
   "slides": [
     {
       "title": "Identity Crisis Control Tower",
@@ -24,12 +24,12 @@
       "kind": "compare"
     },
     {
-      "title": "2 \u00b7 Development bypass can allow Ready with pending required checks",
-      "before": "Required check pending",
-      "after": "Excluded from verdict",
-      "fix": "Keep the bypass useful for development but force an incomplete/development status and prohibit approval while required checks remain pending.",
-      "source": "https://github.com/AravindKumar2504/identity-crisis-control-tower/blob/380760dc3b7b61097756f2b85c0f462feadc802c/tower/checks/__init__.py#L79",
-      "notes": "With a synthetic unknown required check, default assess returned Insufficient Evidence. Setting the explicit development-only allow_missing=True option returned Ready. The test card omitted analyses to isolate this check. The default path therefore fails closed; the recommendation concerns labelling and approval of development output.",
+      "title": "2 \u00b7 Browser starts permissive for unavailable checks",
+      "before": "API default: strict",
+      "after": "Browser default: permissive",
+      "fix": "Default to strict; distinguish incomplete runs from ordinary readiness.",
+      "source": "https://github.com/AravindKumar2504/identity-crisis-control-tower/blob/380760dc3b7b61097756f2b85c0f462feadc802c/app.py#L495",
+      "notes": "Fresh browser option was on. All 14 registrations loaded and all eight built-in cards had their checks; this risk is conditional on a required check being unavailable. Earlier API synthetic unknown-check probe remains valid.",
       "status": "REPRODUCED \u00b7 SEE SCOPE",
       "kind": "compare"
     },
@@ -64,12 +64,32 @@
       "kind": "compare"
     },
     {
+      "title": "6 \u00b7 Same-path input changes can leave cached results stale",
+      "before": "114 samples displayed",
+      "after": "113 after cache invalidation",
+      "fix": "Bind analysis caches to input content or immutable release versions.",
+      "source": "https://github.com/AravindKumar2504/identity-crisis-control-tower/blob/380760dc3b7b61097756f2b85c0f462feadc802c/app.py#L257",
+      "notes": "Actual browser: removed one invented eligible sample, Show results stayed114, changing a cache argument refreshed113. Inputs restored.",
+      "status": "REPRODUCED \u00b7 SEE SCOPE",
+      "kind": "compare"
+    },
+    {
+      "title": "7 \u00b7 A receipt can retain an older question context",
+      "before": "Intended use revised",
+      "after": "Old receipt still signed",
+      "fix": "Invalidate current approval using evidence and policy digests.",
+      "source": "https://github.com/AravindKumar2504/identity-crisis-control-tower/blob/380760dc3b7b61097756f2b85c0f462feadc802c/app.py#L580",
+      "notes": "Deterministic AppTest with approved review retained old receipt while rendering new context. Separate browser navigation/Request more evidence path withdrew it. Do not generalize beyond these paths.",
+      "status": "REPRODUCED \u00b7 SEE SCOPE",
+      "kind": "compare"
+    },
+    {
       "title": "What is verified so far",
       "before": "96 tests passed",
-      "after": "3 tests skipped",
+      "after": "9 of 11 browser checks met",
       "fix": "Read TESTS.md for skips, positive controls and limits.",
       "source": "TESTS.md",
-      "notes": "96 passed, 3 skipped, 0 failed. Targeted synthetic observations are detailed in TESTS.md and are not a score.",
+      "notes": "96 submitted tests passed; three practice-dependent tests skipped. Nine of eleven browser checks met proposed safeguards. Separate AppTest evidence-context probe retained a stale approved receipt; another browser route withdrew it. See exact scopes.",
       "status": "LIMITS",
       "kind": "compare"
     }

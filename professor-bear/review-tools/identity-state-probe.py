@@ -1,0 +1,12 @@
+from pathlib import Path
+import json,datetime,sys
+from streamlit.testing.v1 import AppTest
+b=Path(__file__).resolve().parent;repo=b/'identity-browser/identity-crisis-control-tower';sys.path.insert(0,str(repo));from tower.cards import load_card
+p=repo/'cards/er-alpha-by-er.yaml';original=p.read_bytes();out={}
+at=AppTest.from_file(str(repo/'app.py'),default_timeout=90).run();at.sidebar.selectbox[0].set_value('Test release synthetic-swap').run();next(s for s in at.sidebar.selectbox if s.label=='Question card').set_value('ER-alpha protein in ER-positive vs ER-negative primary tumors (A1)');at.session_state['_test_page']='review';at.run();next(b for b in at.sidebar.button if b.label=='Show results').click().run();next(t for t in at.text_input if t.label=='Your name').set_value('Synthetic Reviewer').run();next(t for t in at.text_input if t.label=='Your role').set_value('test reviewer').run()
+for control in at.button_group:control.set_value(str(control.options[0]))
+at.run();next(b for b in at.button if b.label=='Sign off').click().run();ctx='Test release synthetic-swap|er-alpha-by-er';state=at.session_state['review'][ctx];out['before_signed']=bool(state['signed']);out['before_digest']=state['signed']['review']['signed_off']['inputs']['readiness'];out['before_signature']=state['signed_inputs'];out['before_intent']=state['signed']['card']['intended_use']
+try:
+ p.write_text(original.decode().replace('A descriptive figure for a research report','A revised synthetic intended-use statement for a research report'));at.run();state=at.session_state['review'][ctx];out['after_signed']=bool(state['signed']);out['current_card_intent']=load_card('er-alpha-by-er')['intended_use'];out['after_signed_intent']=state['signed']['card']['intended_use'] if state['signed'] else None;out['after_signature']=state.get('signed_inputs');out['exceptions']=[str(x.value) for x in at.exception];out['errors']=[x.value for x in at.error];out['success_messages']=[x.value for x in at.success];out['warning_messages']=[x.value for x in at.warning]
+ at.session_state['_test_page']='overview';at.run();out['revised_context_in_rendered_markdown']=any('A revised synthetic intended-use statement' in x.value for x in at.markdown);out['signed_after_overview']=bool(at.session_state['review'][ctx]['signed']);out['timestamp']=datetime.datetime.now(datetime.timezone.utc).isoformat();(b/'identity-state-probe.json').write_text(json.dumps(out,indent=2)+'\n');print(json.dumps(out,indent=2))
+finally:p.write_bytes(original)

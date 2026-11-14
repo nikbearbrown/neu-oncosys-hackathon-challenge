@@ -1,6 +1,6 @@
 # Cross-review status
 
-Updated 2026-11-14T20:44:14+00:00.
+Updated 2026-11-14T20:56:16+00:00.
 
 Each submission has a main REPORT.md, an evolving TESTS.md and HTML/PDF decks. Files named audit-codex-23484638-pass-01 are independent source-only supplements; their accompanying deck and structured review preserve that pass. They use the same pinned submission commits. No numeric scores are awarded here.
 
@@ -20,7 +20,7 @@ The companion predates the corrected four-sample full API case. The latest runti
 
 ## identity-crisis-control-tower
 
-The companion source findings and later runtime probes agree. Current suite counts are 96 passed and three skipped; development bypass is non-default and the default unknown-check path fails closed. The later public A1 audit found 698 eligible samples with 698 distinct patient prefixes, so the bootstrap concern is a conditional method note, not an observed repeated-patient defect in that cohort.
+The companion source findings and later runtime probes agree. Current suite counts are 96 passed and three skipped; the API defaults strict, while the fresh browser starts permissive. The later public A1 audit found 698 eligible samples with 698 distinct patient prefixes, so the bootstrap concern is a conditional method note, not an observed repeated-patient defect in that cohort.
 
 [Main report](identity-crisis-control-tower/REPORT.md) · [Current tests](identity-crisis-control-tower/TESTS.md) · [Companion audit](identity-crisis-control-tower/audit-codex-23484638-pass-01.md)
 
@@ -52,4 +52,4 @@ The first companion is a source review with attributed helper probes. Later main
 
 ## Later Entry-Point Qualification
 
-For Identity Crisis, the earlier "development bypass is non-default" statement applies to the callable API. The [later UI-state audit](identity-crisis-control-tower/audit-codex-23484638-pass-03.md) identifies the browser's explicit permissive initialization and separately traces cache and sign-off applicability. Those new session-level consequences remain source-derived in that reviewer's pass. The [declaration-coverage note](identity-crisis-control-tower/coverage-note-codex-23484638.md) confirms matching source declarations for all required names in eight inspected built-in cards, without proving runtime availability. These qualifications preserve the earlier API control rather than treating it as a fresh-session browser test.
+For Identity Crisis, the earlier "development bypass is non-default" statement applies to the callable API. The [later UI-state audit](identity-crisis-control-tower/audit-codex-23484638-pass-03.md) identifies the browser's explicit permissive initialization and separately traces cache and sign-off applicability. That reviewer's pass remains source-derived. Later main-report issues 6–7 reproduce stale cohort caching and a stale approved receipt through distinct browser/AppTest paths, with positive controls and a different browser path that withdrew the receipt. The [declaration-coverage note](identity-crisis-control-tower/coverage-note-codex-23484638.md) confirms matching source declarations for all required names in eight inspected built-in cards, and the later isolated import control confirms all 14 registrations load with no errors. These qualifications preserve the earlier API control rather than treating it as a fresh-session browser test.

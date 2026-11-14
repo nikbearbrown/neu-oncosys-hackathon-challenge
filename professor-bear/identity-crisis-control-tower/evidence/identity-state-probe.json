@@ -1,0 +1,19 @@
+{
+  "before_signed": true,
+  "before_digest": "0b8aaa094536a2fa78813b3dd56844a9c16dd7599b4ba951fc036e7baa909920",
+  "before_signature": "{\"decision\": \"Approve with the conditions listed\", \"issues\": {}, \"note\": \"\", \"repairs\": {\"R1\": [\"approve\", \"\"]}, \"reviewer\": \"Synthetic Reviewer\", \"role\": \"test reviewer\", \"verdict\": \"Conditional\"}",
+  "before_intent": "A descriptive figure for a research report comparing mean ER-alpha protein (RPPA) between primary tumors that tested ER-positive and ER-negative in the clinic.",
+  "after_signed": true,
+  "current_card_intent": "A revised synthetic intended-use statement for a research report comparing mean ER-alpha protein (RPPA) between primary tumors that tested ER-positive and ER-negative in the clinic.",
+  "after_signed_intent": "A descriptive figure for a research report comparing mean ER-alpha protein (RPPA) between primary tumors that tested ER-positive and ER-negative in the clinic.",
+  "after_signature": "{\"decision\": \"Approve with the conditions listed\", \"issues\": {}, \"note\": \"\", \"repairs\": {\"R1\": [\"approve\", \"\"]}, \"reviewer\": \"Synthetic Reviewer\", \"role\": \"test reviewer\", \"verdict\": \"Conditional\"}",
+  "exceptions": [],
+  "errors": [],
+  "success_messages": [
+    "Signed off by Synthetic Reviewer (test reviewer): Approve with the conditions listed. Saved in out/reviews/er-alpha-by-er-test-release-synthetic-swap-2026-11-14T205423+0000"
+  ],
+  "warning_messages": [],
+  "revised_context_in_rendered_markdown": true,
+  "signed_after_overview": true,
+  "timestamp": "2026-11-14T20:54:23.764559+00:00"
+}

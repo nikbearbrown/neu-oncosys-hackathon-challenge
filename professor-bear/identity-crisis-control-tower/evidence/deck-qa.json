@@ -27,9 +27,17 @@
     {
       "slide": 7,
       "no_overflow": true
+    },
+    {
+      "slide": 8,
+      "no_overflow": true
+    },
+    {
+      "slide": 9,
+      "no_overflow": true
     }
   ],
   "script_errors": [],
   "browser": "157.0.8103.51",
-  "visual_inspection": "Contact sheet visually inspected 2026-11-14 20:41 UTC; all pages visible, no clipping observed."
+  "visual_inspection": "Visually inspected 2026-11-14 20:58 UTC: nine slides; no observed clipping."
 }
