@@ -1,10 +1,10 @@
 # Tripwire / Driftwire: independent review
 
-Reviewed commit: `45df43640836025b40e89fc190f913ad694a6011`. Updated: **2026-11-14T21:04:04+00:00**. Track 1: Cohort Firewall.
+Reviewed commit: `45df43640836025b40e89fc190f913ad694a6011`. Updated: **2026-11-14T21:11:39+00:00**. Track 1: Cohort Firewall.
 
 **Status: source review plus isolated runtime checks; no verified hosted demo.** No official score is assigned. Runtime observations are labelled per issue; remaining source findings still require reproduction. Exact branches and limitations are stated. No student code or files were changed.
 
-The code separates release-change compatibility from model-training readiness, includes question-specific dependencies, and reruns nominally unaffected analyses as a cross-check. The first priorities are verdict precedence and completeness of the human-review state. No claim about its real-data detection rate is independently verified in this first pass.
+The code separates release-change compatibility from model-training readiness, includes question-specific dependencies, and reruns nominally unaffected analyses as a cross-check. The first priorities are verdict precedence and completeness of the human-review state. The submitted suite, targeted synthetic probes and local browser checks do not estimate a population-wide detection rate.
 
 ## What it does well
 
@@ -106,7 +106,7 @@ The maximum points below reproduce the official track weights. They are not poin
 
 | Criterion | Maximum | Evidence and question for judges |
 |---|---:|---|
-| Finding data problems. Finds material data problems in the supplied input without reporting problems the data does not support. | 20 | Change detectors and mutation tests are present; accuracy and false alarms need an independent synthetic run. |
+| Finding data problems. Finds material data problems in the supplied input without reporting problems the data does not support. | 20 | 404 submitted tests passed; targeted synthetic and browser cases were exercised. These selected cases do not estimate detection accuracy or false-alarm rates. |
 | Reasoning for the research question. Changes its result appropriately when the research question or intended use changes. | 20 | Distinct description/training cards are a strength; inspect the adequacy precedence in issue 1. |
 | Evidence and sources. Shows the checks, data fields, decision rules, and limitations behind each conclusion. | 15 | Hashes, field dependencies and documented thresholds aid traceability; preserve raw precision. |
 | Safety and uncertainty. Avoids clinical claims, makes uncertainty visible, and requires human review. | 15 | Reason/role validation helps; issue 2 can hide an unresolved review obligation. |
@@ -116,7 +116,7 @@ The maximum points below reproduce the official track weights. They are not poin
 
 ## Runtime update
 
-404 passed, 1 skipped, 0 failed, 0 errors. Independent safeguards: 4 met, 3 unmet. [Commands, limitations and concrete observations](TESTS.md). These counts are not scores.
+404 passed, 1 skipped, 0 failed, 0 errors. Initial independent probe round: 4 met, 3 unmet. Later rounds and 13 browser checks (12 met, one unmet) are separately recorded; do not treat the initial round as the complete total. [Commands, limitations and concrete observations](TESTS.md). These counts are not scores.
 
 ## Initial static pass (historical scope)
 

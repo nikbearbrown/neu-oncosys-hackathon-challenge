@@ -11,13 +11,24 @@ Read each detailed report and issue-by-issue deck together. Work through the iss
 | Cohort Studio | [Report](oncosys-cohort-studio/REPORT.md) | [PDF](oncosys-cohort-studio/slides.pdf) | [HTML](oncosys-cohort-studio/slides.html) | [Tests](oncosys-cohort-studio/TESTS.md) |
 | SNS Control Tower | [Report](sns-cohort-control-tower/REPORT.md) | [PDF](sns-cohort-control-tower/slides.pdf) | [HTML](sns-cohort-control-tower/slides.html) | [Tests](sns-cohort-control-tower/TESTS.md) |
 
-Updated 2026-11-14T21:04:04+00:00. Download HTML decks to open them locally; GitHub renders the PDFs directly. Each deck presents one issue at a time. No official numerical scores are assigned.
+Updated 2026-11-14T21:11:39+00:00. Download HTML decks to open them locally; GitHub renders the PDFs directly. Each deck presents one issue at a time. No official numerical scores are assigned.
 
 Submitted-suite results: ReadySet **107 unit tests plus 38 public mutation cases passed**; Tripwire **404 passed / 1 skipped**; Identity Crisis **96 passed / 3 skipped**; Busy Beavers **65 passed**; Cohort Studio **299 passed**. No submitted SNS test suite was found; its independent synthetic checks are documented. These suites cover different assertions and are not a ranking.
 
 Public-data checks used [six checksum-verified frozen files](review-tools/PUBLIC-RELEASE.md). No sealed judging inputs were opened. The tests do not establish clinical validity, unseen-input performance, production security or full accessibility. Each TESTS.md records the independent reproductions and remaining limits.
 
-Latest additions: SNS small-matrix behavior reproduced through the full engine; A2 generated-script NameError reproduced with an A1 passing control; Cohort Studio automatic fixes and local-only routing checked; Tripwire rounding and consent controls checked. All six now have at least a public-release test or unchanged-input control, with the distinct scope documented.
+## Current evidence at a glance
+
+| Submission | Local browser checks | Main follow-through to read |
+|---|---|---|
+| ReadySet | 10 met | Empty/invalid unchanged inputs; evidence-bound review controls; 38 passing public mutation cases |
+| Tripwire | 12 met, 1 unmet | Compatibility versus question adequacy; evidence requests shown as zero open; failed replacement clears old results |
+| Identity Crisis | 9 met, 2 unmet | Permissive browser default; same-path stale cache; separate path-dependent approved-receipt reproduction |
+| Busy Beavers | 13 met | Passing evidence/export workflow alongside separate duplicate detection and repair-export concerns |
+| Cohort Studio | 13 met | Cohort and audit exports agree in the tested path; separate unknown-hash and reconstruction-warning findings |
+| SNS | 10 met, 1 unmet | Small-matrix full-engine omission, repair authority and exact reconstruction membership differences |
+
+These are different reviewer-selected assertions, not comparable success rates or official criteria. Read each TESTS.md for helper versus full-engine scope, positive controls and limitations. All six have a public-release test or unchanged-input control. Later evidence qualifies earlier source concerns; [cross-review status](REVIEW-STATUS.md) explains how.
 
 ## Companion source audits
 
@@ -48,6 +59,6 @@ Latest Identity follow-through: browser defaults and same-path cache staleness a
 
 Focused companion decks now have direct GitHub PDF previews: [Identity UI/evidence identity](identity-crisis-control-tower/slides-codex-23484638-pass-04.pdf) and [SNS reconstruction](sns-cohort-control-tower/slides-codex-23484638-pass-04.pdf). Read them alongside the updated main reports to distinguish their original source scope from later reproductions.
 
-Latest Tripwire browser pass: 12 of 13 proposed checks met; evidence requests remain correctly exported but the interface reports zero open reviews. A failed new comparison clears old results. A separate [citation audit](review-tools/citation-audit.json) verified 221 pinned file/line references with no invalid paths or line bounds; this is not a correctness judgment.
+Latest Tripwire browser pass: 12 of 13 proposed checks met; evidence requests remain correctly exported but the interface reports zero open reviews. A failed new comparison clears old results. A separate [citation audit](review-tools/citation-audit.json) verified 228 pinned file/line references with no invalid paths or line bounds; this is not a correctness judgment.
 
 [Identity Crisis source/runtime reconciliation](identity-crisis-control-tower/runtime-reconciliation-codex-23484638.md) explains the path-dependent receipt finding and passing controls. Browser screenshots for Identity and Busy Beavers were refreshed with their original tracked theme configurations; behavioral results were unchanged.
