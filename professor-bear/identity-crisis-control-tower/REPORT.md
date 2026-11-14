@@ -1,0 +1,114 @@
+# Identity Crisis Control Tower: independent first-pass review
+
+Reviewed commit: `380760dc3b7b61097756f2b85c0f462feadc802c`. Updated: **2026-11-14T19:40:03+00:00**. Track 1: Cohort Firewall.
+
+**Status: source review, not a verified live demo.** No official score is assigned. Source findings below are hypotheses about reachable runtime behavior unless labelled otherwise; exact branches and limitations are stated. No student code or files were changed.
+
+This submission goes beyond change detection: research-question cards, baseline checks, measured effects, uncertainty estimates and fingerprinted review receipts are visible in source. The main first-pass concerns are a sign-off path that permits a missing validator, an explicit development bypass for missing checks, and silent loss of optional robustness evidence.
+
+## What it does well
+
+### Question-specific materiality and traceable reasons
+
+Material issues determine the verdict in Blocked, unknown, warning order. The output records fields, sample references, rules and file hashes. [tower/readiness.py:108](https://github.com/AravindKumar2504/identity-crisis-control-tower/blob/380760dc3b7b61097756f2b85c0f462feadc802c/tower/readiness.py#L108)
+
+### Explicit empty-measurement handling
+
+A1 refuses missing or repeated ERALPHA rows and groups with no measured values instead of returning a fabricated zero. [tower/analyses.py:28](https://github.com/AravindKumar2504/identity-crisis-control-tower/blob/380760dc3b7b61097756f2b85c0f462feadc802c/tower/analyses.py#L28)
+
+### Fingerprint-bound human review
+
+Sign-off records the reviewer, time, decision and digests of both findings and readiness. UI code withdraws sign-off when its inputs change. [tower/review.py:47](https://github.com/AravindKumar2504/identity-crisis-control-tower/blob/380760dc3b7b61097756f2b85c0f462feadc802c/tower/review.py#L47)
+
+## Issue-by-issue findings
+
+### 1. Missing validator does not stop review-file publication
+
+**Priority: high. Evidence: source inspection; runtime reproduction pending.**
+
+validate returns None when the organizer validator is absent. save rejects only ok is False, then writes the signed readiness and review files for None as well. The UI subsequently records the sign-off. This differs from the stated requirement that sign-off counts only after validation passes.
+
+**Evidence:** [tower/review.py:103](https://github.com/AravindKumar2504/identity-crisis-control-tower/blob/380760dc3b7b61097756f2b85c0f462feadc802c/tower/review.py#L103); [tower/review.py:118](https://github.com/AravindKumar2504/identity-crisis-control-tower/blob/380760dc3b7b61097756f2b85c0f462feadc802c/tower/review.py#L118); [app.py:1141](https://github.com/AravindKumar2504/identity-crisis-control-tower/blob/380760dc3b7b61097756f2b85c0f462feadc802c/app.py#L1141).
+
+**Concrete change:** Require ok is True before a validated sign-off. Allow a separately labelled draft export if validation is unavailable.
+
+**Acceptance check:** Run with an absent validator and confirm no validated sign-off is persisted; then use passing and failing validators as controls.
+
+### 2. Development bypass can allow Ready with pending required checks
+
+**Priority: high. Evidence: source inspection; runtime reproduction pending.**
+
+allow_missing=True marks unknown checks nonmaterial. assess starts at Ready and excludes these pending checks from the deciding set. The bypass is explicitly documented and is not the default; the risk is presenting its output as normal readiness.
+
+**Evidence:** [tower/checks/__init__.py:79](https://github.com/AravindKumar2504/identity-crisis-control-tower/blob/380760dc3b7b61097756f2b85c0f462feadc802c/tower/checks/__init__.py#L79); [tower/readiness.py:133](https://github.com/AravindKumar2504/identity-crisis-control-tower/blob/380760dc3b7b61097756f2b85c0f462feadc802c/tower/readiness.py#L133).
+
+**Concrete change:** Keep the bypass useful for development but force an incomplete/development status and prohibit approval while required checks remain pending.
+
+**Acceptance check:** A card with an unavailable required check stays Insufficient Evidence even under a development run, or produces a clearly separate non-approvable draft result.
+
+### 3. Robustness failures disappear into empty objects
+
+**Priority: medium. Evidence: source inspection; runtime reproduction pending.**
+
+Exceptions from the conclusion/uncertainty calculation and error-budget calculation are replaced by empty dictionaries. These calculations may be optional, so failing them need not invalidate every use; silently omitting them does not show whether they ran.
+
+**Evidence:** [tower/readiness.py:113](https://github.com/AravindKumar2504/identity-crisis-control-tower/blob/380760dc3b7b61097756f2b85c0f462feadc802c/tower/readiness.py#L113); [tower/readiness.py:122](https://github.com/AravindKumar2504/identity-crisis-control-tower/blob/380760dc3b7b61097756f2b85c0f462feadc802c/tower/readiness.py#L122).
+
+**Concrete change:** Record not-run, error type and affected claim as explicit evidence states. Gate only the claims that require the missing calculation.
+
+**Acceptance check:** Inject a controlled calculation failure and verify the report shows the missing result and its consequence rather than merely omitting the panel.
+
+### 4. Reported group size includes unmeasured values
+
+**Priority: medium. Evidence: source inspection; runtime reproduction pending.**
+
+A1 computes means with missing values skipped but reports n_positive and n_negative using Series.size. The robustness code explicitly acknowledges this reference-compatible convention. The count can therefore exceed the actual denominator of the mean and bootstrap.
+
+**Evidence:** [tower/analyses.py:40](https://github.com/AravindKumar2504/identity-crisis-control-tower/blob/380760dc3b7b61097756f2b85c0f462feadc802c/tower/analyses.py#L40); [tower/robustness.py:25](https://github.com/AravindKumar2504/identity-crisis-control-tower/blob/380760dc3b7b61097756f2b85c0f462feadc802c/tower/robustness.py#L25).
+
+**Concrete change:** Preserve reference-compatible eligible counts but add measured counts and missing counts for each group beside the estimates.
+
+**Acceptance check:** Leave at least one measured value per group and blank several others; display eligible, measured and missing denominators separately.
+
+### 5. Bootstrap independence needs a stated unit
+
+**Priority: medium. Evidence: source inspection; runtime reproduction pending.**
+
+The percentile bootstrap redraws observations within each ER group. The method, seed and repetitions are documented, which is good. If distinct sample IDs represent repeated specimens from a patient, independent observation resampling can overstate precision. This is a conditional statistical limitation, not an observed failure on the event dataset.
+
+**Evidence:** [tower/robustness.py:43](https://github.com/AravindKumar2504/identity-crisis-control-tower/blob/380760dc3b7b61097756f2b85c0f462feadc802c/tower/robustness.py#L43).
+
+**Concrete change:** State the sampling unit and verify one independent patient per unit, or use patient-cluster resampling when the question requires it.
+
+**Acceptance check:** A statistician reviews the interval and a repeated-patient synthetic example; document the supported independence assumption.
+
+## Exact official rubric: evidence, not scores
+
+The maximum points below reproduce the official track weights. They are not points awarded. Supplemental dashboard and data-quality rules do not add scoring criteria.
+
+| Criterion | Maximum | Evidence and question for judges |
+|---|---:|---|
+| Finding data problems. Finds material data problems in the supplied input without reporting problems the data does not support. | 20 | Detailed baseline and change checks exist; reported 99 tests and scorecard results are author claims until rerun. |
+| Reasoning for the research question. Changes its result appropriately when the research question or intended use changes. | 20 | Cards make intended use explicit; missing-check bypass needs stronger output qualification. |
+| Evidence and sources. Shows the checks, data fields, decision rules, and limitations behind each conclusion. | 15 | File digests, issue lineage and range-method metadata are strong; surface missing computations. |
+| Safety and uncertainty. Avoids clinical claims, makes uncertainty visible, and requires human review. | 15 | Review receipts are explicit, but missing validation must not count as validated sign-off. |
+| Working tool and clear setup. Judges can run the core workflow from the submitted repository. | 15 | Fresh-machine instructions and test modules exist; no live app verification in this pass. |
+| Useful next steps. Suggested fixes are specific and match the size and importance of the problem. | 10 | Next steps include evidence needed; preserve that distinction when proposing restored values. |
+| Communication. Someone without specialist knowledge can understand the result and next step. | 5 | Glossary and staged views are described; denominators and incomplete results need plain-language labels. |
+
+## Checks actually performed
+
+- Pinned and read source at `380760dc3b7b61097756f2b85c0f462feadc802c`; original checkout was clean when inspected.
+- Parsed **36/36** selected Python source files with `ast.parse`; **0** syntax failures. Parsing does not execute or validate behavior.
+- Counted **99** `test_` function definitions in the inspected source set. This is a source count, not collected tests or passed tests.
+- Validated every cited source path and starting line against the pinned commit.
+- Rendered deck QA is recorded separately in `evidence/deck-qa.json` after rendering.
+- No application builds, dependency installs, submitted runtime tests, live deployment checks, real-data evaluation, sealed-envelope runs or model-provider calls in this first pass.
+
+[Machine-readable static checks](evidence/static-checks.json). No raw TCGA records, answer keys or credentials are included.
+
+## Next investigation
+
+Work through the issues above in order. Reproduce them in an isolated copy with invented inputs, including positive controls. Retain the recorded commit when comparing results. Changes after this review require a new commit-specific update; they do not retroactively change the evidence.
+
+A statistician should review adequacy thresholds, interval assumptions and claims of bias or representativeness. A domain expert should review clinical meaning. Neither source inspection nor passing software tests establishes clinical validity.

@@ -1,0 +1,464 @@
+{
+  "commit": "45df43640836025b40e89fc190f913ad694a6011",
+  "timestamp": "2026-11-14T19:40:03+00:00",
+  "method": "Python ast.parse of regular Git blobs; no imports or execution",
+  "files": [
+    {
+      "file": "app/agent_intake_tab.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "app/chat_intake_tab.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "app/dashboard.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "app/mutation_tab.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "app/own_data_tab.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "app/prepare_tab.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "app/ui.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "driftwire/__init__.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "driftwire/__main__.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "driftwire/mutation_lab/__init__.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "driftwire/mutation_lab/__main__.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "intake_prototype/__init__.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "intake_prototype/__main__.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "intake_prototype/agents.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "intake_prototype/ai_suggest.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "intake_prototype/demo.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "intake_prototype/schema.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "intake_prototype/transform.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "intake_prototype/upload.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "intake_prototype/workflow.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "redteam/run_redteam.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "scripts/build_replay.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "scripts/qa/incident_replay.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "scripts/scale_test.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/conftest.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_adversarial_swap_chains.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_agent_intake_ui.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_analyses.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_chat_intake_ui.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_checks.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_dashboard_input.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_dashboard_same_result.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_detect.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_detector_mutation_integration.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_doctor.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_doctor_ssl.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_driftwire_cli.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_envelope_hints.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_impact_verdicts.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_incident_replay.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_inspect.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_intake_prototype.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_intake_workflow.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_integrations.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_label_concordance.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_malformed_inputs.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_mutation_extended.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_mutation_lab.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_next_steps.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_peer_feedback.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_prepare_tab.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_qa_concordance_robustness.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_questions.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_receipt.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_redteam.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_repair_preview.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_report.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_review.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_robustness.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_survival_and_sources.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_unfamiliar_layouts.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tripwire/__init__.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tripwire/__main__.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tripwire/analyses.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tripwire/api.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tripwire/checks.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tripwire/concordance.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tripwire/config.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tripwire/contract.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tripwire/dashboard_input.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tripwire/detect/__init__.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tripwire/doctor.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tripwire/findings.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tripwire/impact.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tripwire/inspect.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tripwire/mutation_lab/__init__.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tripwire/mutation_lab/__main__.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tripwire/mutation_lab/core.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tripwire/mutation_lab/extended.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tripwire/next_steps.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tripwire/prepare.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tripwire/questions.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tripwire/receipt.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tripwire/release.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tripwire/repair_preview.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tripwire/report.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tripwire/review.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tripwire/sources.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tripwire/unseal_lf.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tripwire/validate.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tripwire/verdicts.py",
+      "parsed": true,
+      "error": null
+    }
+  ],
+  "test_function_definitions": 276,
+  "runtime_tests": "not run in this first pass"
+}

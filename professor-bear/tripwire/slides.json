@@ -1,0 +1,77 @@
+{
+  "title": "Tripwire / Driftwire",
+  "commit": "45df43640836025b40e89fc190f913ad694a6011",
+  "updated": "2026-11-14T19:40:03+00:00",
+  "slides": [
+    {
+      "title": "Tripwire / Driftwire",
+      "before": "Independent first pass",
+      "after": "Evidence before a score",
+      "fix": "Professor Bear \u00b7 14 November 2026",
+      "source": "REPORT.md",
+      "notes": "Pinned commit 45df43640836025b40e89fc190f913ad694a6011. Source review only; no live demonstration or official score.",
+      "status": "SOURCE REVIEW",
+      "kind": "cover"
+    },
+    {
+      "title": "1 \u00b7 Insufficient samples are checked after the unaffected branch",
+      "before": "Unchanged inputs",
+      "after": "Insufficient flag bypassed",
+      "fix": "Evaluate insufficiency before the unaffected return, or return separate compatibility and adequacy results with an explicit trusted-baseline requirement.",
+      "source": "https://github.com/Adhithyan245/tripwire/blob/45df43640836025b40e89fc190f913ad694a6011/tripwire/verdicts.py#L24",
+      "notes": "release_verdict returns Ready for an unaffected, unmoved result before it tests movement.insufficient. Thus the helper can report compatibility as Ready even when its movement object says the sample evidence is insufficient. The outer build guards empty cohorts, but an undersized nonempty cohort is a separate case. This is a source-identified path; an end-to-end reproduction is still needed. Acceptance: Use an unchanged nonempty cohort below the configured per-group minimum. Confirm the result names insufficient evidence; retain a sufficiently large unchanged control.",
+      "status": "SOURCE FINDING \u00b7 HIGH",
+      "kind": "compare"
+    },
+    {
+      "title": "2 \u00b7 A flagged finding without a repair appears fully decided",
+      "before": "Review required",
+      "after": "No repair \u2192 not open",
+      "fix": "Require an explicit finding-level disposition when no repair exists, and distinguish request_more_evidence from approval to proceed.",
+      "source": "https://github.com/Adhithyan245/tripwire/blob/45df43640836025b40e89fc190f913ad694a6011/tripwire/review.py#L37",
+      "notes": "review_status defines open findings using all(...) over associated repairs. For a flagged finding with no associated repair, all([]) is true, so it is excluded from the open list. This matters for imported findings and future checks even if the current builder normally emits a repair for each finding. Acceptance: A synthetic needs_human_review finding with no repair must remain open. A request for evidence should remain visibly unresolved until the required evidence is recorded.",
+      "status": "SOURCE FINDING \u00b7 HIGH",
+      "kind": "compare"
+    },
+    {
+      "title": "3 \u00b7 Analysis rounding precedes effect classification",
+      "before": "Measured values",
+      "after": "Rounded before comparison",
+      "fix": "Keep full-precision calculation fields and format separate display values.",
+      "source": "https://github.com/Adhithyan245/tripwire/blob/45df43640836025b40e89fc190f913ad694a6011/tripwire/analyses.py#L98",
+      "notes": "A1 returns means and differences rounded to three decimals before movement is computed. Small changes and near-zero effects can be hidden or disproportionately changed by display precision. This is not evidence that the published practice result is wrong. Acceptance: Probe near-zero values and changes on each side of the tolerance at full precision; ensure changing display precision cannot change the verdict.",
+      "status": "SOURCE FINDING \u00b7 MEDIUM",
+      "kind": "compare"
+    },
+    {
+      "title": "4 \u00b7 New review calls replace prior decisions",
+      "before": "Review revision",
+      "after": "Previous state replaced",
+      "fix": "Document snapshot semantics.",
+      "source": "https://github.com/Adhithyan245/tripwire/blob/45df43640836025b40e89fc190f913ad694a6011/tripwire/review.py#L14",
+      "notes": "apply_decisions creates a new decisions list from the supplied mapping and replaces the previous list. The helper records neither decision time nor a stable reviewer identity. This is suitable for a current-state document, but is not an immutable approval history. Acceptance: Approve, revise, and request evidence on the same repair. Export the complete history without changing the original evidence.",
+      "status": "SOURCE FINDING \u00b7 MEDIUM",
+      "kind": "compare"
+    },
+    {
+      "title": "5 \u00b7 The no-AI statement is broader than the repository",
+      "before": "Deterministic core",
+      "after": "Optional AI intake exists",
+      "fix": "Scope the claim to the deterministic core and explain the optional intake route, transmitted metadata, and opt-in control.",
+      "source": "https://github.com/Adhithyan245/tripwire/blob/45df43640836025b40e89fc190f913ad694a6011/README.md#L1",
+      "notes": "The README says there are no AI features or AI-service calls, while the optional intake prototype implements consent-gated OpenAI mapping suggestions. The consent gate is a positive control; its presence makes the blanket claim inaccurate. No network call was made in this review. Acceptance: Documentation and UI agree about which route sends information; a no-consent test verifies no request occurs.",
+      "status": "SOURCE FINDING \u00b7 LOW",
+      "kind": "compare"
+    },
+    {
+      "title": "What is verified so far",
+      "before": "91 source files parsed",
+      "after": "Runtime tests pending",
+      "fix": "Read the report; reproduce each issue with a positive control.",
+      "source": "REPORT.md",
+      "notes": "Parsing is not testing. No hosted app, clinical claims, real data or sealed inputs were verified. No numeric score.",
+      "status": "LIMITS",
+      "kind": "compare"
+    }
+  ]
+}

@@ -1,0 +1,189 @@
+{
+  "commit": "380760dc3b7b61097756f2b85c0f462feadc802c",
+  "timestamp": "2026-11-14T19:40:03+00:00",
+  "method": "Python ast.parse of regular Git blobs; no imports or execution",
+  "files": [
+    {
+      "file": "app.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "scripts/make_adversarial.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "scripts/scorecard.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "scripts/try_check.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/synth.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_ai_summary.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_cli_and_plant.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_question_checks.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_release_a_checks.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_release_comparison.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_review.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_screen.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tower/__init__.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tower/__main__.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tower/ai_summary.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tower/analyses.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tower/budget.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tower/cards.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tower/checks/__init__.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tower/checks/bias.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tower/checks/coverage.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tower/checks/design.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tower/checks/fitness.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tower/checks/labels.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tower/checks/survival.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tower/cli.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tower/diff.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tower/doctor.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tower/evidence.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tower/findings.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tower/plant.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tower/questions.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tower/readiness.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tower/release.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tower/review.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tower/robustness.py",
+      "parsed": true,
+      "error": null
+    }
+  ],
+  "test_function_definitions": 99,
+  "runtime_tests": "not run in this first pass"
+}

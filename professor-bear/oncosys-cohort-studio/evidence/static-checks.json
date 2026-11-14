@@ -1,0 +1,334 @@
+{
+  "commit": "54aeacb6f6f355a1dcaa42d7abf2ce174315ad69",
+  "timestamp": "2026-11-14T19:40:03+00:00",
+  "method": "Python ast.parse of regular Git blobs; no imports or execution",
+  "files": [
+    {
+      "file": "app.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "cohort_studio/__init__.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "cohort_studio/__main__.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "cohort_studio/api.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "cohort_studio/assistant/__init__.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "cohort_studio/assistant/catalog.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "cohort_studio/assistant/client.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "cohort_studio/assistant/draft.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "cohort_studio/assistant/edits.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "cohort_studio/assistant/insights.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "cohort_studio/assistant/prompt.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "cohort_studio/assistant/reconcile.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "cohort_studio/assistant/verify.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "cohort_studio/data.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "cohort_studio/editor.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "cohort_studio/engine.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "cohort_studio/env.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "cohort_studio/exports.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "cohort_studio/hosted.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "cohort_studio/llm.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "cohort_studio/mcp_server.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "cohort_studio/ops.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "cohort_studio/parse.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "cohort_studio/spec.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "cohort_studio/sql.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "cohort_studio/stats.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "cohort_studio/verdict.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "conftest.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "evals/build_expected.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "evals/harness.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "evals/run_eval.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "evals/run_inflation.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "examples/run_query.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "frontend/__init__.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "frontend/backend/__init__.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "frontend/backend/advanced.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "frontend/backend/canvas.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "frontend/backend/compare.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "frontend/backend/config.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "frontend/backend/limits.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "frontend/backend/mcp_http.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "frontend/backend/service.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "frontend/backend/storage.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "frontend/backend/suggest.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "frontend/backend/upstream.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "frontend/server.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "frontend/tests/__init__.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "frontend/tests/test_api.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "frontend/tests/test_canvas.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "frontend/tests/test_hosted.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "frontend/tests/test_mcp_http.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "frontend/tests/test_tour.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "frontend/tests/test_upstream.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "frontend/tour/capture.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "frontend/tour/voice.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/__init__.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/make_fixture.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_assistant.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_cohort_studio.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_evals.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_inflation_suite.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_mcp.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_routes.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_sql.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_stats.py",
+      "parsed": true,
+      "error": null
+    }
+  ],
+  "test_function_definitions": 209,
+  "runtime_tests": "not run in this first pass"
+}

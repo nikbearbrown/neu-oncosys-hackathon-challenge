@@ -1,0 +1,77 @@
+{
+  "title": "Cohort Studio",
+  "commit": "54aeacb6f6f355a1dcaa42d7abf2ce174315ad69",
+  "updated": "2026-11-14T19:40:03+00:00",
+  "slides": [
+    {
+      "title": "Cohort Studio",
+      "before": "Independent first pass",
+      "after": "Evidence before a score",
+      "fix": "Professor Bear \u00b7 14 November 2026",
+      "source": "REPORT.md",
+      "notes": "Pinned commit 54aeacb6f6f355a1dcaa42d7abf2ce174315ad69. Source review only; no live demonstration or official score.",
+      "status": "SOURCE REVIEW",
+      "kind": "cover"
+    },
+    {
+      "title": "1 \u00b7 Unknown checksum verification is counted as a pass",
+      "before": "No expected hash",
+      "after": "Claim: matches checksum",
+      "fix": "Use a three-state check: verified True, mismatch False, and unavailable/unknown.",
+      "source": "https://github.com/tammy357/oncosys-cohort-studio/blob/54aeacb6f6f355a1dcaa42d7abf2ce174315ad69/cohort_studio/data.py#L64",
+      "notes": "When sources.csv or an expected entry is missing, file_status retains verified=None. The verdict rejects only verified is False; otherwise it claims every used raw file matches the frozen checksums. Missing verification and successful verification are not equivalent. Committed manifests are separately marked unverified. Acceptance: Remove only the expected checksum entry from a synthetic fixture. The provenance check must become unknown without inventing a mismatch or pass.",
+      "status": "SOURCE FINDING \u00b7 HIGH",
+      "kind": "compare"
+    },
+    {
+      "title": "2 \u00b7 Request text is inserted into generated Python source",
+      "before": "User request text",
+      "after": "Inside Python delimiter",
+      "fix": "Serialize request text as a Python string literal with repr or a JSON value, rather than interpolating it into source delimiters.",
+      "source": "https://github.com/tammy357/oncosys-cohort-studio/blob/54aeacb6f6f355a1dcaa42d7abf2ce174315ad69/cohort_studio/exports.py#L158",
+      "notes": "The reproduction script inserts the raw request inside a triple-quoted module docstring. A request containing triple quotes can terminate that string, damage the script or introduce Python source. This is a source-identified code-generation hazard; no malicious generated file was executed. Acceptance: Use quotes, backslashes, newlines and a harmless marker as request text. Parse the output with ast.parse and verify the request remains data only.",
+      "status": "SOURCE FINDING \u00b7 HIGH",
+      "kind": "compare"
+    },
+    {
+      "title": "3 \u00b7 Automatic fixes are enabled by default in the API",
+      "before": "Join inflated",
+      "after": "API changes steps",
+      "fix": "Separate draft, preview and accepted execution states.",
+      "source": "https://github.com/tammy357/oncosys-cohort-studio/blob/54aeacb6f6f355a1dcaa42d7abf2ce174315ad69/cohort_studio/api.py#L116",
+      "notes": "build_cohort defaults fix=True, applies inflation fixes and exports the resulting cohort. The first result and fix log are retained, which is useful. CLI/MCP consumers can nevertheless receive a changed analysis without an explicit per-change acceptance step. This is an authority and communication improvement, not a claim that all inflation fixes are wrong. Acceptance: An inflating join produces a proposed correction and two distinct versions; the user can inspect and accept or reject it before an approved export.",
+      "status": "SOURCE FINDING \u00b7 MEDIUM",
+      "kind": "compare"
+    },
+    {
+      "title": "4 \u00b7 Blocked outputs are exported beside ordinary cohorts",
+      "before": "Blocked verdict",
+      "after": "Ordinary CSV filename",
+      "fix": "Bundle a manifest binding files to verdict, limitations, review state and hashes.",
+      "source": "https://github.com/tammy357/oncosys-cohort-studio/blob/54aeacb6f6f355a1dcaa42d7abf2ce174315ad69/cohort_studio/api.py#L151",
+      "notes": "write_all writes cohort_samples.csv regardless of the verdict; the verdict is in a separate JSON. Exporting blocked cohorts can be useful for diagnosis, but the CSV alone loses the restriction. The report must not imply that a generated file is approved for use. Acceptance: Produce a blocked cohort, move its CSV alone and inspect the export contract. Ensure downstream tools can detect missing approval metadata.",
+      "status": "SOURCE FINDING \u00b7 MEDIUM",
+      "kind": "compare"
+    },
+    {
+      "title": "5 \u00b7 Automatic drafting can use a hosted service by default",
+      "before": "Local CLI request",
+      "after": "Hosted fallback possible",
+      "fix": "Give a first-use routing notice or explicit opt-in.",
+      "source": "https://github.com/tammy357/oncosys-cohort-studio/blob/54aeacb6f6f355a1dcaa42d7abf2ce174315ad69/cohort_studio/llm.py#L69",
+      "notes": "ai=auto tries an own model, then the hosted service, then rules. The README explains this and --rules provides a local-only route; it is not hidden in documentation. A scientist may still reasonably assume a local CLI will not transmit their typed question. Acceptance: Mock both providers and verify ai=off makes no outbound request; an auto request displays provider selection before transmission.",
+      "status": "SOURCE FINDING \u00b7 MEDIUM",
+      "kind": "compare"
+    },
+    {
+      "title": "What is verified so far",
+      "before": "65 source files parsed",
+      "after": "Runtime tests pending",
+      "fix": "Read the report; reproduce each issue with a positive control.",
+      "source": "REPORT.md",
+      "notes": "Parsing is not testing. No hosted app, clinical claims, real data or sealed inputs were verified. No numeric score.",
+      "status": "LIMITS",
+      "kind": "compare"
+    }
+  ]
+}
