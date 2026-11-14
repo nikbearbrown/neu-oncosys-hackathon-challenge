@@ -1,7 +1,7 @@
 {
   "title": "Cohort Studio",
   "commit": "54aeacb6f6f355a1dcaa42d7abf2ce174315ad69",
-  "updated": "2026-11-14T20:11:00+00:00",
+  "updated": "2026-11-14T20:19:23+00:00",
   "slides": [
     {
       "title": "Cohort Studio",
@@ -60,6 +60,16 @@
       "fix": "Give a first-use routing notice or explicit opt-in.",
       "source": "https://github.com/tammy357/oncosys-cohort-studio/blob/54aeacb6f6f355a1dcaa42d7abf2ce174315ad69/cohort_studio/llm.py#L69",
       "notes": "Mocked own/hosted providers showed that ai=off called neither route; ai=auto tried own configuration and then the hosted route. No network request occurred. This verifies routing behavior and the local-only control; it does not establish what a first-time user understands from the interface.",
+      "status": "REPRODUCED \u00b7 SEE SCOPE",
+      "kind": "compare"
+    },
+    {
+      "title": "6 \u00b7 Reconstruction warns about changed inputs but continues",
+      "before": "Input hash changed",
+      "after": "Warning + new output",
+      "fix": "Make strict reconstruction fail on hash mismatch by default; offer an explicitly named exploratory mode that records new hashes and changed counts.",
+      "source": "https://github.com/tammy357/oncosys-cohort-studio/blob/54aeacb6f6f355a1dcaa42d7abf2ce174315ad69/cohort_studio/exports.py#L210",
+      "notes": "The normal generated script exited successfully and recreated eight synthetic samples. After one row was removed from sample_manifest.csv, the same script printed a hash warning, still exited 0 and wrote a seven-sample output. The warning and expected count are visible, so this is an explicitly permissive policy rather than hidden verification. It cannot guarantee exact reconstruction of the original frozen cohort.",
       "status": "REPRODUCED \u00b7 SEE SCOPE",
       "kind": "compare"
     },

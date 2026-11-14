@@ -63,3 +63,11 @@ were not tested. The screenshot shows only invented fixture values.
 ## Frozen public baseline control
 
 The verified public Release A compared with itself returned Ready and zero findings. [Aggregate result](evidence/public-baseline.json) · [reproduction](../review-tools/public-baseline.py) · [input hashes](../review-tools/PUBLIC-RELEASE.md). ReadySet and Busy Beavers used their identical-file shortcut (analyses not rerun); SNS reran its reference analyses. This is an unchanged-input control, not an independent clinical-data audit or a sealed-input test. No record-level output is published.
+
+## Submitted public-data mutation harness
+
+**15 of 15 recipe cases passed; 23 of 23 hand-made cases passed.** Exit 0; 164.99 seconds for the complete command. The pinned scripts/scorecard.py --own built each public authored recipe, ran the engine, checked detection against its locally generated mutation log, compared analysis outputs with the organizer reference and checked export schema. The hand-made cases include blanks, missing/corrupt files, reordered data, mixed changes and large edits.
+
+[Redacted log](evidence/public-mutation-tests.log) · [Exact command and pinned commits](evidence/public-mutation-command.json). The scripts ran unchanged under the restricted sandbox using the six verified public files. The local mutation logs describe only these self-generated cases; no sealed organizer answer key or envelope was read. Cases with “envelope” in their public recipe names merely omit RNA and are not actual judging envelopes. No mutation log, raw dataset, participant ID or patient-level finding document is published here.
+
+These 38 cases are separate from the 107 unit tests and the 14 independent edge-case probes. Passing known authored cases does not establish generalization or cancel independently reproduced gaps. The student harness's word CLEAN is its own assertion summary, not an official score or clinical approval.

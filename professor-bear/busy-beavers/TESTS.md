@@ -55,3 +55,7 @@ For Tripwire, release compatibility and question adequacy are distinct outputs. 
 ## Frozen public baseline control
 
 The verified public Release A compared with itself returned Ready and zero findings. [Aggregate result](evidence/public-baseline.json) · [reproduction](../review-tools/public-baseline.py) · [input hashes](../review-tools/PUBLIC-RELEASE.md). ReadySet and Busy Beavers used their identical-file shortcut (analyses not rerun); SNS reran its reference analyses. This is an unchanged-input control, not an independent clinical-data audit or a sealed-input test. No record-level output is published.
+
+## Companion-audit reproductions
+
+[Exact observations](evidence/supplement-probes.json) · [source](../review-tools/supplement-probes.py). These independently execute the supplemental source concerns on invented fixtures. Busy Beavers has three proposed safeguards met and three unmet, plus a full-engine quantization observation. Cohort Studio has a passing unchanged control and a failed proposed strict-hash safeguard: it explicitly warns and continues. These are not official scoring requirements.

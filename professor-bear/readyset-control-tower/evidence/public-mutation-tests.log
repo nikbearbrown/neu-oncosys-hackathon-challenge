@@ -1,0 +1,67 @@
+test                       verdict                found   false  sources  analyses  valid   secs
+t0-no-change               Ready                  0/0     0      ok       ok        ok       0.9
+t1-protein-swap-cross-er   Conditional            1/1     0      ok       ok        ok       0.9
+t2-protein-swap-same-er    Conditional            1/1     0      ok       ok        ok       0.9
+t3-protein-dups-basal      Conditional            2/2     0      ok       ok        ok       0.9
+t4-er-relabel              Conditional            1/1     0      ok       ok        ok       1.0
+t5-subtype-relabel         Conditional            1/1     0      ok       ok        ok       1.0
+t6-copynumber-swap         Ready                  1/1     0      ok       ok        ok       4.9
+t7-unread-relabel          Ready                  1/1     0      ok       ok        ok       0.9
+t8-combined                Conditional            3/3     0      ok       ok        ok       7.6
+t9-rna-dups-her2           Ready                  2/2     0      ok       ok        ok       7.7
+t10-four-protein-swaps     Conditional            4/4     0      ok       ok        ok       1.1
+t11-er-to-indeterminate    Conditional            1/1     0      ok       ok        ok       1.1
+t12-mutation-dups-luma     Ready                  2/2     0      ok       ok        ok       5.3
+t13-envelope-swap-no-rna   Conditional            1/1     0      ok       ok        ok       0.8
+t14-envelope-no-change-no-rna Ready                  0/0     0      ok       ok        ok       0.7
+
+Hand-made cases (tests/releases/own_changes.py):
+PASS  o1-blank-er-alpha                1.0s  Conditional            missing_data→A1
+        ER-alpha value blanked for three samples
+PASS  o2-blank-other-protein           1.0s  Ready                  missing_data→none
+        1433EPSILON value blanked for two samples
+PASS  o3-edit-er-alpha-number          1.0s  Conditional            other→A1
+        one ER-alpha number edited
+PASS  o4-rename-sample                 1.0s  Conditional            membership_change→A1
+        one protein sample renamed to an id found nowhere else
+PASS  o5-drop-er-alpha-row             1.0s  Blocked                other→A1
+        the ER-alpha row removed from the protein file
+PASS  o6-drop-other-row                1.0s  Ready                  other→none
+        the 1433EPSILON row removed from the protein file
+PASS  o7-reorder-rows-and-columns      0.9s  Ready                  no findings
+        protein rows and columns reordered, no value changed
+PASS  o8-edit-mutation-cells           5.7s  Ready                  other→none
+        one mutation cell flipped for two samples
+PASS  o9-swap-normal-tissue-rna        7.3s  Ready                  sample_swap→none
+        two normal-tissue samples swapped in the RNA file
+PASS  o10-swap-clinical-records        1.1s  Conditional            sample_swap→A1+A2
+        two patients' whole clinical records exchanged
+PASS  o11-delete-clinical-record       1.1s  Conditional            membership_change→A1+A2
+        one sample's clinical record deleted
+PASS  o12-add-clinical-column          1.0s  Ready                  other→none
+        a new column added to the clinical file
+PASS  o13-blank-er-status              1.0s  Conditional            missing_data→A1
+        ER status blanked for two samples
+PASS  o14-edit-survival-time           0.9s  Ready                  other→none
+        survival time edited for two samples
+PASS  o15-corrupt-protein-file         0.9s  Insufficient Evidence  other→A1
+        the protein file replaced by something unreadable
+PASS  o16-protein-file-missing         0.8s  Insufficient Evidence  other→A1
+        the protein file absent from the new release
+PASS  o17-four-own-kinds-three-files   5.9s  Conditional            membership_change→A1+A2, other→none, membership_change→A1, missing_data→A1
+        ER-alpha blanked, a sample renamed, mutation cells flipped and a clinical record deleted, together
+PASS  o18-script-kinds-mixed-with-ours   1.1s  Conditional            label_conflict→A2, sample_swap→A1, duplicate→A1, missing_data→A1
+        a swap, a copy onto an id with a clinical record, a blanked ER-alpha value and a subtype relabel, together
+PASS  o19-relabel-er-300-samples       1.0s  Conditional            label_conflict→A1
+        ER status relabelled for 300 samples
+PASS  o20-relabel-unread-column-700    1.0s  Ready                  label_conflict→none
+        a column neither analysis reads relabelled for 700 samples
+PASS  o21-shift-whole-er-alpha-row     1.0s  Conditional            other→A1
+        every sample's ER-alpha value shifted by 0.5
+PASS  o22-rewrite-whole-rna-file       7.6s  Ready                  other→none
+        every value in the 180 MB RNA file rewritten with an extra digit (25 million cells)
+PASS  o23-update-shared-survival-record   0.9s  Ready                  other→none
+        one patient's survival record updated; its tumour and normal rows change together
+
+23 of 23 cases pass.  Slowest run: 7.6s
+CLEAN

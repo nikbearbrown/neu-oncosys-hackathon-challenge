@@ -53,3 +53,7 @@ For Tripwire, release compatibility and question adequacy are distinct outputs. 
 | Default API preserves proposed operation until acceptance | No |
 | Explicit fix=False preserves operation | Yes |
 | AI-off calls no provider | Yes |
+
+## Companion-audit reproductions
+
+[Exact observations](evidence/supplement-probes.json) · [source](../review-tools/supplement-probes.py). These independently execute the supplemental source concerns on invented fixtures. Busy Beavers has three proposed safeguards met and three unmet, plus a full-engine quantization observation. Cohort Studio has a passing unchanged control and a failed proposed strict-hash safeguard: it explicitly warns and continues. These are not official scoring requirements.

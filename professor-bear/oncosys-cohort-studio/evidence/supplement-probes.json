@@ -1,0 +1,32 @@
+[
+  {
+    "observation": "reconstruction hash policy",
+    "mode": "unchanged",
+    "exit": 0,
+    "warning_printed": false,
+    "output_exists": true,
+    "output_rows": 8,
+    "error": null
+  },
+  {
+    "check": "unchanged strict reconstruction result",
+    "expected": true,
+    "observed": true,
+    "safeguard_met": true
+  },
+  {
+    "observation": "reconstruction hash policy",
+    "mode": "changed-manifest",
+    "exit": 0,
+    "warning_printed": true,
+    "output_exists": true,
+    "output_rows": 7,
+    "error": null
+  },
+  {
+    "check": "changed-manifest strict reconstruction result",
+    "expected": false,
+    "observed": true,
+    "safeguard_met": false
+  }
+]

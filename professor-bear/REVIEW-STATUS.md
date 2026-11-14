@@ -1,6 +1,6 @@
 # Cross-review status
 
-Updated 2026-11-14T20:17:50+00:00.
+Updated 2026-11-14T20:23:17+00:00.
 
 Each submission has a main REPORT.md, an evolving TESTS.md and HTML/PDF decks. Files named audit-codex-23484638-pass-01 are independent source-only supplements; their accompanying deck and structured review preserve that pass. They use the same pinned submission commits. No numeric scores are awarded here.
 
@@ -8,7 +8,7 @@ A source finding, a helper reproduction, a full engine execution and a browser o
 
 ## readyset-control-tower
 
-The companion is a source audit. The main report adds 107 submitted tests, synthetic regressions, a production build and browser checks, plus the later public unchanged-input control.
+The companion is a source audit. The main report adds 107 submitted tests, synthetic regressions, a production build and browser checks, plus the later public unchanged-input control and 38 passing authored public-data mutation cases.
 
 [Main report](readyset-control-tower/REPORT.md) · [Current tests](readyset-control-tower/TESTS.md) · [Companion audit](readyset-control-tower/audit-codex-23484638-pass-01.md)
 
@@ -26,13 +26,13 @@ The companion source findings and later runtime probes agree. Current suite coun
 
 ## busy-beavers
 
-The companion adds duplicate-ID ordering and rounded-hash concerns. These are linked separately; targeted runtime corroboration is being recorded. Conditional versus Blocked remains a question-policy judgment, not a universal clinical threshold.
+The companion adds duplicate-ID ordering and rounded-hash concerns. These are linked separately; targeted runtime corroboration now appears in main-report issues 6–7 and TESTS.md. Conditional versus Blocked remains a question-policy judgment, not a universal clinical threshold.
 
 [Main report](busy-beavers/REPORT.md) · [Current tests](busy-beavers/TESTS.md) · [Companion audit](busy-beavers/audit-codex-23484638-pass-01.md)
 
 ## oncosys-cohort-studio
 
-The companion adds reconstruction after a hash mismatch. It distinguishes a permissive warning policy from strict reproducibility. The main report separately tests request serialization and unknown checksum states; these are different issues.
+The companion adds reconstruction after a hash mismatch. It distinguishes a permissive warning policy from strict reproducibility. The main report separately tests request serialization and unknown checksum states. New issue 6 reproduces the warning-and-continue policy using a changed synthetic manifest; these are different issues.
 
 [Main report](oncosys-cohort-studio/REPORT.md) · [Current tests](oncosys-cohort-studio/TESTS.md) · [Companion audit](oncosys-cohort-studio/audit-codex-23484638-pass-01.md)
 

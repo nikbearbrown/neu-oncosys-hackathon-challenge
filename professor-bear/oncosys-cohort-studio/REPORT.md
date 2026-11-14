@@ -1,6 +1,6 @@
 # Cohort Studio: independent first-pass review
 
-Reviewed commit: `54aeacb6f6f355a1dcaa42d7abf2ce174315ad69`. Updated: **2026-11-14T20:11:00+00:00**. Track 1: Cohort Firewall.
+Reviewed commit: `54aeacb6f6f355a1dcaa42d7abf2ce174315ad69`. Updated: **2026-11-14T20:19:23+00:00**. Track 1: Cohort Firewall.
 
 **Status: source review plus isolated runtime checks; no verified hosted demo.** No official score is assigned. Runtime observations are labelled per issue; remaining source findings still require reproduction. Exact branches and limitations are stated. No student code or files were changed.
 
@@ -91,6 +91,18 @@ ai=auto tries an own model, then the hosted service, then rules. The README expl
 **Concrete change:** Give a first-use routing notice or explicit opt-in; persist local-only settings and list what request/context is sent.
 
 **Acceptance check:** Mock both providers and verify ai=off makes no outbound request; an auto request displays provider selection before transmission.
+
+### 6. Reconstruction warns about changed inputs but continues
+
+**Priority: medium. Evidence: companion source audit plus isolated runtime reproduction.**
+
+The normal generated script exited successfully and recreated eight synthetic samples. After one row was removed from sample_manifest.csv, the same script printed a hash warning, still exited 0 and wrote a seven-sample output. The warning and expected count are visible, so this is an explicitly permissive policy rather than hidden verification. It cannot guarantee exact reconstruction of the original frozen cohort.
+
+**Evidence:** [cohort_studio/exports.py:210](https://github.com/tammy357/oncosys-cohort-studio/blob/54aeacb6f6f355a1dcaa42d7abf2ce174315ad69/cohort_studio/exports.py#L210); [companion source audit](audit-codex-23484638-pass-01.md); [exact runtime observations](evidence/supplement-probes.json).
+
+**Concrete change:** Make strict reconstruction fail on hash mismatch by default; offer an explicitly named exploratory mode that records new hashes and changed counts.
+
+**Acceptance check:** The unchanged control reproduces the exact cohort. A changed manifest fails strict mode or emits a clearly different exploratory artifact.
 
 ## Exact official rubric: evidence, not scores
 

@@ -1,0 +1,19 @@
+{
+  "exit": 0,
+  "seconds": 164.99,
+  "command": [
+    "/usr/bin/sandbox-exec",
+    "-f",
+    "/private/tmp/oncosys-runtime-k2vhjg41/sandbox.sb",
+    "/private/tmp/oncosys-runtime-k2vhjg41/venv/bin/python3",
+    "scripts/scorecard.py",
+    "--challenge",
+    "/private/tmp/oncosys-runtime-k2vhjg41/oncosys-hackathon-challenge",
+    "--own"
+  ],
+  "source_commit": "4dd07736e99f96dd46cb6199c32bea32465bd20e",
+  "organizer_commit": "6e15a399a64ffbf80778db0b462ac239e70086b9",
+  "raw_input": "six verified public files",
+  "sealed_envelopes_used": false,
+  "scope": "Submitted public recipes and hand-made cases; not an unseen test or official score"
+}

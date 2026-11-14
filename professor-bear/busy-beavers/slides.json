@@ -1,7 +1,7 @@
 {
   "title": "Busy Beavers Cohort Firewall",
   "commit": "bfb369f231bf97a1d3aa21abade3ba4b1406a355",
-  "updated": "2026-11-14T20:11:00+00:00",
+  "updated": "2026-11-14T20:19:23+00:00",
   "slides": [
     {
       "title": "Busy Beavers Cohort Firewall",
@@ -60,6 +60,26 @@
       "fix": "Show the active provider and exact outbound categories before the first free-text request.",
       "source": "https://github.com/GiorgiKarazanashvili/BusyBeavers/blob/bfb369f231bf97a1d3aa21abade3ba4b1406a355/detection/qa.py#L48",
       "notes": "build_context retained a synthetic sample identifier and its synthetic evidence note. Known-ID validation rejected an invented citation and accepted a real fixture citation. No provider transport was called. This verifies payload construction and citation-ID checks, not a privacy breach or semantic factual correctness.",
+      "status": "REPRODUCED \u00b7 SEE SCOPE",
+      "kind": "compare"
+    },
+    {
+      "title": "6 \u00b7 Duplicate IDs are removed before their detector",
+      "before": "Repeated identifier",
+      "after": "Discarded before check",
+      "fix": "Report duplicate IDs before deduplication, preserve both conflicting records and require an explicit record-selection policy.",
+      "source": "https://github.com/GiorgiKarazanashvili/BusyBeavers/blob/bfb369f231bf97a1d3aa21abade3ba4b1406a355/cfw/diff.py#L8",
+      "notes": "A direct diff_file probe supplied a repeated synthetic identifier with an identical value and then a conflicting value of 99. Both produced no duplicate-ID event. The function removes duplicate indices before testing index.duplicated. This confirms the helper ordering defect; it is not evidence that every full application path silently accepts duplicates.",
+      "status": "REPRODUCED \u00b7 SEE SCOPE",
+      "kind": "compare"
+    },
+    {
+      "title": "7 \u00b7 Rounded hashes bypass the finer numerical tolerance",
+      "before": "Tolerance says different",
+      "after": "Hash says equal",
+      "fix": "Use lossless screening before the declared tolerance, or document and consistently implement a deliberate quantization policy.",
+      "source": "https://github.com/GiorgiKarazanashvili/BusyBeavers/blob/bfb369f231bf97a1d3aa21abade3ba4b1406a355/cfw/fingerprint.py#L4",
+      "notes": "For values 1.00001 and 1.00004, rows_close returned False at its declared tolerance, but diff_file returned no change because their four-decimal profile hashes matched. Within-tolerance noise stayed quiet and a larger change was detected. In a full 40-sample engine fixture, the small above-tolerance change returned Ready, zero findings and analyses not_rerun. Scientific importance is task-specific; this is a disagreement between implemented equality policies, not a clinical-effect claim.",
       "status": "REPRODUCED \u00b7 SEE SCOPE",
       "kind": "compare"
     },
