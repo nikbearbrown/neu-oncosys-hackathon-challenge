@@ -1,0 +1,235 @@
+{
+  "mode": "judge",
+  "repo": "GiorgiKarazanashvili/BusyBeavers",
+  "commit": "bfb369f231bf97a1d3aa21abade3ba4b1406a355",
+  "track": 1,
+  "reviewer": "Professor Bear / Codex source review",
+  "summary": "The submission has a clear API boundary and withholds invalid findings rather than presenting a mock as a real result. This deeper source pass identifies two additional detector blind spots: duplicate sample IDs are removed before their dedicated detector, and equality after four-decimal rounding bypasses the stated tolerance check. Repair/evidence truncation also needs explicit coverage. No runtime result or numerical accuracy estimate is claimed.",
+  "limitations": [
+    "Pinned local checkout, not a verified official final-submission receipt; branch names and later changes are outside this pass.",
+    "Static source analysis only. No submission code, tests, installers, workflows, notebook, server, hosted endpoint or model was executed.",
+    "No sealed envelopes, answer keys or raw clinical datasets were accessed. Numerical correctness, performance, accessibility and fresh-machine setup remain untested.",
+    "Source-derived control-flow consequences are labeled as such. Proposed acceptance checks are not observed test results.",
+    "The collected text budget is 160 files, 200 KB/file and 4 MB/entry. Complete_with_exclusions is not an exhaustive audit; exclusions and focused follow-ups are recorded.",
+    "No official score, cross-team ranking, clinical validity or regulatory/accessibility certification is asserted."
+  ],
+  "criteria": [
+    {
+      "id": "T1-1",
+      "status": "observed",
+      "assessment": "The duplicate-ID branch is undermined by preceding deduplication. Other event detectors exist, but no unseen-input accuracy or false-positive rate was measured.",
+      "findings": [
+        {
+          "kind": "gap",
+          "priority": "P1",
+          "title": "Duplicate IDs are removed before the duplicate-ID detector",
+          "observation": "diff_file removes duplicate indices from both input frames before hashing. profile_hashes then assigns the already-deduplicated frame index to its output. The later b.index.duplicated check therefore cannot detect the duplicate indices discarded at the beginning of the function. This is a source-level ordering defect; no duplicate-ID fixture was executed here.",
+          "impact": "Ambiguous repeated records can be silently reduced to the first record instead of being reported for human review. This can hide the exact join or identity problem the workflow is meant to expose.",
+          "recommendation": "Inspect and report duplicate identifiers before deduplication. Keep conflicting rows as evidence and prevent ambiguous records from contributing to an approved analytical slice until a documented selection policy or reviewer decision resolves them.",
+          "acceptance_check": "Use a synthetic table with one repeated ID and conflicting values, plus an identical-duplicate case and a unique-ID control. Confirm the repeated ID is reported, both records remain inspectable and an arbitrary first row is not silently accepted.",
+          "confidence": "High for the inspected ordering and index propagation; end-to-end runtime behavior remains untested.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "cfw/diff.py",
+              "start": 8,
+              "end": 20,
+              "quote": "def diff_file(name, a_df, b_df):\n    a_df, b_df = a_df[~a_df.index.duplicated()], b_df[~b_df.index.duplicated()]\n    a, b = profile_hashes(a_df), profile_hashes(b_df)\n    groups_a, groups_b = _dup_groups(a), _dup_groups(b)\n    out = []\n    added, removed = b.index.difference(a.index), a.index.difference(b.index)\n    if len(added):   out.append(dict(type=\"samples_added\", file=name, sample_ids=sorted(added)))\n    if len(removed): out.append(dict(type=\"samples_removed\", file=name, sample_ids=sorted(removed)))\n    if b.index.duplicated().any():\n        out.append(dict(type=\"duplicate_id\", file=name, sample_ids=sorted(set(b.index[b.index.duplicated()]))))\n    a, b = a[~a.index.duplicated()], b[~b.index.duplicated()]\n    common = a.index.intersection(b.index)\n    changed = [i for i in common if a[i] != b[i] and not rows_close(a_df.loc[i], b_df.loc[i])]"
+            },
+            {
+              "path": "cfw/fingerprint.py",
+              "start": 4,
+              "end": 8,
+              "quote": "def profile_hashes(df):\n    d = df.reindex(sorted(df.columns, key=str), axis=1).round(4)\n    h = pd.util.hash_pandas_object(d, index=False)\n    h.index = df.index\n    return h[~d.isna().all(axis=1)]"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-2",
+      "status": "observed",
+      "assessment": "Actual input slices are a strength. Rounded screening and the lack of a documented effect-magnitude blocking policy need explicit review rather than an automatic scoring deduction.",
+      "findings": [
+        {
+          "kind": "gap",
+          "priority": "P1",
+          "title": "Rounded-hash equality bypasses the finer tolerance check",
+          "observation": "Profile hashes are computed after rounding every column to four decimals. The changed-row predicate calls rows_close only when hashes differ, although rows_close uses rtol=1e-6 and atol=1e-9. Distinct values that round to the same four-decimal value never reach that tolerance check. The analysis-slice impact calculation repeats this pattern.",
+          "impact": "The implementation can call a profile or analysis slice unchanged even when its values differ beyond the finer stated tolerance. The scientific significance depends on the field and question; this is not a claim of harm or a measured miss rate on TCGA.",
+          "recommendation": "Use an exact or lossless canonical hash for screening, then apply the explicit numeric tolerance to candidate differences. Alternatively define one consistent, field-specific quantization policy and disclose the information it intentionally discards.",
+          "acceptance_check": "Compare authorized synthetic values 1.00001 and 1.00004. They round alike at four decimals but differ by more than 1e-6 relative tolerance. Check both detection and analysis impact, and retain a genuinely within-tolerance noise control.",
+          "confidence": "High for the predicate mismatch; the proposed fixture has not been run.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "cfw/fingerprint.py",
+              "start": 4,
+              "end": 8,
+              "quote": "def profile_hashes(df):\n    d = df.reindex(sorted(df.columns, key=str), axis=1).round(4)\n    h = pd.util.hash_pandas_object(d, index=False)\n    h.index = df.index\n    return h[~d.isna().all(axis=1)]"
+            },
+            {
+              "path": "cfw/fingerprint.py",
+              "start": 11,
+              "end": 24,
+              "quote": "def rows_close(ra, rb, rtol=1e-6, atol=1e-9):\n    \"\"\"True if two sample rows hold the same values up to float noise (text must match exactly).\n\n    Hash-after-rounding can flip on values sitting exactly on a rounding boundary, so whenever two\n    hashes differ we confirm with this tolerance check before reporting a change.\n    \"\"\"\n    cols = ra.index.intersection(rb.index)\n    x, y = ra[cols], rb[cols]\n    xn, yn = pd.to_numeric(x, errors=\"coerce\"), pd.to_numeric(y, errors=\"coerce\")\n    num = xn.notna() & yn.notna()\n    if not np.isclose(xn[num].astype(float), yn[num].astype(float), rtol=rtol, atol=atol).all():\n        return False\n    rest = ~num\n    return bool((((x[rest] == y[rest]) | (x[rest].isna() & y[rest].isna()))).all())"
+            },
+            {
+              "path": "cfw/diff.py",
+              "start": 18,
+              "end": 20,
+              "quote": "    a, b = a[~a.index.duplicated()], b[~b.index.duplicated()]\n    common = a.index.intersection(b.index)\n    changed = [i for i in common if a[i] != b[i] and not rows_close(a_df.loc[i], b_df.loc[i])]"
+            },
+            {
+              "path": "cfw/impact.py",
+              "start": 26,
+              "end": 34,
+              "quote": "        sa, sb = spec[\"slice\"](A), spec[\"slice\"](B)\n        if sa is None or sb is None:\n            res[k] = dict(affected=True, reason=\"input file missing in one release\", sample_ids=[]); continue\n        ha, hb = profile_hashes(sa), profile_hashes(sb)\n        sa_ids, sb_ids = set(ha.index), set(hb.index)\n        ids = sorted((sa_ids ^ sb_ids) | {i for i in sa_ids & sb_ids if ha[i] != hb[i] and not rows_close(sa.loc[i], sb.loc[i])})\n        res[k] = dict(affected=bool(ids), sample_ids=ids,\n                      reason=(f\"{len(ids)} sample(s) changed inside the slice it reads ({spec['reads']})\" if ids else\n                              f\"slice it reads is identical after rounding across {len(ha)} samples ({spec['reads']})\"))"
+            }
+          ]
+        },
+        {
+          "kind": "strength",
+          "priority": "P2",
+          "title": "Impact mapping uses the actual analysis input slice",
+          "observation": "A1's slice combines primary-tumor protein values with ER labels, while A2's slice uses primary-tumor subtype labels. The impact function compares sample membership and row values in those slices rather than treating every changed file as equally relevant.",
+          "impact": "This directly supports the product's affected-versus-unaffected analysis workflow. It is a useful design even though the rounded-hash screening concern above limits the implementation's guarantees.",
+          "recommendation": "Preserve the explicit dependency slices, fix their equality screening and record which slice policy was used in each run. Keep new analyses from silently inheriting A1/A2 assumptions.",
+          "acceptance_check": "Alter an unrelated protein row, then ERALPHA for an eligible sample, and then a subtype label. Verify the impact decisions differ for defensible reasons, with baseline and candidate sample sets visible.",
+          "confidence": "High for source structure; numerical parity with organizer reference functions remains untested.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "cfw/impact.py",
+              "start": 7,
+              "end": 20,
+              "quote": "def slice_a1(rel):\n    if \"clinical\" not in rel or \"protein_rppa\" not in rel: return None\n    er, pr = rel[\"clinical\"][ER], rel[\"protein_rppa\"][\"ERALPHA\"]\n    ids = [s for s in _primary(pr.index) if er.get(s) in (\"Positive\", \"Negative\")]\n    return pd.DataFrame({\"er\": er.loc[ids], \"eralpha\": pr.loc[ids]})\n\ndef slice_a2(rel):\n    if \"clinical\" not in rel: return None\n    c = rel[\"clinical\"][\"PAM50Call_RNAseq\"]\n    return c[_primary(c.index)].dropna().to_frame()\n\nANALYSES = {\n    \"A1\": dict(slice=slice_a1, reads=\"clinical[%s] + protein[ERALPHA], primary tumors with Positive/Negative ER\" % ER),\n    \"A2\": dict(slice=slice_a2, reads=\"clinical[PAM50Call_RNAseq], primary tumors\"),"
+            },
+            {
+              "path": "cfw/impact.py",
+              "start": 23,
+              "end": 34,
+              "quote": "def impact(A, B):\n    res = {}\n    for k, spec in ANALYSES.items():\n        sa, sb = spec[\"slice\"](A), spec[\"slice\"](B)\n        if sa is None or sb is None:\n            res[k] = dict(affected=True, reason=\"input file missing in one release\", sample_ids=[]); continue\n        ha, hb = profile_hashes(sa), profile_hashes(sb)\n        sa_ids, sb_ids = set(ha.index), set(hb.index)\n        ids = sorted((sa_ids ^ sb_ids) | {i for i in sa_ids & sb_ids if ha[i] != hb[i] and not rows_close(sa.loc[i], sb.loc[i])})\n        res[k] = dict(affected=bool(ids), sample_ids=ids,\n                      reason=(f\"{len(ids)} sample(s) changed inside the slice it reads ({spec['reads']})\" if ids else\n                              f\"slice it reads is identical after rounding across {len(ha)} samples ({spec['reads']})\"))"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-3",
+      "status": "observed",
+      "assessment": "Evidence, reasons and validation are present. A 500-record cap must not silently narrow authoritative repair coverage.",
+      "findings": [
+        {
+          "kind": "gap",
+          "priority": "P1",
+          "title": "A display cap also truncates the actionable repair scope",
+          "observation": "The exported finding evidence is sliced to MAX_EVIDENCE and the repair's targets are independently sliced to the same limit. MAX_EVIDENCE is 500. There is no complete target-set reference or truncation marker in this construction, while summary text can describe the full event.",
+          "impact": "A downstream consumer cannot infer that an apparently complete repair covers only the first 500 records. The prior report already identified this concern; this pass corroborates the exact source construction rather than claiming a new runtime result.",
+          "recommendation": "Separate a bounded evidence preview from the authoritative complete target set. Export total counts, explicit truncation status and a hash-bound complete target artifact, or refuse to represent a partial repair as complete.",
+          "acceptance_check": "Create a synthetic 501-target event and inspect exported evidence, repair targets and summary counts. Either all intended targets must be addressable or the operation must be visibly partial and non-approvable as a complete repair.",
+          "confidence": "High for the explicit slices; downstream export behavior has not been executed.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "detection/engine.py",
+              "start": 25,
+              "end": 29,
+              "quote": "ENGINE_NAME = \"cohort-firewall-cfw\"\nMAX_EVIDENCE = 500\nREF_PATH = ROOT / \"data\" / \"tcga-brca\" / \"reference_analyses.py\"\n# stems (cfw names files by stem) each analysis reads; used for file-level findings\nANALYSIS_FILES = {\"A1\": {\"clinical\", \"protein_rppa\"}, \"A2\": {\"clinical\"}}"
+            },
+            {
+              "path": "detection/engine.py",
+              "start": 257,
+              "end": 268,
+              "quote": "        findings.append({\n            \"id\": fid, \"kind\": ev[\"kind\"], \"summary\": ev[\"summary\"], \"severity\": sev, \"confidence\": ev[\"confidence\"],\n            \"evidence\": ev[\"evidence\"][:MAX_EVIDENCE],\n            \"affects_analyses\": affects, \"not_affected_analyses\": not_affects,\n            \"limitation\": ev[\"limitation\"], \"needs_human_review\": sev in (\"high\", \"medium\"),\n            \"impact_reasons\": why,\n        })\n        r = ev[\"repair\"]\n        targets = [_ptr(i, name_b, r[\"file\"]) for i in r[\"ids\"]][:MAX_EVIDENCE] or [_ptr(r[\"file\"], name_b, r[\"file\"], kind=\"file\")]\n        repairs.append({\"id\": f\"R{n:02d}\", \"action\": r[\"action\"], \"targets\": targets,\n                        \"justification\": r[\"why\"] + \" Proposal only; no release file is modified.\",\n                        \"addresses\": [fid]})"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-4",
+      "status": "observed",
+      "assessment": "The API withholds schema-invalid output and findings retain limitations. Existing concerns about human approval in derivative exports remain open and were not executed here.",
+      "findings": [
+        {
+          "kind": "strength",
+          "priority": "P2",
+          "title": "Invalid schema output is withheld from the successful findings route",
+          "observation": "The comparison service packages the detector output, calls write_document and checks returned validation errors. On errors it renames the result to findings.invalid.json, marks the run failed and returns before findings_available is set. findings_path only exposes a completed run with an available file.",
+          "impact": "This prevents a format-invalid export from silently taking the successful handoff route. Schema validation still does not prove detector correctness, but it is a useful independent packaging boundary.",
+          "recommendation": "Retain this failed-versus-completed distinction and keep the rejected file available only as a clearly marked diagnostic. Bind validation to the same bytes served to the next team.",
+          "acceptance_check": "Supply a synthetic detector response that fails the organizer schema. Verify the run is failed and the successful findings endpoint does not serve it; then repeat with a valid positive control.",
+          "confidence": "High for the service's control flow; the API and validator were not run.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "backend/services/comparison.py",
+              "start": 100,
+              "end": 123,
+              "quote": "    try:\n        progress(f\"Calling detection engine with {rel_a.name} and {rel_b.name}\")\n        raw, info = detector_adapter.run(rel_a.path, rel_b.path, (rel_a.name, rel_b.name), work, progress)\n        progress(\"Packaging findings.json (format v0.2)\")\n        doc, notes = report_export.build_document(raw, rel_a, rel_b, info.to_dict())\n        progress(\"Validating with format/validate.py\")\n        target = work / \"findings.json\"\n        errors = report_export.write_document(doc, target)\n        summary = build_summary(doc, rel_a, rel_b, notes)\n        if errors:\n            target.replace(work / \"findings.invalid.json\")\n            _update(run_id, status=\"failed\", finished_at=_now(), detector=info.to_dict(), summary=summary,\n                    validation={\"valid\": False, \"errors\": errors[:50], \"validator\": \"format/validate.py\"},\n                    error=f\"Engine output failed the official validator ({len(errors)} problem(s)); findings.json withheld.\")\n            return\n        progress(\"Done: findings.json is valid\")\n        _update(run_id, status=\"completed\", finished_at=_now(), detector=info.to_dict(),\n                validation={\"valid\": True, \"errors\": [], \"validator\": \"format/validate.py\"},\n                findings_available=True, verdict=doc.get(\"verdict\"), summary=summary)\n    except detector_adapter.DetectorError as e:\n        _update(run_id, status=\"failed\", finished_at=_now(), error=str(e))\n    except Exception as e:  # unexpected: report honestly\n        _update(run_id, status=\"failed\", finished_at=_now(), error=f\"{type(e).__name__}: {e}\",\n                traceback=traceback.format_exc(limit=4))"
+            },
+            {
+              "path": "backend/services/comparison.py",
+              "start": 139,
+              "end": 144,
+              "quote": "def findings_path(run_id: str) -> Path | None:\n    rec = get_run(run_id)\n    p = run_dir(run_id) / \"findings.json\"\n    if rec[\"status\"] == \"completed\" and rec.get(\"findings_available\") and p.is_file():\n        return p\n    return None"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-5",
+      "status": "not_tested",
+      "assessment": "A real-engine adapter, API and dashboard exist in source. This pass did not install dependencies, start them, run tests or verify the live deployment.",
+      "findings": [],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. This pass does not establish runtime behavior or user comprehension."
+    },
+    {
+      "id": "T1-6",
+      "status": "observed",
+      "assessment": "Repair proposals contain reasons and preserve uncertainty about which release is authoritative. Approved repairs and unapproved previews must remain distinct.",
+      "findings": [
+        {
+          "kind": "strength",
+          "priority": "P2",
+          "title": "Proposed repairs retain explicit limitations and analysis impact reasons",
+          "observation": "Event construction includes source pointers and per-kind limitations, then computes analysis-specific impact reasons. The exported finding retains those reasons and a human-review flag, and repair justification says the action is a proposal that does not modify a release file in this path.",
+          "impact": "This gives a reviewer an interpretable handoff and preserves the important distinction between detecting a difference and proving which release is correct.",
+          "recommendation": "Keep the event-level evidence and uncertainty wording. Apply the same proposal-versus-approved distinction to every downstream derivative export and avoid treating restoration of a baseline number as proof of factual truth.",
+          "acceptance_check": "Follow one synthetic swap from source pointers through affected and unaffected analyses to a reviewer decision. Confirm original input files remain unchanged and the derivative, if any, is explicitly labeled with approval state.",
+          "confidence": "High for the inspected detector/export path; derivative export and reviewer UI behavior remain untested.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "detection/engine.py",
+              "start": 76,
+              "end": 89,
+              "quote": "        if typ == \"swap\":\n            pairs = [it[\"sample_ids\"] for it in items]\n            ev = []\n            for x, y in pairs:\n                ev.append(_ptr(x, name_b, file_b, f\"{file_b}: profile equals {y}'s profile in release A (and vice versa)\"))\n                ev.append(_ptr(y, name_b, file_b, f\"{file_b}: profile equals {x}'s profile in release A (and vice versa)\"))\n            events.append(dict(\n                kind=\"sample_swap\", file=stem, ids=ids, severity_hi=\"high\", severity_lo=\"medium\", confidence=\"high\",\n                summary=f\"{file_b}: {len(pairs)} pair(s) of samples exchanged their measurements \"\n                        f\"({'; '.join(' <-> '.join(p) for p in pairs[:3])}{' ...' if len(pairs) > 3 else ''}).\",\n                evidence=ev,\n                limitation=\"Exact profile identity shows the labels moved, not which release is correct.\",\n                repair=dict(action=\"restore_from_previous_release\", ids=ids, file=file_b,\n                            why=f\"Restore the release A profiles for these samples in {file_b}, or exclude them until the provider confirms the correct assignment.\")))"
+            },
+            {
+              "path": "detection/engine.py",
+              "start": 240,
+              "end": 268,
+              "quote": "    findings, repairs = [], []\n    for n, ev in enumerate(events, 1):\n        fid = f\"F{n:02d}\"\n        idset = set(ev[\"ids\"])\n        affects, not_affects, why = [], [], {}\n        for aid, res in imp.items():\n            if idset:\n                hit = sorted(idset & set(res[\"sample_ids\"]))\n                hit_flag = bool(hit) and ev[\"file\"] in ANALYSIS_FILES.get(aid, set())\n                why[aid] = (f\"{len(hit)} of this finding's samples sit inside the slice {aid} reads\" if hit_flag\n                            else f\"none of this finding's samples are inside the slice {aid} reads\"\n                                 f\" (or the file is not an input of {aid})\")\n            else:  # file-level finding\n                hit_flag = res[\"affected\"] and ev[\"file\"] in ANALYSIS_FILES.get(aid, set())\n                why[aid] = f\"{ev['file']} is {'an input' if hit_flag else 'not an input'} of {aid}\"\n            (affects if hit_flag else not_affects).append(aid)\n        sev = ev[\"severity_hi\"] if affects else ev[\"severity_lo\"]\n        findings.append({\n            \"id\": fid, \"kind\": ev[\"kind\"], \"summary\": ev[\"summary\"], \"severity\": sev, \"confidence\": ev[\"confidence\"],\n            \"evidence\": ev[\"evidence\"][:MAX_EVIDENCE],\n            \"affects_analyses\": affects, \"not_affected_analyses\": not_affects,\n            \"limitation\": ev[\"limitation\"], \"needs_human_review\": sev in (\"high\", \"medium\"),\n            \"impact_reasons\": why,\n        })\n        r = ev[\"repair\"]\n        targets = [_ptr(i, name_b, r[\"file\"]) for i in r[\"ids\"]][:MAX_EVIDENCE] or [_ptr(r[\"file\"], name_b, r[\"file\"], kind=\"file\")]\n        repairs.append({\"id\": f\"R{n:02d}\", \"action\": r[\"action\"], \"targets\": targets,\n                        \"justification\": r[\"why\"] + \" Proposal only; no release file is modified.\",\n                        \"addresses\": [fid]})"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-7",
+      "status": "not_tested",
+      "assessment": "The first report's communication concerns remain separately retained. Unguided comprehension, labels, keyboard behavior and accessibility are untested in this pass.",
+      "findings": [],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. This pass does not establish runtime behavior or user comprehension."
+    }
+  ],
+  "judge_scores": null
+}
