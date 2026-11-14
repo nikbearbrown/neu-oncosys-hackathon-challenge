@@ -64,3 +64,7 @@ Update after the initial guide snapshot, November 14, 2026, 20:34 UTC:
 - **Studio CS-03 now has a separate warning-policy probe.** The parallel [supplement probes](oncosys-cohort-studio/evidence/supplement-probes.json) report unchanged reconstruction producing eight rows and a changed-manifest rerun warning but continuing to seven rows. Whether exploratory continuation is appropriate remains a product-policy question. A warning does not itself certify faithful reproduction.
 
 Later observations qualify the earlier snapshot only for the paths actually tested. Preserve the positive controls and the distinction between compatibility, adequacy, evidence identity and human approval.
+
+### Built-in check coverage qualification
+
+The [Identity Crisis declaration-coverage note](identity-crisis-control-tower/coverage-note-codex-23484638.md) finds matching source registration declarations for every required check in all eight inspected built-in cards. This does not prove runtime availability or negate the permissive browser default. It prevents reading the conditional missing-check concern as an observed absence of all built-in implementations.
