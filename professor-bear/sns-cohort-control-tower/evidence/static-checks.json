@@ -1,0 +1,104 @@
+{
+  "commit": "c1e8b79a2987cee6087d847867f9895deaa109a4",
+  "timestamp": "2026-11-14T19:40:03+00:00",
+  "method": "Python ast.parse of regular Git blobs; no imports or execution",
+  "files": [
+    {
+      "file": "sns/app.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "sns/chaos.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "sns/cohort.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "sns/engine/__init__.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "sns/engine/cohort.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "sns/engine/diff.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "sns/engine/findings.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "sns/engine/impact.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "sns/engine/release.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "sns/engine/viz.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "sns/inspect_release.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "sns/make_test_release.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "sns/peek_sample.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "sns/run_diff.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "sns/run_tower.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "sns/score_release.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "sns/server.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "sns/show_change.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "sns/swap_replay.py",
+      "parsed": true,
+      "error": null
+    }
+  ],
+  "test_function_definitions": 0,
+  "runtime_tests": "not run in this first pass"
+}

@@ -1,0 +1,156 @@
+{
+  "title": "ReadySet Control Tower review",
+  "commit": "4dd07736e99f96dd46cb6199c32bea32465bd20e",
+  "slides": [
+    {
+      "title": "ReadySet Control Tower",
+      "before": "A working comparison engine",
+      "after": "Readiness needs stronger gates",
+      "fix": "Professor Bear review \u00b7 14 November 2026",
+      "source": "REPORT.md",
+      "notes": "Independent feedback on fixed commit 4dd07736e99f96dd46cb6199c32bea32465bd20e. No official score.",
+      "status": "REVIEW",
+      "kind": "cover"
+    },
+    {
+      "title": "What we actually tested",
+      "before": "107 / 107\nsubmitted tests passed",
+      "after": "12 / 14\nproposed guardrails unmet",
+      "fix": "10 browser checks passed. TypeScript and production build passed.",
+      "source": "TESTS.md",
+      "notes": "The independent checks intentionally target suspected gaps. These denominators measure different things and do not form an accuracy score. Two independent controls passed.",
+      "status": "OBSERVED",
+      "kind": "compare"
+    },
+    {
+      "title": "The working workflow",
+      "before": "Synthetic swap",
+      "after": "Evidence, effect and human review",
+      "fix": "Keep this inspectable workflow.",
+      "source": "evidence/ui-synthetic-swap.png",
+      "notes": "A1 changes, A2 remains unrelated. Browser screenshot uses invented samples only.",
+      "status": "OBSERVED",
+      "kind": "image"
+    },
+    {
+      "title": "1 \u00b7 Empty inputs return Ready",
+      "before": "A: 0 files\nB: 0 files",
+      "after": "Ready\n0 findings",
+      "fix": "Required-input validation must run before the hash shortcut.",
+      "source": "https://github.com/a7ussein/readyset-control-tower/blob/4dd07736e99f96dd46cb6199c32bea32465bd20e/control_tower/compare.py#L78",
+      "notes": "Four probes: empty folders, both required inputs absent, identical zero-byte files and identical invalid bytes all return Ready. Neither analysis reruns.",
+      "status": "REPRODUCED",
+      "kind": "compare"
+    },
+    {
+      "title": "2 \u00b7 Baseline quality stays unknown",
+      "before": "Duplicate already in A",
+      "after": "Same duplicate in B\nReady",
+      "fix": "Separate baseline fitness from new-change compatibility.",
+      "source": "https://github.com/a7ussein/readyset-control-tower/blob/4dd07736e99f96dd46cb6199c32bea32465bd20e/control_tower/compare.py#L26",
+      "notes": "The documented engine is change-only. This is a scope boundary, not proof the detector violates its narrow contract. Broad readiness wording needs an explicit trusted-baseline receipt.",
+      "status": "REPRODUCED",
+      "kind": "compare"
+    },
+    {
+      "title": "3 \u00b7 No measurements remain",
+      "before": "5 eligible sample IDs",
+      "after": "0 measured target values\nConditional",
+      "fix": "Report measured denominators and analysis availability.",
+      "source": "https://github.com/a7ussein/readyset-control-tower/blob/4dd07736e99f96dd46cb6199c32bea32465bd20e/control_tower/analyses.py#L155",
+      "notes": "The all-blank ERALPHA row yields null group means and null difference. Proposed acceptance: Blocked or Insufficient Evidence with the unavailable analysis explained.",
+      "status": "REPRODUCED",
+      "kind": "compare"
+    },
+    {
+      "title": "4a \u00b7 Display rounding hides change",
+      "before": "True mean\n2.0000 \u2192 2.0004",
+      "after": "Computed output\n2.0 \u2192 2.0",
+      "fix": "Keep full precision until display formatting.",
+      "source": "https://github.com/a7ussein/readyset-control-tower/blob/4dd07736e99f96dd46cb6199c32bea32465bd20e/control_tower/analyses.py#L167",
+      "notes": "The positive-group mean changes by 0.0004. The helper receives equal rounded outputs and reports no effect. The detector may still see source changes. This is an effect-classification limitation.",
+      "status": "REPRODUCED",
+      "kind": "compare"
+    },
+    {
+      "title": "4b \u00b7 Zero has no relative denominator",
+      "before": "Difference\n0 \u2192 0.01",
+      "after": "Relative fraction\n1.0",
+      "fix": "Show absolute change when the baseline is zero.",
+      "source": "https://github.com/a7ussein/readyset-control-tower/blob/4dd07736e99f96dd46cb6199c32bea32465bd20e/control_tower/compare.py#L314",
+      "notes": "The helper substitutes 1.0 for zero or nonnumeric baselines. This does not establish a mathematical 100% change. Use explicit undefined relative change and justified absolute tolerance.",
+      "status": "REPRODUCED",
+      "kind": "compare"
+    },
+    {
+      "title": "4c \u00b7 Count loss deserves its own check",
+      "before": "1,000 samples",
+      "after": "1 sample\n\u201csmall\u201d effect",
+      "fix": "Assess adequacy independently of a stable estimate.",
+      "source": "https://github.com/a7ussein/readyset-control-tower/blob/4dd07736e99f96dd46cb6199c32bea32465bd20e/control_tower/compare.py#L303",
+      "notes": "Helper-only probe: the difference remains 2.9, while count drops by 99.9%. This is not a full real-data cohort run. A statistician should set task-specific adequacy criteria.",
+      "status": "REPRODUCED",
+      "kind": "compare"
+    },
+    {
+      "title": "5 \u00b7 Timestamps change the answer",
+      "before": "Plain TSV newer\nReady",
+      "after": "Gzip newer\nConditional",
+      "fix": "Resolve conflicting filenames explicitly.",
+      "source": "https://github.com/a7ussein/readyset-control-tower/blob/4dd07736e99f96dd46cb6199c32bea32465bd20e/control_tower/release.py#L33",
+      "notes": "Same file contents in both runs; only modification times changed. The candidate-selection rule chooses the newest file. Reject conflicts or record explicit selection.",
+      "status": "REPRODUCED",
+      "kind": "compare"
+    },
+    {
+      "title": "6 \u00b7 A blank reviewer is accepted",
+      "before": "Direct API request\nNo reviewer name",
+      "after": "HTTP 200\nReview requirement cleared",
+      "fix": "Enforce reviewer validation on the server.",
+      "source": "https://github.com/a7ussein/readyset-control-tower/blob/4dd07736e99f96dd46cb6199c32bea32465bd20e/control_tower/webserver.py#L258",
+      "notes": "The UI correctly requires a name. The direct loopback API accepts confirmed plus approved without one. This is not a claim of remote exploitation.",
+      "status": "REPRODUCED",
+      "kind": "compare"
+    },
+    {
+      "title": "7 \u00b7 Clearing erases the record",
+      "before": "Confirm \u2192 dismiss",
+      "after": "Clear\n0 stored decisions",
+      "fix": "Preserve an event for every change and withdrawal.",
+      "source": "https://github.com/a7ussein/readyset-control-tower/blob/4dd07736e99f96dd46cb6199c32bea32465bd20e/control_tower/webserver.py#L270",
+      "notes": "The current-state dictionary overwrites and removes records. Comparison history is separate and also replaces prior state. Evidence fingerprints are a strength to retain.",
+      "status": "REPRODUCED",
+      "kind": "compare"
+    },
+    {
+      "title": "Cloud routing already has disclosure",
+      "before": "Typed question\nMocked request",
+      "after": "No findings attached\nNo live API call",
+      "fix": "Add a warning against confidential text in questions.",
+      "source": "https://github.com/a7ussein/readyset-control-tower/blob/4dd07736e99f96dd46cb6199c32bea32465bd20e/web/src/Ask.tsx#L209",
+      "notes": "Corrected earlier suspicion: the UI explicitly discloses Anthropic routing. No missing-disclosure or actual-leak claim is supported. Provider safeguards are prospective improvements.",
+      "status": "SOURCE + MOCK",
+      "kind": "compare"
+    },
+    {
+      "title": "The proposed repair sequence",
+      "before": "Input validity\nAnalysis availability",
+      "after": "Deterministic source\nReview history",
+      "fix": "Then refine precision, zero handling and adequacy.",
+      "source": "REPORT.md",
+      "notes": "Use the detailed report for acceptance checks and source lines. Preserve the efficient change detector, evidence links and question-specific behavior.",
+      "status": "RECOMMENDATION",
+      "kind": "compare"
+    },
+    {
+      "title": "The next review needs real evidence",
+      "before": "Seven official criteria",
+      "after": "No invented score",
+      "fix": "Real-data and unseen-input runs remain unverified.",
+      "source": "REPORT.md",
+      "notes": "Judges apply the Cohort Firewall rubric. Review all findings with the team, rerun acceptance checks and inspect organizer-authorized inputs. No clinical or accessibility certification.",
+      "status": "LIMITS",
+      "kind": "compare"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "browser": "157.0.8103.51",
+  "data": "synthetic only",
+  "checks": [
+    {
+      "check": "synthetic-swap-visible",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "name-required-in-ui",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "question-changes-verdict",
+      "passed": true,
+      "detail": "Only A2 selected: Ready; unrelated swap remains visible"
+    },
+    {
+      "check": "question-toggle-reversible",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "assistant-answer-from-findings",
+      "passed": true,
+      "detail": "Can I use the new release?"
+    },
+    {
+      "check": "ui-review-persists",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "review-survives-reload",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "keyboard-can-focus-control",
+      "passed": true,
+      "detail": "A"
+    },
+    {
+      "check": "mobile-no-page-horizontal-overflow",
+      "passed": true,
+      "detail": "{'scroll': 390, 'viewport': 390}"
+    },
+    {
+      "check": "no-browser-script-errors",
+      "passed": true,
+      "detail": "[]"
+    }
+  ],
+  "passed": 10,
+  "failed": 0,
+  "limits": "Smoke checks, not full accessibility or usability conformance"
+}

@@ -1,0 +1,234 @@
+{
+  "commit": "bfb369f231bf97a1d3aa21abade3ba4b1406a355",
+  "timestamp": "2026-11-14T19:40:03+00:00",
+  "method": "Python ast.parse of regular Git blobs; no imports or execution",
+  "files": [
+    {
+      "file": "backend/__init__.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "backend/config.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "backend/main.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "backend/models.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "backend/services/__init__.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "backend/services/comparison.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "backend/services/detector_adapter.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "backend/services/fixes.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "backend/services/inventory.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "backend/services/mock_detector.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "backend/services/releases.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "backend/services/report_export.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "cfw/__init__.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "cfw/compare.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "cfw/coverage.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "cfw/diff.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "cfw/fingerprint.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "cfw/impact.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "cfw/load.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "cli.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "contrib/__init__.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "contrib/baseline_detector/__init__.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "contrib/baseline_detector/engine.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "contrib/baseline_detector/impact.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "contrib/baseline_detector/tcga_io.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "contrib/engine_template.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "detection/__init__.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "detection/engine.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "detection/qa.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "explore.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "frontend/api_client.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "frontend/app.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "frontend/local_backend.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "score.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "scripts/__init__.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "scripts/make_hard_tests.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "scripts/make_tests.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "scripts/scorecard.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/__init__.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/conftest.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/fake_engines.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_api.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_fixes.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_qa.py",
+      "parsed": true,
+      "error": null
+    },
+    {
+      "file": "tests/test_server.py",
+      "parsed": true,
+      "error": null
+    }
+  ],
+  "test_function_definitions": 45,
+  "runtime_tests": "not run in this first pass"
+}

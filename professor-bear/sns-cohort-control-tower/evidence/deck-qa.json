@@ -1,0 +1,35 @@
+{
+  "slides": [
+    {
+      "slide": 1,
+      "no_overflow": true
+    },
+    {
+      "slide": 2,
+      "no_overflow": true
+    },
+    {
+      "slide": 3,
+      "no_overflow": true
+    },
+    {
+      "slide": 4,
+      "no_overflow": true
+    },
+    {
+      "slide": 5,
+      "no_overflow": true
+    },
+    {
+      "slide": 6,
+      "no_overflow": true
+    },
+    {
+      "slide": 7,
+      "no_overflow": true
+    }
+  ],
+  "script_errors": [],
+  "browser": "157.0.8103.51",
+  "visual_inspection": "All seven slides inspected in contact sheet; legible hierarchy, no clipped text observed."
+}

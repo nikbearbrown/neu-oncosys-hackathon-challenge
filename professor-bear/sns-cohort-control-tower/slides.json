@@ -1,0 +1,77 @@
+{
+  "title": "SNS Cohort Control Tower",
+  "commit": "c1e8b79a2987cee6087d847867f9895deaa109a4",
+  "updated": "2026-11-14T19:40:03+00:00",
+  "slides": [
+    {
+      "title": "SNS Cohort Control Tower",
+      "before": "Independent first pass",
+      "after": "Evidence before a score",
+      "fix": "Professor Bear \u00b7 14 November 2026",
+      "source": "REPORT.md",
+      "notes": "Pinned commit c1e8b79a2987cee6087d847867f9895deaa109a4. Source review only; no live demonstration or official score.",
+      "status": "SOURCE REVIEW",
+      "kind": "cover"
+    },
+    {
+      "title": "1 \u00b7 Cohort export does not consult review decisions",
+      "before": "Repair proposed",
+      "after": "Export applies it",
+      "fix": "Require accepted decisions bound to the findings digest for approved exports.",
+      "source": "https://github.com/saigunavardhan/sns-cohort-control-tower/blob/c1e8b79a2987cee6087d847867f9895deaa109a4/sns/engine/cohort.py#L45",
+      "notes": "parse_repairs reads every proposed repair and run_cohort applies that mapping. Neither path checks the findings decisions section or an approval record. This converts proposals into cohort membership changes without a per-repair approval gate. Acceptance: A rejected exclusion and an undecided restoration must not affect an approved cohort; a separately labelled preview may simulate them.",
+      "status": "SOURCE FINDING \u00b7 HIGH",
+      "kind": "compare"
+    },
+    {
+      "title": "2 \u00b7 Flag for review can restore a missing record",
+      "before": "Record missing in B",
+      "after": "Flag causes restoration",
+      "fix": "Keep flagged absences absent until an explicit restore decision with supporting evidence is recorded.",
+      "source": "https://github.com/saigunavardhan/sns-cohort-control-tower/blob/c1e8b79a2987cee6087d847867f9895deaa109a4/sns/engine/cohort.py#L89",
+      "notes": "If a flagged record is absent from B but found in A, _apply_file_repairs adds it back and labels it flag_for_review_restored. Flagging asks for investigation; it does not establish that removal was an error. A deliberate withdrawal or corrected membership should not be reversed implicitly. Acceptance: A synthetic record intentionally removed from B stays absent when merely flagged; an approved restore is a separate tested action.",
+      "status": "SOURCE FINDING \u00b7 HIGH",
+      "kind": "compare"
+    },
+    {
+      "title": "3 \u00b7 No affecting finding bypasses movement and minimum-group checks",
+      "before": "No detected finding",
+      "after": "Changed result not checked",
+      "fix": "Evaluate analysis validity, minimum evidence and unexplained output movement before the unaffected Ready path.",
+      "source": "https://github.com/saigunavardhan/sns-cohort-control-tower/blob/c1e8b79a2987cee6087d847867f9895deaa109a4/sns/engine/impact.py#L187",
+      "notes": "verdict_for returns Ready when affected_by is empty before comparing before/after values or sample adequacy. The report says unaffected analyses were rerun to confirm they did not move, but this branch does not enforce that confirmation. A detector miss or undersized unchanged cohort can therefore escape those safeguards at helper level. Acceptance: Call the helper with no findings but changed results, then with an unchanged undersized group; neither should be an unqualified Ready.",
+      "status": "SOURCE FINDING \u00b7 HIGH",
+      "kind": "compare"
+    },
+    {
+      "title": "4 \u00b7 Small wide matrices are silently unrecognized",
+      "before": "10-sample matrix",
+      "after": "Not recognized as wide",
+      "fix": "Recognize layout from declared schema or robust headers independent of cohort size.",
+      "source": "https://github.com/saigunavardhan/sns-cohort-control-tower/blob/c1e8b79a2987cee6087d847867f9895deaa109a4/sns/engine/release.py#L60",
+      "notes": "Wide layout recognition requires more than ten TCGA-named columns. A valid wide file with ten or fewer samples falls through to long-layout detection and may return None, after which load_release omits it. Small cohorts are precisely where explicit insufficient-evidence handling matters. Acceptance: Load valid wide synthetic matrices with 1, 10 and 11 samples. Each is either parsed correctly or rejected with an explicit reason.",
+      "status": "SOURCE FINDING \u00b7 MEDIUM",
+      "kind": "compare"
+    },
+    {
+      "title": "5 \u00b7 Restoring baseline values is not independent correctness evidence",
+      "before": "Matches baseline",
+      "after": "Does not prove truth",
+      "fix": "Label the result as baseline-recovery simulation and attach the evidence needed to approve each repair.",
+      "source": "https://github.com/saigunavardhan/sns-cohort-control-tower/blob/c1e8b79a2987cee6087d847867f9895deaa109a4/sns/engine/findings.py#L440",
+      "notes": "repair_restores_before compares the simulated repaired result with baseline output. That verifies recovery relative to the assumed trusted release, not whether the baseline record or proposed repair is factually correct. The README treats A as trusted; that assumption must remain visible at the repair decision. Acceptance: Demonstrate a documented correction in B: the tool should preserve uncertainty about A rather than recommend automatic reversal solely to recover the old number.",
+      "status": "SOURCE FINDING \u00b7 MEDIUM",
+      "kind": "compare"
+    },
+    {
+      "title": "What is verified so far",
+      "before": "19 source files parsed",
+      "after": "Runtime tests pending",
+      "fix": "Read the report; reproduce each issue with a positive control.",
+      "source": "REPORT.md",
+      "notes": "Parsing is not testing. No hosted app, clinical claims, real data or sealed inputs were verified. No numeric score.",
+      "status": "LIMITS",
+      "kind": "compare"
+    }
+  ]
+}

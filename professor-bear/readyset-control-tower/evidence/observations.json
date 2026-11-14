@@ -1,0 +1,226 @@
+{
+  "source_commit": "4dd07736e99f96dd46cb6199c32bea32465bd20e",
+  "data": "synthetic only",
+  "checks": [
+    {
+      "id": "empty-folders",
+      "recommended_expectation": "Insufficient Evidence when required inputs cannot establish the requested result",
+      "observed": {
+        "verdict": "Ready",
+        "findings": 0,
+        "analyses": [
+          {
+            "id": "A1",
+            "status": "not_rerun"
+          },
+          {
+            "id": "A2",
+            "status": "not_rerun"
+          }
+        ]
+      },
+      "passes": false
+    },
+    {
+      "id": "missing-required-both",
+      "recommended_expectation": "Insufficient Evidence when required inputs cannot establish the requested result",
+      "observed": {
+        "verdict": "Ready",
+        "findings": 0,
+        "analyses": [
+          {
+            "id": "A1",
+            "status": "not_rerun"
+          },
+          {
+            "id": "A2",
+            "status": "not_rerun"
+          }
+        ]
+      },
+      "passes": false
+    },
+    {
+      "id": "identical-zero-byte",
+      "recommended_expectation": "Insufficient Evidence when required inputs cannot establish the requested result",
+      "observed": {
+        "verdict": "Ready",
+        "findings": 0,
+        "analyses": [
+          {
+            "id": "A1",
+            "status": "not_rerun"
+          },
+          {
+            "id": "A2",
+            "status": "not_rerun"
+          }
+        ]
+      },
+      "passes": false
+    },
+    {
+      "id": "identical-invalid-bytes",
+      "recommended_expectation": "Insufficient Evidence when required inputs cannot establish the requested result",
+      "observed": {
+        "verdict": "Ready",
+        "findings": 0,
+        "analyses": [
+          {
+            "id": "A1",
+            "status": "not_rerun"
+          },
+          {
+            "id": "A2",
+            "status": "not_rerun"
+          }
+        ]
+      },
+      "passes": false
+    },
+    {
+      "id": "preexisting-duplicate",
+      "recommended_expectation": "A separate baseline-quality gate detects or explicitly withholds fitness for an existing duplicate",
+      "observed": {
+        "verdict": "Ready",
+        "findings": 0,
+        "analyses": [
+          {
+            "id": "A1",
+            "status": "not_rerun"
+          },
+          {
+            "id": "A2",
+            "status": "not_rerun"
+          }
+        ]
+      },
+      "passes": false
+    },
+    {
+      "id": "blank-measurement",
+      "recommended_expectation": "Blocked or Insufficient Evidence when no target measurement remains",
+      "observed": {
+        "verdict": "Conditional",
+        "findings": 1,
+        "analyses": [
+          {
+            "id": "A1",
+            "after": {
+              "n_samples": 5,
+              "n_positive": 3,
+              "n_negative": 2,
+              "mean_positive": null,
+              "mean_negative": null,
+              "difference": null
+            },
+            "status": "changed"
+          },
+          {
+            "id": "A2",
+            "status": "not_rerun"
+          }
+        ]
+      },
+      "passes": false
+    },
+    {
+      "id": "zero-baseline",
+      "recommended_expectation": "Relative change is undefined at zero; use explicit absolute tolerance",
+      "observed": {
+        "size_measure_fraction": [
+          "large",
+          "difference",
+          1.0
+        ]
+      },
+      "passes": false
+    },
+    {
+      "id": "sample-count-collapse",
+      "recommended_expectation": "Loss of 999/1000 samples receives a separate adequacy gate",
+      "observed": {
+        "size_measure_fraction": [
+          "small",
+          "n_samples",
+          0.999
+        ]
+      },
+      "passes": false
+    },
+    {
+      "id": "rounding-before-comparison",
+      "recommended_expectation": "Keep full precision for change calculations and round only for display",
+      "observed": {
+        "true_positive_mean_change": 0.0004,
+        "display_before": 2.0,
+        "display_after": 2.0,
+        "size": [
+          "none",
+          null,
+          0.0
+        ]
+      },
+      "passes": false
+    },
+    {
+      "id": "mtime-choice",
+      "recommended_expectation": "Conflicting aliases require explicit selection independent of mtime",
+      "observed": {
+        "first_choice": "protein_rppa.tsv",
+        "first_verdict": "Ready",
+        "second_choice": "protein_rppa.tsv.gz",
+        "second_verdict": "Conditional",
+        "file_contents_changed_between_runs": false
+      },
+      "passes": false
+    },
+    {
+      "id": "anonymous-review",
+      "recommended_expectation": "Reject a blank reviewer before changing the review state",
+      "observed": {
+        "http_status": 200,
+        "stored_reviewer": "",
+        "needs_human_review": false
+      },
+      "passes": false
+    },
+    {
+      "id": "review-history",
+      "recommended_expectation": "Retain prior decision events and a withdrawal event",
+      "observed": {
+        "records_after_replacement": 1,
+        "records_after_clear": 0
+      },
+      "passes": false
+    },
+    {
+      "id": "cloud-routing-observation",
+      "recommended_expectation": "Outbound question payload matches the disclosed free text, without findings attached",
+      "observed": {
+        "typed_text_present": true,
+        "findings_attached": false,
+        "external_network_used": false
+      },
+      "passes": true
+    },
+    {
+      "id": "positive-swap",
+      "recommended_expectation": "Detect swap, mark A1 affected and leave A2 unrelated",
+      "observed": {
+        "verdict": "Conditional",
+        "kinds": [
+          "sample_swap"
+        ],
+        "affected": [
+          [
+            "A1"
+          ]
+        ]
+      },
+      "passes": true
+    }
+  ],
+  "passed": 2,
+  "failed": 12
+}
