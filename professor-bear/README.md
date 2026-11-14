@@ -31,3 +31,9 @@ These independently authored supplements are preserved alongside the main runtim
 | readyset-control-tower | 2026-11-14T14:53:45-05:00 | [Audit](readyset-control-tower/audit-codex-23484638-pass-01.md) | [HTML deck](readyset-control-tower/slides-codex-23484638-pass-01.html) · [Markdown](readyset-control-tower/slides-codex-23484638-pass-01.md) |
 | sns-cohort-control-tower | 2026-11-14T15:09:22-05:00 | [Audit](sns-cohort-control-tower/audit-codex-23484638-pass-01.md) | [HTML deck](sns-cohort-control-tower/slides-codex-23484638-pass-01.html) · [Markdown](sns-cohort-control-tower/slides-codex-23484638-pass-01.md) |
 | tripwire | 2026-11-14T15:03:44-05:00 | [Audit](tripwire/audit-codex-23484638-pass-01.md) | [HTML deck](tripwire/slides-codex-23484638-pass-01.html) · [Markdown](tripwire/slides-codex-23484638-pass-01.md) |
+
+### SNS reconstruction follow-through — 20:19 UTC
+
+[Reconstruction follow-through audit](sns-cohort-control-tower/audit-codex-23484638-pass-03.md) · [Issue deck](sns-cohort-control-tower/slides-codex-23484638-pass-03.html) · [Markdown deck](sns-cohort-control-tower/slides-codex-23484638-pass-03.md)
+
+Source-only supplement. A2 serialization overlaps the main runtime finding; missing-filter and fallback concerns are additional source findings. Do not double-count overlapping issues.
