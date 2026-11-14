@@ -14,11 +14,11 @@
     },
     {
       "title": "What we actually tested",
-      "before": "107 / 107\nsubmitted tests passed",
+      "before": "107 unit tests + 38 cases",
       "after": "12 / 14\nproposed guardrails unmet",
       "fix": "10 browser checks passed. TypeScript and production build passed.",
       "source": "TESTS.md",
-      "notes": "The independent checks intentionally target suspected gaps. These denominators measure different things and do not form an accuracy score. Two independent controls passed.",
+      "notes": "107 unit tests, 15 public recipe cases and 23 hand-made public-data mutation cases passed. Separate independent edge probes met 2 of 14 proposed guards. Test scopes differ and are not official scores.",
       "status": "OBSERVED",
       "kind": "compare"
     },

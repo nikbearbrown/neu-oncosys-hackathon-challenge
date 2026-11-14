@@ -3,7 +3,7 @@
 **Review date:** November 14, 2026. **Team:** Automyte. **Track:** Cohort Firewall. **Product:** Cohort Control Tower.
 **Reviewed commit:** [`4dd07736e99f96dd46cb6199c32bea32465bd20e`](https://github.com/a7ussein/readyset-control-tower/tree/4dd07736e99f96dd46cb6199c32bea32465bd20e). Later revisions are outside this review.
 
-The project has a working deterministic comparison engine, an inspectable interface, and substantial tests. All **107 submitted tests passed**, the TypeScript check and Vite production build passed, and **10 browser smoke checks passed**. The largest gap is at the boundary between “nothing relevant changed” and “there is enough valid evidence to use this release.” Two empty directories returned **Ready**, with zero findings and neither analysis rerun.
+The project has a working deterministic comparison engine, an inspectable interface, and substantial tests. All **107 submitted unit tests passed**; the later **15 public recipe cases and 23 hand-made public-data mutation cases also passed**. In addition, the TypeScript check and Vite production build passed, and **10 browser smoke checks passed**. The largest gap is at the boundary between “nothing relevant changed” and “there is enough valid evidence to use this release.” Two empty directories returned **Ready**, with zero findings and neither analysis rerun.
 
 The independent synthetic probes exercise that boundary and other review controls. **2 of 14 checks met the proposed expectations; 12 did not.** These deliberately targeted checks are not a random sample of behavior, twelve distinct official rubric failures, an official score, or an estimate of product accuracy. Some probe expectations propose additional guards for the documented narrow scope. Findings below explain that distinction.
 
@@ -15,7 +15,7 @@ This review uses source evidence plus execution of a pinned disposable copy. The
 
 Tests ran on macOS 26.5.1 ARM64, Python 3.14.6, Node 25.9.0 and headless Chrome 157.0.8103.51. A macOS sandbox denied private user-file contents, external networking and writes outside the temporary review folder. Credentials were absent. Loopback was allowed for server tests, with the usual local model port blocked. Browser checks used a fresh unsigned-in profile and blocked non-loopback page requests. Dependency installation used the lockfile, disabled lifecycle scripts, and empty npm config files. Build execution then ran without external networking.
 
-No organizer sealed envelope was opened. Two submitted envelope tests use synthetic fake unsealing scripts in temporary folders; those passed. The 15 recipe files under tests/releases require event data and a separate scoring workflow and were not executed. The initial run did not fetch real data. The later verified public A-versus-A control is documented below; no altered-real-data performance test, live deployment, external model service, clinical evaluation or full accessibility audit was run. Screenshots and reproduced values here use invented samples.
+No organizer sealed envelope was opened. Two submitted envelope tests use synthetic fake unsealing scripts in temporary folders; those passed. The later public-data round executed all 15 submitted recipes and all 23 hand-made mutation cases against checksum-verified Release A. All passed the submitted harness, which checks planted changes, reference-analysis agreement and format validity. These are known public authored cases, not unseen judging results or official points. No live deployment, external model service, clinical evaluation or full accessibility audit was run. Screenshots and independently designed regression fixtures use invented samples; published public-data logs contain no participant identifiers.
 
 ## What works well
 
@@ -120,7 +120,7 @@ Weights below are the official maxima, not awarded points. No numerical score is
 | Reasoning for the research question | 20 | A1/A2 selection changes verdict in observed browser test | Null-result availability and task-specific adequacy; severity helper limitations |
 | Evidence and sources | 15 | Hashes, witnesses, limitations and affected/unaffected analyses | Explicit physical filename selection; baseline receipt; preserved review events |
 | Safety and uncertainty | 15 | Clinical refusal tests, named UI review, visible limitations | Backend blank identity; Ready on absent evidence; broader interpretation of baseline fitness |
-| Working tool and clear setup | 15 | 107 tests, build and browser smoke checks pass locally | Verified public A-versus-A control now exists; unseen exercise and other operating systems remain unverified |
+| Working tool and clear setup | 15 | 107 tests, build and browser smoke checks pass locally | Public unchanged-input control and 38 authored mutation cases pass; unseen exercise and other operating systems remain unverified |
 | Useful next steps | 10 | Concrete suggested repairs and priority explanations visible | Availability-specific remediation, traceable actor/event records, threshold justification |
 | Communication | 5 | Plain-language synthetic walkthrough, source-linked evidence | Separate change compatibility, baseline quality and statistical adequacy clearly |
 

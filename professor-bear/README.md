@@ -11,9 +11,9 @@ Read each detailed report and issue-by-issue deck together. Work through the iss
 | Cohort Studio | [Report](oncosys-cohort-studio/REPORT.md) | [PDF](oncosys-cohort-studio/slides.pdf) | [HTML](oncosys-cohort-studio/slides.html) | [Tests](oncosys-cohort-studio/TESTS.md) |
 | SNS Control Tower | [Report](sns-cohort-control-tower/REPORT.md) | [PDF](sns-cohort-control-tower/slides.pdf) | [HTML](sns-cohort-control-tower/slides.html) | [Tests](sns-cohort-control-tower/TESTS.md) |
 
-Updated 2026-11-14T20:11:00+00:00. Download HTML decks to open them locally; GitHub renders the PDFs directly. Each deck presents one issue at a time. No official numerical scores are assigned.
+Updated 2026-11-14T20:23:17+00:00. Download HTML decks to open them locally; GitHub renders the PDFs directly. Each deck presents one issue at a time. No official numerical scores are assigned.
 
-Submitted-suite results: ReadySet **107 passed**; Tripwire **404 passed / 1 skipped**; Identity Crisis **96 passed / 3 skipped**; Busy Beavers **65 passed**; Cohort Studio **299 passed**. No submitted SNS test suite was found; its independent synthetic checks are documented. These suites cover different assertions and are not a ranking.
+Submitted-suite results: ReadySet **107 unit tests plus 38 public mutation cases passed**; Tripwire **404 passed / 1 skipped**; Identity Crisis **96 passed / 3 skipped**; Busy Beavers **65 passed**; Cohort Studio **299 passed**. No submitted SNS test suite was found; its independent synthetic checks are documented. These suites cover different assertions and are not a ranking.
 
 The latest three public-data runs used [six checksum-verified frozen files](review-tools/PUBLIC-RELEASE.md). No sealed judging inputs were opened. The tests do not establish clinical validity, unseen-input performance, production security or full accessibility. Each TESTS.md records the independent reproductions and remaining limits.
 
@@ -35,3 +35,9 @@ These independently authored supplements are preserved alongside the main runtim
 ## Concise companion decks
 
 [Companion reading guide and concise revision-2 decks](review-guide-codex-23484638.md) links all six entries and reconciles later evidence. It also links the separate SNS reconstruction follow-through. Earlier reports and decks remain preserved.
+
+### SNS reconstruction follow-through — 20:19 UTC
+
+[Reconstruction follow-through audit](sns-cohort-control-tower/audit-codex-23484638-pass-03.md) · [Issue deck](sns-cohort-control-tower/slides-codex-23484638-pass-03.html) · [Markdown deck](sns-cohort-control-tower/slides-codex-23484638-pass-03.md)
+
+Source-only supplement. A2 serialization overlaps the main runtime finding; missing-filter and fallback concerns are additional source findings. Do not double-count overlapping issues.

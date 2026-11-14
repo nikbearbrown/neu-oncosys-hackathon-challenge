@@ -27,9 +27,18 @@
     {
       "slide": 7,
       "no_overflow": true
+    },
+    {
+      "slide": 8,
+      "no_overflow": true
+    },
+    {
+      "slide": 9,
+      "no_overflow": true
     }
   ],
   "script_errors": [],
   "browser": "157.0.8103.51",
-  "visual_inspection": "All current slides inspected in rendered contact sheets; no clipping or overlap observed."
+  "visual_inspection": "All slide contact sheets inspected; no clipped or overlapping content observed.",
+  "reviewed_at": "2026-11-14T20:23:17+00:00"
 }

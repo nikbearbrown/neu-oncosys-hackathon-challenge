@@ -1,0 +1,63 @@
+[
+  {
+    "check": "Repeated identifier with value 1.0 reported",
+    "expected": true,
+    "observed": false,
+    "safeguard_met": false
+  },
+  {
+    "observation": "duplicate-ID events",
+    "value": 1.0,
+    "events": []
+  },
+  {
+    "check": "Repeated identifier with value 99.0 reported",
+    "expected": true,
+    "observed": false,
+    "safeguard_met": false
+  },
+  {
+    "observation": "duplicate-ID events",
+    "value": 99.0,
+    "events": []
+  },
+  {
+    "check": "Tolerance function rejects difference",
+    "expected": false,
+    "observed": false,
+    "safeguard_met": true
+  },
+  {
+    "check": "Detector reports difference beyond its tolerance",
+    "expected": true,
+    "observed": false,
+    "safeguard_met": false
+  },
+  {
+    "check": "Within-tolerance noise is quiet",
+    "expected": [],
+    "observed": [],
+    "safeguard_met": true
+  },
+  {
+    "check": "Larger change is detected",
+    "expected": true,
+    "observed": true,
+    "safeguard_met": true
+  },
+  {
+    "observation": "full engine quantization probe",
+    "verdict": "Ready",
+    "finding_count": 0,
+    "analysis_statuses": [
+      {
+        "id": "A1",
+        "status": "not_rerun"
+      },
+      {
+        "id": "A2",
+        "status": "not_rerun"
+      }
+    ]
+  }
+]

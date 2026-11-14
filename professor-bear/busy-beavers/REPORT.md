@@ -1,6 +1,6 @@
 # Busy Beavers Cohort Firewall: independent first-pass review
 
-Reviewed commit: `bfb369f231bf97a1d3aa21abade3ba4b1406a355`. Updated: **2026-11-14T20:11:00+00:00**. Track 1: Cohort Firewall.
+Reviewed commit: `bfb369f231bf97a1d3aa21abade3ba4b1406a355`. Updated: **2026-11-14T20:19:23+00:00**. Track 1: Cohort Firewall.
 
 **Status: source review plus isolated runtime checks; no verified hosted demo.** No official score is assigned. Runtime observations are labelled per issue; remaining source findings still require reproduction. Exact branches and limitations are stated. No student code or files were changed.
 
@@ -96,6 +96,30 @@ build_context includes up to 40 sample identifiers and ten evidence notes per fi
 
 A proposed fix can justify Conditional when a reviewer has the evidence needed to approve it. A sign change is not a universal clinical blocking threshold. Issue 1 concerns the absence of any output-level severity policy: the engine uses whether a finding affects an analysis, not how the result changed, to choose Conditional. Judges should ask the team to explain and demonstrate its policy rather than award or deduct points solely for one chosen threshold. No clinical cutoff is proposed here.
 
+### 6. Duplicate IDs are removed before their detector
+
+**Priority: high. Evidence: companion source audit plus isolated runtime reproduction.**
+
+A direct diff_file probe supplied a repeated synthetic identifier with an identical value and then a conflicting value of 99. Both produced no duplicate-ID event. The function removes duplicate indices before testing index.duplicated. This confirms the helper ordering defect; it is not evidence that every full application path silently accepts duplicates.
+
+**Evidence:** [cfw/diff.py:8](https://github.com/GiorgiKarazanashvili/BusyBeavers/blob/bfb369f231bf97a1d3aa21abade3ba4b1406a355/cfw/diff.py#L8); [companion source audit](audit-codex-23484638-pass-01.md); [exact runtime observations](evidence/supplement-probes.json).
+
+**Concrete change:** Report duplicate IDs before deduplication, preserve both conflicting records and require an explicit record-selection policy.
+
+**Acceptance check:** Run identical-duplicate, conflicting-duplicate and unique-ID controls through both the detector and full workflow.
+
+### 7. Rounded hashes bypass the finer numerical tolerance
+
+**Priority: high. Evidence: companion source audit plus isolated runtime reproduction.**
+
+For values 1.00001 and 1.00004, rows_close returned False at its declared tolerance, but diff_file returned no change because their four-decimal profile hashes matched. Within-tolerance noise stayed quiet and a larger change was detected. In a full 40-sample engine fixture, the small above-tolerance change returned Ready, zero findings and analyses not_rerun. Scientific importance is task-specific; this is a disagreement between implemented equality policies, not a clinical-effect claim.
+
+**Evidence:** [cfw/fingerprint.py:4](https://github.com/GiorgiKarazanashvili/BusyBeavers/blob/bfb369f231bf97a1d3aa21abade3ba4b1406a355/cfw/fingerprint.py#L4); [companion source audit](audit-codex-23484638-pass-01.md); [exact runtime observations](evidence/supplement-probes.json).
+
+**Concrete change:** Use lossless screening before the declared tolerance, or document and consistently implement a deliberate quantization policy.
+
+**Acceptance check:** Change a value across and within the explicit tolerance; detection and analysis-impact checks must agree with the stated policy.
+
 ## Exact official rubric: evidence, not scores
 
 The maximum points below reproduce the official track weights. They are not points awarded. Supplemental dashboard and data-quality rules do not add scoring criteria.
@@ -135,4 +159,4 @@ Latest unchanged-public-input control: verified frozen Release A versus itself r
 
 ## Companion source audit
 
-A separate reviewer supplied [a detailed source audit](audit-codex-23484638-pass-01.md) and [an issue deck](slides-codex-23484638-pass-01.html) ([Markdown version](slides-codex-23484638-pass-01.md)), committed 2026-11-14T14:59:17-05:00. The companion adds duplicate-ID ordering and rounded-hash concerns. These are linked separately; targeted runtime corroboration is being recorded. Conditional versus Blocked remains a question-policy judgment, not a universal clinical threshold. The companion's “not run” statements describe that reviewer's pass, not all testing in this folder. [Cross-review status](../REVIEW-STATUS.md) explains the relationship.
+A separate reviewer supplied [a detailed source audit](audit-codex-23484638-pass-01.md) and [an issue deck](slides-codex-23484638-pass-01.html) ([Markdown version](slides-codex-23484638-pass-01.md)), committed 2026-11-14T14:59:17-05:00. The companion adds duplicate-ID ordering and rounded-hash concerns. These are linked separately; targeted runtime corroboration now appears in main-report issues 6–7 and TESTS.md. Conditional versus Blocked remains a question-policy judgment, not a universal clinical threshold. The companion's “not run” statements describe that reviewer's pass, not all testing in this folder. [Cross-review status](../REVIEW-STATUS.md) explains the relationship.

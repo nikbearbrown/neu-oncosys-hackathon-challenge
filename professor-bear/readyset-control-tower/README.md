@@ -8,7 +8,7 @@ Pinned submission: `a7ussein/readyset-control-tower@4dd07736e99f96dd46cb6199c32b
 - [Tests and limits](TESTS.md): exact results and reproducibility notes.
 - [Synthetic regression probes](reproductions/checks.py).
 
-All reproduced inputs are invented. This is independent feedback for judges and
+Independent regression and browser fixtures are invented. Later submitted mutation tests use the verified public release, with only redacted aggregate logs published. This is independent feedback for judges and
 students, not an official score. Read the report before interpreting failed
 probes: they test recommended guards and include scoped limitations.
 

@@ -18,3 +18,10 @@ No submitted test suite identified in the inspected source; none claimed execute
 ## Companion source audit
 
 A separate reviewer supplied [a detailed source audit](audit-codex-23484638-pass-01.md) and [an issue deck](slides-codex-23484638-pass-01.html) ([Markdown version](slides-codex-23484638-pass-01.md)), committed 2026-11-14T15:09:22-05:00. The companion is a source review with attributed helper probes. Later main-report evidence adds the full small-matrix engine reproduction, the generated A2-script failure and a synthetic browser smoke test. The companion's “not run” statements describe that reviewer's pass, not all testing in this folder. [Cross-review status](../REVIEW-STATUS.md) explains the relationship.
+
+
+## Additional reconstruction audit — 20:19 UTC
+
+[Reconstruction follow-through audit](audit-codex-23484638-pass-03.md) · [Issue deck](slides-codex-23484638-pass-03.html) · [Markdown deck](slides-codex-23484638-pass-03.md)
+
+This separate source-only pass covers missing filter prerequisites, inconsistent cross-release fallback and A2 JSON serialization. The A2 serialization issue overlaps main-report issue 6, already reproduced at runtime; count it once. The two other findings remain source observations until their acceptance checks are executed.
