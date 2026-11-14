@@ -1,0 +1,77 @@
+{
+  "title": "HIPPA-cratic",
+  "commit": "9f0ad46f32a1a76af25baf1aa621ab862f991c45",
+  "updated": "2026-11-14T21:25:17+00:00",
+  "slides": [
+    {
+      "title": "HIPPA-cratic \u00b7 Cohort Studio",
+      "before": "Independent review",
+      "after": "Evidence before a score",
+      "fix": "Professor Bear \u00b7 14 November 2026",
+      "source": "REPORT.md",
+      "notes": "Pinned 9f0ad46f32a1a76af25baf1aa621ab862f991c45; source and limited isolated synthetic tests. No official score or hosted verification.",
+      "status": "INITIAL FOLLOW-THROUGH",
+      "kind": "cover"
+    },
+    {
+      "title": "1 \u00b7 Unknown checksum status becomes ok",
+      "before": "No expected checksum",
+      "after": "Status: ok",
+      "fix": "Use distinct present-but-unverified, hash-verified, changed and missing states.",
+      "source": "https://github.com/roh9031/HIPPA-cratic/blob/9f0ad46f32a1a76af25baf1aa621ab862f991c45/cohort_studio/data.py#L125",
+      "notes": "With an invented sample manifest and no sources.csv, check_data returned ok. The source also takes this branch when an existing file has no frozen checksum entry. The app maps ok to a green check. This conflates readable/present with compared against a known expected checksum. It is not evidence that a file actually changed or that all sidebar statuses claim clinical correctness. Acceptance: Remove one expected hash, then supply the correct hash and an incorrect hash. Unknown must remain distinct from verified and changed.",
+      "status": "REPRODUCED",
+      "kind": "compare"
+    },
+    {
+      "title": "2 \u00b7 Same-path replacements leave cached data stale",
+      "before": "File now has one row",
+      "after": "Cache still returns two",
+      "fix": "Bind caches to immutable release/content identity, or reject same-path modification.",
+      "source": "https://github.com/roh9031/HIPPA-cratic/blob/9f0ad46f32a1a76af25baf1aa621ab862f991c45/cohort_studio/data.py#L163",
+      "notes": "A two-row invented sample file was loaded, then replaced with one row at the same path. load still returned two rows; clearing _load restored the correct one-row result. _load keys on table and resolved location, and check_data caches by location too. Choosing a different release path is a supported positive design; this finding concerns changed bytes at an unchanged path, not evidence that an immutable official release normally changes. Acceptance: Load two rows, replace with one at the same path, and confirm all counts and exports refresh or an immutable-release violation is explicit. Retain the different-path release control.",
+      "status": "REPRODUCED",
+      "kind": "compare"
+    },
+    {
+      "title": "3 \u00b7 Rebuild script does not enforce recorded inputs",
+      "before": "Definition records hashes",
+      "after": "Script uses current environment",
+      "fix": "Make the script consume the definition and verify resolved files and hashes before rebuilding.",
+      "source": "https://github.com/roh9031/HIPPA-cratic/blob/9f0ad46f32a1a76af25baf1aa621ab862f991c45/cohort_studio/export.py#L21",
+      "notes": "cohort.json records data directory, release and fingerprints, which is useful. The separate generated script embeds steps but calls run(STEPS) using the current environment. It neither reads that definition nor enforces its input hashes. Running it with another ONCOSYS_DATA or ONCOSYS_RELEASE can therefore rebuild against different inputs. This initial finding is source-derived; a changed-environment subprocess control is still pending. Acceptance: Export against invented dataset A, run the script with dataset B selected, and require a clear mismatch or an explicitly new analysis rather than silent reproduction.",
+      "status": "SOURCE FINDING",
+      "kind": "compare"
+    },
+    {
+      "title": "4 \u00b7 Empty cohort warning is absent from final problem summary",
+      "before": "Zero rows + warning",
+      "after": "No unresolved problems",
+      "fix": "State empty cohort explicitly and preserve its reason at export.",
+      "source": "https://github.com/roh9031/HIPPA-cratic/blob/9f0ad46f32a1a76af25baf1aa621ab862f991c45/cohort_studio/engine.py#L281",
+      "notes": "Filtering the invented fixture to a nonexistent type returned zero rows and value_not_found/empty warnings, but unresolved_problems returned an empty list. The source then selects the success text No unresolved problems: one row per sample, and every joined record belongs to its own sample. The narrow join-grain claim is vacuously true, and an empty result may be legitimate. The concern is that the broad lead-in can hide the need to distinguish a genuinely empty population from a misspelled or unsupported filter. The live UI has not yet been observed for this case. Acceptance: Exercise a valid zero-result query, a misspelled value and an unavailable field. Each final summary should retain the different reason and limitation.",
+      "status": "REPRODUCED",
+      "kind": "compare"
+    },
+    {
+      "title": "5 \u00b7 Quoted request breaks generated Python",
+      "before": "Request includes triple quotes",
+      "after": "Generated script does not parse",
+      "fix": "Serialize text and structured data with safe literal encoding or load a separate JSON file.",
+      "source": "https://github.com/roh9031/HIPPA-cratic/blob/9f0ad46f32a1a76af25baf1aa621ab862f991c45/cohort_studio/export.py#L36",
+      "notes": "A normal request produced parseable Python. A request containing triple double quotes produced a SyntaxError when the generated script was parsed. The request is inserted into a triple-quoted module string without safe encoding; steps are also placed inside a raw triple-quoted JSON literal. Generated adversarial text was not executed. This demonstrates broken reproduction and a code-generation boundary, not an exploited deployment. Acceptance: Round-trip requests and values containing both quote styles, newlines, backslashes and triple quotes. Compare exact steps and cohort membership for benign generated scripts.",
+      "status": "REPRODUCED BY PARSING",
+      "kind": "compare"
+    },
+    {
+      "title": "What is verified so far",
+      "before": "170 tests passed",
+      "after": "1 practice case skipped",
+      "fix": "Read the test record before interpreting coverage.",
+      "source": "TESTS.md",
+      "notes": "Full suite: 170 passed, one skipped, zero failures. Earlier eight synthetic tests are included, not additional. No hosted/browser verification yet; targeted probes do not estimate general accuracy.",
+      "status": "LIMITS",
+      "kind": "compare"
+    }
+  ]
+}

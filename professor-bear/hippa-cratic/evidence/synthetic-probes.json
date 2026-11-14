@@ -1,0 +1,21 @@
+{
+  "timestamp": "2026-11-14T21:23:37.480242+00:00",
+  "normal_request_script_parses": true,
+  "commit": "9f0ad46f32a1a76af25baf1aa621ab862f991c45",
+  "unknown_manifest_status": "ok",
+  "cached_counts": {
+    "before": 2,
+    "same_path_after_change": 2,
+    "after_cache_clear": 1
+  },
+  "empty_cohort": {
+    "rows": 0,
+    "warnings": [
+      "value_not_found",
+      "empty"
+    ],
+    "unresolved": []
+  },
+  "triple_quote_request_generated_script_parses": false,
+  "limits": "Invented two-row fixture; helpers/full engine called in sandbox. No UI, real data, provider or generated program execution."
+}

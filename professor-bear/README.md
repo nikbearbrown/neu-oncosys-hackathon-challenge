@@ -10,6 +10,7 @@ Read each detailed report and issue-by-issue deck together. Work through the iss
 | Busy Beavers | [Report](busy-beavers/REPORT.md) | [PDF](busy-beavers/slides.pdf) | [HTML](busy-beavers/slides.html) | [Tests](busy-beavers/TESTS.md) |
 | Cohort Studio | [Report](oncosys-cohort-studio/REPORT.md) | [PDF](oncosys-cohort-studio/slides.pdf) | [HTML](oncosys-cohort-studio/slides.html) | [Tests](oncosys-cohort-studio/TESTS.md) |
 | SNS Control Tower | [Report](sns-cohort-control-tower/REPORT.md) | [PDF](sns-cohort-control-tower/slides.pdf) | [HTML](sns-cohort-control-tower/slides.html) | [Tests](sns-cohort-control-tower/TESTS.md) |
+| HIPPA-cratic / Cohort Studio | [Report](hippa-cratic/REPORT.md) | [PDF](hippa-cratic/slides.pdf) | [HTML](hippa-cratic/slides.html) | [Tests](hippa-cratic/TESTS.md) |
 
 Updated 2026-11-14T21:18:40+00:00. Download HTML decks to open them locally; GitHub renders the PDFs directly. Each deck presents one issue at a time. No official numerical scores are assigned.
 

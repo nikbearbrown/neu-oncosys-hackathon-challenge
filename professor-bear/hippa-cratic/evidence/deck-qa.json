@@ -1,0 +1,35 @@
+{
+  "slides": [
+    {
+      "slide": 1,
+      "no_overflow": true
+    },
+    {
+      "slide": 2,
+      "no_overflow": true
+    },
+    {
+      "slide": 3,
+      "no_overflow": true
+    },
+    {
+      "slide": 4,
+      "no_overflow": true
+    },
+    {
+      "slide": 5,
+      "no_overflow": true
+    },
+    {
+      "slide": 6,
+      "no_overflow": true
+    },
+    {
+      "slide": 7,
+      "no_overflow": true
+    }
+  ],
+  "script_errors": [],
+  "browser": "157.0.8103.51",
+  "visual_inspection": "Seven rendered slides inspected; no clipping or overlap observed. 2026-11-14T21:27:08.648272+00:00"
+}
