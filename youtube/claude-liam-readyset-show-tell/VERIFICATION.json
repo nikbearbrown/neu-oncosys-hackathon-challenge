@@ -1,0 +1,27 @@
+{
+  "file": "exports/landscape/claude-liam-readyset-show-tell.mp4",
+  "bytes": 13261232,
+  "video": [
+    3840,
+    2160
+  ],
+  "audio_codec": "aac",
+  "duration_s": 155.75,
+  "audio_timeline_s": 155.409958,
+  "sampled_frames": 312,
+  "blank_samples": [
+    39.25
+  ],
+  "explained_capture_entrances": [
+    {
+      "time_s": 39.25,
+      "beat": "B02"
+    }
+  ],
+  "decoded_without_errors": true,
+  "errors": [],
+  "visual_review": "Inspected opening/closing at 1280x720, actual UI detail frames and every beat midpoint in three contact sheets; preflight sampled 25/50/95%. The brief B02 entrance fade was inspected and is not a missing scene.",
+  "gate_t": "PASS: 14 beats, 0 failures",
+  "gate_v": "PASS on clean master: 28 samples, 0 blockers, 0 major",
+  "audio_check": "Local Whisper transcription checked opening/greeting/closing; spelling approximations for SEIS and proper names are not a pronunciation certification."
+}

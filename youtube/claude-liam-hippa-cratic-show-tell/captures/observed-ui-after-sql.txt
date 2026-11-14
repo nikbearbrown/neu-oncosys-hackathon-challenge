@@ -1,0 +1,200 @@
+Skip to main content
+Data
+
+Using your own data: samples, labs, visits
+
+Back to TCGA-BRCA
+
+/private/tmp/oncosys-runtime-k2vhjg41/hippa-film-synthetic
+
+✅ sample_manifest.csv — ok
+
+✅ labs.csv — ok
+
+✅ visits.csv — ok
+
+keyboard_arrow_right
+
+Use your own data (CSV or Supabase)
+
+AI drafting and the TCGA examples are off for your own data: build the steps with the dropdowns.
+
+Deploy
+Cohort Studio
+
+Build a cohort from your own data step by step, see who survives each step, and catch joins that count samples twice. Research use only: no diagnosis, treatment advice or clinical claims.
+
+1 · Describe the cohort
+
+Draft steps with AI
+
+2 · Build the steps
+
+filter keeps the samples that match · join brings in another table (and can repeat or drop samples) · collapse keeps one row per sample or patient. Every count below is recomputed as soon as a step changes.
+
+Step 1
+
+Step type
+
+Filter rows
+
+Join a table
+
+Collapse rows
+
+arrow_upward
+
+Up
+
+arrow_downward
+
+Down
+
+delete
+
+Remove
+
+Keeps the samples that match. Conditions are joined with and; switch a connector to or to accept either one.
+
+Column
+
+Condition
+
+Values
+
+Biopsy
+add
+
+Add condition
+
+remove
+
+Remove last condition
+
+In words: Filter: sample_type = Biopsy
+
+Step 2
+
+Step type
+
+Filter rows
+
+Join a table
+
+Collapse rows
+
+arrow_upward
+
+Up
+
+arrow_downward
+
+Down
+
+delete
+
+Remove
+
+Table
+
+Match on
+
+What the join does
+
+Your table labs: 68 rows, up to 3 per sample.
+
+Conditions on the labs rows themselves (which records count as a match):
+
+add
+
+Add condition
+
+remove
+
+Remove last condition
+
+In words: Keep if it has labs on sample_id
+
+add
+
+Add a step
+
+expand_more
+keyboard_arrow_right
+
+Advanced: edit the steps as JSON
+
+3 · What survives each step
+0
+5
+10
+15
+20
+25
+30
+35
+40
+45
+50
+55
+60
+65
+70
+75
+80
+85
+90
+95
+100
+0 · Start: all samp…
+1 · Filter: sample_…
+2 · Keep if it has l…
+patients
+rows
+samples
+
+Why isn't a sample in my cohort? Type a sample ID to see which step removed it and why.
+
+4 · Review and export
+
+Samples
+
+16
+
+Patients
+
+16
+
+Rows in table
+
+16
+
+Human review required. A person should confirm the steps match the research question before this cohort is used. Limitation: your tables are used as uploaded: values aren't quality-checked, and samples and patients are linked only through the ID columns you chose.
+
+Data notes unavailable: they compare the TCGA-BRCA files, so they're off for your own data
+
+Independent check. Rebuild this cohort a second way: the same steps written as one DuckDB SQL query over the raw files, without the app's engine. Both should give the same samples.
+
+🔎 Verify with SQL
+
+✅
+
+Match. Engine: 16 samples · independent SQL: 16 samples. Same sample IDs, and the same rows, samples and patients after every step.
+
+This checks that the steps were carried out correctly. It can't tell you whether the steps match your research question: that's the human review below.
+
+keyboard_arrow_right
+
+Show the SQL (copy it, or download and run python scripts/sql.py -f cohort.sql)
+
+No unresolved problems: one row per sample, and every joined record belongs to its own sample.
+
+cohort_samples.csv
+
+cohort.json (definition + funnel)
+
+rebuild_cohort.py
+
+keyboard_arrow_right
+
+Preview final table (16 rows)

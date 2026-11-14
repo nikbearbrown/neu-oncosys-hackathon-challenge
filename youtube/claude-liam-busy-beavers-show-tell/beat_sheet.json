@@ -1,0 +1,1129 @@
+{
+  "metadata": {
+    "slug": "claude-liam-busy-beavers-show-tell",
+    "title": "Busy Beavers: From Finding To Review",
+    "skill": "lecture",
+    "style_preset": "lecture",
+    "channel": "claude-liam",
+    "channel_title": "@NikBearBrown",
+    "persona": "Liam (in for Bear)",
+    "voice": "am_onyx",
+    "voice_kokoro": "am_onyx",
+    "engine": "kokoro",
+    "clock": "narration",
+    "palette": "neu",
+    "register": "Teardown-warm",
+    "fps": 24,
+    "aspect_ratio": "16:9",
+    "width": 3840,
+    "height": 2160,
+    "caption_policy": "none",
+    "lecture_opening_description": "Make changes understandable",
+    "source_doc": "../../professor-bear/busy-beavers/REPORT.md",
+    "tags": [
+      "Busy Beavers",
+      "AI Healthcare Hackathon",
+      "Evidence",
+      "Research Tools"
+    ],
+    "audience": "Hackathon builders and people exploring evidence-centered research tools",
+    "typography": {
+      "display": "Lato",
+      "serif": "Lato"
+    },
+    "event_credit": "Northeastern SEIS",
+    "team": "Team Busy Beavers",
+    "brand_confirmation": "confirmed",
+    "pronounce": {
+      "SEIS": "sˈeɪs"
+    },
+    "render_concurrency": 4
+  },
+  "beats": [
+    {
+      "beat_id": "BOPEN",
+      "act": "Opening",
+      "lane": "bookend",
+      "proof_gate": "SHOW",
+      "narration_text": "Busy Beavers: From Finding To Review. By Team Busy Beavers. Sponsored by Northeastern SEIS, OncoSys AI, The Open Accelerator, and Red Hat.",
+      "estimated_duration_s": 4.62,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Busy Beavers: From Finding To Review",
+        "motion_claim": "Reveal the idea, terms or project workflow in time with narration",
+        "show": [
+          {
+            "at": 0,
+            "event": "Name the subject"
+          },
+          {
+            "at": 0.15,
+            "event": "Reveal the conceptual process"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysLecture",
+          "props": {
+            "mode": "open",
+            "title": "Busy Beavers: From Finding To Review",
+            "team": "Team Busy Beavers",
+            "lines": [],
+            "labels": [
+              "Compare",
+              "Explain",
+              "Review"
+            ],
+            "credit": "Northeastern SEIS",
+            "logos": [
+              "oncosys-films/brand/the-open-accelerator-transparent.png",
+              "oncosys-films/brand/oncosys-ai-transparent-black-wordmark.png",
+              "oncosys-films/brand/northeastern_university_seis_logo.jpeg",
+              "oncosys-films/brand/red-hat-logo.png"
+            ],
+            "durationSeconds": 9.28
+          },
+          "rendered": {
+            "out": "media/BOPEN.mp4",
+            "at": "2026-11-14T23:20:39.295140+00:00"
+          }
+        }
+      },
+      "actual_duration_s": 9.28,
+      "audio_file": "mp3/beat-BOPEN.mp3",
+      "qc": {
+        "typography_reason": "Inventory of all authored title/team/description and organizer-credit text. Supplied trademark images and label-free conceptual animation are imagery, not authored typography; Gate V inspects the unmasked composition.",
+        "typography_fill": "#FFFFFF",
+        "typography_regions": [
+          {
+            "label": "Title, team and purpose",
+            "box": [
+              0.055,
+              0.14,
+              0.47,
+              0.72
+            ]
+          },
+          {
+            "label": "Written organizer credits",
+            "box": [
+              0.055,
+              0.74,
+              0.34,
+              0.94
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "beat_id": "BIDEA",
+      "act": "The Useful Idea",
+      "lane": "bookend",
+      "proof_gate": "SHOW",
+      "narration_text": "Hallo. This is Liam, in for Bear. Busy Beavers turns a data comparison into findings people can explore. It connects detected changes, affected analyses, and possible next steps. The useful idea is to make investigation feel like a coherent workflow.",
+      "estimated_duration_s": 15.38,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "The useful idea",
+        "motion_claim": "Reveal the idea, terms or project workflow in time with narration",
+        "show": [
+          {
+            "at": 0,
+            "event": "Name the subject"
+          },
+          {
+            "at": 0.15,
+            "event": "Reveal the conceptual process"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysLecture",
+          "props": {
+            "mode": "idea",
+            "title": "The useful idea",
+            "team": "Team Busy Beavers",
+            "lines": [
+              "Make changes understandable"
+            ],
+            "labels": [
+              "Compare",
+              "Explain",
+              "Review"
+            ],
+            "credit": "Northeastern SEIS",
+            "logos": [],
+            "durationSeconds": 16.245333
+          },
+          "rendered": {
+            "out": "media/BIDEA.mp4",
+            "at": "2026-11-14T23:21:02.799150+00:00"
+          }
+        }
+      },
+      "lead_silence_s": 0.8,
+      "actual_duration_s": 16.245333,
+      "audio_file": "mp3/beat-BIDEA.mp3",
+      "audio_padding_applied": {
+        "lead": 0.8,
+        "tail": 0
+      },
+      "qc": {
+        "typography_regions": [
+          {
+            "label": "Heading",
+            "box": [
+              0.055,
+              0.1,
+              0.94,
+              0.29
+            ]
+          },
+          {
+            "label": "Useful idea",
+            "box": [
+              0.055,
+              0.29,
+              0.45,
+              0.7
+            ]
+          },
+          {
+            "label": "Event footer",
+            "box": [
+              0.1,
+              0.9,
+              0.94,
+              0.97
+            ]
+          }
+        ],
+        "typography_fill": "#FFFFFF",
+        "typography_reason": "Complete authored-text inventory. Isometric document hatch marks and box edges are graphical imagery, not overlapping text; actual unmasked frames are inspected separately and remain subject to Gate V."
+      }
+    },
+    {
+      "beat_id": "BDEFS",
+      "act": "The Useful Idea",
+      "lane": "bookend",
+      "proof_gate": "SHOW",
+      "narration_text": "Three terms. Finding means a detected change with supporting evidence. Dependency means an input an analysis relies on. Derivative means a new output that preserves the original.",
+      "estimated_duration_s": 10.38,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Terms in this film",
+        "motion_claim": "Reveal the idea, terms or project workflow in time with narration",
+        "show": [
+          {
+            "at": 0,
+            "event": "Name the subject"
+          },
+          {
+            "at": 0.15,
+            "event": "Reveal the conceptual process"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysLecture",
+          "props": {
+            "mode": "definitions",
+            "title": "Terms in this film",
+            "team": "Team Busy Beavers",
+            "lines": [
+              "Finding: A detected change with supporting evidence",
+              "Dependency: An input an analysis relies on",
+              "Derivative: A new output that preserves the original"
+            ],
+            "labels": [
+              "Compare",
+              "Explain",
+              "Review"
+            ],
+            "credit": "Northeastern SEIS",
+            "logos": [],
+            "durationSeconds": 11.2
+          },
+          "rendered": {
+            "out": "media/BDEFS.mp4",
+            "at": "2026-11-14T23:21:19.577853+00:00"
+          }
+        }
+      },
+      "actual_duration_s": 11.2,
+      "audio_file": "mp3/beat-BDEFS.mp3"
+    },
+    {
+      "beat_id": "B01",
+      "act": "The Useful Idea",
+      "lane": "remotion",
+      "proof_gate": "SHOW",
+      "narration_text": "Compare the releases, explain the effect, then invite review. Busy Beavers keeps those stages visible. A finding becomes useful when a person can trace it to evidence and understand which analysis it affects.",
+      "estimated_duration_s": 12.69,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Evidence Before Action",
+        "motion_claim": "Reveal the named evidence or process on the narrated cue",
+        "show": [
+          {
+            "at": 0,
+            "event": "Establish the real artifact or conceptual cast"
+          },
+          {
+            "at": 0.25,
+            "event": "Focus the part named by the narration"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysProcess",
+          "props": {
+            "title": "Make data changes understandable and actionable",
+            "labels": [
+              "Compare",
+              "Explain",
+              "Review"
+            ],
+            "objectKinds": [
+              "document",
+              "adapter",
+              "monitor"
+            ],
+            "diagramStyle": "show-tell-isometric",
+            "mode": "flow",
+            "note": "Conceptual illustration",
+            "cues": [
+              0.1,
+              0.28,
+              0.65,
+              0.82
+            ],
+            "durationSeconds": 12.010667
+          },
+          "rendered": {
+            "out": "media/B01.mp4",
+            "at": "2026-11-14T23:21:35.372915+00:00"
+          }
+        }
+      },
+      "qc": {
+        "sparse_by_design": true,
+        "sparse_reason": "Show Tell approved isometric cast; whitespace preserves the document and gate relationships.",
+        "typography_regions": [
+          {
+            "label": "Heading",
+            "box": [
+              0.05,
+              0.05,
+              0.95,
+              0.2
+            ]
+          },
+          {
+            "label": "Object labels and details",
+            "box": [
+              0.05,
+              0.62,
+              0.95,
+              0.76
+            ]
+          },
+          {
+            "label": "Gate or drift label",
+            "box": [
+              0.3,
+              0.74,
+              0.7,
+              0.81
+            ]
+          },
+          {
+            "label": "Evidence-status note",
+            "box": [
+              0.05,
+              0.83,
+              0.95,
+              0.9
+            ]
+          },
+          {
+            "label": "Event footer",
+            "box": [
+              0.3,
+              0.91,
+              0.95,
+              0.97
+            ]
+          }
+        ],
+        "typography_fill": "#FFFFFF",
+        "typography_reason": "Complete authored-text inventory. Isometric document hatch marks and box edges are graphical imagery, not overlapping text; actual unmasked frames are inspected separately and remain subject to Gate V."
+      },
+      "actual_duration_s": 12.010667,
+      "audio_file": "mp3/beat-B01.mp3"
+    },
+    {
+      "beat_id": "B02",
+      "act": "The Useful Idea",
+      "lane": "remotion",
+      "proof_gate": "SHOW",
+      "narration_text": "This is the actual local results screen with invented sample data. In our browser checks, a swapped profile exposed evidence and showed one analysis rerun while the unrelated analysis stayed unchanged. The interface makes that relationship inspectable.",
+      "estimated_duration_s": 14.23,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Actual A2-only result · synthetic data",
+        "motion_claim": "Reveal the named evidence or process on the narrated cue",
+        "show": [
+          {
+            "at": 0,
+            "event": "Establish the real artifact or conceptual cast"
+          },
+          {
+            "at": 0.25,
+            "event": "Focus the part named by the narration"
+          }
+        ],
+        "remotion": {
+          "pattern": "BrowserCapture",
+          "props": {
+            "image": "oncosys-films/claude-liam-busy-beavers-show-tell/results-synthetic.png",
+            "imageAspect": 1.44,
+            "caption": "Busy Beavers · actual local synthetic demo",
+            "moves": [
+              {
+                "at": 0,
+                "x": 0.5,
+                "y": 0.5,
+                "scale": 1
+              },
+              {
+                "at": 0.22,
+                "x": 0.5,
+                "y": 0.4,
+                "scale": 1.15
+              }
+            ],
+            "moveSeconds": 0.8,
+            "frame": "app",
+            "durationSeconds": 14.848,
+            "brand": "neu"
+          },
+          "rendered": {
+            "out": "media/B02.mp4",
+            "at": "2026-11-14T23:22:03.776681+00:00"
+          }
+        }
+      },
+      "actual_duration_s": 14.848,
+      "audio_file": "mp3/beat-B02.mp3"
+    },
+    {
+      "beat_id": "B03",
+      "act": "The Useful Idea",
+      "lane": "remotion",
+      "proof_gate": "SHOW",
+      "narration_text": "The next-steps view carries the investigation forward. The tested swap path kept researcher review pending and did not automatically apply a fix. The downloaded findings also matched the information shown in the interface.",
+      "estimated_duration_s": 12.69,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Actual A2-only result · synthetic data",
+        "motion_claim": "Reveal the named evidence or process on the narrated cue",
+        "show": [
+          {
+            "at": 0,
+            "event": "Establish the real artifact or conceptual cast"
+          },
+          {
+            "at": 0.25,
+            "event": "Focus the part named by the narration"
+          }
+        ],
+        "remotion": {
+          "pattern": "BrowserCapture",
+          "props": {
+            "image": "oncosys-films/claude-liam-busy-beavers-show-tell/next-steps-synthetic.png",
+            "imageAspect": 1.44,
+            "caption": "Busy Beavers · actual local synthetic demo",
+            "moves": [
+              {
+                "at": 0,
+                "x": 0.5,
+                "y": 0.5,
+                "scale": 1
+              },
+              {
+                "at": 0.22,
+                "x": 0.5,
+                "y": 0.4,
+                "scale": 1.05
+              }
+            ],
+            "moveSeconds": 0.8,
+            "frame": "app",
+            "durationSeconds": 12.970667,
+            "brand": "neu"
+          },
+          "rendered": {
+            "out": "media/B03.mp4",
+            "at": "2026-11-14T23:22:26.704210+00:00"
+          }
+        }
+      },
+      "actual_duration_s": 12.970667,
+      "audio_file": "mp3/beat-B03.mp3"
+    },
+    {
+      "beat_id": "B10",
+      "act": "The Useful Idea",
+      "lane": "remotion",
+      "proof_gate": "SHOW",
+      "narration_text": "The architecture preserves original releases and produces derivatives separately. That is worth keeping. It lets a researcher compare a proposed correction with the source rather than silently losing the earlier state.",
+      "estimated_duration_s": 11.92,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Evidence Before Action",
+        "motion_claim": "Reveal the named evidence or process on the narrated cue",
+        "show": [
+          {
+            "at": 0,
+            "event": "Establish the real artifact or conceptual cast"
+          },
+          {
+            "at": 0.25,
+            "event": "Focus the part named by the narration"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysProcess",
+          "props": {
+            "title": "Build On The Foundation",
+            "labels": [
+              "Compare",
+              "Explain",
+              "Review"
+            ],
+            "objectKinds": [
+              "document",
+              "adapter",
+              "monitor"
+            ],
+            "diagramStyle": "show-tell-isometric",
+            "mode": "flow",
+            "note": "Conceptual illustration",
+            "cues": [
+              0.1,
+              0.28,
+              0.65,
+              0.82
+            ],
+            "durationSeconds": 11.968
+          },
+          "rendered": {
+            "out": "media/B10.mp4",
+            "at": "2026-11-14T23:22:41.789897+00:00"
+          }
+        }
+      },
+      "qc": {
+        "sparse_by_design": true,
+        "sparse_reason": "Show Tell approved isometric cast; whitespace preserves the document and gate relationships.",
+        "typography_regions": [
+          {
+            "label": "Heading",
+            "box": [
+              0.05,
+              0.05,
+              0.95,
+              0.2
+            ]
+          },
+          {
+            "label": "Object labels and details",
+            "box": [
+              0.05,
+              0.62,
+              0.95,
+              0.76
+            ]
+          },
+          {
+            "label": "Gate or drift label",
+            "box": [
+              0.3,
+              0.74,
+              0.7,
+              0.81
+            ]
+          },
+          {
+            "label": "Evidence-status note",
+            "box": [
+              0.05,
+              0.83,
+              0.95,
+              0.9
+            ]
+          },
+          {
+            "label": "Event footer",
+            "box": [
+              0.3,
+              0.91,
+              0.95,
+              0.97
+            ]
+          }
+        ],
+        "typography_fill": "#FFFFFF",
+        "typography_reason": "Complete authored-text inventory. Isometric document hatch marks and box edges are graphical imagery, not overlapping text; actual unmasked frames are inspected separately and remain subject to Gate V."
+      },
+      "actual_duration_s": 11.968,
+      "audio_file": "mp3/beat-B10.mp3"
+    },
+    {
+      "beat_id": "B11",
+      "act": "Build On The Foundation",
+      "lane": "remotion",
+      "proof_gate": "SHOW",
+      "narration_text": "Next, make every approved derivative follow the review decisions exactly. A proposed exclusion, an accepted exclusion, and a rejected exclusion need different outcomes. Keep previews useful, but label their approval state clearly.",
+      "estimated_duration_s": 12.31,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Evidence Before Action",
+        "motion_claim": "Reveal the named evidence or process on the narrated cue",
+        "show": [
+          {
+            "at": 0,
+            "event": "Establish the real artifact or conceptual cast"
+          },
+          {
+            "at": 0.25,
+            "event": "Focus the part named by the narration"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysProcess",
+          "props": {
+            "title": "Next: Strengthen The Contract",
+            "labels": [
+              "Evidence",
+              "Decision",
+              "Record"
+            ],
+            "objectKinds": [
+              "document",
+              "adapter",
+              "monitor"
+            ],
+            "diagramStyle": "show-tell-isometric",
+            "mode": "flow",
+            "note": "Proposed next step · not a completed feature",
+            "cues": [
+              0.1,
+              0.28,
+              0.65,
+              0.82
+            ],
+            "durationSeconds": 13.461333
+          },
+          "rendered": {
+            "out": "media/B11.mp4",
+            "at": "2026-11-14T23:22:58.298789+00:00"
+          }
+        }
+      },
+      "qc": {
+        "sparse_by_design": true,
+        "sparse_reason": "Show Tell approved isometric cast; whitespace preserves the document and gate relationships.",
+        "typography_regions": [
+          {
+            "label": "Heading",
+            "box": [
+              0.05,
+              0.05,
+              0.95,
+              0.2
+            ]
+          },
+          {
+            "label": "Object labels and details",
+            "box": [
+              0.05,
+              0.62,
+              0.95,
+              0.76
+            ]
+          },
+          {
+            "label": "Gate or drift label",
+            "box": [
+              0.3,
+              0.74,
+              0.7,
+              0.81
+            ]
+          },
+          {
+            "label": "Evidence-status note",
+            "box": [
+              0.05,
+              0.83,
+              0.95,
+              0.9
+            ]
+          },
+          {
+            "label": "Event footer",
+            "box": [
+              0.3,
+              0.91,
+              0.95,
+              0.97
+            ]
+          }
+        ],
+        "typography_fill": "#FFFFFF",
+        "typography_reason": "Complete authored-text inventory. Isometric document hatch marks and box edges are graphical imagery, not overlapping text; actual unmasked frames are inspected separately and remain subject to Gate V."
+      },
+      "actual_duration_s": 13.461333,
+      "audio_file": "mp3/beat-B11.mp3"
+    },
+    {
+      "beat_id": "B12",
+      "act": "Build On The Foundation",
+      "lane": "remotion",
+      "proof_gate": "SHOW",
+      "narration_text": "Also check input validity before taking an unchanged-file shortcut. A valid unchanged release and two empty folders are different situations. Give each a clear result and a concrete next action.",
+      "estimated_duration_s": 11.54,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Evidence Before Action",
+        "motion_claim": "Reveal the named evidence or process on the narrated cue",
+        "show": [
+          {
+            "at": 0,
+            "event": "Establish the real artifact or conceptual cast"
+          },
+          {
+            "at": 0.25,
+            "event": "Focus the part named by the narration"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysProcess",
+          "props": {
+            "title": "Next: Test The Boundaries",
+            "labels": [
+              "Input",
+              "Check",
+              "Explain"
+            ],
+            "objectKinds": [
+              "document",
+              "adapter",
+              "monitor"
+            ],
+            "diagramStyle": "show-tell-isometric",
+            "mode": "flow",
+            "note": "Proposed next step · not a completed feature",
+            "cues": [
+              0.1,
+              0.28,
+              0.65,
+              0.82
+            ],
+            "durationSeconds": 11.818667
+          },
+          "rendered": {
+            "out": "media/B12.mp4",
+            "at": "2026-11-14T23:23:15.417789+00:00"
+          }
+        }
+      },
+      "qc": {
+        "sparse_by_design": true,
+        "sparse_reason": "Show Tell approved isometric cast; whitespace preserves the document and gate relationships.",
+        "typography_regions": [
+          {
+            "label": "Heading",
+            "box": [
+              0.05,
+              0.05,
+              0.95,
+              0.2
+            ]
+          },
+          {
+            "label": "Object labels and details",
+            "box": [
+              0.05,
+              0.62,
+              0.95,
+              0.76
+            ]
+          },
+          {
+            "label": "Gate or drift label",
+            "box": [
+              0.3,
+              0.74,
+              0.7,
+              0.81
+            ]
+          },
+          {
+            "label": "Evidence-status note",
+            "box": [
+              0.05,
+              0.83,
+              0.95,
+              0.9
+            ]
+          },
+          {
+            "label": "Event footer",
+            "box": [
+              0.3,
+              0.91,
+              0.95,
+              0.97
+            ]
+          }
+        ],
+        "typography_fill": "#FFFFFF",
+        "typography_reason": "Complete authored-text inventory. Isometric document hatch marks and box edges are graphical imagery, not overlapping text; actual unmasked frames are inspected separately and remain subject to Gate V."
+      },
+      "actual_duration_s": 11.818667,
+      "audio_file": "mp3/beat-B12.mp3"
+    },
+    {
+      "beat_id": "B13",
+      "act": "Build On The Foundation",
+      "lane": "remotion",
+      "proof_gate": "SHOW",
+      "narration_text": "Keep the strengths and make the boundaries more explicit. This is a research prototype, and a useful starting point for further development. The linked independent review contains the detailed evidence and remaining limitations.",
+      "estimated_duration_s": 12.69,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Evidence Before Action",
+        "motion_claim": "Reveal the named evidence or process on the narrated cue",
+        "show": [
+          {
+            "at": 0,
+            "event": "Establish the real artifact or conceptual cast"
+          },
+          {
+            "at": 0.25,
+            "event": "Focus the part named by the narration"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysProcess",
+          "props": {
+            "title": "A Foundation To Build On",
+            "labels": [
+              "Inspect",
+              "Learn",
+              "Improve"
+            ],
+            "objectKinds": [
+              "document",
+              "adapter",
+              "monitor"
+            ],
+            "diagramStyle": "show-tell-isometric",
+            "mode": "flow",
+            "note": "Research prototype · not clinical or production validation",
+            "cues": [
+              0.1,
+              0.28,
+              0.65,
+              0.82
+            ],
+            "durationSeconds": 12.629333
+          },
+          "rendered": {
+            "out": "media/B13.mp4",
+            "at": "2026-11-14T23:23:31.789405+00:00"
+          }
+        }
+      },
+      "qc": {
+        "sparse_by_design": true,
+        "sparse_reason": "Show Tell approved isometric cast; whitespace preserves the document and gate relationships.",
+        "typography_regions": [
+          {
+            "label": "Heading",
+            "box": [
+              0.05,
+              0.05,
+              0.95,
+              0.2
+            ]
+          },
+          {
+            "label": "Object labels and details",
+            "box": [
+              0.05,
+              0.62,
+              0.95,
+              0.76
+            ]
+          },
+          {
+            "label": "Gate or drift label",
+            "box": [
+              0.3,
+              0.74,
+              0.7,
+              0.81
+            ]
+          },
+          {
+            "label": "Evidence-status note",
+            "box": [
+              0.05,
+              0.83,
+              0.95,
+              0.9
+            ]
+          },
+          {
+            "label": "Event footer",
+            "box": [
+              0.3,
+              0.91,
+              0.95,
+              0.97
+            ]
+          }
+        ],
+        "typography_fill": "#FFFFFF",
+        "typography_reason": "Complete authored-text inventory. Isometric document hatch marks and box edges are graphical imagery, not overlapping text; actual unmasked frames are inspected separately and remain subject to Gate V."
+      },
+      "actual_duration_s": 12.629333,
+      "audio_file": "mp3/beat-B13.mp3"
+    },
+    {
+      "beat_id": "BVDT",
+      "act": "Recap",
+      "lane": "bookend",
+      "proof_gate": "SHOW",
+      "narration_text": "Let's recap. Show which analysis a change affects. Make evidence and next steps inspectable. Preserve the original release. Bind approved exports to review decisions.",
+      "estimated_duration_s": 10.0,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "What to build on",
+        "motion_claim": "Reveal the idea, terms or project workflow in time with narration",
+        "show": [
+          {
+            "at": 0,
+            "event": "Name the subject"
+          },
+          {
+            "at": 0.15,
+            "event": "Reveal the conceptual process"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysLecture",
+          "props": {
+            "mode": "recap",
+            "title": "What to build on",
+            "team": "Team Busy Beavers",
+            "lines": [
+              "Show which analysis a change affects.",
+              "Make evidence and next steps inspectable.",
+              "Preserve the original release.",
+              "Bind approved exports to review decisions."
+            ],
+            "labels": [
+              "Compare",
+              "Explain",
+              "Review"
+            ],
+            "credit": "Northeastern SEIS",
+            "logos": [],
+            "durationSeconds": 10.249958
+          },
+          "rendered": {
+            "out": "media/BVDT.mp4",
+            "at": "2026-11-14T23:23:45.638720+00:00"
+          }
+        }
+      },
+      "lead_silence_s": 0.5,
+      "actual_duration_s": 10.249958,
+      "audio_file": "mp3/beat-BVDT.mp3",
+      "audio_padding_applied": {
+        "lead": 0.5,
+        "tail": 0
+      }
+    },
+    {
+      "beat_id": "BHTF",
+      "act": "Your Turn",
+      "lane": "bookend",
+      "proof_gate": "SHOW",
+      "narration_text": "Help me extend Busy Beavers using invented data. Compare a proposed repair, an accepted repair, and a rejected repair. Show what each export should contain and how to verify the original release stayed unchanged.",
+      "estimated_duration_s": 13.08,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Your turn",
+        "motion_claim": "Reveal the idea, terms or project workflow in time with narration",
+        "show": [
+          {
+            "at": 0,
+            "event": "Name the subject"
+          },
+          {
+            "at": 0.15,
+            "event": "Reveal the conceptual process"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysLecture",
+          "props": {
+            "mode": "prompt",
+            "title": "Your turn",
+            "team": "Team Busy Beavers",
+            "lines": [
+              "Help me extend Busy Beavers using invented data. Compare a proposed repair, an accepted repair, and a rejected repair. Show what each export should contain and how to verify the original release stayed unchanged."
+            ],
+            "labels": [
+              "Compare",
+              "Explain",
+              "Review"
+            ],
+            "credit": "Northeastern SEIS",
+            "logos": [],
+            "durationSeconds": 12.949333
+          },
+          "rendered": {
+            "out": "media/BHTF.mp4",
+            "at": "2026-11-14T23:24:01.825926+00:00"
+          }
+        }
+      },
+      "actual_duration_s": 12.949333,
+      "audio_file": "mp3/beat-BHTF.mp3"
+    },
+    {
+      "beat_id": "BOUT",
+      "act": "Outro",
+      "lane": "bookend",
+      "proof_gate": "SHOW",
+      "narration_text": "Thank you to the participants and sponsors: Northeastern SEIS, OncoSys AI, The Open Accelerator, and Red Hat. This is Liam, in for Bear.",
+      "estimated_duration_s": 3.85,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Busy Beavers: From Finding To Review",
+        "motion_claim": "Reveal the idea, terms or project workflow in time with narration",
+        "show": [
+          {
+            "at": 0,
+            "event": "Name the subject"
+          },
+          {
+            "at": 0.15,
+            "event": "Reveal the conceptual process"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysLecture",
+          "props": {
+            "mode": "outro",
+            "title": "Busy Beavers: From Finding To Review",
+            "team": "Team Busy Beavers",
+            "lines": [],
+            "labels": [
+              "Compare",
+              "Explain",
+              "Review"
+            ],
+            "credit": "Northeastern SEIS",
+            "logos": [
+              "oncosys-films/brand/the-open-accelerator-transparent.png",
+              "oncosys-films/brand/oncosys-ai-transparent-black-wordmark.png",
+              "oncosys-films/brand/northeastern_university_seis_logo.jpeg",
+              "oncosys-films/brand/red-hat-logo.png"
+            ],
+            "durationSeconds": 9.64
+          },
+          "rendered": {
+            "out": "media/BOUT.mp4",
+            "at": "2026-11-14T23:24:15.801719+00:00"
+          }
+        }
+      },
+      "kind": "outro_voice",
+      "tail_silence_s": 1,
+      "actual_duration_s": 9.64,
+      "audio_file": "mp3/beat-BOUT.mp3",
+      "qc": {
+        "typography_reason": "Inventory of all authored title/team/description and organizer-credit text. Supplied trademark images and label-free conceptual animation are imagery, not authored typography; Gate V inspects the unmasked composition.",
+        "typography_fill": "#FFFFFF",
+        "typography_regions": [
+          {
+            "label": "Title, team and purpose",
+            "box": [
+              0.055,
+              0.14,
+              0.47,
+              0.72
+            ]
+          },
+          {
+            "label": "Written organizer credits",
+            "box": [
+              0.055,
+              0.74,
+              0.34,
+              0.94
+            ]
+          }
+        ]
+      },
+      "audio_padding_applied": {
+        "lead": 0,
+        "tail": 1
+      }
+    }
+  ]
+}

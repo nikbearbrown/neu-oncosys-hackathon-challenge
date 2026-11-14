@@ -1,0 +1,17 @@
+{
+  "submission": "GiorgiKarazanashvili/BusyBeavers",
+  "commit": "bfb369f231bf97a1d3aa21abade3ba4b1406a355",
+  "review": "../../professor-bear/busy-beavers/REPORT.md",
+  "captures": [
+    {
+      "file": "captures/next-steps-synthetic.png",
+      "bytes": 130975,
+      "sha256": "d223bbad7350a5d4412663ec5ccbad083dd0e94a961f8c8665ce9e2031a344e1"
+    },
+    {
+      "file": "captures/results-synthetic.png",
+      "bytes": 180457,
+      "sha256": "b8b3fef37760abfa5ae81a631d3e508fed59306506ba3aae9934f018264ed5ae"
+    }
+  ]
+}

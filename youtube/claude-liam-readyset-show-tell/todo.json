@@ -1,0 +1,210 @@
+{
+  "video": "claude-liam-readyset-show-tell",
+  "metadata": {
+    "slug": "claude-liam-readyset-show-tell",
+    "title": "ReadySet: Evidence Before Action",
+    "skill": "lecture",
+    "style_preset": "lecture",
+    "channel": "claude-liam",
+    "channel_title": "@NikBearBrown",
+    "persona": "Liam (in for Bear)",
+    "voice": "am_onyx",
+    "voice_kokoro": "am_onyx",
+    "engine": "kokoro",
+    "clock": "narration",
+    "palette": "neu",
+    "register": "Teardown-warm",
+    "fps": 24,
+    "aspect_ratio": "16:9",
+    "width": 3840,
+    "height": 2160,
+    "caption_policy": "none",
+    "lecture_opening_description": "From data changes to inspectable decisions",
+    "source_doc": "../../professor-bear/readyset-control-tower/REPORT.md",
+    "tags": [
+      "ReadySet",
+      "AI Healthcare Hackathon",
+      "Data Quality",
+      "Evidence",
+      "Research Tools"
+    ],
+    "audience": "Hackathon builders and people exploring evidence-centered research tools",
+    "build": {
+      "at": "2026-11-14T18:18:34",
+      "cut": "review",
+      "filled": 14,
+      "of": 14,
+      "slates": [],
+      "skin_warnings": []
+    },
+    "typography": {
+      "display": "Lato",
+      "serif": "Lato"
+    },
+    "event_credit": "Northeastern SEIS",
+    "team": "Team Automyte",
+    "brand_confirmation": "confirmed",
+    "pronounce": {
+      "SEIS": "s\u02c8e\u026as"
+    }
+  },
+  "source_of_truth": "beat_sheet.json \u2014 edit the sheet, not this file",
+  "beats_total": 14,
+  "beats_open": 0,
+  "beats": [
+    {
+      "beat_id": "BOPEN",
+      "status": "filled",
+      "on_disk": "media/BOPEN.mp4",
+      "method": "remotion",
+      "who": "pipeline",
+      "scene_hint": null,
+      "prompt": null,
+      "slot": "media/BOPEN.mp4",
+      "label": "ReadySet: Evidence Before Action. By Team Automyte. Sponsored by Northeastern SEIS, OncoSys AI, The "
+    },
+    {
+      "beat_id": "BIDEA",
+      "status": "filled",
+      "on_disk": "media/BIDEA.mp4",
+      "method": "remotion",
+      "who": "pipeline",
+      "scene_hint": null,
+      "prompt": null,
+      "slot": "media/BIDEA.mp4",
+      "label": "Hallo. This is Liam, in for Bear. ReadySet asks a useful question: what changed in our data, and doe"
+    },
+    {
+      "beat_id": "BDEFS",
+      "status": "filled",
+      "on_disk": "media/BDEFS.mp4",
+      "method": "remotion",
+      "who": "pipeline",
+      "scene_hint": null,
+      "prompt": null,
+      "slot": "media/BDEFS.mp4",
+      "label": "Three terms. A release is one version of the data. A finding is a change supported by evidence. A re"
+    },
+    {
+      "beat_id": "B01",
+      "status": "filled",
+      "on_disk": "media/B01.mp4",
+      "method": "remotion",
+      "who": "pipeline",
+      "scene_hint": null,
+      "prompt": null,
+      "slot": "media/B01.mp4",
+      "label": "The useful idea is to connect three things: the data, the analysis, and the evidence for a decision."
+    },
+    {
+      "beat_id": "B02",
+      "status": "filled",
+      "on_disk": "media/B02.mp4",
+      "method": "remotion",
+      "who": "pipeline",
+      "scene_hint": null,
+      "prompt": null,
+      "slot": "media/B02.mp4",
+      "label": "Here is the actual ReadySet interface, running locally with invented test data. A deliberately swapp"
+    },
+    {
+      "beat_id": "B03",
+      "status": "filled",
+      "on_disk": "media/B03.mp4",
+      "method": "remotion",
+      "who": "pipeline",
+      "scene_hint": null,
+      "prompt": null,
+      "slot": "media/B03.mp4",
+      "label": "Now the question changes. We leave out the affected protein analysis and keep the unrelated analysis"
+    },
+    {
+      "beat_id": "B04",
+      "status": "filled",
+      "on_disk": "media/B04.mp4",
+      "method": "remotion",
+      "who": "pipeline",
+      "scene_hint": null,
+      "prompt": null,
+      "slot": "media/B04.mp4",
+      "label": "Bring the affected analysis back, and the finding returns. This evidence view is a strength: the rea"
+    },
+    {
+      "beat_id": "B05",
+      "status": "filled",
+      "on_disk": "media/B05.mp4",
+      "method": "remotion",
+      "who": "pipeline",
+      "scene_hint": null,
+      "prompt": null,
+      "slot": "media/B05.mp4",
+      "label": "The next strength is the handoff. Detection produces a finding; a person reviews it before deciding "
+    },
+    {
+      "beat_id": "B06",
+      "status": "filled",
+      "on_disk": "media/B06.mp4",
+      "method": "remotion",
+      "who": "pipeline",
+      "scene_hint": null,
+      "prompt": null,
+      "slot": "media/B06.mp4",
+      "label": "Next steps can build on that foundation. Add an input-validity gate before comparing changes. If req"
+    },
+    {
+      "beat_id": "B07",
+      "status": "filled",
+      "on_disk": "media/B07.mp4",
+      "method": "remotion",
+      "who": "pipeline",
+      "scene_hint": null,
+      "prompt": null,
+      "slot": "media/B07.mp4",
+      "label": "Then preserve each review as an event. A decision can change, but its earlier evidence and reasoning"
+    },
+    {
+      "beat_id": "B08",
+      "status": "filled",
+      "on_disk": "media/B08.mp4",
+      "method": "remotion",
+      "who": "pipeline",
+      "scene_hint": null,
+      "prompt": null,
+      "slot": "media/B08.mp4",
+      "label": "For the team, the opportunity is clear: keep the efficient detector and the readable evidence, then "
+    },
+    {
+      "beat_id": "BVDT",
+      "status": "filled",
+      "on_disk": "media/BVDT.mp4",
+      "method": "remotion",
+      "who": "pipeline",
+      "scene_hint": null,
+      "prompt": null,
+      "slot": "media/BVDT.mp4",
+      "label": "Let's recap. Connect changes to the selected analysis. Let people inspect the evidence. Validate inp"
+    },
+    {
+      "beat_id": "BHTF",
+      "status": "filled",
+      "on_disk": "media/BHTF.mp4",
+      "method": "remotion",
+      "who": "pipeline",
+      "scene_hint": null,
+      "prompt": null,
+      "slot": "media/BHTF.mp4",
+      "label": "Help me extend ReadySet with an input-validity gate. Use invented data. Show one valid unchanged rel"
+    },
+    {
+      "beat_id": "BOUT",
+      "status": "filled",
+      "on_disk": "media/BOUT.mp4",
+      "method": "remotion",
+      "who": "pipeline",
+      "scene_hint": null,
+      "prompt": null,
+      "slot": "media/BOUT.mp4",
+      "label": "Thank you to the participants and sponsors: Northeastern SEIS, OncoSys AI, The Open Accelerator, and"
+    }
+  ]
+}

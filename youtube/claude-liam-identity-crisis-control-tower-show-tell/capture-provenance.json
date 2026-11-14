@@ -1,0 +1,17 @@
+{
+  "submission": "AravindKumar2504/identity-crisis-control-tower",
+  "commit": "380760dc3b7b61097756f2b85c0f462feadc802c",
+  "review": "../../professor-bear/identity-crisis-control-tower/REPORT.md",
+  "captures": [
+    {
+      "file": "captures/overview-synthetic.png",
+      "bytes": 260743,
+      "sha256": "02e0fcaafad1344249b9b3bb10ba0e4088bf9b21e5cb6781a41a978d8610c3c5"
+    },
+    {
+      "file": "captures/signed-synthetic.png",
+      "bytes": 167725,
+      "sha256": "e5397ed90c34e8bc16918f5f6cc1f0a79d96d7233e98df4f4a2c8d0b461c3222"
+    }
+  ]
+}

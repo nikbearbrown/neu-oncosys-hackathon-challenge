@@ -1,0 +1,9 @@
+CLEARANSWER
+Research Claim Auditor
+
+Upload a research report and we'll verify every factual claim against the TCGA-BRCA dataset.
+
+Drop a .txt, .md, or .pdf file here
+or click to browse
+Audit Report
+TCGA-BRCA Dataset · 1,101 tumors · 5 data layers · Deterministic verification

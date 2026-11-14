@@ -1,0 +1,1073 @@
+{
+  "metadata": {
+    "slug": "claude-liam-oncosys-cohort-studio-show-tell",
+    "title": "Cohort Studio: See Who Remains",
+    "skill": "lecture",
+    "style_preset": "lecture",
+    "channel": "claude-liam",
+    "channel_title": "@NikBearBrown",
+    "persona": "Liam (in for Bear)",
+    "voice": "am_onyx",
+    "voice_kokoro": "am_onyx",
+    "engine": "kokoro",
+    "clock": "narration",
+    "palette": "neu",
+    "register": "Teardown-warm",
+    "fps": 24,
+    "aspect_ratio": "16:9",
+    "width": 3840,
+    "height": 2160,
+    "caption_policy": "none",
+    "lecture_opening_description": "Follow cohort membership",
+    "source_doc": "../../professor-bear/oncosys-cohort-studio/REPORT.md",
+    "tags": [
+      "OncoSys Cohort Studio",
+      "AI Healthcare Hackathon",
+      "Evidence",
+      "Research Tools"
+    ],
+    "audience": "Hackathon builders and people exploring evidence-centered research tools",
+    "typography": {
+      "display": "Lato",
+      "serif": "Lato"
+    },
+    "event_credit": "Northeastern SEIS",
+    "team": "Lily Tammy \u00b7 Seth Barribeau \u00b7 Hriday Desai\nAayam Raj Shakya \u00b7 Yanyun Ma",
+    "brand_confirmation": "confirmed",
+    "pronounce": {
+      "SEIS": "s\u02c8e\u026as"
+    },
+    "render_concurrency": 4
+  },
+  "beats": [
+    {
+      "beat_id": "BOPEN",
+      "act": "Opening",
+      "lane": "bookend",
+      "proof_gate": "SHOW",
+      "narration_text": "Cohort Studio: See Who Remains. By Lily Tammy, Seth Barribeau, Hriday Desai, Aayam Raj Shakya, and Yanyun Ma. Sponsored by Northeastern SEIS, OncoSys AI, The Open Accelerator, and Red Hat.",
+      "estimated_duration_s": 4.23,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Cohort Studio: See Who Remains",
+        "motion_claim": "Reveal the idea, terms or project workflow in time with narration",
+        "show": [
+          {
+            "at": 0,
+            "event": "Name the subject"
+          },
+          {
+            "at": 0.15,
+            "event": "Reveal the conceptual process"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysLecture",
+          "props": {
+            "mode": "open",
+            "title": "Cohort Studio: See Who Remains",
+            "team": "Lily Tammy \u00b7 Seth Barribeau \u00b7 Hriday Desai\nAayam Raj Shakya \u00b7 Yanyun Ma",
+            "lines": [],
+            "labels": [
+              "Sources",
+              "Steps",
+              "Cohort"
+            ],
+            "credit": "Northeastern SEIS",
+            "logos": [
+              "oncosys-films/brand/the-open-accelerator-transparent.png",
+              "oncosys-films/brand/oncosys-ai-transparent-black-wordmark.png",
+              "oncosys-films/brand/northeastern_university_seis_logo.jpeg",
+              "oncosys-films/brand/red-hat-logo.png"
+            ],
+            "durationSeconds": 11.946667
+          }
+        }
+      },
+      "actual_duration_s": 11.946667,
+      "audio_file": "mp3/beat-BOPEN.mp3",
+      "qc": {
+        "typography_reason": "Inventory of all authored title/team/description and organizer-credit text. Supplied trademark images and label-free conceptual animation are imagery, not authored typography; Gate V inspects the unmasked composition.",
+        "typography_fill": "#FFFFFF",
+        "typography_regions": [
+          {
+            "label": "Title, team and purpose",
+            "box": [
+              0.055,
+              0.14,
+              0.47,
+              0.72
+            ]
+          },
+          {
+            "label": "Written organizer credits",
+            "box": [
+              0.055,
+              0.74,
+              0.34,
+              0.94
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "beat_id": "BIDEA",
+      "act": "The Useful Idea",
+      "lane": "bookend",
+      "proof_gate": "SHOW",
+      "narration_text": "Hallo. This is Liam, in for Bear. Cohort Studio focuses on a different part of the problem: building the research group itself. Filters and joins change who remains. This project makes those changes visible before we rely on the final table.",
+      "estimated_duration_s": 15.77,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "The useful idea",
+        "motion_claim": "Reveal the idea, terms or project workflow in time with narration",
+        "show": [
+          {
+            "at": 0,
+            "event": "Name the subject"
+          },
+          {
+            "at": 0.15,
+            "event": "Reveal the conceptual process"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysLecture",
+          "props": {
+            "mode": "idea",
+            "title": "The useful idea",
+            "team": "Lily Tammy \u00b7 Seth Barribeau \u00b7 Hriday Desai\nAayam Raj Shakya \u00b7 Yanyun Ma",
+            "lines": [
+              "Follow cohort membership"
+            ],
+            "labels": [
+              "Sources",
+              "Steps",
+              "Cohort"
+            ],
+            "credit": "Northeastern SEIS",
+            "logos": [],
+            "durationSeconds": 14.538667
+          }
+        }
+      },
+      "lead_silence_s": 0.8,
+      "actual_duration_s": 14.538667,
+      "audio_file": "mp3/beat-BIDEA.mp3",
+      "audio_padding_applied": {
+        "lead": 0.8,
+        "tail": 0
+      },
+      "qc": {
+        "typography_regions": [
+          {
+            "label": "Heading",
+            "box": [
+              0.055,
+              0.1,
+              0.94,
+              0.29
+            ]
+          },
+          {
+            "label": "Useful idea",
+            "box": [
+              0.055,
+              0.29,
+              0.45,
+              0.7
+            ]
+          },
+          {
+            "label": "Event footer",
+            "box": [
+              0.1,
+              0.9,
+              0.94,
+              0.97
+            ]
+          }
+        ],
+        "typography_fill": "#FFFFFF",
+        "typography_reason": "Complete authored-text inventory. Isometric document hatch marks and box edges are graphical imagery, not overlapping text; actual unmasked frames are inspected separately and remain subject to Gate V."
+      }
+    },
+    {
+      "beat_id": "BDEFS",
+      "act": "The Useful Idea",
+      "lane": "bookend",
+      "proof_gate": "SHOW",
+      "narration_text": "Three terms. Cohort means the group selected for a research question. Join means combining records through shared identifiers. Grain means what one row represents.",
+      "estimated_duration_s": 9.23,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Terms in this film",
+        "motion_claim": "Reveal the idea, terms or project workflow in time with narration",
+        "show": [
+          {
+            "at": 0,
+            "event": "Name the subject"
+          },
+          {
+            "at": 0.15,
+            "event": "Reveal the conceptual process"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysLecture",
+          "props": {
+            "mode": "definitions",
+            "title": "Terms in this film",
+            "team": "Lily Tammy \u00b7 Seth Barribeau \u00b7 Hriday Desai\nAayam Raj Shakya \u00b7 Yanyun Ma",
+            "lines": [
+              "Cohort: The group selected for a research question",
+              "Join: Combining records through shared identifiers",
+              "Grain: What one row represents"
+            ],
+            "labels": [
+              "Sources",
+              "Steps",
+              "Cohort"
+            ],
+            "credit": "Northeastern SEIS",
+            "logos": [],
+            "durationSeconds": 10.048
+          }
+        }
+      },
+      "actual_duration_s": 10.048,
+      "audio_file": "mp3/beat-BDEFS.mp3"
+    },
+    {
+      "beat_id": "B01",
+      "act": "The Useful Idea",
+      "lane": "remotion",
+      "proof_gate": "SHOW",
+      "narration_text": "Start with the sources, apply explicit steps, and inspect the resulting cohort. Count rows, samples, and people separately. A join can increase rows without adding people, and that difference matters to the analysis.",
+      "estimated_duration_s": 12.69,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Evidence Before Action",
+        "motion_claim": "Reveal the named evidence or process on the narrated cue",
+        "show": [
+          {
+            "at": 0,
+            "event": "Establish the real artifact or conceptual cast"
+          },
+          {
+            "at": 0.25,
+            "event": "Focus the part named by the narration"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysProcess",
+          "props": {
+            "title": "Follow cohort membership through each operation",
+            "labels": [
+              "Sources",
+              "Steps",
+              "Cohort"
+            ],
+            "objectKinds": [
+              "document",
+              "adapter",
+              "monitor"
+            ],
+            "diagramStyle": "show-tell-isometric",
+            "mode": "flow",
+            "note": "Conceptual illustration",
+            "cues": [
+              0.1,
+              0.28,
+              0.65,
+              0.82
+            ],
+            "durationSeconds": 12.672
+          }
+        }
+      },
+      "qc": {
+        "sparse_by_design": true,
+        "sparse_reason": "Show Tell approved isometric cast; whitespace preserves the document and gate relationships.",
+        "typography_regions": [
+          {
+            "label": "Heading",
+            "box": [
+              0.05,
+              0.05,
+              0.95,
+              0.2
+            ]
+          },
+          {
+            "label": "Object labels and details",
+            "box": [
+              0.05,
+              0.62,
+              0.95,
+              0.76
+            ]
+          },
+          {
+            "label": "Gate or drift label",
+            "box": [
+              0.3,
+              0.74,
+              0.7,
+              0.81
+            ]
+          },
+          {
+            "label": "Evidence-status note",
+            "box": [
+              0.05,
+              0.83,
+              0.95,
+              0.9
+            ]
+          },
+          {
+            "label": "Event footer",
+            "box": [
+              0.3,
+              0.91,
+              0.95,
+              0.97
+            ]
+          }
+        ],
+        "typography_fill": "#FFFFFF",
+        "typography_reason": "Complete authored-text inventory. Isometric document hatch marks and box edges are graphical imagery, not overlapping text; actual unmasked frames are inspected separately and remain subject to Gate V."
+      },
+      "actual_duration_s": 12.672,
+      "audio_file": "mp3/beat-B01.mp3"
+    },
+    {
+      "beat_id": "B02",
+      "act": "The Useful Idea",
+      "lane": "remotion",
+      "proof_gate": "SHOW",
+      "narration_text": "Here is the real Cohort Studio interface with an invented test fixture. The observed workflow connected cohort construction with its result and export. The useful feature is the ability to inspect how the selected group was produced.",
+      "estimated_duration_s": 14.23,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Actual A2-only result \u00b7 synthetic data",
+        "motion_claim": "Reveal the named evidence or process on the narrated cue",
+        "show": [
+          {
+            "at": 0,
+            "event": "Establish the real artifact or conceptual cast"
+          },
+          {
+            "at": 0.25,
+            "event": "Focus the part named by the narration"
+          }
+        ],
+        "remotion": {
+          "pattern": "BrowserCapture",
+          "props": {
+            "image": "oncosys-films/claude-liam-oncosys-cohort-studio-show-tell/result-synthetic.png",
+            "imageAspect": 0.6905210295040803,
+            "caption": "Cohort Studio \u00b7 actual local synthetic demo",
+            "moves": [
+              {
+                "at": 0,
+                "x": 0.5,
+                "y": 0.12,
+                "scale": 1
+              },
+              {
+                "at": 0.22,
+                "x": 0.5,
+                "y": 0.18,
+                "scale": 1.05
+              }
+            ],
+            "moveSeconds": 0.8,
+            "frame": "app",
+            "durationSeconds": 13.205333,
+            "brand": "neu"
+          }
+        }
+      },
+      "actual_duration_s": 13.205333,
+      "audio_file": "mp3/beat-B02.mp3"
+    },
+    {
+      "beat_id": "B03",
+      "act": "The Useful Idea",
+      "lane": "remotion",
+      "proof_gate": "SHOW",
+      "narration_text": "The underlying checks distinguish join inflation from repeated patients and retain selection rules. That is a strong analytical foundation: the tool asks what the rows mean, rather than treating a bigger table as automatically better data.",
+      "estimated_duration_s": 13.85,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Actual A2-only result \u00b7 synthetic data",
+        "motion_claim": "Reveal the named evidence or process on the narrated cue",
+        "show": [
+          {
+            "at": 0,
+            "event": "Establish the real artifact or conceptual cast"
+          },
+          {
+            "at": 0.25,
+            "event": "Focus the part named by the narration"
+          }
+        ],
+        "remotion": {
+          "pattern": "BrowserCapture",
+          "props": {
+            "image": "oncosys-films/claude-liam-oncosys-cohort-studio-show-tell/result-synthetic.png",
+            "imageAspect": 0.6905210295040803,
+            "caption": "Cohort Studio \u00b7 actual local synthetic demo",
+            "moves": [
+              {
+                "at": 0,
+                "x": 0.5,
+                "y": 0.12,
+                "scale": 1
+              },
+              {
+                "at": 0.22,
+                "x": 0.5,
+                "y": 0.51,
+                "scale": 1.05
+              }
+            ],
+            "moveSeconds": 0.8,
+            "frame": "app",
+            "durationSeconds": 13.589333,
+            "brand": "neu"
+          }
+        }
+      },
+      "actual_duration_s": 13.589333,
+      "audio_file": "mp3/beat-B03.mp3"
+    },
+    {
+      "beat_id": "B10",
+      "act": "The Useful Idea",
+      "lane": "remotion",
+      "proof_gate": "SHOW",
+      "narration_text": "The reproduction export records expected input hashes and includes the operation implementation. That moves beyond a prose recipe toward an executable account of the work. Keep the explanation and the runnable steps together.",
+      "estimated_duration_s": 12.69,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Evidence Before Action",
+        "motion_claim": "Reveal the named evidence or process on the narrated cue",
+        "show": [
+          {
+            "at": 0,
+            "event": "Establish the real artifact or conceptual cast"
+          },
+          {
+            "at": 0.25,
+            "event": "Focus the part named by the narration"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysProcess",
+          "props": {
+            "title": "Build On The Foundation",
+            "labels": [
+              "Sources",
+              "Steps",
+              "Cohort"
+            ],
+            "objectKinds": [
+              "document",
+              "adapter",
+              "monitor"
+            ],
+            "diagramStyle": "show-tell-isometric",
+            "mode": "flow",
+            "note": "Conceptual illustration",
+            "cues": [
+              0.1,
+              0.28,
+              0.65,
+              0.82
+            ],
+            "durationSeconds": 13.205333
+          }
+        }
+      },
+      "qc": {
+        "sparse_by_design": true,
+        "sparse_reason": "Show Tell approved isometric cast; whitespace preserves the document and gate relationships.",
+        "typography_regions": [
+          {
+            "label": "Heading",
+            "box": [
+              0.05,
+              0.05,
+              0.95,
+              0.2
+            ]
+          },
+          {
+            "label": "Object labels and details",
+            "box": [
+              0.05,
+              0.62,
+              0.95,
+              0.76
+            ]
+          },
+          {
+            "label": "Gate or drift label",
+            "box": [
+              0.3,
+              0.74,
+              0.7,
+              0.81
+            ]
+          },
+          {
+            "label": "Evidence-status note",
+            "box": [
+              0.05,
+              0.83,
+              0.95,
+              0.9
+            ]
+          },
+          {
+            "label": "Event footer",
+            "box": [
+              0.3,
+              0.91,
+              0.95,
+              0.97
+            ]
+          }
+        ],
+        "typography_fill": "#FFFFFF",
+        "typography_reason": "Complete authored-text inventory. Isometric document hatch marks and box edges are graphical imagery, not overlapping text; actual unmasked frames are inspected separately and remain subject to Gate V."
+      },
+      "actual_duration_s": 13.205333,
+      "audio_file": "mp3/beat-B10.mp3"
+    },
+    {
+      "beat_id": "B11",
+      "act": "Build On The Foundation",
+      "lane": "remotion",
+      "proof_gate": "SHOW",
+      "narration_text": "Next, make provenance status precise. An unavailable expected checksum should say unverified; a matching checksum should say verified. Those states give the researcher different evidence, even when both files can be read.",
+      "estimated_duration_s": 12.31,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Evidence Before Action",
+        "motion_claim": "Reveal the named evidence or process on the narrated cue",
+        "show": [
+          {
+            "at": 0,
+            "event": "Establish the real artifact or conceptual cast"
+          },
+          {
+            "at": 0.25,
+            "event": "Focus the part named by the narration"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysProcess",
+          "props": {
+            "title": "Next: Strengthen The Contract",
+            "labels": [
+              "Evidence",
+              "Decision",
+              "Record"
+            ],
+            "objectKinds": [
+              "document",
+              "adapter",
+              "monitor"
+            ],
+            "diagramStyle": "show-tell-isometric",
+            "mode": "flow",
+            "note": "Proposed next step \u00b7 not a completed feature",
+            "cues": [
+              0.1,
+              0.28,
+              0.65,
+              0.82
+            ],
+            "durationSeconds": 12.650667
+          }
+        }
+      },
+      "qc": {
+        "sparse_by_design": true,
+        "sparse_reason": "Show Tell approved isometric cast; whitespace preserves the document and gate relationships.",
+        "typography_regions": [
+          {
+            "label": "Heading",
+            "box": [
+              0.05,
+              0.05,
+              0.95,
+              0.2
+            ]
+          },
+          {
+            "label": "Object labels and details",
+            "box": [
+              0.05,
+              0.62,
+              0.95,
+              0.76
+            ]
+          },
+          {
+            "label": "Gate or drift label",
+            "box": [
+              0.3,
+              0.74,
+              0.7,
+              0.81
+            ]
+          },
+          {
+            "label": "Evidence-status note",
+            "box": [
+              0.05,
+              0.83,
+              0.95,
+              0.9
+            ]
+          },
+          {
+            "label": "Event footer",
+            "box": [
+              0.3,
+              0.91,
+              0.95,
+              0.97
+            ]
+          }
+        ],
+        "typography_fill": "#FFFFFF",
+        "typography_reason": "Complete authored-text inventory. Isometric document hatch marks and box edges are graphical imagery, not overlapping text; actual unmasked frames are inspected separately and remain subject to Gate V."
+      },
+      "actual_duration_s": 12.650667,
+      "audio_file": "mp3/beat-B11.mp3"
+    },
+    {
+      "beat_id": "B12",
+      "act": "Build On The Foundation",
+      "lane": "remotion",
+      "proof_gate": "SHOW",
+      "narration_text": "Then separate a proposed automatic correction from an accepted change. Show the requested join beside the suggested join, retain the original run, and record the person's choice before describing an output as approved.",
+      "estimated_duration_s": 12.69,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Evidence Before Action",
+        "motion_claim": "Reveal the named evidence or process on the narrated cue",
+        "show": [
+          {
+            "at": 0,
+            "event": "Establish the real artifact or conceptual cast"
+          },
+          {
+            "at": 0.25,
+            "event": "Focus the part named by the narration"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysProcess",
+          "props": {
+            "title": "Next: Test The Boundaries",
+            "labels": [
+              "Input",
+              "Check",
+              "Explain"
+            ],
+            "objectKinds": [
+              "document",
+              "adapter",
+              "monitor"
+            ],
+            "diagramStyle": "show-tell-isometric",
+            "mode": "flow",
+            "note": "Proposed next step \u00b7 not a completed feature",
+            "cues": [
+              0.1,
+              0.28,
+              0.65,
+              0.82
+            ],
+            "durationSeconds": 12.992
+          }
+        }
+      },
+      "qc": {
+        "sparse_by_design": true,
+        "sparse_reason": "Show Tell approved isometric cast; whitespace preserves the document and gate relationships.",
+        "typography_regions": [
+          {
+            "label": "Heading",
+            "box": [
+              0.05,
+              0.05,
+              0.95,
+              0.2
+            ]
+          },
+          {
+            "label": "Object labels and details",
+            "box": [
+              0.05,
+              0.62,
+              0.95,
+              0.76
+            ]
+          },
+          {
+            "label": "Gate or drift label",
+            "box": [
+              0.3,
+              0.74,
+              0.7,
+              0.81
+            ]
+          },
+          {
+            "label": "Evidence-status note",
+            "box": [
+              0.05,
+              0.83,
+              0.95,
+              0.9
+            ]
+          },
+          {
+            "label": "Event footer",
+            "box": [
+              0.3,
+              0.91,
+              0.95,
+              0.97
+            ]
+          }
+        ],
+        "typography_fill": "#FFFFFF",
+        "typography_reason": "Complete authored-text inventory. Isometric document hatch marks and box edges are graphical imagery, not overlapping text; actual unmasked frames are inspected separately and remain subject to Gate V."
+      },
+      "actual_duration_s": 12.992,
+      "audio_file": "mp3/beat-B12.mp3"
+    },
+    {
+      "beat_id": "B13",
+      "act": "Build On The Foundation",
+      "lane": "remotion",
+      "proof_gate": "SHOW",
+      "narration_text": "Keep the strengths and make the boundaries more explicit. This is a research prototype, and a useful starting point for further development. The linked independent review contains the detailed evidence and remaining limitations.",
+      "estimated_duration_s": 12.69,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Evidence Before Action",
+        "motion_claim": "Reveal the named evidence or process on the narrated cue",
+        "show": [
+          {
+            "at": 0,
+            "event": "Establish the real artifact or conceptual cast"
+          },
+          {
+            "at": 0.25,
+            "event": "Focus the part named by the narration"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysProcess",
+          "props": {
+            "title": "A Foundation To Build On",
+            "labels": [
+              "Inspect",
+              "Learn",
+              "Improve"
+            ],
+            "objectKinds": [
+              "document",
+              "adapter",
+              "monitor"
+            ],
+            "diagramStyle": "show-tell-isometric",
+            "mode": "flow",
+            "note": "Research prototype \u00b7 not clinical or production validation",
+            "cues": [
+              0.1,
+              0.28,
+              0.65,
+              0.82
+            ],
+            "durationSeconds": 12.629333
+          }
+        }
+      },
+      "qc": {
+        "sparse_by_design": true,
+        "sparse_reason": "Show Tell approved isometric cast; whitespace preserves the document and gate relationships.",
+        "typography_regions": [
+          {
+            "label": "Heading",
+            "box": [
+              0.05,
+              0.05,
+              0.95,
+              0.2
+            ]
+          },
+          {
+            "label": "Object labels and details",
+            "box": [
+              0.05,
+              0.62,
+              0.95,
+              0.76
+            ]
+          },
+          {
+            "label": "Gate or drift label",
+            "box": [
+              0.3,
+              0.74,
+              0.7,
+              0.81
+            ]
+          },
+          {
+            "label": "Evidence-status note",
+            "box": [
+              0.05,
+              0.83,
+              0.95,
+              0.9
+            ]
+          },
+          {
+            "label": "Event footer",
+            "box": [
+              0.3,
+              0.91,
+              0.95,
+              0.97
+            ]
+          }
+        ],
+        "typography_fill": "#FFFFFF",
+        "typography_reason": "Complete authored-text inventory. Isometric document hatch marks and box edges are graphical imagery, not overlapping text; actual unmasked frames are inspected separately and remain subject to Gate V."
+      },
+      "actual_duration_s": 12.629333,
+      "audio_file": "mp3/beat-B13.mp3"
+    },
+    {
+      "beat_id": "BVDT",
+      "act": "Recap",
+      "lane": "bookend",
+      "proof_gate": "SHOW",
+      "narration_text": "Let's recap. Make cohort-building steps explicit. Count rows, samples and people separately. Distinguish verified from unverified inputs. Keep proposed and accepted changes distinct.",
+      "estimated_duration_s": 9.62,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "What to build on",
+        "motion_claim": "Reveal the idea, terms or project workflow in time with narration",
+        "show": [
+          {
+            "at": 0,
+            "event": "Name the subject"
+          },
+          {
+            "at": 0.15,
+            "event": "Reveal the conceptual process"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysLecture",
+          "props": {
+            "mode": "recap",
+            "title": "What to build on",
+            "team": "Lily Tammy \u00b7 Seth Barribeau \u00b7 Hriday Desai\nAayam Raj Shakya \u00b7 Yanyun Ma",
+            "lines": [
+              "Make cohort-building steps explicit.",
+              "Count rows, samples and people separately.",
+              "Distinguish verified from unverified inputs.",
+              "Keep proposed and accepted changes distinct."
+            ],
+            "labels": [
+              "Sources",
+              "Steps",
+              "Cohort"
+            ],
+            "credit": "Northeastern SEIS",
+            "logos": [],
+            "durationSeconds": 11.892
+          }
+        }
+      },
+      "lead_silence_s": 0.5,
+      "actual_duration_s": 11.892,
+      "audio_file": "mp3/beat-BVDT.mp3",
+      "audio_padding_applied": {
+        "lead": 0.5,
+        "tail": 0
+      }
+    },
+    {
+      "beat_id": "BHTF",
+      "act": "Your Turn",
+      "lane": "bookend",
+      "proof_gate": "SHOW",
+      "narration_text": "Help me test Cohort Studio with invented tables. Build a join that multiplies rows, then propose a correction. Show rows, samples, and people before and after. Preserve the original steps and explain what a reviewer must approve.",
+      "estimated_duration_s": 14.23,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Your turn",
+        "motion_claim": "Reveal the idea, terms or project workflow in time with narration",
+        "show": [
+          {
+            "at": 0,
+            "event": "Name the subject"
+          },
+          {
+            "at": 0.15,
+            "event": "Reveal the conceptual process"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysLecture",
+          "props": {
+            "mode": "prompt",
+            "title": "Your turn",
+            "team": "Lily Tammy \u00b7 Seth Barribeau \u00b7 Hriday Desai\nAayam Raj Shakya \u00b7 Yanyun Ma",
+            "lines": [
+              "Help me test Cohort Studio with invented tables. Build a join that multiplies rows, then propose a correction. Show rows, samples, and people before and after. Preserve the original steps and explain what a reviewer must approve."
+            ],
+            "labels": [
+              "Sources",
+              "Steps",
+              "Cohort"
+            ],
+            "credit": "Northeastern SEIS",
+            "logos": [],
+            "durationSeconds": 13.461333
+          }
+        }
+      },
+      "actual_duration_s": 13.461333,
+      "audio_file": "mp3/beat-BHTF.mp3"
+    },
+    {
+      "beat_id": "BOUT",
+      "act": "Outro",
+      "lane": "bookend",
+      "proof_gate": "SHOW",
+      "narration_text": "Thank you to the participants and sponsors: Northeastern SEIS, OncoSys AI, The Open Accelerator, and Red Hat. This is Liam, in for Bear.",
+      "estimated_duration_s": 3.46,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Cohort Studio: See Who Remains",
+        "motion_claim": "Reveal the idea, terms or project workflow in time with narration",
+        "show": [
+          {
+            "at": 0,
+            "event": "Name the subject"
+          },
+          {
+            "at": 0.15,
+            "event": "Reveal the conceptual process"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysLecture",
+          "props": {
+            "mode": "outro",
+            "title": "Cohort Studio: See Who Remains",
+            "team": "Lily Tammy \u00b7 Seth Barribeau \u00b7 Hriday Desai\nAayam Raj Shakya \u00b7 Yanyun Ma",
+            "lines": [],
+            "labels": [
+              "Sources",
+              "Steps",
+              "Cohort"
+            ],
+            "credit": "Northeastern SEIS",
+            "logos": [
+              "oncosys-films/brand/the-open-accelerator-transparent.png",
+              "oncosys-films/brand/oncosys-ai-transparent-black-wordmark.png",
+              "oncosys-films/brand/northeastern_university_seis_logo.jpeg",
+              "oncosys-films/brand/red-hat-logo.png"
+            ],
+            "durationSeconds": 9.192
+          }
+        }
+      },
+      "kind": "outro_voice",
+      "tail_silence_s": 1,
+      "actual_duration_s": 9.192,
+      "audio_file": "mp3/beat-BOUT.mp3",
+      "qc": {
+        "typography_reason": "Inventory of all authored title/team/description and organizer-credit text. Supplied trademark images and label-free conceptual animation are imagery, not authored typography; Gate V inspects the unmasked composition.",
+        "typography_fill": "#FFFFFF",
+        "typography_regions": [
+          {
+            "label": "Title, team and purpose",
+            "box": [
+              0.055,
+              0.14,
+              0.47,
+              0.72
+            ]
+          },
+          {
+            "label": "Written organizer credits",
+            "box": [
+              0.055,
+              0.74,
+              0.34,
+              0.94
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

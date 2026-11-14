@@ -1,0 +1,1341 @@
+{
+  "metadata": {
+    "slug": "claude-liam-readyset-show-tell",
+    "title": "ReadySet: Evidence Before Action",
+    "skill": "lecture",
+    "style_preset": "lecture",
+    "channel": "claude-liam",
+    "channel_title": "@NikBearBrown",
+    "persona": "Liam (in for Bear)",
+    "voice": "am_onyx",
+    "voice_kokoro": "am_onyx",
+    "engine": "kokoro",
+    "clock": "narration",
+    "palette": "neu",
+    "register": "Teardown-warm",
+    "fps": 24,
+    "aspect_ratio": "16:9",
+    "width": 3840,
+    "height": 2160,
+    "caption_policy": "none",
+    "lecture_opening_description": "From data changes to inspectable decisions",
+    "source_doc": "../../professor-bear/readyset-control-tower/REPORT.md",
+    "tags": [
+      "ReadySet",
+      "AI Healthcare Hackathon",
+      "Data Quality",
+      "Evidence",
+      "Research Tools"
+    ],
+    "audience": "Hackathon builders and people exploring evidence-centered research tools",
+    "build": {
+      "at": "2026-11-14T18:21:30",
+      "cut": "master",
+      "filled": 14,
+      "of": 14,
+      "slates": [],
+      "skin_warnings": []
+    },
+    "typography": {
+      "display": "Lato",
+      "serif": "Lato"
+    },
+    "event_credit": "Northeastern SEIS",
+    "team": "Team Automyte",
+    "brand_confirmation": "confirmed",
+    "pronounce": {
+      "SEIS": "sˈeɪs"
+    },
+    "render_concurrency": 4
+  },
+  "beats": [
+    {
+      "beat_id": "BOPEN",
+      "act": "Opening",
+      "lane": "bookend",
+      "proof_gate": "SHOW",
+      "narration_text": "ReadySet: Evidence Before Action. By Team Automyte. Sponsored by Northeastern SEIS, OncoSys AI, The Open Accelerator, and Red Hat.",
+      "estimated_duration_s": 8,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "ReadySet: Evidence Before Action",
+        "motion_claim": "Reveal the idea, terms or project workflow in time with narration",
+        "show": [
+          {
+            "at": 0,
+            "event": "Name the subject"
+          },
+          {
+            "at": 0.15,
+            "event": "Reveal the conceptual process"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysLecture",
+          "props": {
+            "mode": "open",
+            "title": "ReadySet: Evidence Before Action",
+            "team": "Team Automyte",
+            "lines": [],
+            "labels": [
+              "Data",
+              "Analysis",
+              "Evidence"
+            ],
+            "credit": "Northeastern SEIS",
+            "logos": [
+              "oncosys-films/brand/the-open-accelerator-transparent.png",
+              "oncosys-films/brand/oncosys-ai-transparent-black-wordmark.png",
+              "oncosys-films/brand/northeastern_university_seis_logo.jpeg",
+              "oncosys-films/brand/red-hat-logo.png"
+            ],
+            "durationSeconds": 8.810667
+          },
+          "rendered": {
+            "out": "media/BOPEN.mp4",
+            "at": "2026-11-14T23:19:27.382233+00:00"
+          }
+        }
+      },
+      "render_duration_s": 8.833333333333334,
+      "build": {
+        "status": "VIDEO",
+        "src": "media/BOPEN.mp4",
+        "filled_by": "remotion:OncosysLecture",
+        "at": "2026-11-14T18:21:30"
+      },
+      "actual_duration_s": 8.810667,
+      "audio_file": "mp3/beat-BOPEN.mp3",
+      "qc": {
+        "typography_reason": "Inventory of all authored title/team/description and organizer-credit text. Supplied trademark images and label-free conceptual animation are imagery, not authored typography; Gate V inspects the unmasked composition.",
+        "typography_fill": "#FFFFFF",
+        "typography_regions": [
+          {
+            "label": "Title, team and purpose",
+            "box": [
+              0.055,
+              0.14,
+              0.47,
+              0.72
+            ]
+          },
+          {
+            "label": "Written organizer credits",
+            "box": [
+              0.055,
+              0.74,
+              0.34,
+              0.94
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "beat_id": "BIDEA",
+      "act": "The Useful Idea",
+      "lane": "bookend",
+      "proof_gate": "SHOW",
+      "narration_text": "Hallo. This is Liam, in for Bear. ReadySet asks a useful question: what changed in our data, and does that change matter for the analysis we want to run?",
+      "estimated_duration_s": 11.15,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "The useful idea",
+        "motion_claim": "Reveal the idea, terms or project workflow in time with narration",
+        "show": [
+          {
+            "at": 0,
+            "event": "Name the subject"
+          },
+          {
+            "at": 0.15,
+            "event": "Reveal the conceptual process"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysLecture",
+          "props": {
+            "mode": "idea",
+            "title": "The useful idea",
+            "team": "Team Automyte",
+            "lines": [
+              "From data changes to inspectable decisions"
+            ],
+            "labels": [
+              "Data",
+              "Analysis",
+              "Evidence"
+            ],
+            "credit": "Northeastern SEIS",
+            "logos": [],
+            "durationSeconds": 9.845333
+          },
+          "rendered": {
+            "out": "media/BIDEA.mp4",
+            "at": "2026-11-14T23:12:16.823334+00:00"
+          }
+        }
+      },
+      "lead_silence_s": 0.8,
+      "actual_duration_s": 9.845333,
+      "audio_file": "mp3/beat-BIDEA.mp3",
+      "audio_padding_applied": {
+        "lead": 0.8,
+        "tail": 0
+      },
+      "render_duration_s": 9.875,
+      "build": {
+        "status": "VIDEO",
+        "src": "media/BIDEA.mp4",
+        "filled_by": "remotion:OncosysLecture",
+        "at": "2026-11-14T18:21:30"
+      },
+      "qc": {
+        "typography_regions": [
+          {
+            "label": "Heading",
+            "box": [
+              0.055,
+              0.1,
+              0.94,
+              0.29
+            ]
+          },
+          {
+            "label": "Useful idea",
+            "box": [
+              0.055,
+              0.29,
+              0.45,
+              0.7
+            ]
+          },
+          {
+            "label": "Event footer",
+            "box": [
+              0.1,
+              0.9,
+              0.94,
+              0.97
+            ]
+          }
+        ],
+        "typography_fill": "#FFFFFF",
+        "typography_reason": "Complete authored-text inventory. Isometric document hatch marks and box edges are graphical imagery, not overlapping text; actual unmasked frames are inspected separately and remain subject to Gate V."
+      }
+    },
+    {
+      "beat_id": "BDEFS",
+      "act": "The Useful Idea",
+      "lane": "bookend",
+      "proof_gate": "SHOW",
+      "narration_text": "Three terms. A release is one version of the data. A finding is a change supported by evidence. A review is a person deciding what to do with that evidence.",
+      "estimated_duration_s": 11.54,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Terms in this film",
+        "motion_claim": "Reveal the idea, terms or project workflow in time with narration",
+        "show": [
+          {
+            "at": 0,
+            "event": "Name the subject"
+          },
+          {
+            "at": 0.15,
+            "event": "Reveal the conceptual process"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysLecture",
+          "props": {
+            "mode": "definitions",
+            "title": "Terms in this film",
+            "team": "Team Automyte",
+            "lines": [
+              "Release: One version of the data",
+              "Finding: A change supported by evidence",
+              "Review: A person decides the next action"
+            ],
+            "labels": [
+              "Data",
+              "Analysis",
+              "Evidence"
+            ],
+            "credit": "Northeastern SEIS",
+            "logos": [],
+            "durationSeconds": 9.386667
+          },
+          "rendered": {
+            "out": "media/BDEFS.mp4",
+            "at": "2026-11-14T23:12:37.627365+00:00"
+          }
+        }
+      },
+      "actual_duration_s": 9.386667,
+      "audio_file": "mp3/beat-BDEFS.mp3",
+      "render_duration_s": 9.416666666666666,
+      "build": {
+        "status": "VIDEO",
+        "src": "media/BDEFS.mp4",
+        "filled_by": "remotion:OncosysLecture",
+        "at": "2026-11-14T18:21:30"
+      }
+    },
+    {
+      "beat_id": "B01",
+      "act": "The Useful Idea",
+      "lane": "remotion",
+      "proof_gate": "SHOW",
+      "narration_text": "The useful idea is to connect three things: the data, the analysis, and the evidence for a decision. A change matters because of what it affects. That makes the question part of the checking process.",
+      "estimated_duration_s": 13.46,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Evidence Before Action",
+        "motion_claim": "Reveal the named evidence or process on the narrated cue",
+        "show": [
+          {
+            "at": 0,
+            "event": "Establish the real artifact or conceptual cast"
+          },
+          {
+            "at": 0.25,
+            "event": "Focus the part named by the narration"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysProcess",
+          "props": {
+            "title": "Evidence Before Action",
+            "labels": [
+              "Data",
+              "Analysis",
+              "Evidence"
+            ],
+            "objectKinds": [
+              "document",
+              "adapter",
+              "document"
+            ],
+            "diagramStyle": "show-tell-isometric",
+            "mode": "flow",
+            "note": "Conceptual illustration",
+            "cues": [
+              0.1,
+              0.28,
+              0.65,
+              0.82
+            ],
+            "durationSeconds": 11.072
+          },
+          "rendered": {
+            "out": "media/B01.mp4",
+            "at": "2026-11-14T23:13:00.910508+00:00"
+          }
+        }
+      },
+      "actual_duration_s": 11.072,
+      "audio_file": "mp3/beat-B01.mp3",
+      "qc": {
+        "sparse_by_design": true,
+        "sparse_reason": "Show Tell approved isometric cast; whitespace preserves the document and gate relationships.",
+        "typography_regions": [
+          {
+            "label": "Heading",
+            "box": [
+              0.05,
+              0.05,
+              0.95,
+              0.2
+            ]
+          },
+          {
+            "label": "Object labels and details",
+            "box": [
+              0.05,
+              0.62,
+              0.95,
+              0.76
+            ]
+          },
+          {
+            "label": "Gate or drift label",
+            "box": [
+              0.3,
+              0.74,
+              0.7,
+              0.81
+            ]
+          },
+          {
+            "label": "Evidence-status note",
+            "box": [
+              0.05,
+              0.83,
+              0.95,
+              0.9
+            ]
+          },
+          {
+            "label": "Event footer",
+            "box": [
+              0.3,
+              0.91,
+              0.95,
+              0.97
+            ]
+          }
+        ],
+        "typography_fill": "#FFFFFF",
+        "typography_reason": "Complete authored-text inventory. Isometric document hatch marks and box edges are graphical imagery, not overlapping text; actual unmasked frames are inspected separately and remain subject to Gate V."
+      },
+      "render_duration_s": 11.083333333333334,
+      "build": {
+        "status": "VIDEO",
+        "src": "media/B01.mp4",
+        "filled_by": "remotion:OncosysProcess",
+        "at": "2026-11-14T18:21:30"
+      }
+    },
+    {
+      "beat_id": "B02",
+      "act": "The Useful Idea",
+      "lane": "remotion",
+      "proof_gate": "SHOW",
+      "narration_text": "Here is the actual ReadySet interface, running locally with invented test data. A deliberately swapped measurement triggers a review. The headline tells us to pause, and the analysis cards tell us where to look.",
+      "estimated_duration_s": 13.08,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "ReadySet · synthetic local demonstration · 14 Nov 2026",
+        "motion_claim": "Reveal the named evidence or process on the narrated cue",
+        "show": [
+          {
+            "at": 0,
+            "event": "Establish the real artifact or conceptual cast"
+          },
+          {
+            "at": 0.25,
+            "event": "Focus the part named by the narration"
+          }
+        ],
+        "remotion": {
+          "pattern": "BrowserCapture",
+          "props": {
+            "image": "oncosys-films/claude-liam-readyset-show-tell/overview.png",
+            "imageAspect": 1.7777777777777777,
+            "caption": "ReadySet · synthetic local demonstration · 14 Nov 2026",
+            "moves": [
+              {
+                "at": 0,
+                "x": 0.5,
+                "y": 0.5,
+                "scale": 1
+              },
+              {
+                "at": 0.22,
+                "x": 0.49,
+                "y": 0.34,
+                "scale": 1.4
+              }
+            ],
+            "moveSeconds": 0.8,
+            "durationSeconds": 11.818667,
+            "brand": "neu",
+            "frame": "app"
+          },
+          "rendered": {
+            "out": "media/B02.mp4",
+            "at": "2026-11-14T23:13:37.517367+00:00"
+          }
+        }
+      },
+      "actual_duration_s": 11.818667,
+      "audio_file": "mp3/beat-B02.mp3",
+      "render_duration_s": 11.833333333333334,
+      "build": {
+        "status": "VIDEO",
+        "src": "media/B02.mp4",
+        "filled_by": "remotion:BrowserCapture",
+        "at": "2026-11-14T18:21:30"
+      },
+      "qc": {
+        "contrast_reason": "Real captured application panels have different background colors. Whole-frame mean treats panel fills as ink. Inspect essential headline/claim and designed caption separately; retain all edge/fill tests.",
+        "contrast_regions": [
+          {
+            "label": "Captured finding headline",
+            "box": [
+              0.14,
+              0.43,
+              0.85,
+              0.5
+            ]
+          },
+          {
+            "label": "Film caption",
+            "box": [
+              0.15,
+              0.895,
+              0.86,
+              0.935
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "beat_id": "B03",
+      "act": "The Useful Idea",
+      "lane": "remotion",
+      "proof_gate": "SHOW",
+      "narration_text": "Now the question changes. We leave out the affected protein analysis and keep the unrelated analysis. In this tested example, the verdict becomes Ready. That is a concrete demonstration of question-dependent checking.",
+      "estimated_duration_s": 12.31,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Actual A2-only result · synthetic data",
+        "motion_claim": "Reveal the named evidence or process on the narrated cue",
+        "show": [
+          {
+            "at": 0,
+            "event": "Establish the real artifact or conceptual cast"
+          },
+          {
+            "at": 0.25,
+            "event": "Focus the part named by the narration"
+          }
+        ],
+        "remotion": {
+          "pattern": "BrowserCapture",
+          "props": {
+            "image": "oncosys-films/claude-liam-readyset-show-tell/question-a2.png",
+            "imageAspect": 1.7777777777777777,
+            "caption": "Actual A2-only result · synthetic data",
+            "moves": [
+              {
+                "at": 0,
+                "x": 0.5,
+                "y": 0.5,
+                "scale": 1
+              },
+              {
+                "at": 0.22,
+                "x": 0.49,
+                "y": 0.3,
+                "scale": 1.5
+              }
+            ],
+            "moveSeconds": 0.8,
+            "durationSeconds": 12.672,
+            "brand": "neu",
+            "frame": "app"
+          },
+          "rendered": {
+            "out": "media/B03.mp4",
+            "at": "2026-11-14T23:14:16.444326+00:00"
+          }
+        }
+      },
+      "actual_duration_s": 12.672,
+      "audio_file": "mp3/beat-B03.mp3",
+      "render_duration_s": 12.708333333333334,
+      "build": {
+        "status": "VIDEO",
+        "src": "media/B03.mp4",
+        "filled_by": "remotion:BrowserCapture",
+        "at": "2026-11-14T18:21:30"
+      }
+    },
+    {
+      "beat_id": "B04",
+      "act": "The Useful Idea",
+      "lane": "remotion",
+      "proof_gate": "SHOW",
+      "narration_text": "Bring the affected analysis back, and the finding returns. This evidence view is a strength: the reader can inspect what changed, consider the suggested repair, and see the limits of the explanation.",
+      "estimated_duration_s": 12.31,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Actual finding and evidence · synthetic data",
+        "motion_claim": "Reveal the named evidence or process on the narrated cue",
+        "show": [
+          {
+            "at": 0,
+            "event": "Establish the real artifact or conceptual cast"
+          },
+          {
+            "at": 0.25,
+            "event": "Focus the part named by the narration"
+          }
+        ],
+        "remotion": {
+          "pattern": "BrowserCapture",
+          "props": {
+            "image": "oncosys-films/claude-liam-readyset-show-tell/evidence.png",
+            "imageAspect": 1.7777777777777777,
+            "caption": "Actual finding and evidence · synthetic data",
+            "moves": [
+              {
+                "at": 0,
+                "x": 0.5,
+                "y": 0.5,
+                "scale": 1
+              },
+              {
+                "at": 0.22,
+                "x": 0.5,
+                "y": 0.75,
+                "scale": 1.4
+              }
+            ],
+            "moveSeconds": 0.8,
+            "durationSeconds": 10.965333,
+            "brand": "neu",
+            "frame": "app"
+          },
+          "rendered": {
+            "out": "media/B04.mp4",
+            "at": "2026-11-14T23:14:51.323548+00:00"
+          }
+        }
+      },
+      "actual_duration_s": 10.965333,
+      "audio_file": "mp3/beat-B04.mp3",
+      "render_duration_s": 11.0,
+      "build": {
+        "status": "VIDEO",
+        "src": "media/B04.mp4",
+        "filled_by": "remotion:BrowserCapture",
+        "at": "2026-11-14T18:21:30"
+      },
+      "qc": {
+        "contrast_reason": "Real captured application panels have different background colors. Whole-frame mean treats panel fills as ink. Inspect essential headline/claim and designed caption separately; retain all edge/fill tests.",
+        "contrast_regions": [
+          {
+            "label": "Actual finding headline",
+            "box": [
+              0.13,
+              0.225,
+              0.85,
+              0.28
+            ]
+          },
+          {
+            "label": "Film caption",
+            "box": [
+              0.15,
+              0.895,
+              0.86,
+              0.935
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "beat_id": "B05",
+      "act": "The Useful Idea",
+      "lane": "remotion",
+      "proof_gate": "SHOW",
+      "narration_text": "The next strength is the handoff. Detection produces a finding; a person reviews it before deciding on action. The normal named-review path worked in our browser checks. That makes the decision inspectable.",
+      "estimated_duration_s": 12.31,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Keep The Human Handoff",
+        "motion_claim": "Reveal the named evidence or process on the narrated cue",
+        "show": [
+          {
+            "at": 0,
+            "event": "Establish the real artifact or conceptual cast"
+          },
+          {
+            "at": 0.25,
+            "event": "Focus the part named by the narration"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysProcess",
+          "props": {
+            "title": "Keep The Human Handoff",
+            "labels": [
+              "Finding",
+              "Review",
+              "Action"
+            ],
+            "objectKinds": [
+              "document",
+              "monitor",
+              "package"
+            ],
+            "diagramStyle": "show-tell-isometric",
+            "mode": "flow",
+            "note": "Conceptual illustration",
+            "cues": [
+              0.1,
+              0.28,
+              0.65,
+              0.82
+            ],
+            "durationSeconds": 11.434667
+          },
+          "rendered": {
+            "out": "media/B05.mp4",
+            "at": "2026-11-14T23:15:15.283947+00:00"
+          }
+        }
+      },
+      "actual_duration_s": 11.434667,
+      "audio_file": "mp3/beat-B05.mp3",
+      "qc": {
+        "sparse_by_design": true,
+        "sparse_reason": "Show Tell approved isometric cast; whitespace preserves the document and gate relationships.",
+        "typography_regions": [
+          {
+            "label": "Heading",
+            "box": [
+              0.05,
+              0.05,
+              0.95,
+              0.2
+            ]
+          },
+          {
+            "label": "Object labels and details",
+            "box": [
+              0.05,
+              0.62,
+              0.95,
+              0.76
+            ]
+          },
+          {
+            "label": "Gate or drift label",
+            "box": [
+              0.3,
+              0.74,
+              0.7,
+              0.81
+            ]
+          },
+          {
+            "label": "Evidence-status note",
+            "box": [
+              0.05,
+              0.83,
+              0.95,
+              0.9
+            ]
+          },
+          {
+            "label": "Event footer",
+            "box": [
+              0.3,
+              0.91,
+              0.95,
+              0.97
+            ]
+          }
+        ],
+        "typography_fill": "#FFFFFF",
+        "typography_reason": "Complete authored-text inventory. Isometric document hatch marks and box edges are graphical imagery, not overlapping text; actual unmasked frames are inspected separately and remain subject to Gate V."
+      },
+      "render_duration_s": 11.458333333333334,
+      "build": {
+        "status": "VIDEO",
+        "src": "media/B05.mp4",
+        "filled_by": "remotion:OncosysProcess",
+        "at": "2026-11-14T18:21:30"
+      }
+    },
+    {
+      "beat_id": "B06",
+      "act": "Build On The Foundation",
+      "lane": "remotion",
+      "proof_gate": "SHOW",
+      "narration_text": "Next steps can build on that foundation. Add an input-validity gate before comparing changes. If required evidence is missing, the process should stop there and explain what is needed to continue.",
+      "estimated_duration_s": 11.92,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Next: Validate Inputs",
+        "motion_claim": "Reveal the named evidence or process on the narrated cue",
+        "show": [
+          {
+            "at": 0,
+            "event": "Establish the real artifact or conceptual cast"
+          },
+          {
+            "at": 0.25,
+            "event": "Focus the part named by the narration"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysProcess",
+          "props": {
+            "title": "Next: Validate Inputs",
+            "labels": [
+              "Inputs",
+              "Validity",
+              "Comparison"
+            ],
+            "objectKinds": [
+              "document",
+              "scanner",
+              "adapter"
+            ],
+            "diagramStyle": "show-tell-isometric",
+            "mode": "gate",
+            "note": "Proposed next step · not a completed feature",
+            "cues": [
+              0.1,
+              0.28,
+              0.65,
+              0.82
+            ],
+            "gateLabel": "Request evidence",
+            "durationSeconds": 11.285333
+          },
+          "rendered": {
+            "out": "media/B06.mp4",
+            "at": "2026-11-14T23:15:40.428269+00:00"
+          }
+        }
+      },
+      "actual_duration_s": 11.285333,
+      "audio_file": "mp3/beat-B06.mp3",
+      "qc": {
+        "sparse_by_design": true,
+        "sparse_reason": "Show Tell approved isometric cast; whitespace preserves the document and gate relationships.",
+        "typography_regions": [
+          {
+            "label": "Heading",
+            "box": [
+              0.05,
+              0.05,
+              0.95,
+              0.2
+            ]
+          },
+          {
+            "label": "Object labels and details",
+            "box": [
+              0.05,
+              0.62,
+              0.95,
+              0.76
+            ]
+          },
+          {
+            "label": "Gate or drift label",
+            "box": [
+              0.3,
+              0.74,
+              0.7,
+              0.81
+            ]
+          },
+          {
+            "label": "Evidence-status note",
+            "box": [
+              0.05,
+              0.83,
+              0.95,
+              0.9
+            ]
+          },
+          {
+            "label": "Event footer",
+            "box": [
+              0.3,
+              0.91,
+              0.95,
+              0.97
+            ]
+          }
+        ],
+        "typography_fill": "#FFFFFF",
+        "typography_reason": "Complete authored-text inventory. Isometric document hatch marks and box edges are graphical imagery, not overlapping text; actual unmasked frames are inspected separately and remain subject to Gate V."
+      },
+      "render_duration_s": 11.291666666666666,
+      "build": {
+        "status": "VIDEO",
+        "src": "media/B06.mp4",
+        "filled_by": "remotion:OncosysProcess",
+        "at": "2026-11-14T18:21:30"
+      }
+    },
+    {
+      "beat_id": "B07",
+      "act": "Build On The Foundation",
+      "lane": "remotion",
+      "proof_gate": "SHOW",
+      "narration_text": "Then preserve each review as an event. A decision can change, but its earlier evidence and reasoning should remain inspectable. This is a practical extension of the evidence fingerprints the project already uses.",
+      "estimated_duration_s": 12.69,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Next: Preserve Decisions",
+        "motion_claim": "Reveal the named evidence or process on the narrated cue",
+        "show": [
+          {
+            "at": 0,
+            "event": "Establish the real artifact or conceptual cast"
+          },
+          {
+            "at": 0.25,
+            "event": "Focus the part named by the narration"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysProcess",
+          "props": {
+            "title": "Next: Preserve Decisions",
+            "labels": [
+              "Evidence",
+              "Decision",
+              "History"
+            ],
+            "objectKinds": [
+              "document",
+              "monitor",
+              "package"
+            ],
+            "diagramStyle": "show-tell-isometric",
+            "mode": "flow",
+            "note": "Proposed next step · immutable review events",
+            "cues": [
+              0.1,
+              0.28,
+              0.65,
+              0.82
+            ],
+            "durationSeconds": 12.309333
+          },
+          "rendered": {
+            "out": "media/B07.mp4",
+            "at": "2026-11-14T23:16:06.057042+00:00"
+          }
+        }
+      },
+      "actual_duration_s": 12.309333,
+      "audio_file": "mp3/beat-B07.mp3",
+      "qc": {
+        "sparse_by_design": true,
+        "sparse_reason": "Show Tell approved isometric cast; whitespace preserves the document and gate relationships.",
+        "typography_regions": [
+          {
+            "label": "Heading",
+            "box": [
+              0.05,
+              0.05,
+              0.95,
+              0.2
+            ]
+          },
+          {
+            "label": "Object labels and details",
+            "box": [
+              0.05,
+              0.62,
+              0.95,
+              0.76
+            ]
+          },
+          {
+            "label": "Gate or drift label",
+            "box": [
+              0.3,
+              0.74,
+              0.7,
+              0.81
+            ]
+          },
+          {
+            "label": "Evidence-status note",
+            "box": [
+              0.05,
+              0.83,
+              0.95,
+              0.9
+            ]
+          },
+          {
+            "label": "Event footer",
+            "box": [
+              0.3,
+              0.91,
+              0.95,
+              0.97
+            ]
+          }
+        ],
+        "typography_fill": "#FFFFFF",
+        "typography_reason": "Complete authored-text inventory. Isometric document hatch marks and box edges are graphical imagery, not overlapping text; actual unmasked frames are inspected separately and remain subject to Gate V."
+      },
+      "render_duration_s": 12.333333333333334,
+      "build": {
+        "status": "VIDEO",
+        "src": "media/B07.mp4",
+        "filled_by": "remotion:OncosysProcess",
+        "at": "2026-11-14T18:21:30"
+      }
+    },
+    {
+      "beat_id": "B08",
+      "act": "Build On The Foundation",
+      "lane": "remotion",
+      "proof_gate": "SHOW",
+      "narration_text": "For the team, the opportunity is clear: keep the efficient detector and the readable evidence, then strengthen those boundaries. This is a promising research prototype. The demonstration does not establish clinical or production readiness.",
+      "estimated_duration_s": 13.08,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "An Inspectable Workflow",
+        "motion_claim": "Reveal the named evidence or process on the narrated cue",
+        "show": [
+          {
+            "at": 0,
+            "event": "Establish the real artifact or conceptual cast"
+          },
+          {
+            "at": 0.25,
+            "event": "Focus the part named by the narration"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysProcess",
+          "props": {
+            "title": "An Inspectable Workflow",
+            "labels": [
+              "Detect",
+              "Explain",
+              "Improve"
+            ],
+            "objectKinds": [
+              "scanner",
+              "document",
+              "adapter"
+            ],
+            "diagramStyle": "show-tell-isometric",
+            "mode": "flow",
+            "note": "Research prototype · detailed review linked with this film",
+            "cues": [
+              0.1,
+              0.28,
+              0.65,
+              0.82
+            ],
+            "durationSeconds": 12.970667
+          },
+          "rendered": {
+            "out": "media/B08.mp4",
+            "at": "2026-11-14T23:16:33.685602+00:00"
+          }
+        }
+      },
+      "actual_duration_s": 12.970667,
+      "audio_file": "mp3/beat-B08.mp3",
+      "qc": {
+        "sparse_by_design": true,
+        "sparse_reason": "Show Tell approved isometric cast; whitespace preserves the document and gate relationships.",
+        "typography_regions": [
+          {
+            "label": "Heading",
+            "box": [
+              0.05,
+              0.05,
+              0.95,
+              0.2
+            ]
+          },
+          {
+            "label": "Object labels and details",
+            "box": [
+              0.05,
+              0.62,
+              0.95,
+              0.76
+            ]
+          },
+          {
+            "label": "Gate or drift label",
+            "box": [
+              0.3,
+              0.74,
+              0.7,
+              0.81
+            ]
+          },
+          {
+            "label": "Evidence-status note",
+            "box": [
+              0.05,
+              0.83,
+              0.95,
+              0.9
+            ]
+          },
+          {
+            "label": "Event footer",
+            "box": [
+              0.3,
+              0.91,
+              0.95,
+              0.97
+            ]
+          }
+        ],
+        "typography_fill": "#FFFFFF",
+        "typography_reason": "Complete authored-text inventory. Isometric document hatch marks and box edges are graphical imagery, not overlapping text; actual unmasked frames are inspected separately and remain subject to Gate V."
+      },
+      "render_duration_s": 13.0,
+      "build": {
+        "status": "VIDEO",
+        "src": "media/B08.mp4",
+        "filled_by": "remotion:OncosysProcess",
+        "at": "2026-11-14T18:21:30"
+      }
+    },
+    {
+      "beat_id": "BVDT",
+      "act": "Recap",
+      "lane": "bookend",
+      "proof_gate": "SHOW",
+      "narration_text": "Let's recap. Connect changes to the selected analysis. Let people inspect the evidence. Validate inputs before interpreting changes. Preserve the history of human decisions.",
+      "estimated_duration_s": 10.0,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "What to build on",
+        "motion_claim": "Reveal the idea, terms or project workflow in time with narration",
+        "show": [
+          {
+            "at": 0,
+            "event": "Name the subject"
+          },
+          {
+            "at": 0.15,
+            "event": "Reveal the conceptual process"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysLecture",
+          "props": {
+            "mode": "recap",
+            "title": "What to build on",
+            "team": "Team Automyte",
+            "lines": [
+              "Connect changes to the selected analysis.",
+              "Let people inspect the evidence.",
+              "Validate inputs before interpreting changes.",
+              "Preserve the history of human decisions."
+            ],
+            "labels": [
+              "Data",
+              "Analysis",
+              "Evidence"
+            ],
+            "credit": "Northeastern SEIS",
+            "logos": [],
+            "durationSeconds": 11.017958
+          },
+          "rendered": {
+            "out": "media/BVDT.mp4",
+            "at": "2026-11-14T23:16:57.393087+00:00"
+          }
+        }
+      },
+      "lead_silence_s": 0.5,
+      "render_duration_s": 11.041666666666666,
+      "build": {
+        "status": "VIDEO",
+        "src": "media/BVDT.mp4",
+        "filled_by": "remotion:OncosysLecture",
+        "at": "2026-11-14T18:21:30"
+      },
+      "actual_duration_s": 11.017958,
+      "audio_file": "mp3/beat-BVDT.mp3",
+      "audio_padding_applied": {
+        "lead": 0.5,
+        "tail": 0
+      }
+    },
+    {
+      "beat_id": "BHTF",
+      "act": "Your Turn",
+      "lane": "bookend",
+      "proof_gate": "SHOW",
+      "narration_text": "Help me extend ReadySet with an input-validity gate. Use invented data. Show one valid unchanged release and one missing-input case. Explain the expected decision and the evidence needed to justify it.",
+      "estimated_duration_s": 11.92,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Your turn",
+        "motion_claim": "Reveal the idea, terms or project workflow in time with narration",
+        "show": [
+          {
+            "at": 0,
+            "event": "Name the subject"
+          },
+          {
+            "at": 0.15,
+            "event": "Reveal the conceptual process"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysLecture",
+          "props": {
+            "mode": "prompt",
+            "title": "Your turn",
+            "team": "Team Automyte",
+            "lines": [
+              "Help me extend ReadySet with an input-validity gate. Use invented data. Show one valid unchanged release and one missing-input case. Explain the expected decision and the evidence needed to justify it."
+            ],
+            "labels": [
+              "Data",
+              "Analysis",
+              "Evidence"
+            ],
+            "credit": "Northeastern SEIS",
+            "logos": [],
+            "durationSeconds": 12.181333
+          },
+          "rendered": {
+            "out": "media/BHTF.mp4",
+            "at": "2026-11-14T23:17:22.764986+00:00"
+          }
+        }
+      },
+      "actual_duration_s": 12.181333,
+      "audio_file": "mp3/beat-BHTF.mp3",
+      "render_duration_s": 12.208333333333334,
+      "build": {
+        "status": "VIDEO",
+        "src": "media/BHTF.mp4",
+        "filled_by": "remotion:OncosysLecture",
+        "at": "2026-11-14T18:21:30"
+      }
+    },
+    {
+      "beat_id": "BOUT",
+      "act": "Outro",
+      "lane": "bookend",
+      "proof_gate": "SHOW",
+      "narration_text": "Thank you to the participants and sponsors: Northeastern SEIS, OncoSys AI, The Open Accelerator, and Red Hat. This is Liam, in for Bear.",
+      "estimated_duration_s": 3.08,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "ReadySet: Evidence Before Action",
+        "motion_claim": "Reveal the idea, terms or project workflow in time with narration",
+        "show": [
+          {
+            "at": 0,
+            "event": "Name the subject"
+          },
+          {
+            "at": 0.15,
+            "event": "Reveal the conceptual process"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysLecture",
+          "props": {
+            "mode": "outro",
+            "title": "ReadySet: Evidence Before Action",
+            "team": "Team Automyte",
+            "lines": [],
+            "labels": [
+              "Data",
+              "Analysis",
+              "Evidence"
+            ],
+            "credit": "Northeastern SEIS",
+            "logos": [
+              "oncosys-films/brand/the-open-accelerator-transparent.png",
+              "oncosys-films/brand/oncosys-ai-transparent-black-wordmark.png",
+              "oncosys-films/brand/northeastern_university_seis_logo.jpeg",
+              "oncosys-films/brand/red-hat-logo.png"
+            ],
+            "durationSeconds": 9.64
+          },
+          "rendered": {
+            "out": "media/BOUT.mp4",
+            "at": "2026-11-14T23:17:47.358488+00:00"
+          }
+        }
+      },
+      "kind": "outro_voice",
+      "tail_silence_s": 1,
+      "actual_duration_s": 9.64,
+      "audio_file": "mp3/beat-BOUT.mp3",
+      "render_duration_s": 9.666666666666666,
+      "build": {
+        "status": "VIDEO",
+        "src": "media/BOUT.mp4",
+        "filled_by": "remotion:OncosysLecture",
+        "at": "2026-11-14T18:21:30"
+      },
+      "qc": {
+        "typography_reason": "Inventory of all authored title/team/description and organizer-credit text. Supplied trademark images and label-free conceptual animation are imagery, not authored typography; Gate V inspects the unmasked composition.",
+        "typography_fill": "#FFFFFF",
+        "typography_regions": [
+          {
+            "label": "Title, team and purpose",
+            "box": [
+              0.055,
+              0.14,
+              0.47,
+              0.72
+            ]
+          },
+          {
+            "label": "Written organizer credits",
+            "box": [
+              0.055,
+              0.74,
+              0.34,
+              0.94
+            ]
+          }
+        ]
+      },
+      "audio_padding_applied": {
+        "lead": 0,
+        "tail": 1
+      }
+    }
+  ]
+}

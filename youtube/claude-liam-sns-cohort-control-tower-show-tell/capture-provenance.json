@@ -1,0 +1,17 @@
+{
+  "submission": "saigunavardhan/sns-cohort-control-tower",
+  "commit": "c1e8b79a2987cee6087d847867f9895deaa109a4",
+  "review": "../../professor-bear/sns-cohort-control-tower/REPORT.md",
+  "captures": [
+    {
+      "file": "captures/export-synthetic.png",
+      "bytes": 39854,
+      "sha256": "9245d229e9ec5c1dfa0c9eb15b9d255b66aba85ba94753f2217f8e6a0e17bd94"
+    },
+    {
+      "file": "captures/results-synthetic.png",
+      "bytes": 603258,
+      "sha256": "352beaff0643038122fdeb3e0c141723f733fbb9d065ab16fa3f468585e152f6"
+    }
+  ]
+}

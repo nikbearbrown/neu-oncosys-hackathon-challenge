@@ -1,0 +1,1063 @@
+{
+  "metadata": {
+    "slug": "claude-liam-cohort-firewall-show-tell",
+    "title": "Cohort Firewall: Evidence And Policy",
+    "skill": "lecture",
+    "style_preset": "lecture",
+    "channel": "claude-liam",
+    "channel_title": "@NikBearBrown",
+    "persona": "Liam (in for Bear)",
+    "voice": "am_onyx",
+    "voice_kokoro": "am_onyx",
+    "engine": "kokoro",
+    "clock": "narration",
+    "palette": "neu",
+    "register": "Teardown-warm",
+    "fps": 24,
+    "aspect_ratio": "16:9",
+    "width": 3840,
+    "height": 2160,
+    "caption_policy": "none",
+    "lecture_opening_description": "Measurements, rules and review",
+    "source_doc": "../../professor-bear/cohort-firewall/REPORT.md",
+    "tags": [
+      "Cohort Firewall",
+      "AI Healthcare Hackathon",
+      "Evidence",
+      "Research Tools"
+    ],
+    "audience": "Hackathon builders and people exploring evidence-centered research tools",
+    "typography": {
+      "display": "Lato",
+      "serif": "Lato"
+    },
+    "event_credit": "Northeastern SEIS",
+    "team": "Ninad Rao \u00b7 Kareesa Rao\nSreelasya Changalasetty \u00b7 Sanica Chaudhary",
+    "brand_confirmation": "confirmed",
+    "pronounce": {
+      "SEIS": "s\u02c8e\u026as"
+    },
+    "render_concurrency": 4
+  },
+  "beats": [
+    {
+      "beat_id": "BOPEN",
+      "act": "Opening",
+      "lane": "bookend",
+      "proof_gate": "SHOW",
+      "narration_text": "Cohort Firewall: Evidence And Policy. By Ninad Rao, Kareesa Rao, Sreelasya Changalasetty, and Sanica Chaudhary. Sponsored by Northeastern SEIS, OncoSys AI, The Open Accelerator, and Red Hat.",
+      "estimated_duration_s": 4.23,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Cohort Firewall: Evidence And Policy",
+        "motion_claim": "Reveal the idea, terms or project workflow in time with narration",
+        "show": [
+          {
+            "at": 0,
+            "event": "Name the subject"
+          },
+          {
+            "at": 0.15,
+            "event": "Reveal the conceptual process"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysLecture",
+          "props": {
+            "mode": "open",
+            "title": "Cohort Firewall: Evidence And Policy",
+            "team": "Ninad Rao \u00b7 Kareesa Rao\nSreelasya Changalasetty \u00b7 Sanica Chaudhary",
+            "lines": [],
+            "labels": [
+              "Measure",
+              "Policy",
+              "Review"
+            ],
+            "credit": "Northeastern SEIS",
+            "logos": [
+              "oncosys-films/brand/the-open-accelerator-transparent.png",
+              "oncosys-films/brand/oncosys-ai-transparent-black-wordmark.png",
+              "oncosys-films/brand/northeastern_university_seis_logo.jpeg",
+              "oncosys-films/brand/red-hat-logo.png"
+            ],
+            "durationSeconds": 12.245333
+          }
+        }
+      },
+      "actual_duration_s": 12.245333,
+      "audio_file": "mp3/beat-BOPEN.mp3",
+      "qc": {
+        "typography_reason": "Inventory of all authored title/team/description and organizer-credit text. Supplied trademark images and label-free conceptual animation are imagery, not authored typography; Gate V inspects the unmasked composition.",
+        "typography_fill": "#FFFFFF",
+        "typography_regions": [
+          {
+            "label": "Title, team and purpose",
+            "box": [
+              0.055,
+              0.14,
+              0.47,
+              0.72
+            ]
+          },
+          {
+            "label": "Written organizer credits",
+            "box": [
+              0.055,
+              0.74,
+              0.34,
+              0.94
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "beat_id": "BIDEA",
+      "act": "The Useful Idea",
+      "lane": "bookend",
+      "proof_gate": "SHOW",
+      "narration_text": "Hallo. This is Liam, in for Bear. Cohort Firewall separates measurements from policy. It makes the rules behind a readiness decision explicit and attaches evidence to the result. That is a useful architecture for a system people must inspect and challenge.",
+      "estimated_duration_s": 15.77,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "The useful idea",
+        "motion_claim": "Reveal the idea, terms or project workflow in time with narration",
+        "show": [
+          {
+            "at": 0,
+            "event": "Name the subject"
+          },
+          {
+            "at": 0.15,
+            "event": "Reveal the conceptual process"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysLecture",
+          "props": {
+            "mode": "idea",
+            "title": "The useful idea",
+            "team": "Ninad Rao \u00b7 Kareesa Rao\nSreelasya Changalasetty \u00b7 Sanica Chaudhary",
+            "lines": [
+              "Measurements, rules and review"
+            ],
+            "labels": [
+              "Measure",
+              "Policy",
+              "Review"
+            ],
+            "credit": "Northeastern SEIS",
+            "logos": [],
+            "durationSeconds": 15.605333
+          }
+        }
+      },
+      "lead_silence_s": 0.8,
+      "actual_duration_s": 15.605333,
+      "audio_file": "mp3/beat-BIDEA.mp3",
+      "audio_padding_applied": {
+        "lead": 0.8,
+        "tail": 0
+      },
+      "qc": {
+        "typography_regions": [
+          {
+            "label": "Heading",
+            "box": [
+              0.055,
+              0.1,
+              0.94,
+              0.29
+            ]
+          },
+          {
+            "label": "Useful idea",
+            "box": [
+              0.055,
+              0.29,
+              0.45,
+              0.7
+            ]
+          },
+          {
+            "label": "Event footer",
+            "box": [
+              0.1,
+              0.9,
+              0.94,
+              0.97
+            ]
+          }
+        ],
+        "typography_fill": "#FFFFFF",
+        "typography_reason": "Complete authored-text inventory. Isometric document hatch marks and box edges are graphical imagery, not overlapping text; actual unmasked frames are inspected separately and remain subject to Gate V."
+      }
+    },
+    {
+      "beat_id": "BDEFS",
+      "act": "The Useful Idea",
+      "lane": "bookend",
+      "proof_gate": "SHOW",
+      "narration_text": "Three terms. Policy means explicit rules for interpreting checks. Evidence means measurements supporting a finding. Certificate means a signed record of selected result fields.",
+      "estimated_duration_s": 9.23,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Terms in this film",
+        "motion_claim": "Reveal the idea, terms or project workflow in time with narration",
+        "show": [
+          {
+            "at": 0,
+            "event": "Name the subject"
+          },
+          {
+            "at": 0.15,
+            "event": "Reveal the conceptual process"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysLecture",
+          "props": {
+            "mode": "definitions",
+            "title": "Terms in this film",
+            "team": "Ninad Rao \u00b7 Kareesa Rao\nSreelasya Changalasetty \u00b7 Sanica Chaudhary",
+            "lines": [
+              "Policy: Explicit rules for interpreting checks",
+              "Evidence: Measurements supporting a finding",
+              "Certificate: A signed record of selected result fields"
+            ],
+            "labels": [
+              "Measure",
+              "Policy",
+              "Review"
+            ],
+            "credit": "Northeastern SEIS",
+            "logos": [],
+            "durationSeconds": 10.581333
+          }
+        }
+      },
+      "actual_duration_s": 10.581333,
+      "audio_file": "mp3/beat-BDEFS.mp3"
+    },
+    {
+      "beat_id": "B01",
+      "act": "The Useful Idea",
+      "lane": "remotion",
+      "proof_gate": "SHOW",
+      "narration_text": "Measurements feed explicit rules, and the result goes to review. The project's evidence records include fields, limitations, remedies, and what would justify reconsideration. That gives the next person a concrete starting point.",
+      "estimated_duration_s": 12.31,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Evidence Before Action",
+        "motion_claim": "Reveal the named evidence or process on the narrated cue",
+        "show": [
+          {
+            "at": 0,
+            "event": "Establish the real artifact or conceptual cast"
+          },
+          {
+            "at": 0.25,
+            "event": "Focus the part named by the narration"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysProcess",
+          "props": {
+            "title": "Connect measurements, explicit rules and review",
+            "labels": [
+              "Measure",
+              "Policy",
+              "Review"
+            ],
+            "objectKinds": [
+              "document",
+              "adapter",
+              "monitor"
+            ],
+            "diagramStyle": "show-tell-isometric",
+            "mode": "flow",
+            "note": "Conceptual illustration",
+            "cues": [
+              0.1,
+              0.28,
+              0.65,
+              0.82
+            ],
+            "durationSeconds": 13.248
+          }
+        }
+      },
+      "qc": {
+        "sparse_by_design": true,
+        "sparse_reason": "Show Tell approved isometric cast; whitespace preserves the document and gate relationships.",
+        "typography_regions": [
+          {
+            "label": "Heading",
+            "box": [
+              0.05,
+              0.05,
+              0.95,
+              0.2
+            ]
+          },
+          {
+            "label": "Object labels and details",
+            "box": [
+              0.05,
+              0.62,
+              0.95,
+              0.76
+            ]
+          },
+          {
+            "label": "Gate or drift label",
+            "box": [
+              0.3,
+              0.74,
+              0.7,
+              0.81
+            ]
+          },
+          {
+            "label": "Evidence-status note",
+            "box": [
+              0.05,
+              0.83,
+              0.95,
+              0.9
+            ]
+          },
+          {
+            "label": "Event footer",
+            "box": [
+              0.3,
+              0.91,
+              0.95,
+              0.97
+            ]
+          }
+        ],
+        "typography_fill": "#FFFFFF",
+        "typography_reason": "Complete authored-text inventory. Isometric document hatch marks and box edges are graphical imagery, not overlapping text; actual unmasked frames are inspected separately and remain subject to Gate V."
+      },
+      "actual_duration_s": 13.248,
+      "audio_file": "mp3/beat-B01.mp3"
+    },
+    {
+      "beat_id": "B02",
+      "act": "The Useful Idea",
+      "lane": "remotion",
+      "proof_gate": "SHOW",
+      "narration_text": "Here is an actual local command-line result using the supplied synthetic clean variant. The engine returns Ready, with no findings, and its certificate verifies. This is an engine demonstration, not evidence of clinical readiness.",
+      "estimated_duration_s": 13.08,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Actual A2-only result \u00b7 synthetic data",
+        "motion_claim": "Reveal the named evidence or process on the narrated cue",
+        "show": [
+          {
+            "at": 0,
+            "event": "Establish the real artifact or conceptual cast"
+          },
+          {
+            "at": 0.25,
+            "event": "Focus the part named by the narration"
+          }
+        ],
+        "remotion": {
+          "pattern": "CCPlainShell",
+          "props": {
+            "title": "Cohort Firewall \u00b7 actual stdout excerpt",
+            "lines": [
+              "Recorded local output \u2014 clean variant",
+              "clean: READY",
+              "Certificate verifies: True",
+              "Findings: 0"
+            ],
+            "fontSize": 40,
+            "lineGap": 18,
+            "startCue": 10,
+            "windowMargin": 140,
+            "durationSeconds": 13.568
+          }
+        }
+      },
+      "actual_duration_s": 13.568,
+      "audio_file": "mp3/beat-B02.mp3",
+      "qc": {
+        "sparse_by_design": true,
+        "sparse_reason": "Verbatim three-line local result plus explicit excerpt label. Do not fabricate additional terminal output to fill space. Contrast, visible content and safe-area checks remain required."
+      }
+    },
+    {
+      "beat_id": "B03",
+      "act": "The Useful Idea",
+      "lane": "remotion",
+      "proof_gate": "SHOW",
+      "narration_text": "Now the supplied synthetic missingness variant returns Conditional, with one finding. The certificate verifies here too. A valid signature and a favorable readiness verdict answer different questions. The interface should keep that distinction clear.",
+      "estimated_duration_s": 13.08,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Actual A2-only result \u00b7 synthetic data",
+        "motion_claim": "Reveal the named evidence or process on the narrated cue",
+        "show": [
+          {
+            "at": 0,
+            "event": "Establish the real artifact or conceptual cast"
+          },
+          {
+            "at": 0.25,
+            "event": "Focus the part named by the narration"
+          }
+        ],
+        "remotion": {
+          "pattern": "CCPlainShell",
+          "props": {
+            "title": "Cohort Firewall \u00b7 actual stdout excerpt",
+            "lines": [
+              "Recorded local output \u2014 missingness variant",
+              "feature_missingness: CONDITIONAL",
+              "Certificate verifies: True",
+              "Findings: 1"
+            ],
+            "fontSize": 40,
+            "lineGap": 18,
+            "startCue": 10,
+            "windowMargin": 140,
+            "durationSeconds": 13.866667
+          }
+        }
+      },
+      "actual_duration_s": 13.866667,
+      "audio_file": "mp3/beat-B03.mp3",
+      "qc": {
+        "sparse_by_design": true,
+        "sparse_reason": "Verbatim three-line local result plus explicit excerpt label. Do not fabricate additional terminal output to fill space. Contrast, visible content and safe-area checks remain required."
+      }
+    },
+    {
+      "beat_id": "B10",
+      "act": "The Useful Idea",
+      "lane": "remotion",
+      "proof_gate": "SHOW",
+      "narration_text": "The review controls include a real restriction against approving a Blocked result, observed in the independent tests. Preserve that boundary while strengthening exactly which evidence and question the signature covers.",
+      "estimated_duration_s": 11.54,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Evidence Before Action",
+        "motion_claim": "Reveal the named evidence or process on the narrated cue",
+        "show": [
+          {
+            "at": 0,
+            "event": "Establish the real artifact or conceptual cast"
+          },
+          {
+            "at": 0.25,
+            "event": "Focus the part named by the narration"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysProcess",
+          "props": {
+            "title": "Build On The Foundation",
+            "labels": [
+              "Measure",
+              "Policy",
+              "Review"
+            ],
+            "objectKinds": [
+              "document",
+              "adapter",
+              "monitor"
+            ],
+            "diagramStyle": "show-tell-isometric",
+            "mode": "flow",
+            "note": "Conceptual illustration",
+            "cues": [
+              0.1,
+              0.28,
+              0.65,
+              0.82
+            ],
+            "durationSeconds": 12.330667
+          }
+        }
+      },
+      "qc": {
+        "sparse_by_design": true,
+        "sparse_reason": "Show Tell approved isometric cast; whitespace preserves the document and gate relationships.",
+        "typography_regions": [
+          {
+            "label": "Heading",
+            "box": [
+              0.05,
+              0.05,
+              0.95,
+              0.2
+            ]
+          },
+          {
+            "label": "Object labels and details",
+            "box": [
+              0.05,
+              0.62,
+              0.95,
+              0.76
+            ]
+          },
+          {
+            "label": "Gate or drift label",
+            "box": [
+              0.3,
+              0.74,
+              0.7,
+              0.81
+            ]
+          },
+          {
+            "label": "Evidence-status note",
+            "box": [
+              0.05,
+              0.83,
+              0.95,
+              0.9
+            ]
+          },
+          {
+            "label": "Event footer",
+            "box": [
+              0.3,
+              0.91,
+              0.95,
+              0.97
+            ]
+          }
+        ],
+        "typography_fill": "#FFFFFF",
+        "typography_reason": "Complete authored-text inventory. Isometric document hatch marks and box edges are graphical imagery, not overlapping text; actual unmasked frames are inspected separately and remain subject to Gate V."
+      },
+      "actual_duration_s": 12.330667,
+      "audio_file": "mp3/beat-B10.mp3"
+    },
+    {
+      "beat_id": "B11",
+      "act": "Build On The Foundation",
+      "lane": "remotion",
+      "proof_gate": "SHOW",
+      "narration_text": "Next, bind the complete question and evidence document to the approval. A signature can verify the fields it covers; it cannot protect fields left outside that contract. Make changes to either invalidate the old receipt.",
+      "estimated_duration_s": 13.46,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Evidence Before Action",
+        "motion_claim": "Reveal the named evidence or process on the narrated cue",
+        "show": [
+          {
+            "at": 0,
+            "event": "Establish the real artifact or conceptual cast"
+          },
+          {
+            "at": 0.25,
+            "event": "Focus the part named by the narration"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysProcess",
+          "props": {
+            "title": "Next: Strengthen The Contract",
+            "labels": [
+              "Evidence",
+              "Decision",
+              "Record"
+            ],
+            "objectKinds": [
+              "document",
+              "adapter",
+              "monitor"
+            ],
+            "diagramStyle": "show-tell-isometric",
+            "mode": "flow",
+            "note": "Proposed next step \u00b7 not a completed feature",
+            "cues": [
+              0.1,
+              0.28,
+              0.65,
+              0.82
+            ],
+            "durationSeconds": 12.842667
+          }
+        }
+      },
+      "qc": {
+        "sparse_by_design": true,
+        "sparse_reason": "Show Tell approved isometric cast; whitespace preserves the document and gate relationships.",
+        "typography_regions": [
+          {
+            "label": "Heading",
+            "box": [
+              0.05,
+              0.05,
+              0.95,
+              0.2
+            ]
+          },
+          {
+            "label": "Object labels and details",
+            "box": [
+              0.05,
+              0.62,
+              0.95,
+              0.76
+            ]
+          },
+          {
+            "label": "Gate or drift label",
+            "box": [
+              0.3,
+              0.74,
+              0.7,
+              0.81
+            ]
+          },
+          {
+            "label": "Evidence-status note",
+            "box": [
+              0.05,
+              0.83,
+              0.95,
+              0.9
+            ]
+          },
+          {
+            "label": "Event footer",
+            "box": [
+              0.3,
+              0.91,
+              0.95,
+              0.97
+            ]
+          }
+        ],
+        "typography_fill": "#FFFFFF",
+        "typography_reason": "Complete authored-text inventory. Isometric document hatch marks and box edges are graphical imagery, not overlapping text; actual unmasked frames are inspected separately and remain subject to Gate V."
+      },
+      "actual_duration_s": 12.842667,
+      "audio_file": "mp3/beat-B11.mp3"
+    },
+    {
+      "beat_id": "B12",
+      "act": "Build On The Foundation",
+      "lane": "remotion",
+      "proof_gate": "SHOW",
+      "narration_text": "Then broaden the difficult-input tests. Newly eligible samples, duplicate identifiers, and malformed filters deserve explicit outcomes. That builds on the existing insufficient-evidence behavior instead of allowing an unexpected shape to end the workflow.",
+      "estimated_duration_s": 12.69,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Evidence Before Action",
+        "motion_claim": "Reveal the named evidence or process on the narrated cue",
+        "show": [
+          {
+            "at": 0,
+            "event": "Establish the real artifact or conceptual cast"
+          },
+          {
+            "at": 0.25,
+            "event": "Focus the part named by the narration"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysProcess",
+          "props": {
+            "title": "Next: Test The Boundaries",
+            "labels": [
+              "Input",
+              "Check",
+              "Explain"
+            ],
+            "objectKinds": [
+              "document",
+              "adapter",
+              "monitor"
+            ],
+            "diagramStyle": "show-tell-isometric",
+            "mode": "flow",
+            "note": "Proposed next step \u00b7 not a completed feature",
+            "cues": [
+              0.1,
+              0.28,
+              0.65,
+              0.82
+            ],
+            "durationSeconds": 15.146667
+          }
+        }
+      },
+      "qc": {
+        "sparse_by_design": true,
+        "sparse_reason": "Show Tell approved isometric cast; whitespace preserves the document and gate relationships.",
+        "typography_regions": [
+          {
+            "label": "Heading",
+            "box": [
+              0.05,
+              0.05,
+              0.95,
+              0.2
+            ]
+          },
+          {
+            "label": "Object labels and details",
+            "box": [
+              0.05,
+              0.62,
+              0.95,
+              0.76
+            ]
+          },
+          {
+            "label": "Gate or drift label",
+            "box": [
+              0.3,
+              0.74,
+              0.7,
+              0.81
+            ]
+          },
+          {
+            "label": "Evidence-status note",
+            "box": [
+              0.05,
+              0.83,
+              0.95,
+              0.9
+            ]
+          },
+          {
+            "label": "Event footer",
+            "box": [
+              0.3,
+              0.91,
+              0.95,
+              0.97
+            ]
+          }
+        ],
+        "typography_fill": "#FFFFFF",
+        "typography_reason": "Complete authored-text inventory. Isometric document hatch marks and box edges are graphical imagery, not overlapping text; actual unmasked frames are inspected separately and remain subject to Gate V."
+      },
+      "actual_duration_s": 15.146667,
+      "audio_file": "mp3/beat-B12.mp3"
+    },
+    {
+      "beat_id": "B13",
+      "act": "Build On The Foundation",
+      "lane": "remotion",
+      "proof_gate": "SHOW",
+      "narration_text": "Keep the strengths and make the boundaries more explicit. This is a research prototype, and a useful starting point for further development. The linked independent review contains the detailed evidence and remaining limitations.",
+      "estimated_duration_s": 12.69,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Evidence Before Action",
+        "motion_claim": "Reveal the named evidence or process on the narrated cue",
+        "show": [
+          {
+            "at": 0,
+            "event": "Establish the real artifact or conceptual cast"
+          },
+          {
+            "at": 0.25,
+            "event": "Focus the part named by the narration"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysProcess",
+          "props": {
+            "title": "A Foundation To Build On",
+            "labels": [
+              "Inspect",
+              "Learn",
+              "Improve"
+            ],
+            "objectKinds": [
+              "document",
+              "adapter",
+              "monitor"
+            ],
+            "diagramStyle": "show-tell-isometric",
+            "mode": "flow",
+            "note": "Research prototype \u00b7 not clinical or production validation",
+            "cues": [
+              0.1,
+              0.28,
+              0.65,
+              0.82
+            ],
+            "durationSeconds": 12.629333
+          }
+        }
+      },
+      "qc": {
+        "sparse_by_design": true,
+        "sparse_reason": "Show Tell approved isometric cast; whitespace preserves the document and gate relationships.",
+        "typography_regions": [
+          {
+            "label": "Heading",
+            "box": [
+              0.05,
+              0.05,
+              0.95,
+              0.2
+            ]
+          },
+          {
+            "label": "Object labels and details",
+            "box": [
+              0.05,
+              0.62,
+              0.95,
+              0.76
+            ]
+          },
+          {
+            "label": "Gate or drift label",
+            "box": [
+              0.3,
+              0.74,
+              0.7,
+              0.81
+            ]
+          },
+          {
+            "label": "Evidence-status note",
+            "box": [
+              0.05,
+              0.83,
+              0.95,
+              0.9
+            ]
+          },
+          {
+            "label": "Event footer",
+            "box": [
+              0.3,
+              0.91,
+              0.95,
+              0.97
+            ]
+          }
+        ],
+        "typography_fill": "#FFFFFF",
+        "typography_reason": "Complete authored-text inventory. Isometric document hatch marks and box edges are graphical imagery, not overlapping text; actual unmasked frames are inspected separately and remain subject to Gate V."
+      },
+      "actual_duration_s": 12.629333,
+      "audio_file": "mp3/beat-B13.mp3"
+    },
+    {
+      "beat_id": "BVDT",
+      "act": "Recap",
+      "lane": "bookend",
+      "proof_gate": "SHOW",
+      "narration_text": "Let's recap. Separate measurements from policy. Make findings actionable and inspectable. Bind approvals to the complete evidence. Give difficult inputs explicit outcomes.",
+      "estimated_duration_s": 9.23,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "What to build on",
+        "motion_claim": "Reveal the idea, terms or project workflow in time with narration",
+        "show": [
+          {
+            "at": 0,
+            "event": "Name the subject"
+          },
+          {
+            "at": 0.15,
+            "event": "Reveal the conceptual process"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysLecture",
+          "props": {
+            "mode": "recap",
+            "title": "What to build on",
+            "team": "Ninad Rao \u00b7 Kareesa Rao\nSreelasya Changalasetty \u00b7 Sanica Chaudhary",
+            "lines": [
+              "Separate measurements from policy.",
+              "Make findings actionable and inspectable.",
+              "Bind approvals to the complete evidence.",
+              "Give difficult inputs explicit outcomes."
+            ],
+            "labels": [
+              "Measure",
+              "Policy",
+              "Review"
+            ],
+            "credit": "Northeastern SEIS",
+            "logos": [],
+            "durationSeconds": 10.612
+          }
+        }
+      },
+      "lead_silence_s": 0.5,
+      "actual_duration_s": 10.612,
+      "audio_file": "mp3/beat-BVDT.mp3",
+      "audio_padding_applied": {
+        "lead": 0.5,
+        "tail": 0
+      }
+    },
+    {
+      "beat_id": "BHTF",
+      "act": "Your Turn",
+      "lane": "bookend",
+      "proof_gate": "SHOW",
+      "narration_text": "Help me test Cohort Firewall with invented data. Change the question after a result is signed, and add a newly eligible sample. Explain which checks must rerun and why the earlier approval must not silently cover the changed evidence.",
+      "estimated_duration_s": 15.0,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Your turn",
+        "motion_claim": "Reveal the idea, terms or project workflow in time with narration",
+        "show": [
+          {
+            "at": 0,
+            "event": "Name the subject"
+          },
+          {
+            "at": 0.15,
+            "event": "Reveal the conceptual process"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysLecture",
+          "props": {
+            "mode": "prompt",
+            "title": "Your turn",
+            "team": "Ninad Rao \u00b7 Kareesa Rao\nSreelasya Changalasetty \u00b7 Sanica Chaudhary",
+            "lines": [
+              "Help me test Cohort Firewall with invented data. Change the question after a result is signed, and add a newly eligible sample. Explain which checks must rerun and why the earlier approval must not silently cover the changed evidence."
+            ],
+            "labels": [
+              "Measure",
+              "Policy",
+              "Review"
+            ],
+            "credit": "Northeastern SEIS",
+            "logos": [],
+            "durationSeconds": 13.909333
+          }
+        }
+      },
+      "actual_duration_s": 13.909333,
+      "audio_file": "mp3/beat-BHTF.mp3"
+    },
+    {
+      "beat_id": "BOUT",
+      "act": "Outro",
+      "lane": "bookend",
+      "proof_gate": "SHOW",
+      "narration_text": "Thank you to the participants and sponsors: Northeastern SEIS, OncoSys AI, The Open Accelerator, and Red Hat. This is Liam, in for Bear.",
+      "estimated_duration_s": 3.46,
+      "voice": "am_onyx",
+      "engine": "kokoro",
+      "shot": {
+        "type": "REMOTION",
+        "source": "own",
+        "visual_intent": "Cohort Firewall: Evidence And Policy",
+        "motion_claim": "Reveal the idea, terms or project workflow in time with narration",
+        "show": [
+          {
+            "at": 0,
+            "event": "Name the subject"
+          },
+          {
+            "at": 0.15,
+            "event": "Reveal the conceptual process"
+          }
+        ],
+        "remotion": {
+          "pattern": "OncosysLecture",
+          "props": {
+            "mode": "outro",
+            "title": "Cohort Firewall: Evidence And Policy",
+            "team": "Ninad Rao \u00b7 Kareesa Rao\nSreelasya Changalasetty \u00b7 Sanica Chaudhary",
+            "lines": [],
+            "labels": [
+              "Measure",
+              "Policy",
+              "Review"
+            ],
+            "credit": "Northeastern SEIS",
+            "logos": [
+              "oncosys-films/brand/the-open-accelerator-transparent.png",
+              "oncosys-films/brand/oncosys-ai-transparent-black-wordmark.png",
+              "oncosys-films/brand/northeastern_university_seis_logo.jpeg",
+              "oncosys-films/brand/red-hat-logo.png"
+            ],
+            "durationSeconds": 9.192
+          }
+        }
+      },
+      "kind": "outro_voice",
+      "tail_silence_s": 1,
+      "actual_duration_s": 9.192,
+      "audio_file": "mp3/beat-BOUT.mp3",
+      "qc": {
+        "typography_reason": "Inventory of all authored title/team/description and organizer-credit text. Supplied trademark images and label-free conceptual animation are imagery, not authored typography; Gate V inspects the unmasked composition.",
+        "typography_fill": "#FFFFFF",
+        "typography_regions": [
+          {
+            "label": "Title, team and purpose",
+            "box": [
+              0.055,
+              0.14,
+              0.47,
+              0.72
+            ]
+          },
+          {
+            "label": "Written organizer credits",
+            "box": [
+              0.055,
+              0.74,
+              0.34,
+              0.94
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "submission": "a7ussein/readyset-control-tower",
+  "commit": "4dd07736e99f96dd46cb6199c32bea32465bd20e",
+  "review": "../../professor-bear/readyset-control-tower/REPORT.md",
+  "captures": [
+    {
+      "file": "captures/capture.json",
+      "bytes": 436,
+      "sha256": "70c0f4f65e885a1bb6dede41a3020d7dd8d6d95413f091e0e7735616826e8da1"
+    },
+    {
+      "file": "captures/evidence.png",
+      "bytes": 404053,
+      "sha256": "5360846f87993bb64f33347cac6b72476f46c6d8beef28fd02824b03674f9be7"
+    },
+    {
+      "file": "captures/overview.png",
+      "bytes": 382850,
+      "sha256": "aa0fb9ab5d7df873e6e90301f76d891482ca3361cdd068429f936ffed30461f4"
+    },
+    {
+      "file": "captures/question-a2.png",
+      "bytes": 410107,
+      "sha256": "b57bc5828613aa88bcfb08afe1670a379a5f745bef730538f0f02231561f946b"
+    }
+  ]
+}

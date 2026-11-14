@@ -1,0 +1,12 @@
+{
+  "submission": "tammy357/oncosys-cohort-studio",
+  "commit": "54aeacb6f6f355a1dcaa42d7abf2ce174315ad69",
+  "review": "../../professor-bear/oncosys-cohort-studio/REPORT.md",
+  "captures": [
+    {
+      "file": "captures/result-synthetic.png",
+      "bytes": 267466,
+      "sha256": "6fe61e26142908b9005302bfcab0fb868cf6178c5391de90107d356e2c52360b"
+    }
+  ]
+}

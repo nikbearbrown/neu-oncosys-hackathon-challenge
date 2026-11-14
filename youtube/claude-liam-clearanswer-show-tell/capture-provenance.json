@@ -1,0 +1,22 @@
+{
+  "submission": "GauravBohra2001/clearanswer",
+  "commit": "7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8",
+  "review": "../../professor-bear/clearanswer/report.md",
+  "captures": [
+    {
+      "file": "captures/capture.json",
+      "bytes": 179,
+      "sha256": "3e60c3b02bacf62e5ed439a5cef4e9e765512c85f424a28468258f72a0d02f27"
+    },
+    {
+      "file": "captures/observed-ui.txt",
+      "bytes": 278,
+      "sha256": "466e30e183840258de26ab1013283c07e616bac1e5843d42ca1f1862db1e89a5"
+    },
+    {
+      "file": "captures/overview.png",
+      "bytes": 142568,
+      "sha256": "5d0457e318d8d09957c5cd1f27395a40bac523d97163118c200e6a77cdaeceb6"
+    }
+  ]
+}

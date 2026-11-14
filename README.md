@@ -10,9 +10,12 @@ all seven criteria for the selected track, and produces detailed Markdown
 reports from a reviewer-completed record. It does **not** score repositories
 from keywords or pretend that source inspection proves a working demo.
 
+Event organizers and sponsors: **Northeastern University · OncoSys AI · The Open Accelerator · Red Hat**. Film credits also identify Northeastern SEIS, as requested by Bear. See [branding and attribution](docs/film-branding.md).
+
 ## Start here
 
 - [Professor Bear: published submission reviews and issue-by-issue decks](professor-bear/README.md).
+- [Promotional project films: scripts, evidence and build status](youtube/README.md).
 
 - [Actual challenge repository and product checks](docs/oncosys-challenge.md).
 - [Tutorial](docs/tutorial.md): inspect one repository or an entire submission list.

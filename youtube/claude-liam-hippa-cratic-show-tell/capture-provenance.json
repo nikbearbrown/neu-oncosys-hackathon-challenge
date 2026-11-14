@@ -1,0 +1,37 @@
+{
+  "submission": "roh9031/HIPPA-cratic",
+  "commit": "9f0ad46f32a1a76af25baf1aa621ab862f991c45",
+  "review": "../../professor-bear/hippa-cratic/REPORT.md",
+  "captures": [
+    {
+      "file": "captures/capture.json",
+      "bytes": 143,
+      "sha256": "477572a2cc7ac8fe1be7d6163acc41d182a450e1070e4c0161cb408c26161b84"
+    },
+    {
+      "file": "captures/observed-ui-after-sql.txt",
+      "bytes": 3204,
+      "sha256": "b033398f4db4c05d6d4ac8e3e9e1f62edbaa84f27b8c82250a3fd5857fc8feee"
+    },
+    {
+      "file": "captures/observed-ui.txt",
+      "bytes": 2809,
+      "sha256": "0bc17a47a358d26d1735dd0bac0a5b7c50b009e665c721087b1026b001113d73"
+    },
+    {
+      "file": "captures/overview.png",
+      "bytes": 351984,
+      "sha256": "7d02a48579edd7ff7f520b3c337b8ab21866bc1e85acb5c96dc67b0effb11384"
+    },
+    {
+      "file": "captures/sql.png",
+      "bytes": 442204,
+      "sha256": "24dc25fadc3c8fe9c7ca10bd69bdaf26b06c47a8244d9b06bae32308eb9bd86b"
+    },
+    {
+      "file": "captures/steps.png",
+      "bytes": 343444,
+      "sha256": "9bc2560beca588ac4d9e9dfaf86068c5b8f404130bc18b4670d1ff50fb619332"
+    }
+  ]
+}

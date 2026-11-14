@@ -1,0 +1,12 @@
+{
+  "submission": "NinadRao0707/cohort-firewall",
+  "commit": "ab5084f7caaa57e68636e2cd3fde97b20a47bf69",
+  "review": "../../professor-bear/cohort-firewall/REPORT.md",
+  "captures": [
+    {
+      "file": "captures/cli-output.txt",
+      "bytes": 936,
+      "sha256": "23e3e0154a0fa0fa0e0c4aba8370bbc1f84f645d9ccb9f000a70fba2ec30d74d"
+    }
+  ]
+}

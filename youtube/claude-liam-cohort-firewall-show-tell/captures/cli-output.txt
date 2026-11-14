@@ -1,0 +1,10 @@
+/private/tmp/oncosys-runtime-k2vhjg41/cohort-firewall/cohort_firewall/checks.py:326: FutureWarning: Downcasting object dtype arrays on .fillna, .ffill, .bfill is deprecated and will change in a future version. Call result.infer_objects(copy=False) instead. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`
+  y = _binary_outcome(ctx, c).fillna(False).astype(bool)
+/private/tmp/oncosys-runtime-k2vhjg41/cohort-firewall/cohort_firewall/checks.py:326: FutureWarning: Downcasting object dtype arrays on .fillna, .ffill, .bfill is deprecated and will change in a future version. Call result.infer_objects(copy=False) instead. To opt-in to the future behavior, set `pd.set_option('future.no_silent_downcasting', True)`
+  y = _binary_outcome(ctx, c).fillna(False).astype(bool)
+clean: READY
+Certificate verifies: True
+Findings: 0
+feature_missingness: CONDITIONAL
+Certificate verifies: True
+Findings: 1

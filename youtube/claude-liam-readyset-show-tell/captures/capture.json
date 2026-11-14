@@ -1,0 +1,17 @@
+{
+  "url": "http://127.0.0.1:51566",
+  "data": "Invented TinyRelease fixture; synthetic sample-label swap; no patient records",
+  "commit": "4dd07736e99f96dd46cb6199c32bea32465bd20e",
+  "browser": "157.0.8103.51",
+  "viewport": [
+    1600,
+    900
+  ],
+  "device_scale_factor": 2.4,
+  "observed": [
+    "Both analyses selected: Conditional",
+    "A1 disabled: Ready",
+    "A1 reenabled: Conditional"
+  ],
+  "captured_at": "2026-11-14"
+}

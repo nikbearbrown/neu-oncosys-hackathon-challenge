@@ -1,0 +1,16 @@
+*.mp3
+*.mp4
+*.wav
+media/
+manim/
+clips/
+mp4/
+mp3/
+exports/
+_qc/
+opening/
+*.log
+beat_sheet.pre-event-brand.json
+batch-status.json
+qc-sheet.png
+build-state.json
