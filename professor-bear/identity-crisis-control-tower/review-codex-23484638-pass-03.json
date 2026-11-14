@@ -1,0 +1,263 @@
+{
+  "mode": "judge",
+  "repo": "AravindKumar2504/identity-crisis-control-tower",
+  "commit": "380760dc3b7b61097756f2b85c0f462feadc802c",
+  "track": 1,
+  "reviewer": "Professor Bear / Codex source review",
+  "summary": "This focused pass corrects an overbroad earlier default claim and follows evidence identity through the browser. The callable assessment API defaults to strict missing-check handling, but the UI initializes allow_missing=True. The analysis cache, optional-summary cache and sign-off invalidation use narrower identities than the complete evidence they represent. These are source-level concerns requiring targeted session tests, not observed live-app failures. The receipt's stored evidence digests remain a real strength and are not alleged to be forged.",
+  "limitations": [
+    "Pinned local checkout, not a verified official final-submission receipt; branch names and later changes are outside this pass.",
+    "Static source analysis only. No submission code, tests, installers, workflows, notebook, server, hosted endpoint or model was executed.",
+    "No sealed envelopes, answer keys or raw clinical datasets were accessed. Numerical correctness, performance, accessibility and fresh-machine setup remain untested.",
+    "Source-derived control-flow consequences are labeled as such. Proposed acceptance checks are not observed test results.",
+    "The collected text budget is 160 files, 200 KB/file and 4 MB/entry. Complete_with_exclusions is not an exhaustive audit; exclusions and focused follow-ups are recorded.",
+    "No official score, cross-team ranking, clinical validity or regulatory/accessibility certification is asserted."
+  ],
+  "criteria": [
+    {
+      "id": "T1-1",
+      "status": "not_tested",
+      "assessment": "Core default unknown-check guards remain source-supported. A browser default can select different materiality, so entry-point coverage matters.",
+      "findings": [],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. This pass does not establish runtime behavior or user comprehension."
+    },
+    {
+      "id": "T1-2",
+      "status": "not_tested",
+      "assessment": "Card policy must be part of evidence identity, not just a stable card ID or verdict label. No new numerical performance result is asserted.",
+      "findings": [],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. This pass does not establish runtime behavior or user comprehension."
+    },
+    {
+      "id": "T1-3",
+      "status": "observed",
+      "assessment": "This pass follows provenance into caches, receipts and captions. The official Streamlit reference supports the cache inference; application consequences remain unexecuted.",
+      "findings": [
+        {
+          "kind": "gap",
+          "priority": "P1",
+          "title": "The analysis cache signature omits release-file identity",
+          "observation": "inputs_sig enumerates card YAML and tower Python paths with modification times, but not release data. analyze is decorated with st.cache_data and receives the release path, card ID, missing-check option, that signature and optional custom-card JSON. Reading release bytes happens inside the cached body. Replacing data at the same path does not change the explicitly supplied data identity.",
+          "impact": "Under the documented cache contract, unchanged arguments and source can reuse an earlier result even when a release file changed in place. This is conditional on path reuse and a retained cache; immutable per-run release directories avoid that condition. It is not evidence that the frozen baseline changed during judging.",
+          "recommendation": "Pass a content-bound release manifest or immutable release-version identity into every cached analysis and board call. Show which version the result represents and invalidate all derived views together. A code/card timestamp signature should remain a separate policy-version input.",
+          "acceptance_check": "On invented data, run a comparison, replace one value at the same release path without changing code/cards, and rerun. The cached result must either refresh to the new input digest or explicitly refuse the changed immutable release. Retain an unchanged-input cache-hit control.",
+          "confidence": "High for the inspected cache arguments and official cache contract; stale-result behavior has not been reproduced here.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "app.py",
+              "start": 257,
+              "end": 274,
+              "quote": "def inputs_sig() -> tuple:\n    \"\"\"Changes whenever a card or the tower code changes, so a cached verdict is never stale.\"\"\"\n    root = pathlib.Path(__file__).resolve().parent\n    return tuple((str(p.relative_to(root)), p.stat().st_mtime_ns)\n                 for p in sorted([*root.glob(\"cards/*.yaml\"), *root.glob(\"tower/**/*.py\")]))\n\n\n@st.cache_data(show_spinner=False)     # the caller shows a spinner naming the release and question\ndef analyze(b_path: str | None, card_id: str, allow_missing: bool, sig: tuple = (), card_json: str = \"\"):\n    card = json.loads(card_json) if card_json else load_card(card_id)   # a question asked on screen has no file\n    a = load_release(RAW, \"release-A\")\n    if b_path is None:\n        return None, assess(card, a, allow_missing=allow_missing), [], []\n    b = load_release(b_path)\n    cmp = compare(a, b)\n    results, impact = rerun(a, b, cmp.changes)\n    findings = build(cmp, results, impact)\n    return findings, assess(card, b, cmp, results, allow_missing=allow_missing), membership(cmp), file_summary(cmp)"
+            },
+            {
+              "path": "app.py",
+              "start": 277,
+              "end": 292,
+              "quote": "@st.cache_data(show_spinner=\"Judging every question on this release...\")\ndef board(b_path: str | None, allow_missing: bool, sig: tuple = (), extra_json: str = \"[]\") -> list[dict]:\n    \"\"\"Every question card judged on the same release, so the screen can show that the verdict depends on the question.\"\"\"\n    a = load_release(RAW, \"release-A\")\n    rel, cmp, results = a, None, None\n    if b_path is not None:\n        rel = load_release(b_path)\n        cmp = compare(a, rel)\n        results, _ = rerun(a, rel, cmp.changes)\n    out = []\n    for c in list_cards() + json.loads(extra_json):\n        try:\n            d = assess(c, rel, cmp, results, allow_missing=allow_missing)\n            out.append({\"id\": c[\"id\"], \"title\": c[\"title\"], \"short\": c.get(\"short_title\", c[\"title\"]),\n                        \"verdict\": d[\"verdict\"], \"reason\": d[\"reasons\"][0] if d[\"reasons\"] else \"\",\n                        \"pending\": len(d.get(\"pending_checks\") or [])})"
+            },
+            {
+              "path": "app.py",
+              "start": 537,
+              "end": 541,
+              "quote": "b_path = opts[release_label]\ntry:\n    with st.spinner(f\"Checking {release_label} for {card.get('short_title') or card['title']}\u2026\"):\n        findings, ready, members, files = analyze(b_path, card[\"id\"], allow_missing, inputs_sig(),\n                                           json.dumps(card) if card[\"id\"].startswith(\"custom-\") else \"\")"
+            }
+          ]
+        },
+        {
+          "kind": "strength",
+          "priority": "P2",
+          "title": "The AI citation caption accurately describes an ID-membership check",
+          "observation": "The checker identifies unknown finding/sample references and whether the verdict word appears. The UI describes its result narrowly as an ID existing in this result, rather than claiming that all prose is factually verified. The system prompt separately tells the model to use only supplied facts and avoid clinical advice.",
+          "impact": "This appropriately limits what an automated citation check proves. Existing IDs and a verdict word do not validate numbers, negation or the meaning of a generated sentence, so the narrow caption is a strength worth preserving.",
+          "recommendation": "Keep the scoped label and deterministic verdict as authoritative. Add evidence-version binding and targeted contradictory-number/negation cases before making any broader factual-validation claim.",
+          "acceptance_check": "With mocked responses, compare an unknown ID, a known ID with an unsupported numeric statement, and the wrong verdict embedded in a negation. Keep identity checks separate from semantic correctness and do not label all passing IDs as verified facts.",
+          "confidence": "High for checker and caption wording. The test file contains definitions, not this reviewer's observed test results, and no model was called.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "tower/ai_summary.py",
+              "start": 107,
+              "end": 118,
+              "quote": "def check(text: str, ready: dict, findings: dict | None) -> dict:\n    \"\"\"Every finding and sample id the text cites must be one the model was given: a release change that touches\n    this question, or a sample named in this question's results.\"\"\"\n    ctx = context(ready, findings)\n    known_f = {f[\"id\"] for f in ctx.get(\"release_changes_that_touch_this_question\", [])}\n    known_s = set(SAMPLE.findall(json.dumps(ctx, default=str)))\n    cited_f = sorted(set(FINDING.findall(text)), key=lambda x: int(x[1:]))\n    cited_s = sorted(set(SAMPLE.findall(text)))\n    unknown = [x for x in cited_f if x not in known_f] + [\n        s for s in cited_s if s not in known_s and not any(k.startswith(s + \"-\") for k in known_s)]\n    states = bool(re.search(rf\"\\b{re.escape(ready['verdict'])}\\b\", text, re.I))\n    return {\"cited\": len(cited_f) + len(cited_s), \"unknown\": unknown, \"states_verdict\": states}"
+            },
+            {
+              "path": "app.py",
+              "start": 675,
+              "end": 687,
+              "quote": "        elif got:\n            st.markdown(got[\"text\"])\n            bad, n = got[\"citations\"][\"unknown\"], got[\"citations\"][\"cited\"]\n            if bad:\n                st.warning(f\"The model cited {plural(len(bad), 'id')} that this result doesn't contain: \"\n                           f\"{', '.join(bad)}. Don't rely on that part of the summary.\")\n            else:\n                st.caption(\"Citation check: it cites no finding or sample ids.\" if not n else\n                           \"Citation check: the one id it cites is in this result.\" if n == 1 else\n                           f\"Citation check: all {n} finding and sample ids it cites are in this result.\")\n            if not got[\"states_verdict\"]:\n                st.caption(f\"It doesn't use the verdict's own word ({ready['verdict']}); the verdict above is the tool's.\")\n            st.caption(f\"Written by {got['model']} in {got['seconds']:.0f} s.\")"
+            },
+            {
+              "path": "tower/ai_summary.py",
+              "start": 28,
+              "end": 36,
+              "quote": "SYSTEM = \"\"\"You write a short plain-English summary of a data-quality tool's results for a research data engineer.\nRules:\n- Use only facts in the JSON you are given. Never add numbers, sample ids, causes or advice that are not in it.\n- Start with the verdict for the research question, using the exact verdict word.\n- Then say which release changes touch this question and why they matter. If none touch it, say so and explain the verdict from the reasons.\n- Cite only the finding ids listed under release_changes_that_touch_this_question, in square brackets, like [F1]. Never put anything else in square brackets.\n- Then give the first next step and one thing the tool can't tell.\n- Write 4 to 6 sentences in one paragraph: no lists, no headings, no em dashes.\n- No diagnosis, treatment advice or clinical claims.\"\"\""
+            },
+            {
+              "path": "tests/test_ai_summary.py",
+              "start": 32,
+              "end": 50,
+              "quote": "    def test_a_change_that_does_not_touch_the_question_counts_as_unknown(self):\n        c = ai.check(\"Conditional, because of [F2] and TCGA-E2-A1L7-01.\", READY, FINDINGS)\n        self.assertEqual(c[\"unknown\"], [\"F2\", \"TCGA-E2-A1L7-01\"])\n\n    def test_citations_flag_ids_that_are_not_in_the_results(self):\n        c = ai.check(\"Conditional: [F1] swapped TCGA-A8-A09K-01 with TCGA-ZZ-0000-01, see [F7].\", READY, FINDINGS)\n        self.assertEqual(c[\"unknown\"], [\"F7\", \"TCGA-ZZ-0000-01\"])\n        self.assertEqual(c[\"cited\"], 4)\n        self.assertTrue(c[\"states_verdict\"])\n\n    def test_a_patient_level_id_counts_as_found(self):\n        self.assertEqual(ai.check(\"TCGA-A8-A09K was swapped.\", READY, FINDINGS)[\"unknown\"], [])\n\n    def test_summary_strips_thinking_and_checks_it(self):\n        with mock.patch.object(ai, \"ask\", return_value=(\"<think>notes</think>Conditional. [F1] matters.\", \"fake\")):\n            out = ai.summarize(READY, FINDINGS)\n        self.assertEqual(out[\"text\"], \"Conditional. [F1] matters.\")\n        self.assertEqual(out[\"citations\"], {\"cited\": 1, \"unknown\": []})\n        self.assertTrue(out[\"states_verdict\"])"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-4",
+      "status": "observed",
+      "assessment": "Correct the overbroad nondefault claim: the callable API is strict by default and the browser initializes permissive handling. Sign-off state must match current evidence.",
+      "findings": [
+        {
+          "kind": "gap",
+          "priority": "P1",
+          "title": "The browser enables permissive missing-check handling by default",
+          "observation": "The sidebar sets st.session_state.allow_missing to True when the key is absent and passes that value into analyze and assess. With this option, an unregistered required check is unknown but nonmaterial. The callable assess and run_checks signatures default to False. Thus the strict API default and permissive browser default are different source facts.",
+          "impact": "If a required check is unavailable, a fresh browser session can exclude it from the deciding material set unless the user changes Settings. The UI does disclose pending checks and its toggle meaning; this is an active default-policy concern, not a hidden setting or proof that every current card is incomplete.",
+          "recommendation": "Make strict handling the initial browser default, or give permissive runs a distinct incomplete/development state that cannot be confused with ordinary readiness. Keep the disclosure and test the browser entry point separately from the core API.",
+          "acceptance_check": "In an authorized fresh-session test with a synthetic card requiring an unregistered check, inspect the initial toggle and resulting state. Compare the strict API, initial UI and explicit permissive opt-in. No ordinary approved result should conceal the pending requirement.",
+          "confidence": "High for initialization and call flow. The browser was not executed by this reviewer; an API-only default probe does not answer this UI question.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "app.py",
+              "start": 495,
+              "end": 501,
+              "quote": "    with st.expander(\"Settings\"):\n        st.caption(\"How checks that aren't built yet are counted.\")\n        if \"allow_missing\" not in st.session_state:     # the default lives here, so the toggle keeps its state by key\n            st.session_state[\"allow_missing\"] = True\n        allow_missing = st.toggle(\"List unbuilt checks as pending\", key=\"allow_missing\",\n                                  help=\"On: a check that isn't built yet is listed as pending and doesn't decide the \"\n                                       \"verdict. Off: it counts as 'can't tell', the strict reading.\")"
+            },
+            {
+              "path": "app.py",
+              "start": 537,
+              "end": 541,
+              "quote": "b_path = opts[release_label]\ntry:\n    with st.spinner(f\"Checking {release_label} for {card.get('short_title') or card['title']}\u2026\"):\n        findings, ready, members, files = analyze(b_path, card[\"id\"], allow_missing, inputs_sig(),\n                                           json.dumps(card) if card[\"id\"].startswith(\"custom-\") else \"\")"
+            },
+            {
+              "path": "app.py",
+              "start": 264,
+              "end": 274,
+              "quote": "@st.cache_data(show_spinner=False)     # the caller shows a spinner naming the release and question\ndef analyze(b_path: str | None, card_id: str, allow_missing: bool, sig: tuple = (), card_json: str = \"\"):\n    card = json.loads(card_json) if card_json else load_card(card_id)   # a question asked on screen has no file\n    a = load_release(RAW, \"release-A\")\n    if b_path is None:\n        return None, assess(card, a, allow_missing=allow_missing), [], []\n    b = load_release(b_path)\n    cmp = compare(a, b)\n    results, impact = rerun(a, b, cmp.changes)\n    findings = build(cmp, results, impact)\n    return findings, assess(card, b, cmp, results, allow_missing=allow_missing), membership(cmp), file_summary(cmp)"
+            },
+            {
+              "path": "tower/checks/__init__.py",
+              "start": 79,
+              "end": 105,
+              "quote": "def run_checks(release, card: dict, allow_missing: bool = False) -> list[Issue]:\n    \"\"\"Run every check the card lists.\n\n    A listed check that doesn't exist yet comes back as 'unknown' (material), which makes the verdict Insufficient\n    Evidence: the honest answer when part of the question can't be judged. While checks are still being written,\n    allow_missing=True lists them as pending without letting them decide the verdict.\n    \"\"\"\n    load_all()\n    out: list[Issue] = []\n    for name in card.get(\"checks\", []):\n        fn = CHECKS.get(name)\n        if fn is None:\n            broken = \"; \".join(f\"{k}.py: {v}\" for k, v in LOAD_ERRORS.items())\n            out.append(Issue(id=name, title=f\"Check '{name}' is not built yet\"\n                             + (f\" (or its file failed to load: {broken})\" if broken else \"\"), status=\"unknown\",\n                             material=not allow_missing, pre_existing=False, numbers={\"pending\": True},\n                             limitation=\"The tool cannot judge this part of the question yet.\"))\n            continue\n        try:\n            got = fn(release, card)\n            if not isinstance(got, list) or not all(isinstance(x, Issue) for x in got):\n                raise TypeError(\"it must return a list of Issue objects\")\n            out.extend(got)\n        except Exception as e:      # a broken check must never take the whole report down\n            out.append(Issue(id=name, title=f\"Check '{name}' failed: {e}\", status=\"unknown\", material=True,\n                             pre_existing=False, limitation=\"The check crashed, so this part can't be judged.\"))\n    return out"
+            },
+            {
+              "path": "tower/readiness.py",
+              "start": 133,
+              "end": 148,
+              "quote": "    verdict, deciding = \"Ready\", []\n    for status, label in ORDER:\n        hits = [x for x in material if x.status == status]\n        if hits or (status == \"warn\" and touching):\n            verdict, deciding = label, hits\n            break\n    reasons = [f\"{x.title}.\" for x in deciding]\n    if verdict == \"Conditional\" and touching:\n        reasons += [_touch_reason(t) for t in touching]\n    pending = [x.id for x in issues if (x.numbers or {}).get(\"pending\") and not x.material]\n    if verdict == \"Ready\":\n        checked = [x.id for x in issues if x.status == \"pass\"]\n        reasons = [f\"Nothing material found in the checks that ran ({', '.join(checked) or 'none'}).\"\n                   + (\" No release change touches what this question reads.\" if cmp else \"\")]\n    if pending:\n        reasons.append(f\"Not built yet, so not counted: {', '.join(pending)}.\")"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-5",
+      "status": "not_tested",
+      "assessment": "The proposed checks require an authorized fresh browser session with invented inputs and mocked models. This reviewer did not run the application or alter submitted code.",
+      "findings": [],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. This pass does not establish runtime behavior or user comprehension."
+    },
+    {
+      "id": "T1-6",
+      "status": "observed",
+      "assessment": "Preserve prior receipts while invalidating their applicability to new evidence. A stored digest and a live applicability check are distinct controls.",
+      "findings": [
+        {
+          "kind": "gap",
+          "priority": "P1",
+          "title": "Sign-off invalidation does not compare the evidence digests",
+          "observation": "signed stores findings and readiness digests in the receipt. The live UI's separate signature contains current repair/issue decisions, verdict, sign-off choice, note and reviewer fields, but no findings/readiness digest, input-file digest or complete card policy. It clears signed state only when that narrower signature changes, and the overview reports Signed whenever the retained signed object exists.",
+          "impact": "A changed policy or refreshed evidence can retain the same verdict and decision IDs while differing from the evidence a reviewer signed. The saved old receipt still identifies its old evidence; the concern is associating that retained sign-off state with a newly displayed result. This narrows the earlier broad claim that any input change withdraws sign-off.",
+          "recommendation": "Build the live invalidation identity from the same canonical evidence/policy digests used in the receipt, alongside reviewer decisions. Preserve the old receipt as history and require a new decision for a changed evidence version. Exclude only documented nondeterministic display fields from canonicalization.",
+          "acceptance_check": "Sign an invented result, then change a card's material policy or evidence while keeping verdict and decision IDs the same. After recomputation, the current result must be Pending or explicitly show that the retained signature covers an older version. The original receipt must remain unchanged.",
+          "confidence": "High for the missing fields in the invalidation signature and the Signed display predicate; no session-level reproduction was executed here.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "tower/review.py",
+              "start": 47,
+              "end": 63,
+              "quote": "def signed(readiness_doc: dict, findings_doc: dict | None, repair_dec: dict, issue_dec: dict,\n           reviewer: str, role: str, decision: str, note: str) -> dict:\n    \"\"\"A copy of readiness.json with every review decision and the sign-off, fingerprinted.\"\"\"\n    doc = copy.deepcopy(readiness_doc)\n    doc[\"review\"][\"items\"] = (\n        [{\"id\": rid, \"type\": \"repair\", **d, \"reviewer\": reviewer, \"role\": role} for rid, d in repair_dec.items()]\n        + [{\"id\": iid, \"type\": \"issue\", **d, \"reviewer\": reviewer, \"role\": role} for iid, d in issue_dec.items()])\n    inputs = {\"release\": doc[\"release\"], \"findings\": _digest(findings_doc), \"readiness\": _digest(readiness_doc)}\n    doc[\"review\"][\"signed_off\"] = {\"by\": reviewer, \"role\": role, \"decision\": decision, \"note\": note, \"at\": now(),\n                                   \"verdict_at_sign_off\": doc[\"verdict\"], \"inputs\": inputs}\n    return doc\n\n\ndef _digest(d: dict | None) -> str | None:\n    if d is None:\n        return None\n    return hashlib.sha256(json.dumps(d, sort_keys=True, default=str).encode()).hexdigest()"
+            },
+            {
+              "path": "app.py",
+              "start": 575,
+              "end": 588,
+              "quote": "repairs = findings[\"repairs\"] if findings else []\nrequired_issues = list(dict.fromkeys(i for i in ready[\"review\"][\"required\"] if not i.startswith(\"F\")))\nstate[\"repairs\"] = collect(\"rep\", [r[\"id\"] for r in repairs])\nstate[\"issues\"] = collect(\"iss\", required_issues)\ntotal = len(repairs) + len(required_issues)\ndecided = len(state[\"repairs\"]) + len(state[\"issues\"])\n# A sign-off covers exactly what was decided. If any decision, the verdict or the reviewer changes afterwards, the\n# sign-off is withdrawn so the record can never disagree with the screen.\nsignature = json.dumps({\"repairs\": {k: [v[\"decision\"], v[\"reason\"]] for k, v in state[\"repairs\"].items()},\n                        \"issues\": {k: [v[\"decision\"], v[\"reason\"]] for k, v in state[\"issues\"].items()},\n                        \"verdict\": ready[\"verdict\"], \"decision\": st.session_state.get(dkey),\n                        \"note\": st.session_state.get(nkey) or \"\", \"reviewer\": reviewer, \"role\": role}, sort_keys=True)\nif state[\"signed\"] and state.get(\"signed_inputs\") != signature:\n    state[\"signed\"], state[\"withdrawn\"] = None, True"
+            },
+            {
+              "path": "app.py",
+              "start": 690,
+              "end": 713,
+              "quote": "def page_overview() -> None:\n    n_changes = len(findings[\"findings\"]) if findings else 0\n    signed_by = state[\"signed\"][\"review\"][\"signed_off\"][\"by\"] if state[\"signed\"] else None\n    signed_as = state[\"signed\"][\"review\"][\"signed_off\"][\"decision\"] if state[\"signed\"] else None\n    st.markdown('<div class=\"ct-intro\">' + esc(INTRO) + '</div>', unsafe_allow_html=True)\n    left, right = st.columns([3, 2], gap=\"medium\")\n    left.markdown(f\"\"\"\n<div class=\"ct-hero\" style=\"--c:{colour}; --bg:{tint}\">\n  <div class=\"ct-eyebrow\" title=\"{esc(SECTION_HELP[\"verdict\"])}\">Verdict for this question</div>\n  <div class=\"ct-verdict\" title=\"{esc(VERDICT_HELP[ready['verdict']])}\">{esc(ready['verdict'])}</div>\n  <div class=\"ct-q\">{esc(card['title'])}</div>\n  <div class=\"ct-meta\">{esc(where)} \u00b7 {ready['group_size']} samples studied</div>\n  <div class=\"ct-sum\">{esc(headline())}</div>\n</div>\"\"\", unsafe_allow_html=True)\n    kpis = [   # label, value, what it means in one plain line, state\n        (\"Changes found\", f\"{n_changes}\" if findings else \"n/a\",\n         \"things that differ between the new data and release A\", \"warn\" if n_changes else \"done\"),\n        (\"Touch this question\", f\"{len(touching)}\" if findings else \"n/a\",\n         \"of those, changes in data this question uses\", \"warn\" if touching else \"done\"),\n        (\"Decisions\", f\"{decided} of {total}\",\n         \"flagged items a reviewer has approved, rejected or questioned\", \"done\" if decided == total else \"warn\"),\n        (\"Sign-off\", \"Signed\" if signed_by else \"Pending\",\n         f\"by {signed_by}: {signed_as}\" if signed_by else \"whether a named reviewer has approved this result\",\n         \"done\" if signed_by else \"todo\"),"
+            },
+            {
+              "path": "app.py",
+              "start": 1141,
+              "end": 1153,
+              "quote": "        if st.button(\"Sign off\", type=\"primary\", disabled=not can_sign):\n            signed_doc = signed(ready, findings, state[\"repairs\"], state[\"issues\"], reviewer, role, decision, note)\n            reviewed = with_decisions(findings, state[\"repairs\"], reviewer, role) if findings else None\n            slug = re.sub(r\"[^A-Za-z0-9]+\", \"-\", release_label).strip(\"-\").lower()\n            out = REPO / \"out\" / \"reviews\" / f\"{card['id']}-{slug}-{now().replace(':', '')}\"\n            try:\n                check = save_review(out, signed_doc, reviewed, reviewed, CHALLENGE / \"format\" / \"validate.py\")\n            except Exception as e:\n                st.error(f\"Not signed off: {e}\")\n            else:\n                state[\"signed\"], state[\"signed_inputs\"] = signed_doc, signature\n                state[\"flash\"] = (f\"Signed off by {reviewer} ({role}): {decision}. Saved in {out.relative_to(REPO)}\", check)\n                st.rerun()                           # redraw so the header and the Overview show the sign-off"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-7",
+      "status": "observed",
+      "assessment": "Keep the narrow citation caption, but prevent stale optional prose from appearing to describe current results. No factual or clinical certification is implied.",
+      "findings": [
+        {
+          "kind": "gap",
+          "priority": "P2",
+          "title": "The optional summary cache is keyed only by release label and card ID",
+          "observation": "ai_box retrieves generated text under ai|release_label|card_id and reuses it until the user requests another summary. That key excludes current findings, readiness, card policy and missing-check setting. The analysis path can recompute when those settings or card timestamps change, while the stored summary remains under the same key.",
+          "impact": "Optional prose can describe an older result beside a newly recomputed verdict or reason. The UI's accurate citation-ID captions do not establish that cached prose belongs to the current evidence version. No stale model output or provider call was observed in this review.",
+          "recommendation": "Bind the summary to a canonical digest of the exact context sent to the model. Invalidate or visibly mark old prose when context changes, retain its prior version if useful, and keep deterministic results available without a model.",
+          "acceptance_check": "Mock model output for one invented context, then change the missing-check policy or a card's reasons with the same release label and card ID. The old summary must disappear or carry an explicit old-version label until regenerated. No network call is required.",
+          "confidence": "High for session key construction and reuse. Actual model behavior and UI refresh were not tested.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "app.py",
+              "start": 655,
+              "end": 674,
+              "quote": "def ai_box() -> None:\n    \"\"\"Optional: a language model puts this result into plain words. The rules made the verdict; every id the model\n    cites is checked against the results it was given (tower/ai_summary.py).\"\"\"\n    key = f\"ai|{release_label}|{card['id']}\"\n    got = st.session_state.get(key)\n    with st.expander(\"AI summary (optional): this result in plain English\", expanded=bool(got)):\n        st.caption(\"A language model rewrites this page's results in plain words. It reads the verdict, the reasons, \"\n                   \"the next steps and the release changes that touch this question, never the raw data files, and it \"\n                   f\"never makes the call: the rules above do. It runs on {ai_summary.backend()}.\")\n        if st.button(\"Write the summary\", key=f\"ai_go|{card['id']}\", icon=\":material/auto_awesome:\"):\n            with st.spinner(\"Writing the summary (5 to 20 seconds on the local model)...\"):\n                try:\n                    got = ai_summary.summarize(ready, findings, where)\n                except ai_summary.ModelUnavailable as e:\n                    got = {\"error\": str(e)}\n                except Exception as e:                       # a model problem must never stop the screen\n                    got = {\"error\": f\"The summary failed ({type(e).__name__}). The results above are unaffected.\"}\n            st.session_state[key] = got\n        if got and got.get(\"error\"):\n            st.info(got[\"error\"])"
+            },
+            {
+              "path": "app.py",
+              "start": 675,
+              "end": 687,
+              "quote": "        elif got:\n            st.markdown(got[\"text\"])\n            bad, n = got[\"citations\"][\"unknown\"], got[\"citations\"][\"cited\"]\n            if bad:\n                st.warning(f\"The model cited {plural(len(bad), 'id')} that this result doesn't contain: \"\n                           f\"{', '.join(bad)}. Don't rely on that part of the summary.\")\n            else:\n                st.caption(\"Citation check: it cites no finding or sample ids.\" if not n else\n                           \"Citation check: the one id it cites is in this result.\" if n == 1 else\n                           f\"Citation check: all {n} finding and sample ids it cites are in this result.\")\n            if not got[\"states_verdict\"]:\n                st.caption(f\"It doesn't use the verdict's own word ({ready['verdict']}); the verdict above is the tool's.\")\n            st.caption(f\"Written by {got['model']} in {got['seconds']:.0f} s.\")"
+            },
+            {
+              "path": "app.py",
+              "start": 537,
+              "end": 541,
+              "quote": "b_path = opts[release_label]\ntry:\n    with st.spinner(f\"Checking {release_label} for {card.get('short_title') or card['title']}\u2026\"):\n        findings, ready, members, files = analyze(b_path, card[\"id\"], allow_missing, inputs_sig(),\n                                           json.dumps(card) if card[\"id\"].startswith(\"custom-\") else \"\")"
+            },
+            {
+              "path": "tower/ai_summary.py",
+              "start": 50,
+              "end": 66,
+              "quote": "def context(ready: dict, findings: dict | None, release: str | None = None) -> dict:\n    \"\"\"The tool's own results for one question, as the screen shows them. No raw data, and only the release\n    changes that touch this question.\"\"\"\n    ctx = {\"research_question\": ready[\"card\"][\"title\"], \"release\": release or ready[\"release\"][\"name\"],\n           \"verdict\": ready[\"verdict\"], \"reasons\": list(ready[\"reasons\"])[:6],\n           \"next_steps\": [s[\"step\"] for s in ready.get(\"next_steps\") or []][:4],\n           \"what_the_tool_cant_tell\": list(ready.get(\"cannot_tell\") or [])[:3]}\n    if findings:\n        touching = {t[\"finding\"] for t in ready.get(\"release_changes\") or []}\n        rel = [f for f in findings[\"findings\"] if f[\"id\"] in touching]\n        ctx[\"release_changes_that_touch_this_question\"] = [\n            {\"id\": f[\"id\"], \"kind\": PLAIN.get(f[\"kind\"], f[\"kind\"]), \"severity\": f[\"severity\"],\n             \"samples\": [e[\"id\"] for e in f[\"evidence\"] if e.get(\"kind\") == \"sample\"][:12],\n             \"affects\": f.get(\"affects_analyses\") or [], \"summary\": f[\"summary\"]}\n            for f in rel[:12]]\n        ctx[\"release_changes_that_do_not_touch_this_question\"] = len(findings[\"findings\"]) - len(rel)\n    return ctx"
+            },
+            {
+              "path": "tower/ai_summary.py",
+              "start": 121,
+              "end": 131,
+              "quote": "def summarize(ready: dict, findings: dict | None, release: str | None = None) -> dict:\n    \"\"\"Write the summary and check it. Raises ModelUnavailable when no model can be reached.\"\"\"\n    user = \"Results:\\n```json\\n\" + json.dumps(context(ready, findings, release), indent=1) + \"\\n```\\nWrite the summary.\"\n    t0 = time.time()\n    text, model = ask(SYSTEM, user)\n    text = re.sub(r\"<think>.*?</think>\", \"\", text, flags=re.S).strip()\n    if not text:\n        raise ModelUnavailable(\"The model returned an empty answer. Try again.\")\n    c = check(text, ready, findings)\n    return {\"text\": text, \"model\": model, \"seconds\": time.time() - t0,\n            \"citations\": {\"cited\": c[\"cited\"], \"unknown\": c[\"unknown\"]}, \"states_verdict\": c[\"states_verdict\"]}"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    }
+  ],
+  "judge_scores": null
+}
