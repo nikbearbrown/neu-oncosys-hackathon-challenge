@@ -57,3 +57,9 @@ The verified public Release A compared with itself returned Ready and zero findi
 [Exact checks](evidence/browser-qa.json) · [fixed dependency hashes](evidence/browser-dependencies.json) · [script](../review-tools/sns-browser-qa.py). The browser served four exact-version JavaScript assets from local files and blocked other remote requests. The application ran under the recorded filesystem/network sandbox on localhost with only invented TCGA-ZZ records. No envelope route was used.
 
 [Results screenshot, synthetic data](evidence/results-synthetic.png) · [Export screenshot](evidence/export-synthetic.png) · [Narrow-screen screenshot](evidence/mobile-synthetic.png). The successful cohort exports do not fix the separate generated A2 reproduction-script failure.
+
+## Reconstruction follow-through — 2026-11-14T20:26:17+00:00
+
+[Probe source](../review-tools/sns-reconstruction-probes.py) · [Observed results](evidence/reconstruction-parity.json). Four actual A1 CLI exports and their four generated scripts ran in the restrictive sandbox with invented 40-record data and no repairs. All processes exited 0. The ordinary TSV control selected the intended 39 records in both outputs. A missing ER column retained all 40 with no unavailable/error step. Missing B clinical data and B clinical.csv each gave 39 records in the main output but 40 in the generated reconstruction. Exact membership was compared, not just counts.
+
+The three affected cases corroborate the companion source findings; they are not three additional unrelated official rubric deductions. A2 serialization was already tested separately. No patient data, remote services or sealed input was used. Source scripts and generated Python were inspected before execution.

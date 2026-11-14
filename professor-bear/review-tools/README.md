@@ -13,3 +13,5 @@ Usage inside the isolation described in each TESTS.md: `python synthetic-probes.
 The [third probe round](synthetic-probes-round3.py) adds full SNS engine cases, A1/A2 generated-script execution, rounding and mocked provider controls. The [public baseline runner](public-baseline.py) records aggregate unchanged-input outcomes only. These scripts import submission code and require the same inspected sandbox; they are not safe generic executors.
 
 [Supplement probes](supplement-probes.py) corroborate selected findings from the independent source audit. Generated reconstruction code was inspected and executed only with invented data in the restricted environment.
+
+[SNS reconstruction probes](sns-reconstruction-probes.py) compare exact synthetic cohort membership between the actual CLI and its generated scripts, including a complete-input control, a missing eligibility column, cross-release fallback and a CSV clinical file.

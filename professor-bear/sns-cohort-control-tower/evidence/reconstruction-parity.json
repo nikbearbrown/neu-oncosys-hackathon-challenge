@@ -1,0 +1,98 @@
+[
+  {
+    "case": "normal",
+    "cli_exit": 0,
+    "cli_error": null,
+    "expected_valid_membership_count": 39,
+    "export_rows": 39,
+    "require_value_step": {
+      "step": "require_value",
+      "params": {
+        "column": "breast_carcinoma_estrogen_receptor_status",
+        "allowed": [
+          "Positive",
+          "Negative"
+        ]
+      },
+      "n_rows": 39,
+      "n_distinct_samples": 39,
+      "n_distinct_patients": 39
+    },
+    "script_exit": 0,
+    "reproduced_rows": 39,
+    "membership_equal": true,
+    "additional_members": 0
+  },
+  {
+    "case": "missing-required-column",
+    "cli_exit": 0,
+    "cli_error": null,
+    "expected_valid_membership_count": null,
+    "export_rows": 40,
+    "require_value_step": {
+      "step": "require_value",
+      "params": {
+        "column": "breast_carcinoma_estrogen_receptor_status",
+        "allowed": [
+          "Positive",
+          "Negative"
+        ]
+      },
+      "n_rows": 40,
+      "n_distinct_samples": 40,
+      "n_distinct_patients": 40
+    },
+    "script_exit": 0,
+    "reproduced_rows": 40,
+    "membership_equal": true,
+    "additional_members": 0
+  },
+  {
+    "case": "missing-B-clinical",
+    "cli_exit": 0,
+    "cli_error": null,
+    "expected_valid_membership_count": 39,
+    "export_rows": 39,
+    "require_value_step": {
+      "step": "require_value",
+      "params": {
+        "column": "breast_carcinoma_estrogen_receptor_status",
+        "allowed": [
+          "Positive",
+          "Negative"
+        ]
+      },
+      "n_rows": 39,
+      "n_distinct_samples": 39,
+      "n_distinct_patients": 39
+    },
+    "script_exit": 0,
+    "reproduced_rows": 40,
+    "membership_equal": false,
+    "additional_members": 1
+  },
+  {
+    "case": "clinical-csv",
+    "cli_exit": 0,
+    "cli_error": null,
+    "expected_valid_membership_count": 39,
+    "export_rows": 39,
+    "require_value_step": {
+      "step": "require_value",
+      "params": {
+        "column": "breast_carcinoma_estrogen_receptor_status",
+        "allowed": [
+          "Positive",
+          "Negative"
+        ]
+      },
+      "n_rows": 39,
+      "n_distinct_samples": 39,
+      "n_distinct_patients": 39
+    },
+    "script_exit": 0,
+    "reproduced_rows": 40,
+    "membership_equal": false,
+    "additional_members": 1
+  }
+]
