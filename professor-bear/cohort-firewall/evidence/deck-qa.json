@@ -1,0 +1,75 @@
+{
+  "slides": [
+    {
+      "title": "Cohort Firewall needs stronger evidence boundaries",
+      "overflow": false,
+      "headlineLines": 0.9995860323295985,
+      "outside": []
+    },
+    {
+      "title": "Keep the explicit rules and approval safeguards",
+      "overflow": false,
+      "headlineLines": 0.9995860323295985,
+      "outside": []
+    },
+    {
+      "title": "Newly eligible samples can miss an analysis rerun",
+      "overflow": false,
+      "headlineLines": 0.9995860323295985,
+      "outside": []
+    },
+    {
+      "title": "Duplicate clinical IDs disappear before comparison",
+      "overflow": false,
+      "headlineLines": 0.9995860323295985,
+      "outside": []
+    },
+    {
+      "title": "Release approval can omit signed-result evidence",
+      "overflow": false,
+      "headlineLines": 0.9995860323295985,
+      "outside": []
+    },
+    {
+      "title": "Question approval can record an unbound question",
+      "overflow": false,
+      "headlineLines": 0.9995860323295985,
+      "outside": []
+    },
+    {
+      "title": "Malformed inputs escape the safe fallback",
+      "overflow": false,
+      "headlineLines": 0.9995860323295985,
+      "outside": []
+    },
+    {
+      "title": "The sample export overstates complete cases",
+      "overflow": false,
+      "headlineLines": 0.9995860323295985,
+      "outside": []
+    },
+    {
+      "title": "The optional wording guard accepts contradictions",
+      "overflow": false,
+      "headlineLines": 0.9995860323295985,
+      "outside": []
+    },
+    {
+      "title": "The tests establish mechanisms, not event accuracy",
+      "overflow": false,
+      "headlineLines": 0.9995860323295985,
+      "outside": []
+    },
+    {
+      "title": "Repair evidence first, then verify the complete flow",
+      "overflow": false,
+      "headlineLines": 0.9995860323295985,
+      "outside": []
+    }
+  ],
+  "page_errors": [],
+  "mobile": {
+    "width": 390,
+    "scroll": 390
+  }
+}
