@@ -1,0 +1,230 @@
+{
+  "mode": "judge",
+  "repo": "AravindKumar2504/identity-crisis-control-tower",
+  "commit": "380760dc3b7b61097756f2b85c0f462feadc802c",
+  "track": 1,
+  "reviewer": "Professor Bear / Codex source review",
+  "summary": "This entry connects explicit research-question cards, material checks, evidence lineage and fingerprinted human review. The implementation is stronger than a generic file-difference dashboard, but unavailable validation still permits signed-file creation, optional calculation failures lose their error state, and displayed group counts need measured-value denominators. These are bounded source findings, with two separately attributed parallel helper reproductions; no clinical validity or official score is asserted.",
+  "limitations": [
+    "Pinned local checkout, not a verified official final-submission receipt; branch names and later changes are outside this pass.",
+    "Static source analysis only. No submission code, tests, installers, workflows, notebook, server, hosted endpoint or model was executed.",
+    "No sealed envelopes, answer keys or raw clinical datasets were accessed. Numerical correctness, performance, accessibility and fresh-machine setup remain untested.",
+    "Source-derived control-flow consequences are labeled as such. Proposed acceptance checks are not observed test results.",
+    "The collected text budget is 160 files, 200 KB/file and 4 MB/entry. Complete_with_exclusions is not an exhaustive audit; exclusions and focused follow-ups are recorded.",
+    "No official score, cross-team ranking, clinical validity or regulatory/accessibility certification is asserted."
+  ],
+  "criteria": [
+    {
+      "id": "T1-1",
+      "status": "observed",
+      "assessment": "Default unknown-check and empty-measurement guards are source-supported. Detector accuracy on unseen inputs remains outside this pass.",
+      "findings": [
+        {
+          "kind": "strength",
+          "priority": "P2",
+          "title": "Unknown checks and empty measurements have explicit failure routes",
+          "observation": "By default, an unregistered required check becomes material unknown, and a crashed check becomes material unknown with a limitation. A1 refuses duplicated relevant clinical IDs, missing or repeated ERALPHA rows, and a group with no measured values. allow_missing=True is a documented nondefault development option that changes the missing-check materiality.",
+          "impact": "The default path distinguishes missing evidence from a passing check and avoids manufacturing a numeric estimate for an empty measurement group. This strength coexists with the narrower optional-calculation omission in IC-02.",
+          "recommendation": "Keep fail-explicit defaults and label development-bypass outputs as incomplete and non-approvable. Do not let consumers treat the nondefault bypass as equivalent to a complete checked run.",
+          "acceptance_check": "Omit a required registered check, induce a check error and create a zero-measurement group. Verify each names the uncertainty; compare the development option and confirm its output cannot be confused with fully assessed readiness.",
+          "confidence": "High for source defaults and guards; no runtime checks were performed in this source pass.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "tower/checks/__init__.py",
+              "start": 79,
+              "end": 105,
+              "quote": "def run_checks(release, card: dict, allow_missing: bool = False) -> list[Issue]:\n    \"\"\"Run every check the card lists.\n\n    A listed check that doesn't exist yet comes back as 'unknown' (material), which makes the verdict Insufficient\n    Evidence: the honest answer when part of the question can't be judged. While checks are still being written,\n    allow_missing=True lists them as pending without letting them decide the verdict.\n    \"\"\"\n    load_all()\n    out: list[Issue] = []\n    for name in card.get(\"checks\", []):\n        fn = CHECKS.get(name)\n        if fn is None:\n            broken = \"; \".join(f\"{k}.py: {v}\" for k, v in LOAD_ERRORS.items())\n            out.append(Issue(id=name, title=f\"Check '{name}' is not built yet\"\n                             + (f\" (or its file failed to load: {broken})\" if broken else \"\"), status=\"unknown\",\n                             material=not allow_missing, pre_existing=False, numbers={\"pending\": True},\n                             limitation=\"The tool cannot judge this part of the question yet.\"))\n            continue\n        try:\n            got = fn(release, card)\n            if not isinstance(got, list) or not all(isinstance(x, Issue) for x in got):\n                raise TypeError(\"it must return a list of Issue objects\")\n            out.extend(got)\n        except Exception as e:      # a broken check must never take the whole report down\n            out.append(Issue(id=name, title=f\"Check '{name}' failed: {e}\", status=\"unknown\", material=True,\n                             pre_existing=False, limitation=\"The check crashed, so this part can't be judged.\"))\n    return out"
+            },
+            {
+              "path": "tower/analyses.py",
+              "start": 28,
+              "end": 45,
+              "quote": "def run_a1(rel: Release) -> dict:\n    clinical, protein = _clinical(rel), _protein(rel)\n    er = clinical.set_index(\"sampleID\")[ER]\n    twice = set(er.index[er.index.duplicated()]) & {str(s) for s in protein.columns}\n    if twice:                       # the reference script can't run either: each id must have one ER status\n        raise ValueError(f\"A1 cannot run: {len(twice)} protein sample(s) appear on more than one clinical row \"\n                         f\"({', '.join(sorted(twice)[:3])})\")\n    samples = [s for s in protein.columns if sample_type(str(s)) == \"01\" and er.get(s) in (\"Positive\", \"Negative\")]\n    if \"ERALPHA\" not in protein.index or not samples:\n        raise ValueError(\"A1 cannot run: the ERALPHA row or the ER-labelled primary tumors are missing\")\n    if int((protein.index == \"ERALPHA\").sum()) > 1:\n        raise ValueError(\"A1 cannot run: the protein file has more than one ERALPHA row\")\n    vals = protein.loc[\"ERALPHA\", samples]\n    groups = {k: vals[[s for s in samples if er[s] == k]] for k in (\"Positive\", \"Negative\")}\n    empty = [k for k, g in groups.items() if int(g.count()) == 0]\n    if empty:\n        raise ValueError(\"A1 cannot run: no ER-alpha value for the ER-\" + \" or ER-\".join(k.lower() for k in empty)\n                         + \" primary tumors\")"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-2",
+      "status": "observed",
+      "assessment": "Question cards and material lineage support task-specific reasoning. Policy validity, confidence intervals and sampling assumptions require statistical review.",
+      "findings": [
+        {
+          "kind": "strength",
+          "priority": "P2",
+          "title": "Question cards make materiality and intended use inspectable",
+          "observation": "The A1 card states its descriptive research use, eligible group, target field, acceptable limitations, unacceptable identity problems and excluded clinical uses. Assessment selects material issues in its declared verdict order and attaches fields, rules, source references, row counts and file hashes to lineage.",
+          "impact": "A reviewer can relate a warning to the specific research task instead of receiving one context-free data-quality score. The policy choices remain prototype choices requiring human evaluation, not clinical standards.",
+          "recommendation": "Retain explicit cards and version their policies with each export. Demonstrate how changing intended use changes a result while the underlying release remains fixed.",
+          "acceptance_check": "Use the same synthetic release with descriptive and training-oriented cards. Explain each difference using declared dependencies and limits, and verify exported lineage identifies the fields and policy behind the decision.",
+          "confidence": "High for the inspected card and lineage construction; cross-card numerical behavior remains untested here.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "cards/er-alpha-by-er.yaml",
+              "start": 1,
+              "end": 22,
+              "quote": "id: er-alpha-by-er\ntitle: ER-alpha protein in ER-positive vs ER-negative primary tumors (A1)\nshort_title: ER-alpha by ER (A1)\nintended_use: A descriptive figure for a research report comparing mean ER-alpha protein (RPPA) between primary tumors that tested ER-positive and ER-negative in the clinic.\ngroup_studied: Primary tumors (sample type 01) with protein data and a clinical ER status of Positive or Negative.\noutcome: Mean ER-alpha protein (the ERALPHA row of protein_rppa.tsv.gz) in each ER group, and the difference between them.\nacceptable_limitations: Up to 10% of primary tumors without a usable ER status, and a modest shift in which hospitals contributed samples, if both are reported.\nnot_acceptable: Any sample carrying another sample's protein data, or a profile counted twice.\nout_of_scope: Diagnosis, treatment advice, risk scores or any clinical claim about a patient.\nuses:\n  clinical.tsv: [breast_carcinoma_estrogen_receptor_status]\n  protein_rppa.tsv.gz: [ERALPHA]\ngroup:\n  sample_type: \"01\"\n  in_files: [protein_rppa.tsv.gz]\n  values:\n    breast_carcinoma_estrogen_receptor_status: [Positive, Negative]\nanalyses: [A1]\nlimits:\n  missing_fraction: 0.10\n  site_shift_tvd: 0.15\nchecks: [inputs_present, missing_values, site_shift]"
+            },
+            {
+              "path": "tower/readiness.py",
+              "start": 133,
+              "end": 158,
+              "quote": "    verdict, deciding = \"Ready\", []\n    for status, label in ORDER:\n        hits = [x for x in material if x.status == status]\n        if hits or (status == \"warn\" and touching):\n            verdict, deciding = label, hits\n            break\n    reasons = [f\"{x.title}.\" for x in deciding]\n    if verdict == \"Conditional\" and touching:\n        reasons += [_touch_reason(t) for t in touching]\n    pending = [x.id for x in issues if (x.numbers or {}).get(\"pending\") and not x.material]\n    if verdict == \"Ready\":\n        checked = [x.id for x in issues if x.status == \"pass\"]\n        reasons = [f\"Nothing material found in the checks that ran ({', '.join(checked) or 'none'}).\"\n                   + (\" No release change touches what this question reads.\" if cmp else \"\")]\n    if pending:\n        reasons.append(f\"Not built yet, so not counted: {', '.join(pending)}.\")\n\n    files = {f: release.content_sha256.get(f) for f in (card.get(\"uses\") or {}) if release.has(f)}\n    lineage = [{\"conclusion\": x.title, \"issue\": x.id, \"status\": x.status, \"rule\": x.rule, \"source\": x.source,\n                \"fields\": x.fields, \"rows\": x.rows, \"row_count\": len(x.rows), \"numbers\": x.numbers,\n                \"files\": {f.split(':')[0]: files.get(f.split(':')[0]) for f in x.fields if f.split(':')[0] in files}}\n               for x in issues if x.material]\n    lineage += [{\"conclusion\": t[\"summary\"], \"finding\": t[\"finding\"], \"status\": \"warn\", \"rule\":\n                 \"A release change that touches what the question reads needs a person's review before use.\",\n                 \"source\": \"findings.json (release comparison)\", \"fields\": [f\"{t['file']}:*\"], \"rows\": t[\"samples\"],\n                 \"row_count\": len(t[\"samples\"]), \"files\": {t[\"file\"]: files.get(t[\"file\"])}} for t in touching]"
+            },
+            {
+              "path": "tower/readiness.py",
+              "start": 175,
+              "end": 205,
+              "quote": "    next_steps = [{\"for\": x.id, \"step\": x.next_step, \"evidence_needed\": x.evidence_needed}\n                  for x in deciding if x.next_step]\n    if not next_steps:                        # no check named an action: say what evidence would settle it\n        next_steps = [{\"for\": x.id, \"step\": \"Get \" + x.evidence_needed[:1].lower() + x.evidence_needed[1:],\n                       \"evidence_needed\": x.evidence_needed} for x in deciding if x.evidence_needed]\n    if verdict == \"Conditional\":\n        next_steps += [_touch_step(t) for t in touching]\n    review_items = list(dict.fromkeys([x.id for x in material if x.status != \"pass\"] + [t[\"finding\"] for t in touching]))\n    # What this result can't tell the user, shown under the verdict: the limits of the checks and changes behind it.\n    limits = [x.limitation for x in deciding if x.limitation] + [CHANGE_LIMITS.get(t[\"kind\"], CHANGE_LIMITS[\"other\"])\n                                                                 for t in touching]\n    if robust:\n        limits.append(\"Whether a systematic error such as a mislabelled ER test changed the result: the 95% range \"\n                      \"covers sampling variation only.\")\n    limits = limits or [x.limitation for x in issues if x.material and x.limitation]\n    cannot_tell = list(dict.fromkeys(limits + [GENERAL_LIMIT]))[:3]\n    group_ids = sorted(card_group(release, card))\n    doc = {\n        \"card\": {k: card.get(k) for k in (\"id\", \"title\", \"intended_use\", \"group_studied\", \"outcome\",\n                                          \"acceptable_limitations\", \"not_acceptable\", \"out_of_scope\")},\n        \"release\": {\"name\": release.name, \"files\": files},\n        \"compared_with\": cmp.a.name if cmp else None,\n        \"group_size\": len(group_ids),\n        \"group_samples\": group_ids,\n        \"cannot_tell\": cannot_tell,\n        \"verdict\": verdict,\n        \"reasons\": reasons,\n        \"summary\": summary(verdict, reasons, next_steps, pending),\n        \"issues\": [x.to_dict() | {\"rows\": x.rows[:50], \"row_count\": len(x.rows)} for x in issues],\n        \"checked_not_material\": [x.id for x in issues if not x.material and not (x.numbers or {}).get(\"pending\")],\n        \"pending_checks\": pending,"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-3",
+      "status": "observed",
+      "assessment": "Lineage and file digests are strengths; optional calculation errors need explicit states instead of empty outputs.",
+      "findings": [
+        {
+          "kind": "gap",
+          "priority": "P2",
+          "title": "Optional calculation failure loses its evidence state",
+          "observation": "The conclusion calculation and error-budget calculation catch broad exceptions and replace their outputs with empty dictionaries. A conclusion issue is appended only when the robustness object is nonempty. The source therefore does not distinguish a calculation that failed from one that was inapplicable or absent in these fields.",
+          "impact": "Keeping optional context from crashing the workflow is sensible, but missing context cannot be interpreted correctly without an execution state and reason. This does not establish that normal inputs cause a crash or that every question must be blocked by an optional failure.",
+          "recommendation": "Export separate applicable, attempted, succeeded, unavailable and failed states with bounded error details. Gate only claims that actually depend on that calculation, and keep unrelated checks usable.",
+          "acceptance_check": "Inject a controlled robustness error and a separate error-budget error in an authorized synthetic run. The output must identify each missing calculation and affected claim, while a non-applicable question remains explicitly not applicable.",
+          "confidence": "High for exception handling; the parallel review reports a controlled robustness fault, not an ordinary-data failure rate.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "tower/readiness.py",
+              "start": 108,
+              "end": 131,
+              "quote": "def assess(card: dict, release: Release, cmp: Comparison | None = None, results: dict | None = None,\n           allow_missing: bool = False) -> dict:\n    issues = run_checks(release, card, allow_missing=allow_missing)\n    touching = changes_touching(card, cmp) if cmp else []\n    robust = {}\n    if \"A1\" in (card.get(\"analyses\") or []):\n        try:\n            robust = conclusion(cmp if cmp else release, sorted({s for t in touching for s in t[\"samples\"]}))\n        except Exception:  # the robustness readout must never break the verdict\n            robust = {}\n        if robust:\n            issues.append(_conclusion_issue(robust, bool(cmp)))\n    material = [x for x in issues if x.material]\n    eb = {}\n    if set(card.get(\"analyses\") or []) & {\"A1\", \"A2\"} and release.has(\"clinical.tsv\"):\n        try:                                     # the error budget is context; it must never break the verdict\n            clin = _clinical(release)\n            f1 = (a1_frames(clin, _protein(release)) if \"A1\" in card[\"analyses\"] and release.has(\"protein_rppa.tsv.gz\")\n                  else None)\n            c2 = (clin[clin.sampleID.str[13:15] == \"01\"].dropna(subset=[PAM50])[PAM50].value_counts().to_dict()\n                  if \"A2\" in card[\"analyses\"] else None)\n            eb = error_budget(card, f1, c2, cmp, touching, clin.set_index(\"sampleID\")[ER].to_dict() if cmp else {})\n        except Exception:\n            eb = {}"
+            },
+            {
+              "path": "tower/readiness.py",
+              "start": 133,
+              "end": 148,
+              "quote": "    verdict, deciding = \"Ready\", []\n    for status, label in ORDER:\n        hits = [x for x in material if x.status == status]\n        if hits or (status == \"warn\" and touching):\n            verdict, deciding = label, hits\n            break\n    reasons = [f\"{x.title}.\" for x in deciding]\n    if verdict == \"Conditional\" and touching:\n        reasons += [_touch_reason(t) for t in touching]\n    pending = [x.id for x in issues if (x.numbers or {}).get(\"pending\") and not x.material]\n    if verdict == \"Ready\":\n        checked = [x.id for x in issues if x.status == \"pass\"]\n        reasons = [f\"Nothing material found in the checks that ran ({', '.join(checked) or 'none'}).\"\n                   + (\" No release change touches what this question reads.\" if cmp else \"\")]\n    if pending:\n        reasons.append(f\"Not built yet, so not counted: {', '.join(pending)}.\")"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-4",
+      "status": "observed",
+      "assessment": "Human sign-off is fingerprinted, but unavailable validation must remain distinct from validated approval. The development bypass is nondefault.",
+      "findings": [
+        {
+          "kind": "gap",
+          "priority": "P1",
+          "title": "Unavailable validation still permits signed review artifacts",
+          "observation": "validate returns None when the organizer validator is absent. save rejects only False and then writes readiness.signed.json and findings.reviewed.json for the None case too. The UI records the signed state after save returns normally. The returned message does disclose that findings were not checked: this is permissive policy, not a hidden assertion that validation ran.",
+          "impact": "A downstream reader can encounter a signed artifact without the expected format-validation guarantee. A human signature and successful schema validation are different claims and should not be collapsed into one success state.",
+          "recommendation": "Require an explicit True result for validated sign-off. If review without the validator is useful, emit a separately named, non-approved draft carrying validation_status=unavailable and do not activate the normal signed success state.",
+          "acceptance_check": "With a missing validator, no validated signed artifact or success state should be created. Repeat with passing and rejecting validators, and inspect both files and UI state rather than the message alone.",
+          "confidence": "High for helper and UI control flow; the retained parallel TESTS.md independently reports the helper-level missing-validator write.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "tower/review.py",
+              "start": 103,
+              "end": 115,
+              "quote": "def validate(doc: dict, validator: pathlib.Path) -> tuple[bool | None, str]:\n    \"\"\"Run the organizers' validator: (True, \"\"), (False, its message), or (None, why) if it isn't there.\"\"\"\n    if not validator.exists():\n        return None, \"the organizers' validator wasn't found\"\n    with tempfile.TemporaryDirectory() as tmp:\n        path = pathlib.Path(tmp) / \"findings.reviewed.json\"\n        path.write_text(json.dumps(doc, indent=2), encoding=\"utf-8\")\n        r = subprocess.run([sys.executable, str(validator), str(path)], capture_output=True, text=True,\n                           encoding=\"utf-8\", errors=\"replace\")\n        said = (r.stdout or r.stderr or \"\").replace(str(path), \"findings.reviewed.json\").strip()\n    if r.returncode == 0:\n        return True, \"\"\n    return False, said or f\"it stopped with exit code {r.returncode}\""
+            },
+            {
+              "path": "tower/review.py",
+              "start": 118,
+              "end": 134,
+              "quote": "def save(out_dir: pathlib.Path, signed_doc: dict, reviewed: dict | None, findings_doc: dict | None,\n         validator: pathlib.Path) -> str:\n    \"\"\"Validate the reviewed findings, then write the review files. Raises NotSaved if rejected.\"\"\"\n    check = \"\"\n    if reviewed is not None:\n        ok, said = validate(reviewed, validator)\n        if ok is False:\n            raise NotSaved(f\"the organizers' validator rejected findings.reviewed.json: {said}\")\n        check = (\"Organizers' validator on findings.reviewed.json: valid\" if ok\n                 else f\"findings.reviewed.json was not checked: {said}\")\n    record = record_markdown(signed_doc, findings_doc)\n    out_dir.mkdir(parents=True, exist_ok=True)\n    write_atomic(out_dir / \"readiness.signed.json\", json.dumps(signed_doc, indent=2, default=str))\n    write_atomic(out_dir / \"review_record.md\", record)\n    if reviewed is not None:\n        write_atomic(out_dir / \"findings.reviewed.json\", json.dumps(reviewed, indent=2))\n    return check"
+            },
+            {
+              "path": "app.py",
+              "start": 1136,
+              "end": 1159,
+              "quote": "        overrules = ready[\"verdict\"] in (\"Blocked\", \"Insufficient Evidence\") and decision.startswith(\"Approve\")\n        if overrules:\n            st.warning(f\"The tool says {ready['verdict']}. Approving overrules it, so the note must say why.\")\n        can_sign = (bool(reviewer and role) and not missing and not unexplained\n                    and not (overrules and not (note or \"\").strip()))\n        if st.button(\"Sign off\", type=\"primary\", disabled=not can_sign):\n            signed_doc = signed(ready, findings, state[\"repairs\"], state[\"issues\"], reviewer, role, decision, note)\n            reviewed = with_decisions(findings, state[\"repairs\"], reviewer, role) if findings else None\n            slug = re.sub(r\"[^A-Za-z0-9]+\", \"-\", release_label).strip(\"-\").lower()\n            out = REPO / \"out\" / \"reviews\" / f\"{card['id']}-{slug}-{now().replace(':', '')}\"\n            try:\n                check = save_review(out, signed_doc, reviewed, reviewed, CHALLENGE / \"format\" / \"validate.py\")\n            except Exception as e:\n                st.error(f\"Not signed off: {e}\")\n            else:\n                state[\"signed\"], state[\"signed_inputs\"] = signed_doc, signature\n                state[\"flash\"] = (f\"Signed off by {reviewer} ({role}): {decision}. Saved in {out.relative_to(REPO)}\", check)\n                st.rerun()                           # redraw so the header and the Overview show the sign-off\n    if state[\"signed\"]:\n        sd = state[\"signed\"]\n        msg, check = state.get(\"flash\", (\"Signed off.\", \"\"))\n        st.success(msg)\n        if check:\n            st.caption(check)"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-5",
+      "status": "not_tested",
+      "assessment": "The retained parallel review reports 81 passed and 18 skipped tests with environment limits. This reviewer did not run those tests or a deployed application.",
+      "findings": [],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. This pass does not establish runtime behavior or user comprehension."
+    },
+    {
+      "id": "T1-6",
+      "status": "observed",
+      "assessment": "Evidence-bound review records and evidence-needed next steps are useful. Persisting a record alone does not prove its schema was checked.",
+      "findings": [
+        {
+          "kind": "strength",
+          "priority": "P2",
+          "title": "Review receipts bind the human decision to evidence fingerprints",
+          "observation": "signed copies the readiness document, records repair and issue decisions, and includes reviewer, role, timestamp and digests of findings and readiness at sign-off. The Markdown record presents the tool verdict separately from the reviewer's decision. A digest detects content changes; it does not authenticate the named person.",
+          "impact": "This is a useful basis for accountable handoff and distinguishes a human override from the tool's own verdict. Its value should be preserved while fixing the unavailable-validation policy.",
+          "recommendation": "Keep separate tool and reviewer decisions, retain evidence digests and add authenticated identity only if the deployment claims it. Preserve earlier receipts when a reviewer revises a decision.",
+          "acceptance_check": "Sign a synthetic record, change one evidence field and compare its digest. Confirm the old receipt remains tied to the old evidence, the tool verdict is not rewritten as the human decision, and missing validation is visibly non-approved.",
+          "confidence": "High for receipt construction; authentication, tamper-resistant storage and UI invalidation were not verified at runtime.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "tower/review.py",
+              "start": 47,
+              "end": 63,
+              "quote": "def signed(readiness_doc: dict, findings_doc: dict | None, repair_dec: dict, issue_dec: dict,\n           reviewer: str, role: str, decision: str, note: str) -> dict:\n    \"\"\"A copy of readiness.json with every review decision and the sign-off, fingerprinted.\"\"\"\n    doc = copy.deepcopy(readiness_doc)\n    doc[\"review\"][\"items\"] = (\n        [{\"id\": rid, \"type\": \"repair\", **d, \"reviewer\": reviewer, \"role\": role} for rid, d in repair_dec.items()]\n        + [{\"id\": iid, \"type\": \"issue\", **d, \"reviewer\": reviewer, \"role\": role} for iid, d in issue_dec.items()])\n    inputs = {\"release\": doc[\"release\"], \"findings\": _digest(findings_doc), \"readiness\": _digest(readiness_doc)}\n    doc[\"review\"][\"signed_off\"] = {\"by\": reviewer, \"role\": role, \"decision\": decision, \"note\": note, \"at\": now(),\n                                   \"verdict_at_sign_off\": doc[\"verdict\"], \"inputs\": inputs}\n    return doc\n\n\ndef _digest(d: dict | None) -> str | None:\n    if d is None:\n        return None\n    return hashlib.sha256(json.dumps(d, sort_keys=True, default=str).encode()).hexdigest()"
+            },
+            {
+              "path": "tower/review.py",
+              "start": 66,
+              "end": 80,
+              "quote": "def record_markdown(readiness_doc: dict, findings_doc: dict | None) -> str:\n    \"\"\"A human-readable record of the review, for the README, the demo or an email.\"\"\"\n    r, so = readiness_doc[\"review\"], readiness_doc[\"review\"][\"signed_off\"] or {}\n    c = readiness_doc[\"card\"]\n    lines = [f\"# Review record: {c['title']}\", \"\",\n             f\"- Release: {readiness_doc['release']['name']}\" + (f\" (compared with {readiness_doc['compared_with']})\"\n                                                                  if readiness_doc.get(\"compared_with\") else \"\"),\n             f\"- Tool verdict: **{readiness_doc['verdict']}**\",\n             f\"- Signed off by: {so.get('by', '(not signed)')}, {so.get('role', '')}, at {so.get('at', '')}\",\n             f\"- Reviewer's decision: **{so.get('decision', '(none)')}**\" + (f\". Note: {so['note']}\" if so.get(\"note\") else \"\"),\n             \"\", \"## Decisions\", \"\", \"| Item | Type | Decision | Reason |\", \"|---|---|---|---|\"]\n    for it in r[\"items\"]:\n        lines.append(f\"| {it['id']} | {it['type']} | {it['decision']} | {it.get('reason', '')} |\")\n    lines += [\"\", \"## Fingerprints of what was reviewed\", \"\"]\n    for f, h in (readiness_doc[\"release\"].get(\"files\") or {}).items():"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-7",
+      "status": "observed",
+      "assessment": "Clarify eligible versus measured denominators and tool versus reviewer decisions. Fresh-user comprehension and accessibility remain untested.",
+      "findings": [
+        {
+          "kind": "gap",
+          "priority": "P2",
+          "title": "Eligible group size and measured denominator need separate labels",
+          "observation": "A1 rejects a group with zero observed values, then computes means using Series.mean while reporting n_positive and n_negative using Series.size. With some missing values, size includes entries that do not contribute to the mean. This may preserve a reference-compatible eligible count, but it is not the measured denominator.",
+          "impact": "Readers can overestimate the amount of measured evidence behind an estimate. The concern is incomplete count labeling, not that every mean is wrong or that the implementation accepts entirely empty measurement groups.",
+          "recommendation": "Preserve eligible counts if the organizer requires them and add measured and missing counts beside each estimate. Use measured counts where an evidence-adequacy rule specifically concerns observed values.",
+          "acceptance_check": "Keep at least one measured value per ER group and blank several other values. Show eligible, measured and missing counts separately and identify which denominator drives each limit and interval.",
+          "confidence": "High for the count-versus-mean distinction; no missing-value fixture was executed by this reviewer.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "tower/analyses.py",
+              "start": 35,
+              "end": 51,
+              "quote": "    samples = [s for s in protein.columns if sample_type(str(s)) == \"01\" and er.get(s) in (\"Positive\", \"Negative\")]\n    if \"ERALPHA\" not in protein.index or not samples:\n        raise ValueError(\"A1 cannot run: the ERALPHA row or the ER-labelled primary tumors are missing\")\n    if int((protein.index == \"ERALPHA\").sum()) > 1:\n        raise ValueError(\"A1 cannot run: the protein file has more than one ERALPHA row\")\n    vals = protein.loc[\"ERALPHA\", samples]\n    groups = {k: vals[[s for s in samples if er[s] == k]] for k in (\"Positive\", \"Negative\")}\n    empty = [k for k, g in groups.items() if int(g.count()) == 0]\n    if empty:\n        raise ValueError(\"A1 cannot run: no ER-alpha value for the ER-\" + \" or ER-\".join(k.lower() for k in empty)\n                         + \" primary tumors\")\n    return {\"n_samples\": len(samples), \"sample_ids\": sorted(samples),\n            \"repeated_ids\": sorted(set(repeated(header_ids(rel.path / \"protein_rppa.tsv.gz\"))) & set(samples)),\n            \"n_positive\": int(groups[\"Positive\"].size), \"n_negative\": int(groups[\"Negative\"].size),\n            \"mean_positive\": round(float(groups[\"Positive\"].mean()), 3),\n            \"mean_negative\": round(float(groups[\"Negative\"].mean()), 3),\n            \"difference\": round(float(groups[\"Positive\"].mean() - groups[\"Negative\"].mean()), 3)}"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    }
+  ],
+  "judge_scores": null
+}
