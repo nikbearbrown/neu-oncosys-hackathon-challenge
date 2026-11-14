@@ -1,50 +1,6 @@
 {
   "pages": 11,
-  "page_sizes": [
-    [
-      1152.0,
-      648.0
-    ],
-    [
-      1152.0,
-      648.0
-    ],
-    [
-      1152.0,
-      648.0
-    ],
-    [
-      1152.0,
-      648.0
-    ],
-    [
-      1152.0,
-      648.0
-    ],
-    [
-      1152.0,
-      648.0
-    ],
-    [
-      1152.0,
-      648.0
-    ],
-    [
-      1152.0,
-      648.0
-    ],
-    [
-      1152.0,
-      648.0
-    ],
-    [
-      1152.0,
-      648.0
-    ],
-    [
-      1152.0,
-      648.0
-    ]
-  ],
-  "empty_pages": []
+  "expected_pages": 11,
+  "nonempty_text": true,
+  "visual_review": "All rendered slides visually inspected 2026-11-14T21:41:53+00:00; no observed clipping or overlap. This checks the review deck, not the submitted app."
 }

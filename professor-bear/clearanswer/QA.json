@@ -65,5 +65,10 @@
       "valid_bounds": true
     }
   ],
-  "limits": "Source line bounds are not semantic verification. Full application, model and browser workflows not tested."
+  "limits": "Source line bounds are not semantic verification. Full application, model and browser workflows not tested.",
+  "scope": "Historical initial reviewer checks; current ten-slide HTML/PDF verification lives in evidence/deck-qa.json and evidence/pdf-qa.json.",
+  "current_qa": [
+    "evidence/deck-qa.json",
+    "evidence/pdf-qa.json"
+  ]
 }

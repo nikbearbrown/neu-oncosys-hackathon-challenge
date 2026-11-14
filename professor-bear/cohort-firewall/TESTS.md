@@ -2,7 +2,17 @@
 
 Tested snapshot: `ab5084f7caaa57e68636e2cd3fde97b20a47bf69` of NinadRao0707/cohort-firewall. Date: November 14, 2026. This is the observed local commit, not a verified official frozen submission. Exact environment versions are in [provenance.json](evidence/provenance.json).
 
-## Safety and execution scope
+## Runtime follow-through — 2026-11-14T21:40:17+00:00
+
+The complete submitted Python test collection now passes: **9 collected tests passed, 0 failed, 0 skipped**, in 3.82 seconds. The 26 seeded readiness variants and 12 synthetic tower scenarios are grouped inside those nine tests; do not add them to the collected count. The earlier six disclosure cases are also included. The authored synthetic fixture generator was inspected before execution. The optional official-schema check in the tower tests was not enabled in this run. [Log](evidence/cohort-firewall-tests.log) · [JUnit](evidence/cohort-firewall-junit.xml) · [Command](evidence/cohort-firewall-run.json).
+
+Six additional in-process FastAPI requests exercised the actual routing/validation path, without a listening server or browser: list-shaped spec, list-shaped dictionary and incompatible numeric filter each returned HTTP 500; empty CSV returned HTTP 200 with Insufficient Evidence; an unchanged signed question was approved; changing its question text after certification was also approved and the changed text stored. This corroborates CF-04 and CF-05 at the local API boundary, not a hosted exploit. [Raw results](evidence/cohort-firewall-api-probes.json) · [Reproducer](../review-tools/new-entry-api-probes.py).
+
+Environment: isolated disposable pinned copy, Python 3.14.6, pandas 2.3.3, NumPy 2.3.5, pytest 9.2.0; already installed FastAPI/Starlette dependencies. External network and private user-file access were denied by the macOS sandbox; environment variables were cleared and signing keys/ledger were temporary. No real model calls, Supabase, sealed inputs or original-checkout edits. The reviewer-authored harness expects both disposable submission folders beside it; it is not a general safe executor.
+
+The earlier first-pass limitations below remain historical. The complete submitted suite and selected in-process API calls are now observed. Browser, clean installation, production build, hosted service, public real-data control and full workflow remain unverified.
+
+## Initial-pass safety and execution scope
 
 The reviewer inspected the imported implementation before execution. An independent source clone was used under `/tmp`; no installers, setup scripts, migrations, hosted services, cloud credentials, sealed materials, answer keys, real patient data, or external reference-analysis modules were executed/accessed. The probes use synthetic in-memory tables and tiny temporary TSV files. Review signatures use a fresh throwaway key; review records are written only in a fresh temporary directory. The harness replaces socket.socket.connect with a rejecting function and never enables the LLM paths. This is a bounded safety measure, not an operating-system network-isolation certification.
 
@@ -56,6 +66,6 @@ The deck copies the existing Professor Bear Lato, red/white, two-column visual s
 
 Full-size slide images are retained under `evidence/slide-01.png` through `slide-11.png`. Render checks measure containment and headline wrapping; they do not establish accessibility compliance or real-room legibility. See [deck review](evidence/deck-review.md) for the per-slide visual assessment.
 
-## Not run
+## Not run in the initial pass (see follow-through above)
 
 The complete submitted test suite; clean dependency installation; API server and HTTP requests; Next.js build; submitted browser interactions; protected event analyses; public or sealed mutation challenges; bootstrap/repair simulation; optional LLM output generation; Supabase persistence; demo-video/user-task evaluation; assistive-technology testing. README success claims were not adopted as independent test results. No official accuracy rate or score follows from these tests.

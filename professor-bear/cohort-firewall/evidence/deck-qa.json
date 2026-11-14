@@ -1,75 +1,51 @@
 {
   "slides": [
     {
-      "title": "Cohort Firewall needs stronger evidence boundaries",
-      "overflow": false,
-      "headlineLines": 0.9995860323295985,
-      "outside": []
+      "slide": 1,
+      "no_overflow": true
     },
     {
-      "title": "Keep the explicit rules and approval safeguards",
-      "overflow": false,
-      "headlineLines": 0.9995860323295985,
-      "outside": []
+      "slide": 2,
+      "no_overflow": true
     },
     {
-      "title": "Newly eligible samples can miss an analysis rerun",
-      "overflow": false,
-      "headlineLines": 0.9995860323295985,
-      "outside": []
+      "slide": 3,
+      "no_overflow": true
     },
     {
-      "title": "Duplicate clinical IDs disappear before comparison",
-      "overflow": false,
-      "headlineLines": 0.9995860323295985,
-      "outside": []
+      "slide": 4,
+      "no_overflow": true
     },
     {
-      "title": "Release approval can omit signed-result evidence",
-      "overflow": false,
-      "headlineLines": 0.9995860323295985,
-      "outside": []
+      "slide": 5,
+      "no_overflow": true
     },
     {
-      "title": "Question approval can record an unbound question",
-      "overflow": false,
-      "headlineLines": 0.9995860323295985,
-      "outside": []
+      "slide": 6,
+      "no_overflow": true
     },
     {
-      "title": "Malformed inputs escape the safe fallback",
-      "overflow": false,
-      "headlineLines": 0.9995860323295985,
-      "outside": []
+      "slide": 7,
+      "no_overflow": true
     },
     {
-      "title": "The sample export overstates complete cases",
-      "overflow": false,
-      "headlineLines": 0.9995860323295985,
-      "outside": []
+      "slide": 8,
+      "no_overflow": true
     },
     {
-      "title": "The optional wording guard accepts contradictions",
-      "overflow": false,
-      "headlineLines": 0.9995860323295985,
-      "outside": []
+      "slide": 9,
+      "no_overflow": true
     },
     {
-      "title": "The tests establish mechanisms, not event accuracy",
-      "overflow": false,
-      "headlineLines": 0.9995860323295985,
-      "outside": []
+      "slide": 10,
+      "no_overflow": true
     },
     {
-      "title": "Repair evidence first, then verify the complete flow",
-      "overflow": false,
-      "headlineLines": 0.9995860323295985,
-      "outside": []
+      "slide": 11,
+      "no_overflow": true
     }
   ],
-  "page_errors": [],
-  "mobile": {
-    "width": 390,
-    "scroll": 390
-  }
+  "script_errors": [],
+  "browser": "157.0.8103.51",
+  "visual_inspection": "All rendered slides visually inspected 2026-11-14T21:41:53+00:00; no observed clipping or overlap. This checks the review deck, not the submitted app."
 }

@@ -4,7 +4,7 @@ Pinned source: `roh9031/HIPPA-cratic@9f0ad46f32a1a76af25baf1aa621ab862f991c45`. 
 
 The README calls this product Cohort Studio. It is a separate submission from tammy357/oncosys-cohort-studio. The local submission tag resolves to this same commit; the official submission form/freeze receipt is not verified. No official score is assigned.
 
-The full submitted suite completed: **170 passed, one skipped, zero failures**. Independent invented-data probes corroborate four issues below; one reconstruction concern remains source-derived. The earlier eight-test custom-data subset is included in that total, not additional coverage. No student checkout was edited.
+The full submitted suite completed: **170 passed, one skipped, zero failures**. Independent invented-data probes now corroborate all five issue mechanisms, including the changed-source rebuild. The earlier eight-test custom-data subset is included in that total, not additional coverage. No student checkout was edited.
 
 ## Strengths
 
@@ -48,9 +48,9 @@ A two-row invented sample file was loaded, then replaced with one row at the sam
 
 ### 3. Rebuild script does not enforce recorded inputs
 
-**Priority: medium. Evidence: source finding.**
+**Priority: medium. Evidence: source and reproduced subprocess behavior.**
 
-cohort.json records data directory, release and fingerprints, which is useful. The separate generated script embeds steps but calls run(STEPS) using the current environment. It neither reads that definition nor enforces its input hashes. Running it with another ONCOSYS_DATA or ONCOSYS_RELEASE can therefore rebuild against different inputs. This initial finding is source-derived; a changed-environment subprocess control is still pending.
+cohort.json records data directory, release and fingerprints, which is useful. The separate generated script embeds steps but calls run(STEPS) using the current environment. It neither reads that definition nor enforces its input hashes. Running it with another ONCOSYS_DATA or ONCOSYS_RELEASE can therefore rebuild against different inputs. A later changed-environment subprocess test reproduced this: the original two-row source rebuilt as a different one-row source with exit 0 and no mismatch warning; the same-source control retained two rows. See TESTS.md.
 
 **Sources:** [cohort_studio/export.py:21](https://github.com/roh9031/HIPPA-cratic/blob/9f0ad46f32a1a76af25baf1aa621ab862f991c45/cohort_studio/export.py#L21) · [cohort_studio/export.py:36](https://github.com/roh9031/HIPPA-cratic/blob/9f0ad46f32a1a76af25baf1aa621ab862f991c45/cohort_studio/export.py#L36) · [cohort_studio/data.py:82](https://github.com/roh9031/HIPPA-cratic/blob/9f0ad46f32a1a76af25baf1aa621ab862f991c45/cohort_studio/data.py#L82)
 

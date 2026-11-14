@@ -9,4 +9,6 @@ Preliminary evidence-backed review of commit `7ede1f8fb84b6d23f3dba13a7c77688b32
 - [Probe results](probe-results.jsonl) and [reproducer](probes.py)
 - [Artifact verification](QA.json)
 
-Four narrow synthetic checks reproduce concerns; they are not the submitted test suite or end-to-end workflow. Read the report before interpreting severity.
+The initial four probes are now supplemented by 16 passing submitted tests, 13 completed numbered foundation checks and local API/result-assembly observations; these do not establish the full model workflow. Read the report before interpreting severity.
+
+- [Parallel source review](audit-codex-23484638-pass-01.md) and [companion deck](slides-codex-23484638-pass-01.html)

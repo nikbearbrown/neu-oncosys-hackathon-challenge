@@ -9,3 +9,5 @@ Observed submission: `NinadRao0707/cohort-firewall@ab5084f7caaa57e68636e2cd3fde9
 - [Editable slide content](slides.json), [structured findings](findings.json) and [reproduction harness](reproductions/checks.py).
 
 All fixtures are synthetic. No sealed materials, cloud credentials or real patient records were used. The HTML reuses the existing Professor Bear Lato/red/white presentation style; its embedded font license is included.
+
+- [Parallel source audit](audit-codex-23484638-pass-01.md) and [companion deck](slides-codex-23484638-pass-01.html); read alongside the newer runtime results in TESTS.md.

@@ -39,8 +39,8 @@
       "after": "Script uses current environment",
       "fix": "Make the script consume the definition and verify resolved files and hashes before rebuilding.",
       "source": "https://github.com/roh9031/HIPPA-cratic/blob/9f0ad46f32a1a76af25baf1aa621ab862f991c45/cohort_studio/export.py#L21",
-      "notes": "cohort.json records data directory, release and fingerprints, which is useful. The separate generated script embeds steps but calls run(STEPS) using the current environment. It neither reads that definition nor enforces its input hashes. Running it with another ONCOSYS_DATA or ONCOSYS_RELEASE can therefore rebuild against different inputs. This initial finding is source-derived; a changed-environment subprocess control is still pending. Acceptance: Export against invented dataset A, run the script with dataset B selected, and require a clear mismatch or an explicitly new analysis rather than silent reproduction.",
-      "status": "SOURCE FINDING",
+      "notes": "Original definition records hashes. Same-source rebuild returned S1/S2; selecting another invented source returned S3 without mismatch warning. No malformed generated code executed.",
+      "status": "REPRODUCED SUBPROCESS",
       "kind": "compare"
     },
     {

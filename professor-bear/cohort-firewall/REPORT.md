@@ -2,6 +2,8 @@
 
 **The submission has a thoughtful evidence architecture, but local probes reproduced gaps in analysis dependency routing, identity checks and the human-review boundary.** Prioritize CF-01 through CF-06 before relying on release verdicts or signed approval records. CF-07 concerns optional generated wording.
 
+**Later runtime update:** the complete submitted Python suite now has nine passing collected tests. Six in-process API requests corroborate CF-04/CF-05; see [current test record](TESTS.md). The first-pass source/function evidence below remains preserved.
+
 ## Provenance and scope
 
 - Submission: [NinadRao0707/cohort-firewall](https://github.com/NinadRao0707/cohort-firewall).
@@ -75,7 +77,7 @@
 
 **Reproduction:** A valid certificate created for an original synthetic question was submitted with a different question_text. Approval succeeded, stored the changed question, and verify_review returned true.
 
-**Why it matters:** The audit trail can attach a valid approval to question text not covered by that certificate. The probe exercises the review function directly; an HTTP/browser exploit was not run.
+**Why it matters:** The audit trail can attach a valid approval to question text not covered by that certificate. The initial probe exercised the review function directly. A later in-process FastAPI request also accepted changed question text; no hosted/browser exploit was run.
 
 **Concrete repair:** Resolve the canonical question spec from an immutable server record, or hash the received canonical spec and compare it with the signed spec_sha256 before accepting a review.
 
@@ -89,7 +91,7 @@
 
 **Reproduction:** A nonempty list spec and a nonempty list dictionary each raised AttributeError. A numeric column compared with a string using > raised TypeError. In contrast, an empty CSV returned INSUFFICIENT_EVIDENCE, confirming a working fallback for that input class.
 
-**Why it matters:** Expected user mistakes can terminate evaluation instead of producing a usable Insufficient Evidence result. api/main.py:60–90 decodes JSON without validating object shape, so these shapes can reach the engine; HTTP status behavior is source-based inference, not a reproduced API test.
+**Why it matters:** Expected user mistakes can terminate evaluation instead of producing a usable Insufficient Evidence result. api/main.py:60–90 decodes JSON without validating object shape, so these shapes can reach the engine; The later in-process API tests returned HTTP 500 for all three malformed shapes, corroborating the earlier source inference.
 
 **Concrete repair:** Validate top-level and nested shapes at the boundary, enforce filter type compatibility, and make fallback formatting type-safe. Isolate funnel failure so an otherwise valid failure report can still return.
 
@@ -131,7 +133,7 @@
 | T1-2 Research-question reasoning | Structured specs, question-specific checks and accepted limitations are implemented. | CF-01, CF-04 and CF-06 weaken eligibility and question provenance. Verify changed intended use and equivalent wildcard/explicit features end to end. |
 | T1-3 Evidence and sources | Versioned rules, file hashes, fields, remedies and signed payloads provide traceability. | CF-02–CF-04 show why hashes/signatures alone do not establish complete evidence binding. Preserve and verify the exact reviewed document. |
 | T1-4 Safety and uncertainty | Blocked approvals are rejected; unreadable CSV fails safely; research-only limits are explicit. | CF-03–CF-05 require boundary hardening; CF-07 affects optional wording. Test malformed requests and changed evidence at the API boundary. |
-| T1-5 Working tool and setup | Selected core functions and six submitted disclosure cases ran with installed dependencies. | No clean installation, full submitted suite, production build or browser workflow was run. Malformed-input exceptions are reproduced. |
+| T1-5 Working tool and setup | Selected core functions and six submitted disclosure cases ran with installed dependencies. | Nine submitted tests now pass; clean installation, production build and browser workflow remain untested. Malformed-input exceptions are reproduced. |
 | T1-6 Useful next steps | Finding remedies, reconsideration evidence and proposed release repairs are structured. | Validate that each recommendation is tied to complete, immutable evidence; repair-simulation accuracy remains untested. |
 | T1-7 Communication | Plain summaries, a funnel, shareable summaries and human-review text are implemented. | CF-06 produces conflicting answerability claims; CF-07 permits conflicting wording. User testing and accessibility remain untested. |
 
@@ -141,8 +143,24 @@ First, repair dependency routing and duplicate preservation (CF-01/02); these af
 
 Before presenting a repaired version as validated, pin its new SHA, rerun these synthetic regressions, then run the full submitted suite, a clean setup, a public unchanged-release control, approved public mutations and an end-to-end review flow. Keep organizer unseen-input evaluation separate from independent checks.
 
-## Limitations and fairness
+## Initial-pass limitations and fairness
+
+See the later runtime update above for the completed suite and selected API requests. These supersede only those initial omissions.
 
 This is a bounded independent review under a deadline, not a clinical, security, privacy or accessibility certification. We did not watch the demo, verify README performance claims, test hosted services, access sealed releases, execute external reference-analysis code, run bootstrap/repair simulations, run the full submitted test suite, install dependencies, or build/test the web app. The synthetic analysis in CF-01 is intentionally reviewer-authored; no event analysis result is claimed. API reachability is established by source inspection only. Absence of a runtime check is not a failure or score deduction.
 
 The HTML/PDF deck summarizes each issue separately; this report and TESTS.md carry the detailed qualifications. The reference rubric is the review repository’s captured Track 1 criteria, not a claim of newly verified organizer rules.
+
+## Exact official criterion labels and maximum weights
+
+These are rubric maxima, not awarded points; supplemental checks add no judging criteria.
+
+| Criterion | Maximum |
+|---|---:|
+| Finding data problems. Finds material data problems in the supplied input without reporting problems the data does not support. | 20 |
+| Reasoning for the research question. Changes its result appropriately when the research question or intended use changes. | 20 |
+| Evidence and sources. Shows the checks, data fields, decision rules, and limitations behind each conclusion. | 15 |
+| Safety and uncertainty. Avoids clinical claims, makes uncertainty visible, and requires human review. | 15 |
+| Working tool and clear setup. Judges can run the core workflow from the submitted repository. | 15 |
+| Useful next steps. Suggested fixes are specific and match the size and importance of the problem. | 10 |
+| Communication. Someone without specialist knowledge can understand the result and next step. | 5 |

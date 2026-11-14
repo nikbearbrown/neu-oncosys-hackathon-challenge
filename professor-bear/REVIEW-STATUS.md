@@ -1,6 +1,6 @@
 # Cross-review status
 
-Updated 2026-11-14T21:18:40+00:00.
+Updated 2026-11-14T21:41:53+00:00.
 
 Each submission has a main REPORT.md, an evolving TESTS.md and HTML/PDF decks. Files named audit-codex-23484638-pass-01 are independent source-only supplements; their accompanying deck and structured review preserve that pass. They use the same pinned submission commits. No numeric scores are awarded here.
 
@@ -57,3 +57,21 @@ For Identity Crisis, the earlier "development bypass is non-default" statement a
 [Identity Crisis source/runtime reconciliation](identity-crisis-control-tower/runtime-reconciliation-codex-23484638.md) consolidates the later evidence without assigning a new score or double-counting findings.
 
 Tripwire follow-through at 21:17 UTC: the declared Python 3.13/direct-dependency suite also gives 404 passed/one skipped. A separate supported-importer browser case confirms zero-open review for a schema-valid flagged finding without a repair. This extends the earlier helper evidence; it does not imply a repair was approved. See [current test evidence](tripwire/TESTS.md).
+
+## hippa-cratic
+
+The full submitted suite has 170 passes and one skip. Independent probes reproduce unknown-checksum status, same-path cache staleness, empty-summary ambiguity, unsafe request serialization, and a changed-source rebuild. The later rebuild subprocess uses benign invented data; malformed generated code was never executed. No actual browser workflow was run.
+
+[Report](hippa-cratic/REPORT.md) · [Tests](hippa-cratic/TESTS.md)
+
+## cohort-firewall
+
+The independent report contains 12 synthetic probes. Later work adds the complete nine-test Python collection (including 26 readiness variants and 12 tower scenarios), and six actual in-process API requests. Changed-question approval and malformed-input failures are corroborated at that boundary. Do not add grouped cases or the earlier six disclosure cases to the nine-test count. Browser/build/hosted operation remains unverified.
+
+[Report](cohort-firewall/REPORT.md) · [Tests](cohort-firewall/TESTS.md)
+
+## clearanswer
+
+The four initial probes are corroborated by additional real result-assembly and local export routes, with an injected synthetic completed-job fixture and no model call. Sixteen submitted data-model tests and 13 numbered foundation checks completed using public data. Schema validity does not establish truth: both transformed exports pass the fallback schema check while exhibiting the reported confidence/override behavior. The parallel source audit is preserved; later runtime results supplement its initial limits.
+
+[Report](clearanswer/report.md) · [Tests](clearanswer/TESTS.md) · [Parallel source audit](clearanswer/audit-codex-23484638-pass-01.md)

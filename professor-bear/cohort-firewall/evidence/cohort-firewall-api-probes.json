@@ -1,0 +1,31 @@
+[
+  {
+    "check": "list_spec",
+    "status": 500,
+    "verdict": null
+  },
+  {
+    "check": "list_dictionary",
+    "status": 500,
+    "verdict": null
+  },
+  {
+    "check": "incompatible_filter",
+    "status": 500,
+    "verdict": null
+  },
+  {
+    "check": "empty_csv",
+    "status": 200,
+    "verdict": "INSUFFICIENT_EVIDENCE"
+  },
+  {
+    "check": "original_question_control",
+    "status": 200
+  },
+  {
+    "check": "changed_question_review",
+    "status": 200,
+    "stored_question": "Different synthetic question after certification"
+  }
+]

@@ -1,11 +1,11 @@
 {
-  "timestamp": "2026-11-14T21:19:28.365173+00:00",
-  "scope": "Current six primary review packages; source-only companion decks retain separate QA and review scope. Hashes identify these artifact bytes, not an official submission freeze.",
-  "review_repository_base_commit": "fd027a853879d2535539c992f8a46320c5828490",
+  "timestamp": "2026-11-14T21:41:53+00:00",
+  "scope": "Nine primary report/deck packages; companion audits retain separate scope. Hashes identify review artifact bytes, not official submission freeze.",
+  "review_repository_base_commit": "806ac48bed073dea2dbd6f39598c2a614a55d73d",
+  "total_slides": 86,
   "packages": [
     {
       "submission": "busy-beavers",
-      "pinned_commit": "bfb369f231bf97a1d3aa21abade3ba4b1406a355",
       "slides": 9,
       "pdf_pages": 9,
       "all_pdf_pages_nonempty": true,
@@ -21,8 +21,55 @@
       }
     },
     {
+      "submission": "clearanswer",
+      "slides": 10,
+      "pdf_pages": 10,
+      "all_pdf_pages_nonempty": true,
+      "html_overflow_checks_pass": true,
+      "browser_script_errors": [],
+      "visual_review_record": "All rendered slides visually inspected 2026-11-14T21:41:53+00:00; no observed clipping or overlap. This checks the review deck, not the submitted app.",
+      "artifacts": {
+        "report.md": "a400faec5bfc3d608f2dcf7bff6ce3e3efac360864f4f9f6e5afe64590ffa1cd",
+        "TESTS.md": "da9887c7a66711d8747c4ca7ed400dbcdbb0ba9e366b322058a5d70b74942113",
+        "slides.json": "edc0ee8336099e655f147a589620dc431c096733d48709baeaae387795cbf538",
+        "slides.html": "3012da85901992d16e4806044ed2bd00d658fdae4db12dd103c59b85664b74e7",
+        "slides.pdf": "a1d9a4c5dc7147e230ccb14f9a90cee16505573df3110348ffa8686493a224c4"
+      }
+    },
+    {
+      "submission": "cohort-firewall",
+      "slides": 11,
+      "pdf_pages": 11,
+      "all_pdf_pages_nonempty": true,
+      "html_overflow_checks_pass": true,
+      "browser_script_errors": [],
+      "visual_review_record": "All rendered slides visually inspected 2026-11-14T21:41:53+00:00; no observed clipping or overlap. This checks the review deck, not the submitted app.",
+      "artifacts": {
+        "REPORT.md": "6e193c06fddc944746648b8bb929ae9eb89613298143fdc2a71e10bfcf4b474c",
+        "TESTS.md": "e73a55eb22a6d3be5be791609affd37bb6cab0d80697f6f71735ed1f4bb12bce",
+        "slides.json": "bd6a6176ca6065f4df0eef1b442b8ac512417c4f58d1d7d08a3aefb9b75fe2e2",
+        "slides.html": "96e342d207f4a9694e0eb9b0bad70eecda2d2cee6647603492794152b1f4cdeb",
+        "slides.pdf": "93b2051c85c4704ab959ab914cf612ee56f7c82d2812372869dfa9930776052c"
+      }
+    },
+    {
+      "submission": "hippa-cratic",
+      "slides": 7,
+      "pdf_pages": 7,
+      "all_pdf_pages_nonempty": true,
+      "html_overflow_checks_pass": true,
+      "browser_script_errors": [],
+      "visual_review_record": "All rendered slides visually inspected 2026-11-14T21:41:53+00:00; no observed clipping or overlap. This checks the review deck, not the submitted app.",
+      "artifacts": {
+        "REPORT.md": "d23da467639c6e544f270596fb718452748635ca022cf0e3c6a3e65d75761670",
+        "TESTS.md": "9cf74cf983bdc1fa735648619b6b35f23a5185dd1038eaaf761c58a27551734a",
+        "slides.json": "0e166f96c9e8964d1fe1d8919c9e4af21a868293ccde78be409cd3b70bbd5a3e",
+        "slides.html": "b14f0f92fb254007bb1db68ac7f936eb5287995751acadc231c31ba5f286f648",
+        "slides.pdf": "7a543ee89de090a53294154b0a845c17074b876fdd4cdfa8e03e74ecddc3878a"
+      }
+    },
+    {
       "submission": "identity-crisis-control-tower",
-      "pinned_commit": "380760dc3b7b61097756f2b85c0f462feadc802c",
       "slides": 9,
       "pdf_pages": 9,
       "all_pdf_pages_nonempty": true,
@@ -39,7 +86,6 @@
     },
     {
       "submission": "oncosys-cohort-studio",
-      "pinned_commit": "54aeacb6f6f355a1dcaa42d7abf2ce174315ad69",
       "slides": 8,
       "pdf_pages": 8,
       "all_pdf_pages_nonempty": true,
@@ -56,7 +102,6 @@
     },
     {
       "submission": "readyset-control-tower",
-      "pinned_commit": "4dd07736e99f96dd46cb6199c32bea32465bd20e",
       "slides": 15,
       "pdf_pages": 15,
       "all_pdf_pages_nonempty": true,
@@ -73,7 +118,6 @@
     },
     {
       "submission": "sns-cohort-control-tower",
-      "pinned_commit": "c1e8b79a2987cee6087d847867f9895deaa109a4",
       "slides": 10,
       "pdf_pages": 10,
       "all_pdf_pages_nonempty": true,
@@ -90,7 +134,6 @@
     },
     {
       "submission": "tripwire",
-      "pinned_commit": "45df43640836025b40e89fc190f913ad694a6011",
       "slides": 7,
       "pdf_pages": 7,
       "all_pdf_pages_nonempty": true,

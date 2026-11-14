@@ -1,0 +1,21 @@
+{
+  "original_rows": 2,
+  "recorded_source": "/private/tmp/oncosys-runtime-k2vhjg41/tmp/tmpcbyh21sr/a",
+  "recorded_hashes_present": true,
+  "runs": [
+    {
+      "case": "same_source_control",
+      "exit": 0,
+      "stdout": " 0  Start: all samples (sample_manifest.csv)                               rows=    2 samples=    2 patients=    2\nwrote cohort_samples.csv (2 samples)\n",
+      "stderr": "",
+      "exported_csv": "sample_id,patient_id\nS1,P1\nS2,P2\n"
+    },
+    {
+      "case": "different_source",
+      "exit": 0,
+      "stdout": " 0  Start: all samples (sample_manifest.csv)                               rows=    1 samples=    1 patients=    1\nwrote cohort_samples.csv (1 samples)\n",
+      "stderr": "",
+      "exported_csv": "sample_id,patient_id\nS3,P3\n"
+    }
+  ]
+}

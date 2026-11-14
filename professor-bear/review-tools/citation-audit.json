@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-11-14T21:32:55.429169+00:00",
+  "timestamp": "2026-11-14T21:42:35.940919+00:00",
   "scope": "All recognized pinned GitHub blob links in primary reports, companion audits, coverage notes and runtime reconciliation notes. Verifies local Git object/path and cited line bounds, not scientific correctness or whether claims follow from cited code.",
-  "references": 266,
-  "distinct_files": 88,
+  "references": 359,
+  "distinct_files": 103,
   "invalid": [],
   "checks": [
     {
@@ -78,6 +78,156 @@
       "valid_path_and_lines": true
     },
     {
+      "document": "hippa-cratic/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/roh9031/HIPPA-cratic/blob/9f0ad46f32a1a76af25baf1aa621ab862f991c45/app.py#L162-L173",
+      "line_count": 470,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "hippa-cratic/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/roh9031/HIPPA-cratic/blob/9f0ad46f32a1a76af25baf1aa621ab862f991c45/app.py#L380-L388",
+      "line_count": 470,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "hippa-cratic/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/roh9031/HIPPA-cratic/blob/9f0ad46f32a1a76af25baf1aa621ab862f991c45/app.py#L408-L425",
+      "line_count": 470,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "hippa-cratic/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/roh9031/HIPPA-cratic/blob/9f0ad46f32a1a76af25baf1aa621ab862f991c45/app.py#L430-L444",
+      "line_count": 470,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "hippa-cratic/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/roh9031/HIPPA-cratic/blob/9f0ad46f32a1a76af25baf1aa621ab862f991c45/app.py#L430-L449",
+      "line_count": 470,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "hippa-cratic/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/roh9031/HIPPA-cratic/blob/9f0ad46f32a1a76af25baf1aa621ab862f991c45/app.py#L451-L466",
+      "line_count": 470,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "hippa-cratic/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/roh9031/HIPPA-cratic/blob/9f0ad46f32a1a76af25baf1aa621ab862f991c45/app.py#L458-L466",
+      "line_count": 470,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "hippa-cratic/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/roh9031/HIPPA-cratic/blob/9f0ad46f32a1a76af25baf1aa621ab862f991c45/app.py#L95-L103",
+      "line_count": 470,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "hippa-cratic/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/roh9031/HIPPA-cratic/blob/9f0ad46f32a1a76af25baf1aa621ab862f991c45/cohort_studio/advice.py#L50-L55",
+      "line_count": 101,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "hippa-cratic/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/roh9031/HIPPA-cratic/blob/9f0ad46f32a1a76af25baf1aa621ab862f991c45/cohort_studio/advice.py#L70-L84",
+      "line_count": 101,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "hippa-cratic/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/roh9031/HIPPA-cratic/blob/9f0ad46f32a1a76af25baf1aa621ab862f991c45/cohort_studio/custom.py#L163-L181",
+      "line_count": 185,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "hippa-cratic/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/roh9031/HIPPA-cratic/blob/9f0ad46f32a1a76af25baf1aa621ab862f991c45/cohort_studio/data.py#L222-L225",
+      "line_count": 225,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "hippa-cratic/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/roh9031/HIPPA-cratic/blob/9f0ad46f32a1a76af25baf1aa621ab862f991c45/cohort_studio/data.py#L82-L101",
+      "line_count": 225,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "hippa-cratic/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/roh9031/HIPPA-cratic/blob/9f0ad46f32a1a76af25baf1aa621ab862f991c45/cohort_studio/data.py#L82-L93",
+      "line_count": 225,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "hippa-cratic/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/roh9031/HIPPA-cratic/blob/9f0ad46f32a1a76af25baf1aa621ab862f991c45/cohort_studio/engine.py#L440-L465",
+      "line_count": 562,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "hippa-cratic/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/roh9031/HIPPA-cratic/blob/9f0ad46f32a1a76af25baf1aa621ab862f991c45/cohort_studio/engine.py#L468-L483",
+      "line_count": 562,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "hippa-cratic/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/roh9031/HIPPA-cratic/blob/9f0ad46f32a1a76af25baf1aa621ab862f991c45/cohort_studio/engine.py#L508-L530",
+      "line_count": 562,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "hippa-cratic/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/roh9031/HIPPA-cratic/blob/9f0ad46f32a1a76af25baf1aa621ab862f991c45/cohort_studio/engine.py#L550-L562",
+      "line_count": 562,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "hippa-cratic/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/roh9031/HIPPA-cratic/blob/9f0ad46f32a1a76af25baf1aa621ab862f991c45/cohort_studio/export.py#L21-L33",
+      "line_count": 65,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "hippa-cratic/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/roh9031/HIPPA-cratic/blob/9f0ad46f32a1a76af25baf1aa621ab862f991c45/cohort_studio/export.py#L36-L53",
+      "line_count": 65,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "hippa-cratic/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/roh9031/HIPPA-cratic/blob/9f0ad46f32a1a76af25baf1aa621ab862f991c45/cohort_studio/export.py#L36-L55",
+      "line_count": 65,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "hippa-cratic/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/roh9031/HIPPA-cratic/blob/9f0ad46f32a1a76af25baf1aa621ab862f991c45/cohort_studio/sqlcheck.py#L218-L234",
+      "line_count": 360,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "hippa-cratic/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/roh9031/HIPPA-cratic/blob/9f0ad46f32a1a76af25baf1aa621ab862f991c45/cohort_studio/sqlcheck.py#L24-L45",
+      "line_count": 360,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "hippa-cratic/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/roh9031/HIPPA-cratic/blob/9f0ad46f32a1a76af25baf1aa621ab862f991c45/cohort_studio/versions.py#L33-L49",
+      "line_count": 92,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "hippa-cratic/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/roh9031/HIPPA-cratic/blob/9f0ad46f32a1a76af25baf1aa621ab862f991c45/tests/test_rebuild.py#L32-L47",
+      "line_count": 47,
+      "valid_path_and_lines": true
+    },
+    {
       "document": "clearanswer/report.md",
       "url": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/agents/base.py#L38-L68",
       "line_count": 106,
@@ -135,6 +285,210 @@
       "document": "clearanswer/report.md",
       "url": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/core/tolerance.py#L19-L91",
       "line_count": 91,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "clearanswer/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/agents/extractor.py#L141-L151",
+      "line_count": 151,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "clearanswer/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/agents/extractor.py#L92-L102",
+      "line_count": 151,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "clearanswer/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/agents/verifier.py#L239-L265",
+      "line_count": 671,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "clearanswer/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/agents/verifier.py#L301-L321",
+      "line_count": 671,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "clearanswer/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/agents/verifier.py#L348-L373",
+      "line_count": 671,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "clearanswer/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/agents/verifier.py#L377-L405",
+      "line_count": 671,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "clearanswer/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/agents/verifier.py#L431-L440",
+      "line_count": 671,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "clearanswer/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/agents/verifier.py#L455-L467",
+      "line_count": 671,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "clearanswer/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/agents/verifier.py#L49-L64",
+      "line_count": 671,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "clearanswer/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/agents/verifier.py#L491-L504",
+      "line_count": 671,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "clearanswer/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/agents/verifier.py#L519-L525",
+      "line_count": 671,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "clearanswer/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/app.py#L209-L221",
+      "line_count": 511,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "clearanswer/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/app.py#L263-L273",
+      "line_count": 511,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "clearanswer/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/app.py#L409-L425",
+      "line_count": 511,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "clearanswer/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/app.py#L432-L458",
+      "line_count": 511,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "clearanswer/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/app.py#L438-L459",
+      "line_count": 511,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "clearanswer/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/app.py#L442-L453",
+      "line_count": 511,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "clearanswer/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/core/evidence.py#L86-L94",
+      "line_count": 179,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "clearanswer/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/core/guard.py#L107-L113",
+      "line_count": 113,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "clearanswer/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/core/guard.py#L99-L113",
+      "line_count": 113,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "clearanswer/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/core/loader.py#L206-L213",
+      "line_count": 221,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "clearanswer/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/core/loader.py#L56-L72",
+      "line_count": 221,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "clearanswer/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/core/tolerance.py#L21-L34",
+      "line_count": 91,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "clearanswer/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/core/tolerance.py#L62-L90",
+      "line_count": 91,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "clearanswer/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/output.py#L106-L120",
+      "line_count": 325,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "clearanswer/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/output.py#L64-L75",
+      "line_count": 325,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "clearanswer/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/templates/index.html#L1718-L1738",
+      "line_count": 2179,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "clearanswer/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/templates/index.html#L1808-L1811",
+      "line_count": 2179,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "clearanswer/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/templates/index.html#L2075-L2086",
+      "line_count": 2179,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "clearanswer/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/tools/data_tool.py#L206-L218",
+      "line_count": 311,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "clearanswer/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/tools/data_tool.py#L248-L264",
+      "line_count": 311,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "clearanswer/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/tools/data_tool.py#L69-L94",
+      "line_count": 311,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "clearanswer/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/tools/data_tool.py#L98-L125",
+      "line_count": 311,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "clearanswer/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/tools/manifest_tool.py#L47-L77",
+      "line_count": 130,
       "valid_path_and_lines": true
     },
     {
@@ -1191,6 +1545,210 @@
       "document": "cohort-firewall/REPORT.md",
       "url": "https://github.com/NinadRao0707/cohort-firewall/blob/ab5084f7caaa57e68636e2cd3fde97b20a47bf69/cohort_firewall/tower/releases.py#L100-L110",
       "line_count": 224,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "cohort-firewall/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/NinadRao0707/cohort-firewall/blob/ab5084f7caaa57e68636e2cd3fde97b20a47bf69/api/main.py#L281-L299",
+      "line_count": 334,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "cohort-firewall/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/NinadRao0707/cohort-firewall/blob/ab5084f7caaa57e68636e2cd3fde97b20a47bf69/api/main.py#L302-L321",
+      "line_count": 334,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "cohort-firewall/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/NinadRao0707/cohort-firewall/blob/ab5084f7caaa57e68636e2cd3fde97b20a47bf69/cohort_firewall/certificate.py#L50-L63",
+      "line_count": 80,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "cohort-firewall/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/NinadRao0707/cohort-firewall/blob/ab5084f7caaa57e68636e2cd3fde97b20a47bf69/cohort_firewall/engine.py#L70-L72",
+      "line_count": 140,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "cohort-firewall/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/NinadRao0707/cohort-firewall/blob/ab5084f7caaa57e68636e2cd3fde97b20a47bf69/cohort_firewall/ledger.py#L1-L8",
+      "line_count": 112,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "cohort-firewall/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/NinadRao0707/cohort-firewall/blob/ab5084f7caaa57e68636e2cd3fde97b20a47bf69/cohort_firewall/ledger.py#L47-L67",
+      "line_count": 112,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "cohort-firewall/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/NinadRao0707/cohort-firewall/blob/ab5084f7caaa57e68636e2cd3fde97b20a47bf69/cohort_firewall/policy.py#L32-L37",
+      "line_count": 114,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "cohort-firewall/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/NinadRao0707/cohort-firewall/blob/ab5084f7caaa57e68636e2cd3fde97b20a47bf69/cohort_firewall/policy.py#L53-L66",
+      "line_count": 114,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "cohort-firewall/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/NinadRao0707/cohort-firewall/blob/ab5084f7caaa57e68636e2cd3fde97b20a47bf69/cohort_firewall/policy.py#L68-L87",
+      "line_count": 114,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "cohort-firewall/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/NinadRao0707/cohort-firewall/blob/ab5084f7caaa57e68636e2cd3fde97b20a47bf69/cohort_firewall/policy.py#L99-L114",
+      "line_count": 114,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "cohort-firewall/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/NinadRao0707/cohort-firewall/blob/ab5084f7caaa57e68636e2cd3fde97b20a47bf69/cohort_firewall/review.py#L102-L122",
+      "line_count": 136,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "cohort-firewall/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/NinadRao0707/cohort-firewall/blob/ab5084f7caaa57e68636e2cd3fde97b20a47bf69/cohort_firewall/review.py#L19-L27",
+      "line_count": 136,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "cohort-firewall/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/NinadRao0707/cohort-firewall/blob/ab5084f7caaa57e68636e2cd3fde97b20a47bf69/cohort_firewall/review.py#L35-L39",
+      "line_count": 136,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "cohort-firewall/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/NinadRao0707/cohort-firewall/blob/ab5084f7caaa57e68636e2cd3fde97b20a47bf69/cohort_firewall/review.py#L42-L51",
+      "line_count": 136,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "cohort-firewall/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/NinadRao0707/cohort-firewall/blob/ab5084f7caaa57e68636e2cd3fde97b20a47bf69/cohort_firewall/review.py#L69-L90",
+      "line_count": 136,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "cohort-firewall/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/NinadRao0707/cohort-firewall/blob/ab5084f7caaa57e68636e2cd3fde97b20a47bf69/cohort_firewall/review.py#L93-L112",
+      "line_count": 136,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "cohort-firewall/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/NinadRao0707/cohort-firewall/blob/ab5084f7caaa57e68636e2cd3fde97b20a47bf69/cohort_firewall/tower/analyses.py#L101-L122",
+      "line_count": 134,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "cohort-firewall/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/NinadRao0707/cohort-firewall/blob/ab5084f7caaa57e68636e2cd3fde97b20a47bf69/cohort_firewall/tower/analyses.py#L123-L133",
+      "line_count": 134,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "cohort-firewall/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/NinadRao0707/cohort-firewall/blob/ab5084f7caaa57e68636e2cd3fde97b20a47bf69/cohort_firewall/tower/analyses.py#L38-L44",
+      "line_count": 134,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "cohort-firewall/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/NinadRao0707/cohort-firewall/blob/ab5084f7caaa57e68636e2cd3fde97b20a47bf69/cohort_firewall/tower/analyses.py#L93-L122",
+      "line_count": 134,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "cohort-firewall/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/NinadRao0707/cohort-firewall/blob/ab5084f7caaa57e68636e2cd3fde97b20a47bf69/cohort_firewall/tower/diff.py#L227-L236",
+      "line_count": 236,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "cohort-firewall/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/NinadRao0707/cohort-firewall/blob/ab5084f7caaa57e68636e2cd3fde97b20a47bf69/cohort_firewall/tower/diff.py#L77-L90",
+      "line_count": 236,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "cohort-firewall/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/NinadRao0707/cohort-firewall/blob/ab5084f7caaa57e68636e2cd3fde97b20a47bf69/cohort_firewall/tower/findings.py#L264-L268",
+      "line_count": 397,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "cohort-firewall/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/NinadRao0707/cohort-firewall/blob/ab5084f7caaa57e68636e2cd3fde97b20a47bf69/cohort_firewall/tower/findings.py#L285-L291",
+      "line_count": 397,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "cohort-firewall/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/NinadRao0707/cohort-firewall/blob/ab5084f7caaa57e68636e2cd3fde97b20a47bf69/cohort_firewall/tower/findings.py#L67-L77",
+      "line_count": 397,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "cohort-firewall/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/NinadRao0707/cohort-firewall/blob/ab5084f7caaa57e68636e2cd3fde97b20a47bf69/cohort_firewall/tower/releases.py#L100-L110",
+      "line_count": 224,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "cohort-firewall/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/NinadRao0707/cohort-firewall/blob/ab5084f7caaa57e68636e2cd3fde97b20a47bf69/cohort_firewall/tower/releases.py#L119-L137",
+      "line_count": 224,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "cohort-firewall/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/NinadRao0707/cohort-firewall/blob/ab5084f7caaa57e68636e2cd3fde97b20a47bf69/cohort_firewall/tower/releases.py#L149-L174",
+      "line_count": 224,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "cohort-firewall/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/NinadRao0707/cohort-firewall/blob/ab5084f7caaa57e68636e2cd3fde97b20a47bf69/cohort_firewall/tower/releases.py#L181-L201",
+      "line_count": 224,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "cohort-firewall/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/NinadRao0707/cohort-firewall/blob/ab5084f7caaa57e68636e2cd3fde97b20a47bf69/cohort_firewall/tower/releases.py#L208-L219",
+      "line_count": 224,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "cohort-firewall/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/NinadRao0707/cohort-firewall/blob/ab5084f7caaa57e68636e2cd3fde97b20a47bf69/cohort_firewall/tower/run.py#L24-L37",
+      "line_count": 116,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "cohort-firewall/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/NinadRao0707/cohort-firewall/blob/ab5084f7caaa57e68636e2cd3fde97b20a47bf69/cohort_firewall/tower/run.py#L27-L35",
+      "line_count": 116,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "cohort-firewall/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/NinadRao0707/cohort-firewall/blob/ab5084f7caaa57e68636e2cd3fde97b20a47bf69/cohort_firewall/tower/run.py#L78-L82",
+      "line_count": 116,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "cohort-firewall/audit-codex-23484638-pass-01.md",
+      "url": "https://github.com/NinadRao0707/cohort-firewall/blob/ab5084f7caaa57e68636e2cd3fde97b20a47bf69/rules/tower_v0_1.yaml#L9-L21",
+      "line_count": 72,
       "valid_path_and_lines": true
     },
     {

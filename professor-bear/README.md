@@ -14,7 +14,7 @@ Read each detailed report and issue-by-issue deck together. Work through the iss
 | Cohort Firewall | [Report](cohort-firewall/REPORT.md) | [PDF](cohort-firewall/slides.pdf) | [HTML](cohort-firewall/slides.html) | [Tests](cohort-firewall/TESTS.md) |
 | ClearAnswer | [Report](clearanswer/report.md) | [PDF](clearanswer/slides.pdf) | [HTML](clearanswer/slides.html) | [Tests](clearanswer/TESTS.md) |
 
-Updated 2026-11-14T21:31:58+00:00. Download HTML decks to open them locally; GitHub renders the PDFs directly. Each deck presents one issue at a time. No official numerical scores are assigned.
+Updated 2026-11-14T21:41:53+00:00. Download HTML decks to open them locally; GitHub renders the PDFs directly. Each deck presents one issue at a time. No official numerical scores are assigned.
 
 Submitted-suite results: ReadySet **107 unit tests plus 38 public mutation cases passed**; Tripwire **404 passed / 1 skipped**; Identity Crisis **96 passed / 3 skipped**; Busy Beavers **65 passed**; Cohort Studio **299 passed**. No submitted SNS test suite was found; its independent synthetic checks are documented. These suites cover different assertions and are not a ranking.
 
@@ -72,4 +72,8 @@ Latest Tripwire browser pass: 12 of 13 proposed checks met; evidence requests re
 
 Tripwire follow-through at 21:17 UTC: the declared Python 3.13/direct-dependency suite also gives 404 passed/one skipped. A separate supported-importer browser case confirms zero-open review for a schema-valid flagged finding without a repair. This extends the earlier helper evidence; it does not imply a repair was approved. See [current test evidence](tripwire/TESTS.md).
 
-Latest additions: HIPPA-cratic has **170 submitted tests passed / 1 skipped**. Cohort Firewall has **12 independent synthetic probes and six passing submitted disclosure cases**; ClearAnswer has **four narrow synthetic probes**. Neither new package claims full application or model verification. Their reports and decks are now linked above.
+Latest additions: HIPPA-cratic has **170 submitted tests passed / 1 skipped**. Cohort Firewall has **nine passing collected tests**, including its grouped synthetic cases, plus independent probes and six local API requests. ClearAnswer has **16 passing data-model tests**, 13 completed numbered foundation checks and six additional local observations. None of these claims full hosted application or live model verification. Their reports and decks are now linked above.
+
+Latest runtime follow-through: [HIPPA reconstruction](hippa-cratic/TESTS.md), [Cohort Firewall suite and API](cohort-firewall/TESTS.md), [ClearAnswer suite and export](clearanswer/TESTS.md). [ClearAnswer parallel source audit](clearanswer/audit-codex-23484638-pass-01.md) and [companion deck](clearanswer/slides-codex-23484638-pass-01.html) are preserved alongside the main report. Read overlapping findings once, using the newest scoped evidence.
+
+[Cohort Firewall parallel source audit](cohort-firewall/audit-codex-23484638-pass-01.md) and [companion deck](cohort-firewall/slides-codex-23484638-pass-01.html) are also preserved. The primary report links the later executed suite/API evidence; overlapping concerns are not additional scored items.

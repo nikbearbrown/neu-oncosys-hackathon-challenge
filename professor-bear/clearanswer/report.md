@@ -2,14 +2,16 @@
 
 Reviewed commit: `7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8`. Track 2, Evidence Navigator / Research Claim Auditor. Preliminary source and narrow runtime review; not an official score or verified final submission receipt.
 
+**Later runtime update:** 16 submitted data-model tests and 13 numbered foundation checks completed; local API/result-assembly tests corroborate F1–F4 and qualify F6. See [TESTS.md](TESTS.md) for exact scope, controls and environment.
+
 ## Summary
 ClearAnswer is a substantive research-claim auditor with a clear reviewer workflow: extract sentences, use deterministic data tools, inspect evidence, review findings, and export JSON or HTML. The semantic layer explicitly documents questions the data cannot answer. These are good foundations. However, numeric tolerance and export transformations can overstate support or confidence. Fix these before trusting the exported verdicts.
 
-## Verified strengths
+## Source-observed strengths
 - Separate agent, semantic, and data layers make behavior inspectable and allow deterministic computations rather than free-form numeric answers.
 - A bounded verification loop returns insufficient evidence when it does not finalize.
 - Evidence records, release file hashes, alternative interpretations, impact explanations and reviewer overrides are represented.
-- The UI and CLI are documented, with standalone HTML and shared-schema JSON exports. These paths were inspected but not end-to-end tested.
+- The UI and CLI are documented, with standalone HTML and shared-schema JSON exports. Selected JSON export routes were tested locally; the full workflow was not.
 
 ## F1: compound-claim tolerance can erase a contradiction (high)
 **Reproduced narrow runtime behavior:** `check_tolerance('50.1% are LumA and 90% are Basal', '50% are LumA; 10% are Basal')` returns a note saying to treat the claim as supported. It compares only the first number, although the second number is materially wrong. `_build_result` changes the entire contradicted verdict to supported when this note exists.
@@ -25,7 +27,7 @@ Evidence: [app.py](https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb
 
 Fix: retain original confidence and evidence strength. Expose extraction, computation, semantic-match and reviewer uncertainty separately. Schema validity should not be achieved by upgrading epistemic certainty.
 
-## F3: unsupported model conclusions can satisfy the evidence shape (high; source observation)
+## F3: unsupported model conclusions can satisfy the evidence shape (high; source and reproduced assembly)
 A supported result with no evidence receives `model_asserted_match`. The model may also name files that no successful tool call touched; these become evidence pointers. Therefore the guarantee that every verdict is backed by deterministic computation is not enforced at finalization.
 
 Evidence: [agents/verifier.py](https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/agents/verifier.py#L444-L525).
@@ -65,8 +67,28 @@ Dependencies are unpinned. README demo video remains a placeholder. The Flask ap
 - Working setup (10): documented CLI/UI; hosted/API pipeline not executed in this pass.
 - Communication (5): clear scope and architecture; demo link incomplete.
 
-## Tests actually performed
+## Initial tests (later results are in TESTS.md)
 Four synthetic pure-function probes: two tolerance cases, one low-confidence export case, one reasonless override case. The exact submitted tolerance module was imported after inspection; the export function was extracted unchanged with Python AST and executed with only its `copy` dependency. No app startup, API key use, network call, patient data or sealed material was involved. These probes establish narrow function behavior, not full end-to-end exploitability.
 
-## Not performed
-The submitted ground-truth suite requires TCGA files and dependencies not provisioned in this isolated checkout. No submitted suite pass is claimed. No LLM audit, browser, official-envelope, accessibility or clinical validation was performed. This is an initial review of the observed commit, not necessarily the competition freeze commit.
+## Not performed in the initial pass
+
+The following paragraph describes the initial pass only. The offline suites and selected local export routes were subsequently tested as documented above. Model audits, real browser workflows and hosted deployments remain unverified.
+Current limits: no live LLM audit, browser task, official-envelope, accessibility or clinical validation. The 16-test data-model suite and 13 numbered foundation checks now pass using the public data. This is a review of the observed commit, not necessarily the competition freeze commit.
+
+## Companion source review
+
+[Independent source audit](audit-codex-23484638-pass-01.md) · [Companion issue deck](slides-codex-23484638-pass-01.html). These preserve the parallel reviewer’s scope; do not double-count overlapping findings. The later local runtime evidence above supplements that audit.
+
+## Exact official criterion labels and maximum weights
+
+These are rubric maxima, not awarded points; supplemental checks add no judging criteria.
+
+| Criterion | Maximum |
+|---|---:|
+| Decision usefulness. Helps the user make the decision in the scenario and clearly identifies the next step. | 20 |
+| Understanding the evidence. Users can move from summary to source evidence without losing context. | 20 |
+| Role fit. Gives technical and non-technical users the detail they need, based on the same evidence. | 15 |
+| Safety and uncertainty. Limitations and conflicts are visible; the interface avoids unsupported clinical conclusions. | 15 |
+| Usability and accessibility. People can find what they need, understand the wording, and use the tool under time pressure. | 15 |
+| Working tool and clear setup. Judges can run and test the submitted experience. | 10 |
+| Communication. The demo explains the problem, user, decision, and outcome clearly. | 5 |

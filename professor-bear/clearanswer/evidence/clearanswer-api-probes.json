@@ -1,0 +1,84 @@
+[
+  {
+    "check": "compound_full_assembly",
+    "verdict": "supported",
+    "evidence": [
+      {
+        "kind": "analysis",
+        "id": "model_asserted_match",
+        "release": null,
+        "file": null,
+        "note": null
+      }
+    ]
+  },
+  {
+    "check": "unqueried_file_evidence",
+    "verdict": "supported",
+    "evidence": [
+      {
+        "kind": "file",
+        "id": "not-queried.csv",
+        "release": null,
+        "file": null,
+        "note": null
+      }
+    ]
+  },
+  {
+    "check": "missing_job_control",
+    "status": 404
+  },
+  {
+    "check": "plain_export",
+    "status": 200,
+    "validation": true,
+    "download_status": 200,
+    "exported_finding": {
+      "id": "F1",
+      "summary": "Invented unsupported claim",
+      "claim_text": "Invented unsupported claim",
+      "claim_verdict": "insufficient_evidence",
+      "confidence": "high",
+      "evidence": [
+        {
+          "kind": "claim",
+          "id": "Invented unsupported claim"
+        }
+      ],
+      "needs_human_review": true,
+      "severity": "medium"
+    }
+  },
+  {
+    "check": "reasonless_override",
+    "status": 200,
+    "validation": true,
+    "download_status": 200,
+    "exported_finding": {
+      "id": "F1",
+      "summary": "Invented unsupported claim",
+      "claim_text": "Invented unsupported claim",
+      "claim_verdict": "supported",
+      "confidence": "high",
+      "evidence": [
+        {
+          "kind": "claim",
+          "id": "Invented unsupported claim"
+        }
+      ],
+      "needs_human_review": false,
+      "tool_verdict": "insufficient_evidence",
+      "reviewer_decision": "override",
+      "severity": "none"
+    }
+  },
+  {
+    "check": "manifest_release_scope",
+    "manifest_count": 2,
+    "actual_clinical_rows": 1,
+    "checksummed_files": [
+      "clinical.tsv"
+    ]
+  }
+]

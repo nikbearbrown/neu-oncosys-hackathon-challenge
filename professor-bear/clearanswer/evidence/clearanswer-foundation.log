@@ -1,0 +1,22 @@
+Test 1 - Primary tumors: 1101
+Test 2 - With all layers: 535
+Test 3 - Subtype distribution: {'Basal': 141, 'Her2': 67, 'LumA': 421, 'LumB': 192, 'Normal': 23}
+Test 4 - Contract enforced (contradicted no value): A contradicted claim requires a non-empty correct_value (e.g. '49.9% (421 of 844)').
+Test 5 - Contract enforced (supported no evidence): A 'supported' claim requires at least one evidence entry.
+Test 6 - Insufficient evidence OK: verdict=insufficient_evidence
+Test 7 - Clinical has 194 columns
+Test 8 - PAM50 distribution: {'LumA': 434, 'LumB': 194, 'Basal': 142, 'Normal': 119, 'Her2': 67}
+Test 9 - Manifest count: {'ok': True, 'action': 'count_samples', 'sample_type': None, 'count': 1247, 'total_in_manifest': 1247}
+Test 10 - Guard caught 1 issues: ["clinical_recommendation: 'We recommend prescrib'"]
+Test 11 - Guard passed clean claim: 0 issues
+Test 12 - Trace has 1 entries
+# Agent trace
+
+## Step 1 · `test_agent` / `plan`
+- **When:** 2026-11-14T21:34:19.257985+00:00  **Duration:** 0.001 ms
+- **Reasoning:** Testing the trace system
+- **Output:** `{'test': True}`
+
+Test 13 - Columns matching 'therap': {'ok': True, 'action': 'search_columns', 'query': 'therap', 'matches_by_layer': {'clinical': ['additional_pharmaceutical_therapy', 'additional_radiation_therapy', 'radiation_therapy', 'targeted_molecular_therapy']}, 'n_hits': 4}
+
+✅ ALL 13 FOUNDATION TESTS PASSED

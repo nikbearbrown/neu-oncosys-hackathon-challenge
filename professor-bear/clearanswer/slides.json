@@ -1,0 +1,105 @@
+{
+  "title": "ClearAnswer",
+  "slides": [
+    {
+      "title": "ClearAnswer: preserve the evidence boundary",
+      "before": "Claims \u2192 computations",
+      "after": "Evidence \u2192 human review",
+      "fix": "Strong structure; repair false-support and confidence paths.",
+      "source": "report.md",
+      "status": "OVERVIEW",
+      "notes": "No official score. Observed snapshot; no verified official freeze receipt.",
+      "kind": "compare"
+    },
+    {
+      "title": "Retain the deterministic foundation",
+      "before": "16 data tests pass",
+      "after": "13 foundation checks complete",
+      "fix": "These checks overlap; they are not an accuracy benchmark.",
+      "source": "TESTS.md",
+      "status": "STRENGTHS",
+      "notes": "Public baseline and offline deterministic tests; no real model calls.",
+      "kind": "compare"
+    },
+    {
+      "title": "F1 \u00b7 One close number cannot validate a whole claim",
+      "before": "50.1% versus 50%",
+      "after": "90% versus 10%",
+      "fix": "Check every subclaim, unit and denominator.",
+      "source": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/core/tolerance.py#L19-L91",
+      "status": "REPRODUCED",
+      "notes": "Actual _build_result returns supported for the compound synthetic mismatch. The tolerance helper alone was also reproduced.",
+      "kind": "compare"
+    },
+    {
+      "title": "F2 \u00b7 Export must preserve uncertainty",
+      "before": "Low confidence",
+      "after": "Export: high confidence",
+      "fix": "Keep uncertainty attached to the evidence.",
+      "source": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/app.py#L409-L459",
+      "status": "REPRODUCED LOCAL API",
+      "notes": "Injected synthetic completed-job fixture; HTTP 200 and schema-valid export. Model pipeline and browser were not run.",
+      "kind": "compare"
+    },
+    {
+      "title": "F3 \u00b7 A named file is not executed evidence",
+      "before": "No successful query",
+      "after": "File pointer accepted",
+      "fix": "Bind supported claims to successful relevant computations.",
+      "source": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/agents/verifier.py#L444-L525",
+      "status": "REPRODUCED ASSEMBLY",
+      "notes": "Called the real result-assembly method without initializing a model client. An unqueried file name became evidence.",
+      "kind": "compare"
+    },
+    {
+      "title": "F4 \u00b7 Approval requires reasons and provenance",
+      "before": "Insufficient evidence",
+      "after": "Reasonless override: supported",
+      "fix": "Preserve verdict, disposition, identity and review history.",
+      "source": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/app.py#L432-L458",
+      "status": "REPRODUCED LOCAL API",
+      "notes": "Schema-valid synthetic export changed verdict and cleared human review without identity or reason. Original tool verdict remained. This is a local route test, not a remote exploit.",
+      "kind": "compare"
+    },
+    {
+      "title": "F5 \u00b7 Flag before sending sensitive text",
+      "before": "Input guard flags text",
+      "after": "Processing still continues",
+      "fix": "Make the transmission boundary explicit.",
+      "source": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/agents/orchestrator.py#L44-L66",
+      "status": "SOURCE OBSERVATION",
+      "notes": "No actual sensitive disclosure or live model call observed. Optional advice should follow event-approved data rules.",
+      "kind": "compare"
+    },
+    {
+      "title": "F6 \u00b7 Make manifest scope explicit",
+      "before": "Manifest: two samples",
+      "after": "Release file: one sample",
+      "fix": "Bind counts and hashes to the intended population.",
+      "source": "https://github.com/GauravBohra2001/clearanswer/blob/7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8/core/loader.py#L47-L75",
+      "status": "SYNTHETIC LOADER",
+      "notes": "Collection-wide manifests can be valid. The issue is presenting their count as if it described the chosen release; current file_checksums does not include the manifest.",
+      "kind": "compare"
+    },
+    {
+      "title": "What these checks establish",
+      "before": "Offline tests + local routes",
+      "after": "No live model verification",
+      "fix": "Read TESTS.md before judging coverage.",
+      "source": "TESTS.md",
+      "status": "LIMITS",
+      "notes": "No hosted deployment, real browser task, accessibility certification or sealed challenge. Synthetic cases establish mechanisms, not their prevalence.",
+      "kind": "compare"
+    },
+    {
+      "title": "Repair, rerun, then demonstrate the whole workflow",
+      "before": "Fix verdict integrity",
+      "after": "Verify evidence and review",
+      "fix": "Keep the useful architecture and show concrete controls.",
+      "source": "report.md",
+      "status": "NEXT STEPS",
+      "notes": "Prioritize F1\u2013F4; then input boundaries, changed-release assumptions and role-specific user tasks. Human judges award scores.",
+      "kind": "compare"
+    }
+  ]
+}
