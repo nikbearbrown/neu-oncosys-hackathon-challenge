@@ -27,3 +27,5 @@ The companion also has a [concise revised deck](slides-codex-23484638-pass-02.ht
 The earlier nondefault-bypass wording describes the callable API. The browser instead initializes its permissive missing-check option to on. Read the [UI-state follow-through and correction](audit-codex-23484638-pass-03.md) and its [separate deck](slides-codex-23484638-pass-03.html) for the exact default, cache and sign-off applicability paths. Those session-level consequences remain source-derived in that pass, not observed browser failures.
 
 The [declaration-coverage note](coverage-note-codex-23484638.md) finds matching source declarations for every required check in eight built-in cards. That bounds the missing-check concern without proving runtime availability. Preserve the strict API control and test a fresh UI session separately.
+
+Latest concise follow-through: [PDF](slides-codex-23484638-pass-04.pdf) · [HTML](slides-codex-23484638-pass-04.html) · [full notes](slides-codex-23484638-pass-04.md). This companion preserves its stated source-review scope; current runtime evidence is in [TESTS.md](TESTS.md).

@@ -1,0 +1,80 @@
+{
+  "timestamp": "2026-11-14T21:03:24.106088+00:00",
+  "commit": "45df43640836025b40e89fc190f913ad694a6011",
+  "browser": "157.0.8103.51",
+  "fixture": "Invented 120 primary tumors plus four normals; cross-group protein-profile swap; RNA absent",
+  "checks": [
+    {
+      "check": "Tour can be skipped without opening practice input",
+      "passed": true
+    },
+    {
+      "check": "Synthetic swap has Conditional compatibility",
+      "passed": true
+    },
+    {
+      "check": "Analysis impact distinguishes changed A1 from unchanged A2",
+      "passed": true
+    },
+    {
+      "check": "Question adequacy separately shows Blocked and Insufficient Evidence",
+      "passed": true
+    },
+    {
+      "check": "Expanded finding explains limitation and affected analysis",
+      "passed": true
+    },
+    {
+      "check": "Blank reason is rejected",
+      "passed": true
+    },
+    {
+      "check": "Blank reviewer role is rejected",
+      "passed": true
+    },
+    {
+      "check": "Request for more evidence remains visibly open",
+      "passed": false
+    },
+    {
+      "check": "Export passes actual organizer format validation",
+      "passed": true
+    },
+    {
+      "check": "Export preserves evidence request and original-preserved marker",
+      "passed": true
+    },
+    {
+      "check": "No document horizontal overflow at390px",
+      "passed": true
+    },
+    {
+      "check": "Failed replacement clears prior result and export",
+      "passed": true
+    },
+    {
+      "check": "No browser script errors",
+      "passed": true
+    }
+  ],
+  "observations": {
+    "evidence_excerpt": "keyboard_arrow_down\n\n\ud83d\udd34 F1 \u00b7 sample_swap \u00b7 high severity \u00b7 needs review\n\n!\nhigh severity \n!\nneeds human review\n\nProfiles of TCGA-A1-0000-01 and TCGA-D4-0003-01 in protein_rppa.tsv.gz appear exchanged between releases. Affected samples by release-A labels: subtype: 1 Her2, 1 LumA; ER: 1 Negative, 1 Positive.\n\nWhy this severity: It feeds results that are Blocked overall: predict_er_from_protein.\n\nAffects: A1 \u00b7 Not affected: A2\n\nQuestions: er_protein_by_er_status, predict_er_from_protein\n\nLimitation: A swap is inferred from two profiles trading places between releases; the release doesn't say why.",
+    "after_request_review_tab": "Review (0 open)",
+    "export_decisions": [
+      {
+        "repair_id": "R1",
+        "decision": "request_more_evidence",
+        "reason": "Synthetic review: obtain the original assignment record",
+        "reviewer_role": "synthetic curator",
+        "original_preserved": true
+      }
+    ],
+    "mobile_dimensions": {
+      "width": 390,
+      "documentWidth": 390
+    }
+  },
+  "script_errors": [],
+  "blocked_external": [],
+  "limits": "Actual local Streamlit app and organizer schema validator in isolated sandbox. No practice/sealed envelope, provider calls, hosted application, clinical validity or full accessibility audit. The unresolved-count expectation is a reviewer-proposed safeguard, not an official score."
+}

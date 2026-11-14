@@ -1,6 +1,6 @@
 # Tests and evidence: tripwire
 
-Updated 2026-11-14T19:51:28+00:00. The fixed source commit remains the one in [REPORT.md](REPORT.md).
+Updated 2026-11-14T21:04:04+00:00. The fixed source commit remains the one in [REPORT.md](REPORT.md).
 
 ## Submitted tests
 
@@ -47,7 +47,7 @@ The following are targeted recommendations and controls, not additional official
 | Revision retains both review events | 2 | 1 | No |
 | Revision leaves prior object unchanged | "approve" | "approve" | Yes |
 
-For Tripwire, release compatibility and question adequacy are distinct outputs. For Identity Crisis, the bypass is explicitly non-default. For export checks, a diagnostic export can be legitimate when its restrictions remain clear. See REPORT.md for these interpretation limits.
+For Tripwire, release compatibility and question adequacy are distinct outputs. Identity Crisis’s Python API defaults strict, while its browser checkbox defaults to allowing missing validators; see its updated report. For export checks, a diagnostic export can be legitimate when its restrictions remain clear. See REPORT.md for these interpretation limits.
 
 ## Third independent round
 
@@ -57,3 +57,11 @@ For Tripwire, release compatibility and question adequacy are distinct outputs. 
 |---|---|
 | Display precision does not erase calculated change | No |
 | No consent means no provider call | Yes |
+
+## Local browser workflow
+
+**13 final checks: 12 met, one did not meet the reviewer-proposed safeguard.** Actual Streamlit app, original tracked dark-theme configuration, invented 120-primary-tumor/four-normal releases and a cross-group protein swap. No practice or sealed envelope was opened. [Results](evidence/browser-qa.json) · [overview](evidence/overview-synthetic.png) · [zero-open review counter](evidence/request-evidence-synthetic.png) · [mobile viewport](evidence/mobile-synthetic.png) · [runner](../review-tools/tripwire-browser-qa.py).
+
+The interface showed Conditional compatibility and separate question-level Blocked/Insufficient Evidence results. Evidence expansion, reason/role requirements, organizer schema validation and JSON export worked. Request more evidence became Review (0 open), while the JSON correctly retained the request and original_preserved=true; no repair was applied. This is a distinction between decisions recorded and concerns resolved, not evidence of an unauthorized repair.
+
+A failed replacement comparison removed the previous result and download controls, a useful positive control. No page script errors or document-level horizontal overflow were observed at 390px. These do not establish full accessibility or hosted behavior. The radio was exercised by keyboard because its styled input is covered by its label. An early screenshot omitted the tracked theme configuration; that harness omission was corrected, the completed workflow rerun, and only the final captures/counts are reported. Temporary server shutdown is recorded in the review completion notes.

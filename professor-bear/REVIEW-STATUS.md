@@ -1,6 +1,6 @@
 # Cross-review status
 
-Updated 2026-11-14T20:56:16+00:00.
+Updated 2026-11-14T21:04:04+00:00.
 
 Each submission has a main REPORT.md, an evolving TESTS.md and HTML/PDF decks. Files named audit-codex-23484638-pass-01 are independent source-only supplements; their accompanying deck and structured review preserve that pass. They use the same pinned submission commits. No numeric scores are awarded here.
 
@@ -14,7 +14,7 @@ The companion is a source audit. The main report adds 107 submitted tests, synth
 
 ## tripwire
 
-The companion predates the corrected four-sample full API case. The latest runtime evidence confirms Ready release compatibility alongside Insufficient Evidence question adequacy; it does not claim that the separate question checker ignores size.
+The companion predates the corrected four-sample full API case. The latest runtime evidence confirms Ready release compatibility alongside Insufficient Evidence question adequacy; it does not claim that the separate question checker ignores size. Thirteen synthetic browser checks completed (12 met/one proposed safeguard unmet): the UI preserves evidence-request decisions but labels their review count zero open, and a failed replacement clears previous results/exports.
 
 [Main report](tripwire/REPORT.md) · [Current tests](tripwire/TESTS.md) · [Companion audit](tripwire/audit-codex-23484638-pass-01.md)
 

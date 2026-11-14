@@ -1,7 +1,7 @@
 {
   "title": "Tripwire / Driftwire",
   "commit": "45df43640836025b40e89fc190f913ad694a6011",
-  "updated": "2026-11-14T20:11:00+00:00",
+  "updated": "2026-11-14T21:04:04+00:00",
   "slides": [
     {
       "title": "Tripwire / Driftwire",
@@ -24,12 +24,12 @@
       "kind": "compare"
     },
     {
-      "title": "2 \u00b7 A flagged finding without a repair appears fully decided",
-      "before": "Review required",
-      "after": "No repair \u2192 not open",
-      "fix": "Require an explicit finding-level disposition when no repair exists, and distinguish request_more_evidence from approval to proceed.",
+      "title": "2 \u00b7 Decisions recorded is not concerns resolved",
+      "before": "More evidence requested",
+      "after": "Review: 0 open",
+      "fix": "Show separate counts for decisions recorded and unresolved concerns.",
       "source": "https://github.com/Adhithyan245/tripwire/blob/45df43640836025b40e89fc190f913ad694a6011/tripwire/review.py#L37",
-      "notes": "Direct review_status calls returned an empty open list for a flagged finding without repairs and for a repair marked request_more_evidence. These are helper-level reproductions with invented review documents; no UI bypass was tested.",
+      "notes": "Actual synthetic browser flow showed zero open after request_more_evidence; export retained that decision and no repair was applied. Separate helper test covered a flagged finding without a repair.",
       "status": "REPRODUCED \u00b7 SEE SCOPE",
       "kind": "compare"
     },
@@ -66,10 +66,10 @@
     {
       "title": "What is verified so far",
       "before": "404 tests passed",
-      "after": "1 tests skipped",
+      "after": "12 of 13 browser checks met",
       "fix": "Read TESTS.md for skips, positive controls and limits.",
       "source": "TESTS.md",
-      "notes": "404 passed, 1 skipped, 0 failed. Targeted synthetic observations are detailed in TESTS.md and are not a score.",
+      "notes": "404 submitted tests passed, one skipped. Twelve of thirteen local browser checks met reviewer-proposed safeguards. Actual export validator and failed-replacement clearing passed; review-counter concern remained. No hosted/clinical/accessibility certification.",
       "status": "LIMITS",
       "kind": "compare"
     }

@@ -1,5 +1,7 @@
 # Independent synthetic safeguards
 
+The default repository-review toolkit remains static-only. These are separate manual follow-through tests explicitly authorized by the repository owner for the six pinned submissions. They do not authorize automatic execution of arbitrary future submissions.
+
 `synthetic-probes.py` contains small, invented cases for the five named pinned submissions. It imports submission code: inspect it and run only inside an isolated disposable environment with no credentials, outbound network or access to original data. It is not a general safe runner for arbitrary repositories. The recorded run used the exact commits in each report.
 
 Expected outcomes are reviewer-proposed safeguards, not an organizer answer key. A false `safeguard_met` identifies a behavior to review; it is not an official score. Helper-level probes and controlled fault injection are identified in the reports. Generated Python delimiter cases are parsed, never executed.
@@ -23,3 +25,5 @@ The [third probe round](synthetic-probes-round3.py) adds full SNS engine cases, 
 [Busy Beavers browser checks](busy-browser-qa.py) and [synthetic server setup](busy-browser-server.py) reproduce an invented sample swap through the actual local interface. They require the documented isolated environment and are not general safe executors.
 
 Identity Crisis follow-through: [browser checks](identity-browser-qa.py), [fixture setup](identity-browser-setup.py), [deterministic state probe](identity-state-probe.py), and [runtime registration control](identity-check-coverage.py). These require the same isolated environment and do not open sealed inputs.
+
+[Tripwire browser checks](tripwire-browser-qa.py) cover evidence, review-state labels, exports and failed replacement. [Citation audit](citation-audit.json) checks pinned path/line existence; its [script](audit-citations.py) does not execute submissions or establish whether a finding follows from a citation.

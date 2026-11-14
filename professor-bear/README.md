@@ -11,7 +11,7 @@ Read each detailed report and issue-by-issue deck together. Work through the iss
 | Cohort Studio | [Report](oncosys-cohort-studio/REPORT.md) | [PDF](oncosys-cohort-studio/slides.pdf) | [HTML](oncosys-cohort-studio/slides.html) | [Tests](oncosys-cohort-studio/TESTS.md) |
 | SNS Control Tower | [Report](sns-cohort-control-tower/REPORT.md) | [PDF](sns-cohort-control-tower/slides.pdf) | [HTML](sns-cohort-control-tower/slides.html) | [Tests](sns-cohort-control-tower/TESTS.md) |
 
-Updated 2026-11-14T20:56:16+00:00. Download HTML decks to open them locally; GitHub renders the PDFs directly. Each deck presents one issue at a time. No official numerical scores are assigned.
+Updated 2026-11-14T21:04:04+00:00. Download HTML decks to open them locally; GitHub renders the PDFs directly. Each deck presents one issue at a time. No official numerical scores are assigned.
 
 Submitted-suite results: ReadySet **107 unit tests plus 38 public mutation cases passed**; Tripwire **404 passed / 1 skipped**; Identity Crisis **96 passed / 3 skipped**; Busy Beavers **65 passed**; Cohort Studio **299 passed**. No submitted SNS test suite was found; its independent synthetic checks are documented. These suites cover different assertions and are not a ranking.
 
@@ -45,3 +45,7 @@ Source-only supplement. A2 serialization overlaps the main runtime finding; miss
 Latest browser check: Cohort Studio passed 13 local smoke checks using invented data, with consistent cohort/audit exports and a visible Blocked result. See its TESTS.md and screenshots for scope and mobile-layout limits.
 
 Latest Identity follow-through: browser defaults and same-path cache staleness are observed; a deterministic approved-review path retained an old-context receipt. Positive controls and differing browser navigation behavior are documented in its report. All built-in check registrations loaded in the test environment.
+
+Focused companion decks now have direct GitHub PDF previews: [Identity UI/evidence identity](identity-crisis-control-tower/slides-codex-23484638-pass-04.pdf) and [SNS reconstruction](sns-cohort-control-tower/slides-codex-23484638-pass-04.pdf). Read them alongside the updated main reports to distinguish their original source scope from later reproductions.
+
+Latest Tripwire browser pass: 12 of 13 proposed checks met; evidence requests remain correctly exported but the interface reports zero open reviews. A failed new comparison clears old results. A separate [citation audit](review-tools/citation-audit.json) verified 221 pinned file/line references with no invalid paths or line bounds; this is not a correctness judgment.

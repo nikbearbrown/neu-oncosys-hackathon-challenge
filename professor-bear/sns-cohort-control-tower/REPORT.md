@@ -180,3 +180,5 @@ This separate source-only pass covers missing filter prerequisites, inconsistent
 
 
 The companion also has a [concise revised deck](slides-codex-23484638-pass-02.html), [full slide notes](slides-codex-23484638-pass-02.md) and a [cross-review reading guide](../review-guide-codex-23484638.md). These preserve the source review; current runtime observations remain in TESTS.md.
+
+Latest concise follow-through: [PDF](slides-codex-23484638-pass-04.pdf) · [HTML](slides-codex-23484638-pass-04.html) · [full notes](slides-codex-23484638-pass-04.md). This companion preserves its stated source-review scope; current runtime evidence is in [TESTS.md](TESTS.md).

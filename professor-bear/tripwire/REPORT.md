@@ -1,6 +1,6 @@
-# Tripwire / Driftwire: independent first-pass review
+# Tripwire / Driftwire: independent review
 
-Reviewed commit: `45df43640836025b40e89fc190f913ad694a6011`. Updated: **2026-11-14T20:11:00+00:00**. Track 1: Cohort Firewall.
+Reviewed commit: `45df43640836025b40e89fc190f913ad694a6011`. Updated: **2026-11-14T21:04:04+00:00**. Track 1: Cohort Firewall.
 
 **Status: source review plus isolated runtime checks; no verified hosted demo.** No official score is assigned. Runtime observations are labelled per issue; remaining source findings still require reproduction. Exact branches and limitations are stated. No student code or files were changed.
 
@@ -20,6 +20,10 @@ The build path reruns analyses when verify_unaffected is enabled and compares th
 
 The helper rejects unknown repairs, unknown decisions, blank reasons and blank roles. It copies the input instead of changing source data. [tripwire/review.py:14](https://github.com/Adhithyan245/tripwire/blob/45df43640836025b40e89fc190f913ad694a6011/tripwire/review.py#L14)
 
+### Local browser workflow observed
+
+Thirteen synthetic checks completed: **12 met, one did not meet the proposed safeguard**. The real interface distinguished release compatibility from question adequacy, expanded finding evidence, rejected missing review reasons and roles, validated the export, preserved the evidence-request decision, and cleared the previous result/export when a replacement comparison failed. The remaining review-counter issue is described below. [Browser evidence](TESTS.md#local-browser-workflow).
+
 ## Issue-by-issue findings
 
 ### 1. Insufficient samples are checked after the unaffected branch
@@ -36,11 +40,11 @@ release_verdict returns Ready for an unaffected, unmoved result before it tests 
 
 **Acceptance check:** Use an unchanged nonempty cohort below the configured per-group minimum. Confirm the result names insufficient evidence; retain a sufficiently large unchanged control.
 
-### 2. A flagged finding without a repair appears fully decided
+### 2. Review counts can hide unresolved evidence requests
 
 **Priority: high. Evidence: source and isolated runtime reproduction.**
 
-**Runtime update:** Direct review_status calls returned an empty open list for a flagged finding without repairs and for a repair marked request_more_evidence. These are helper-level reproductions with invented review documents; no UI bypass was tested. See [test evidence](TESTS.md).
+**Runtime update:** Direct review_status calls returned an empty open list for a flagged finding without repairs and for a repair marked request_more_evidence. The no-repair case is a helper-level reproduction. A later actual local browser test recorded Request more evidence and observed Review (0 open) plus zero awaiting human review; the exported decision correctly remained request_more_evidence and no repair was applied. The counter tracks decisions recorded rather than concerns resolved. See [test evidence](TESTS.md).
 
 review_status defines open findings using all(...) over associated repairs. For a flagged finding with no associated repair, all([]) is true, so it is excluded from the open list. This matters for imported findings and future checks even if the current builder normally emits a repair for each finding.
 
