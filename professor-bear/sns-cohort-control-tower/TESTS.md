@@ -32,3 +32,28 @@ Git blobs were copied into a disposable directory, without hooks, secrets or sea
 No hosted application, real provider call, clinical validity, production authorization, screen-reader usability or real-world accuracy was verified. Passing tests demonstrates the assertions in those tests, not all rubric requirements. The issue decks distinguish source findings from independently reproduced behavior. No official score is assigned.
 
 [Recorded dependency versions and isolation probes](../review-tools/environment.json). The final profile explicitly permits loopback only; external probes returned PermissionError.
+
+## Third independent round
+
+[Exact observations](evidence/synthetic-probes-round3.json) · [Inspected reproduction script](../review-tools/synthetic-probes-round3.py). Provider transports were mocked; no model API was called. SNS generated scripts used invented fixtures, inspected imports and the same sandbox.
+
+| Check | Proposed safeguard met? |
+|---|---|
+| Full engine 4 samples delta 0 | No |
+| Full engine 4 samples delta -10 | No |
+| Full engine 40 samples delta 0 | Yes |
+| Full engine 40 samples delta -10 | Yes |
+| A1 generated script executes | Yes |
+| A2 generated script executes | No |
+
+## Frozen public baseline control
+
+The verified public Release A compared with itself returned Ready and zero findings. [Aggregate result](evidence/public-baseline.json) · [reproduction](../review-tools/public-baseline.py) · [input hashes](../review-tools/PUBLIC-RELEASE.md). ReadySet and Busy Beavers used their identical-file shortcut (analyses not rerun); SNS reran its reference analyses. This is an unchanged-input control, not an independent clinical-data audit or a sealed-input test. No record-level output is published.
+
+## Browser smoke test with invented data
+
+**10 checks passed; 1 failed.** The interface selected a saved synthetic release, ran the full check, showed Blocked for the 40-sample sign-change fixture, displayed evidence, exported A1 and A2 cohorts without duplicate sample IDs, and switched theme. There were no browser execution errors. At a 390 × 844 viewport the page had horizontal overflow. Fonts were intentionally blocked and fallbacks were used; this is a narrow-screen observation under that test condition, not a full WCAG assessment.
+
+[Exact checks](evidence/browser-qa.json) · [fixed dependency hashes](evidence/browser-dependencies.json) · [script](../review-tools/sns-browser-qa.py). The browser served four exact-version JavaScript assets from local files and blocked other remote requests. The application ran under the recorded filesystem/network sandbox on localhost with only invented TCGA-ZZ records. No envelope route was used.
+
+[Results screenshot, synthetic data](evidence/results-synthetic.png) · [Export screenshot](evidence/export-synthetic.png) · [Narrow-screen screenshot](evidence/mobile-synthetic.png). The successful cohort exports do not fix the separate generated A2 reproduction-script failure.

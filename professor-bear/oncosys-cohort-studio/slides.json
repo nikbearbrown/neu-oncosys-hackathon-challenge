@@ -1,7 +1,7 @@
 {
   "title": "Cohort Studio",
   "commit": "54aeacb6f6f355a1dcaa42d7abf2ce174315ad69",
-  "updated": "2026-11-14T20:04:21+00:00",
+  "updated": "2026-11-14T20:11:00+00:00",
   "slides": [
     {
       "title": "Cohort Studio",
@@ -39,8 +39,8 @@
       "after": "API changes steps",
       "fix": "Separate draft, preview and accepted execution states.",
       "source": "https://github.com/tammy357/oncosys-cohort-studio/blob/54aeacb6f6f355a1dcaa42d7abf2ce174315ad69/cohort_studio/api.py#L116",
-      "notes": "build_cohort defaults fix=True, applies inflation fixes and exports the resulting cohort. The first result and fix log are retained, which is useful. CLI/MCP consumers can nevertheless receive a changed analysis without an explicit per-change acceptance step. This is an authority and communication improvement, not a claim that all inflation fixes are wrong. Acceptance: An inflating join produces a proposed correction and two distinct versions; the user can inspect and accept or reject it before an approved export.",
-      "status": "SOURCE FINDING \u00b7 MEDIUM",
+      "notes": "Calling build_cohort with its default fix=True changed a synthetic clinical join from patient_id to sample_id, removed the observed inflation, and retained the original run and an explanatory fix log. Explicit fix=False preserved the requested operation. The correction is documented and useful; the recommendation is to distinguish automatic preview from a human-approved change.",
+      "status": "REPRODUCED \u00b7 SEE SCOPE",
       "kind": "compare"
     },
     {
@@ -59,8 +59,8 @@
       "after": "Hosted fallback possible",
       "fix": "Give a first-use routing notice or explicit opt-in.",
       "source": "https://github.com/tammy357/oncosys-cohort-studio/blob/54aeacb6f6f355a1dcaa42d7abf2ce174315ad69/cohort_studio/llm.py#L69",
-      "notes": "ai=auto tries an own model, then the hosted service, then rules. The README explains this and --rules provides a local-only route; it is not hidden in documentation. A scientist may still reasonably assume a local CLI will not transmit their typed question. Acceptance: Mock both providers and verify ai=off makes no outbound request; an auto request displays provider selection before transmission.",
-      "status": "SOURCE FINDING \u00b7 MEDIUM",
+      "notes": "Mocked own/hosted providers showed that ai=off called neither route; ai=auto tried own configuration and then the hosted route. No network request occurred. This verifies routing behavior and the local-only control; it does not establish what a first-time user understands from the interface.",
+      "status": "REPRODUCED \u00b7 SEE SCOPE",
       "kind": "compare"
     },
     {

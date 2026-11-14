@@ -1,7 +1,7 @@
 {
   "title": "SNS Cohort Control Tower",
   "commit": "c1e8b79a2987cee6087d847867f9895deaa109a4",
-  "updated": "2026-11-14T19:51:28+00:00",
+  "updated": "2026-11-14T20:11:00+00:00",
   "slides": [
     {
       "title": "SNS Cohort Control Tower",
@@ -35,11 +35,11 @@
     },
     {
       "title": "3 \u00b7 No affecting finding bypasses movement and minimum-group checks",
-      "before": "No detected finding",
-      "after": "Changed result not checked",
+      "before": "4-sample protein omitted",
+      "after": "Changed result \u2192 Ready",
       "fix": "Evaluate analysis validity, minimum evidence and unexplained output movement before the unaffected Ready path.",
       "source": "https://github.com/saigunavardhan/sns-cohort-control-tower/blob/c1e8b79a2987cee6087d847867f9895deaa109a4/sns/engine/impact.py#L187",
-      "notes": "Direct verdict_for calls returned Ready for an undersized group and for an unexplained sign change when affected_by was empty. The same sign change returned Blocked with affected_by=[F1], confirming the branch distinction. This is helper-level evidence, not a full UI run.",
+      "notes": "Full load \u2192 diff \u2192 assess \u2192 build_document execution on four synthetic samples returned Ready even when the reference A1 difference changed from +2 to \u22128. The protein matrix was omitted by layout recognition, leaving zero affecting findings despite the rerun showing changed output. A 40-sample sign-change control returned Blocked, and an unchanged 40-sample control returned Ready. This extends the earlier helper probe into a full engine reproduction.",
       "status": "REPRODUCED \u00b7 SEE SCOPE",
       "kind": "compare"
     },
@@ -49,7 +49,7 @@
       "after": "Not recognized as wide",
       "fix": "Recognize layout from declared schema or robust headers independent of cohort size.",
       "source": "https://github.com/saigunavardhan/sns-cohort-control-tower/blob/c1e8b79a2987cee6087d847867f9895deaa109a4/sns/engine/release.py#L60",
-      "notes": "Valid invented wide matrices with 1 and 10 samples returned None from load_layer; an otherwise equivalent 11-sample matrix was recognized. This confirms the hard size boundary.",
+      "notes": "The full pipeline recognized only clinical.tsv for the four-sample fixture. It recognized both clinical and protein files for the 40-sample control. Consequently, the small-matrix omission can bypass the finding-dependent verdict path; it is not merely a display issue.",
       "status": "REPRODUCED \u00b7 SEE SCOPE",
       "kind": "compare"
     },
@@ -64,9 +64,19 @@
       "kind": "compare"
     },
     {
+      "title": "6 \u00b7 A2 reproduction script stops before rebuilding",
+      "before": "JSON true in Python",
+      "after": "NameError",
+      "fix": "Serialize literals safely; execute both generated A1 and A2 scripts.",
+      "source": "https://github.com/saigunavardhan/sns-cohort-control-tower/blob/c1e8b79a2987cee6087d847867f9895deaa109a4/sns/cohort.py#L27",
+      "notes": "A2 generated script failed with NameError on true. A1 control exited successfully. Only invented data were used in the restricted sandbox.",
+      "status": "REPRODUCED",
+      "kind": "compare"
+    },
+    {
       "title": "What is verified so far",
       "before": "No submitted suite found",
-      "after": "6 unmet safeguards",
+      "after": "End-to-end cases added",
       "fix": "Read TESTS.md for skips, positive controls and limits.",
       "source": "TESTS.md",
       "notes": "No submitted test suite identified in the inspected source; none claimed executed; independent safeguards are targeted probes, not a score.",

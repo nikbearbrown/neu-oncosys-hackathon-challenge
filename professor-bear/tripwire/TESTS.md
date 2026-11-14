@@ -48,3 +48,12 @@ The following are targeted recommendations and controls, not additional official
 | Revision leaves prior object unchanged | "approve" | "approve" | Yes |
 
 For Tripwire, release compatibility and question adequacy are distinct outputs. For Identity Crisis, the bypass is explicitly non-default. For export checks, a diagnostic export can be legitimate when its restrictions remain clear. See REPORT.md for these interpretation limits.
+
+## Third independent round
+
+[Exact observations](evidence/synthetic-probes-round3.json) · [Inspected reproduction script](../review-tools/synthetic-probes-round3.py). Provider transports were mocked; no model API was called. SNS generated scripts used invented fixtures, inspected imports and the same sandbox.
+
+| Check | Proposed safeguard met? |
+|---|---|
+| Display precision does not erase calculated change | No |
+| No consent means no provider call | Yes |

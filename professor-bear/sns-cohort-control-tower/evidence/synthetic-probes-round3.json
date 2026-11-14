@@ -1,0 +1,302 @@
+[
+  {
+    "observation": "full engine synthetic result",
+    "n": 4,
+    "positive_delta": 0,
+    "loaded_files": [
+      "clinical.tsv"
+    ],
+    "verdict": "Ready",
+    "findings": 0,
+    "analyses": [
+      {
+        "id": "A1",
+        "status": "unchanged",
+        "before": {
+          "n_samples": 4,
+          "n_positive": 2,
+          "n_negative": 2,
+          "mean_positive": 2.0,
+          "mean_negative": 0.0,
+          "difference": 2.0
+        },
+        "after": {
+          "n_samples": 4,
+          "n_positive": 2,
+          "n_negative": 2,
+          "mean_positive": 2.0,
+          "mean_negative": 0.0,
+          "difference": 2.0
+        },
+        "verdict": "Ready",
+        "reason": "no finding touches its input files, columns or samples"
+      },
+      {
+        "id": "A2",
+        "status": "unchanged",
+        "before": {
+          "n_samples": 4,
+          "counts": {
+            "Basal": 2,
+            "LumA": 2
+          },
+          "percent": {
+            "Basal": 50.0,
+            "LumA": 50.0
+          }
+        },
+        "after": {
+          "n_samples": 4,
+          "counts": {
+            "Basal": 2,
+            "LumA": 2
+          },
+          "percent": {
+            "Basal": 50.0,
+            "LumA": 50.0
+          }
+        },
+        "verdict": "Ready",
+        "reason": "no finding touches its input files, columns or samples"
+      }
+    ]
+  },
+  {
+    "check": "Full engine 4 samples delta 0",
+    "expected": "Insufficient Evidence",
+    "observed": "Ready",
+    "safeguard_met": false
+  },
+  {
+    "observation": "full engine synthetic result",
+    "n": 4,
+    "positive_delta": -10,
+    "loaded_files": [
+      "clinical.tsv"
+    ],
+    "verdict": "Ready",
+    "findings": 0,
+    "analyses": [
+      {
+        "id": "A1",
+        "status": "changed",
+        "before": {
+          "n_samples": 4,
+          "n_positive": 2,
+          "n_negative": 2,
+          "mean_positive": 2.0,
+          "mean_negative": 0.0,
+          "difference": 2.0
+        },
+        "after": {
+          "n_samples": 4,
+          "n_positive": 2,
+          "n_negative": 2,
+          "mean_positive": -8.0,
+          "mean_negative": 0.0,
+          "difference": -8.0
+        },
+        "verdict": "Ready",
+        "reason": "no finding touches its input files, columns or samples"
+      },
+      {
+        "id": "A2",
+        "status": "unchanged",
+        "before": {
+          "n_samples": 4,
+          "counts": {
+            "Basal": 2,
+            "LumA": 2
+          },
+          "percent": {
+            "Basal": 50.0,
+            "LumA": 50.0
+          }
+        },
+        "after": {
+          "n_samples": 4,
+          "counts": {
+            "Basal": 2,
+            "LumA": 2
+          },
+          "percent": {
+            "Basal": 50.0,
+            "LumA": 50.0
+          }
+        },
+        "verdict": "Ready",
+        "reason": "no finding touches its input files, columns or samples"
+      }
+    ]
+  },
+  {
+    "check": "Full engine 4 samples delta -10",
+    "expected": "Insufficient Evidence",
+    "observed": "Ready",
+    "safeguard_met": false
+  },
+  {
+    "observation": "full engine synthetic result",
+    "n": 40,
+    "positive_delta": 0,
+    "loaded_files": [
+      "clinical.tsv",
+      "protein_rppa.tsv.gz"
+    ],
+    "verdict": "Ready",
+    "findings": 0,
+    "analyses": [
+      {
+        "id": "A1",
+        "status": "unchanged",
+        "before": {
+          "n_samples": 40,
+          "n_positive": 20,
+          "n_negative": 20,
+          "mean_positive": 2.001,
+          "mean_negative": 0.003,
+          "difference": 1.998
+        },
+        "after": {
+          "n_samples": 40,
+          "n_positive": 20,
+          "n_negative": 20,
+          "mean_positive": 2.001,
+          "mean_negative": 0.003,
+          "difference": 1.998
+        },
+        "verdict": "Ready",
+        "reason": "no finding touches its input files, columns or samples"
+      },
+      {
+        "id": "A2",
+        "status": "unchanged",
+        "before": {
+          "n_samples": 40,
+          "counts": {
+            "Basal": 20,
+            "LumA": 20
+          },
+          "percent": {
+            "Basal": 50.0,
+            "LumA": 50.0
+          }
+        },
+        "after": {
+          "n_samples": 40,
+          "counts": {
+            "Basal": 20,
+            "LumA": 20
+          },
+          "percent": {
+            "Basal": 50.0,
+            "LumA": 50.0
+          }
+        },
+        "verdict": "Ready",
+        "reason": "no finding touches its input files, columns or samples"
+      }
+    ]
+  },
+  {
+    "check": "Full engine 40 samples delta 0",
+    "expected": "Ready",
+    "observed": "Ready",
+    "safeguard_met": true
+  },
+  {
+    "observation": "full engine synthetic result",
+    "n": 40,
+    "positive_delta": -10,
+    "loaded_files": [
+      "clinical.tsv",
+      "protein_rppa.tsv.gz"
+    ],
+    "verdict": "Blocked",
+    "findings": 1,
+    "analyses": [
+      {
+        "id": "A1",
+        "status": "changed",
+        "before": {
+          "n_samples": 40,
+          "n_positive": 20,
+          "n_negative": 20,
+          "mean_positive": 2.001,
+          "mean_negative": 0.003,
+          "difference": 1.998
+        },
+        "after": {
+          "n_samples": 40,
+          "n_positive": 20,
+          "n_negative": 20,
+          "mean_positive": -7.999,
+          "mean_negative": 0.003,
+          "difference": -8.002
+        },
+        "verdict": "Blocked",
+        "reason": "difference changed sign: 1.998 in the old release, -8.002 in the new release"
+      },
+      {
+        "id": "A2",
+        "status": "unchanged",
+        "before": {
+          "n_samples": 40,
+          "counts": {
+            "Basal": 20,
+            "LumA": 20
+          },
+          "percent": {
+            "Basal": 50.0,
+            "LumA": 50.0
+          }
+        },
+        "after": {
+          "n_samples": 40,
+          "counts": {
+            "Basal": 20,
+            "LumA": 20
+          },
+          "percent": {
+            "Basal": 50.0,
+            "LumA": 50.0
+          }
+        },
+        "verdict": "Ready",
+        "reason": "no finding touches its input files, columns or samples"
+      }
+    ]
+  },
+  {
+    "check": "Full engine 40 samples delta -10",
+    "expected": "Blocked",
+    "observed": "Blocked",
+    "safeguard_met": true
+  },
+  {
+    "observation": "generated reproduction script",
+    "analysis": "A1",
+    "exit": 0,
+    "error": null,
+    "json_boolean_name_in_ast": false
+  },
+  {
+    "check": "A1 generated script executes",
+    "expected": 0,
+    "observed": 0,
+    "safeguard_met": true
+  },
+  {
+    "observation": "generated reproduction script",
+    "analysis": "A2",
+    "exit": 1,
+    "error": "NameError: name 'true' is not defined. Did you mean: 'True'?",
+    "json_boolean_name_in_ast": true
+  },
+  {
+    "check": "A2 generated script executes",
+    "expected": 0,
+    "observed": 1,
+    "safeguard_met": false
+  }
+]

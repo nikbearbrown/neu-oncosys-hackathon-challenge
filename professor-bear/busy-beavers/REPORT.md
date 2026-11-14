@@ -1,6 +1,6 @@
 # Busy Beavers Cohort Firewall: independent first-pass review
 
-Reviewed commit: `bfb369f231bf97a1d3aa21abade3ba4b1406a355`. Updated: **2026-11-14T20:04:21+00:00**. Track 1: Cohort Firewall.
+Reviewed commit: `bfb369f231bf97a1d3aa21abade3ba4b1406a355`. Updated: **2026-11-14T20:11:00+00:00**. Track 1: Cohort Firewall.
 
 **Status: source review plus isolated runtime checks; no verified hosted demo.** No official score is assigned. Runtime observations are labelled per issue; remaining source findings still require reproduction. Exact branches and limitations are stated. No student code or files were changed.
 
@@ -80,7 +80,9 @@ Both evidence and repair targets are sliced to MAX_EVIDENCE=500. A large finding
 
 ### 5. Free-text model context includes sample identifiers and evidence notes
 
-**Priority: medium. Evidence: source inspection; runtime reproduction pending.**
+**Priority: medium. Evidence: source and isolated runtime reproduction.**
+
+**Runtime update:** build_context retained a synthetic sample identifier and its synthetic evidence note. Known-ID validation rejected an invented citation and accepted a real fixture citation. No provider transport was called. This verifies payload construction and citation-ID checks, not a privacy breach or semantic factual correctness. [Exact observations](evidence/synthetic-probes-round3.json).
 
 build_context includes up to 40 sample identifiers and ten evidence notes per finding, and a configured OpenAI route sends the context with the question. This is source evidence of payload construction, not an observed transmission or privacy breach. A local model route also exists.
 
@@ -128,3 +130,5 @@ The maximum points below reproduce the official track weights. They are not poin
 Work through the issues above in order. Use the supplied reproductions for confirmed issues; reproduce the remaining source-only concerns in isolation with positive controls. Retain the recorded commit when comparing results. Changes after this review require a new commit-specific update; they do not retroactively change the evidence.
 
 A statistician should review adequacy thresholds, interval assumptions and claims of bias or representativeness. A domain expert should review clinical meaning. Neither source inspection nor passing software tests establishes clinical validity.
+
+Latest unchanged-public-input control: verified frozen Release A versus itself returned Ready and zero findings. [Scope and aggregate evidence](TESTS.md#frozen-public-baseline-control). This does not invalidate the synthetic missing-input or small-matrix findings.

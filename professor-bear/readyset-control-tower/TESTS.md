@@ -59,3 +59,7 @@ and invented inputs. The separate 15 event-data recipe files under tests/release
 real-data reference analyses, hosted deployment, paid API calls, performance at
 full scale, screen-reader tasks and complete accessibility/clinical validation
 were not tested. The screenshot shows only invented fixture values.
+
+## Frozen public baseline control
+
+The verified public Release A compared with itself returned Ready and zero findings. [Aggregate result](evidence/public-baseline.json) · [reproduction](../review-tools/public-baseline.py) · [input hashes](../review-tools/PUBLIC-RELEASE.md). ReadySet and Busy Beavers used their identical-file shortcut (analyses not rerun); SNS reran its reference analyses. This is an unchanged-input control, not an independent clinical-data audit or a sealed-input test. No record-level output is published.
