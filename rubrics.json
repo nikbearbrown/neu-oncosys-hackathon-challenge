@@ -1,0 +1,76 @@
+{
+  "1": [
+    {
+      "id": "T1-1",
+      "points": 20,
+      "criterion": "Finding data problems. Finds material data problems in the supplied input without reporting problems the data does not support."
+    },
+    {
+      "id": "T1-2",
+      "points": 20,
+      "criterion": "Reasoning for the research question. Changes its result appropriately when the research question or intended use changes."
+    },
+    {
+      "id": "T1-3",
+      "points": 15,
+      "criterion": "Evidence and sources. Shows the checks, data fields, decision rules, and limitations behind each conclusion."
+    },
+    {
+      "id": "T1-4",
+      "points": 15,
+      "criterion": "Safety and uncertainty. Avoids clinical claims, makes uncertainty visible, and requires human review."
+    },
+    {
+      "id": "T1-5",
+      "points": 15,
+      "criterion": "Working tool and clear setup. Judges can run the core workflow from the submitted repository."
+    },
+    {
+      "id": "T1-6",
+      "points": 10,
+      "criterion": "Useful next steps. Suggested fixes are specific and match the size and importance of the problem."
+    },
+    {
+      "id": "T1-7",
+      "points": 5,
+      "criterion": "Communication. Someone without specialist knowledge can understand the result and next step."
+    }
+  ],
+  "2": [
+    {
+      "id": "T2-1",
+      "points": 20,
+      "criterion": "Decision usefulness. Helps the user make the decision in the scenario and clearly identifies the next step."
+    },
+    {
+      "id": "T2-2",
+      "points": 20,
+      "criterion": "Understanding the evidence. Users can move from summary to source evidence without losing context."
+    },
+    {
+      "id": "T2-3",
+      "points": 15,
+      "criterion": "Role fit. Gives technical and non-technical users the detail they need, based on the same evidence."
+    },
+    {
+      "id": "T2-4",
+      "points": 15,
+      "criterion": "Safety and uncertainty. Limitations and conflicts are visible; the interface avoids unsupported clinical conclusions."
+    },
+    {
+      "id": "T2-5",
+      "points": 15,
+      "criterion": "Usability and accessibility. People can find what they need, understand the wording, and use the tool under time pressure."
+    },
+    {
+      "id": "T2-6",
+      "points": 10,
+      "criterion": "Working tool and clear setup. Judges can run and test the submitted experience."
+    },
+    {
+      "id": "T2-7",
+      "points": 5,
+      "criterion": "Communication. The demo explains the problem, user, decision, and outcome clearly."
+    }
+  ]
+}

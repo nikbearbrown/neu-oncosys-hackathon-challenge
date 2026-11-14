@@ -1,0 +1,338 @@
+The Open Accelerator
+About/Why
+Residency
+OpenClaw
+Hackathons
+TOA Talks
+Mission
+Connect
+
+Format
+Tracks
+Judging
+Schedule
+Data & safety
+Prep
+FAQ
+Discord
+Waitlist
+An Open Accelerator hackathon • Virtual, then Boston
+Is
+this
+dataset
+ready
+for
+this
+AI
+question?
+Ready.Conditional.Blocked.Insufficient Evidence.
+AI Healthcare Hackathon
+at Northeastern
+Build practical tools that make oncology data safer, clearer, and more useful for responsible AI.
+
+Track 1 · Cohort Firewall  •  Track 2 · Evidence Navigator
+
+Oncology data holds enormous promise for AI, but only if teams can tell when a dataset is actually fit for the question being asked, and can explain why. The Open Accelerator (TOA), OncoSys AI, and Northeastern University are running a 4-day hackathon, from a virtual kickoff on Wednesday, Nov. 11 to in-person finals in Boston on Saturday, Nov. 14.
+
+The challenge is live. Read the track briefs and the rubric, run the starter, and get your team in by 1:30 PM ET on Thursday. Registration is full, and the waitlist is open on Luma.
+
+Read the briefs →
+Kickoff slides
+Join the waitlist
+Organized by Northeastern University, OncoSys AI, The Open Accelerator, and Red Hat
+
+Code freeze in
+00
+Days
+:
+02
+Hours
+:
+07
+Minutes
+:
+16
+Seconds
+Saturday, Nov. 14 · 2:15 PM ET
+Kickoff
+Wed, Nov. 11 · Virtual
+Build days
+Thu-Fri, Nov. 12-13 · Virtual
+Finals
+Sat, Nov. 14 · 9:30 AM - 5:00 PM ET
+Where
+Cabral Center, Northeastern · Boston
+4
+Days · Nov. 11-14
+2
+Tracks · 1 shared dataset
+3-5
+People per team
+5 min
+Per team · 3 to present, 2 for questions
+The format
+4 days, 2 tracks, 1 working prototype
+Build a working prototype that helps people use oncology data responsibly. Choose 1 of 2 tracks: check whether data can support a research question, or help people understand the findings and decide what to do next. Bring something that runs to finals. Slides alone won’t do it.
+
+Wed
+Virtual kickoff and reveal
+We started at 7:00 PM ET on Wednesday, Nov. 11. Organizers revealed the challenge and the approved sample data, and teams got the rubric. Missed it? Watch the recording with the passcode [REDACTED], or browse the slides.
+
+Thu-Fri
+Virtual build days
+Your team builds from wherever suits it on Thursday, Nov. 12 and Friday, Nov. 13, and the work carries on into Saturday morning.
+
+Sat
+In-person finals
+Finals are at the Cabral Center, Northeastern University, 40 Leon Street, Boston, Massachusetts. Keep building until the 2:15 PM ET code freeze, then present to the judges.
+
+Who
+Who should join
+Developers, data scientists, designers, researchers, and anyone working where healthcare meets AI. Teams have 3-5 people.
+
+The tracks
+One track decides. The other explains.
+Both tracks use the same frozen TCGA-BRCA release, real breast cancer data from The Cancer Genome Atlas. Pick the one that fits how you like to work. Your team names its track on the team form, which is due by 1:30 PM ET on Thursday, Nov. 12.
+
+Track 1
+Cohort Firewall
+Is this dataset ready for this AI question?
+Build a tool that checks whether an oncology dataset can support a specific research or analysis question before it is used in an AI workflow. Find data problems, explain why they matter for that question, and show one of 4 results. Show the reasons behind each result so a person can review it.
+
+Ready
+Conditional
+Blocked
+Insufficient Evidence
+Suits
+Builders who like rules, logic, and data.
+What you’ll receive
+The frozen TCGA-BRCA data and manifests, with source documentation, checksums, and versioned instructions in the Cancer AI Lab repository.
+A research-question card describing the intended use, the group being studied, the outcome of interest, and acceptable limitations.
+A simple template for recording checks, findings, confidence, limitations, and data sources.
+An unseen test input, such as a changed release or research question, shared during the team’s judging slot to see how its tool handles a new example.
+What to submit
+A working interface or API that runs against the provided data.
+A report showing data problems, such as inconsistent records, missing values, unlikely values, unclear field meanings, bias, information that could give a model an unfair shortcut, and missing source details.
+A record linking each result to the checks performed and the data fields used.
+A step that asks a person to review the evidence before approving use of the dataset.
+Specific steps to address problems in a Blocked or Conditional dataset, with the evidence needed to reconsider the result.
+Submit a Git repository with no private information, setup instructions that let judges run your project, a README with a short project summary, and a short demo video. No separate one-page brief is required.
+See how this track is scored
+
+Track 2
+Evidence Navigator
+Help people understand oncology data and choose a next step
+Build an interactive tool that helps people with different levels of technical experience understand what an oncology dataset can and cannot tell them. Make data-quality findings, comparisons, and next steps easy to follow. Clearly explain uncertainty and avoid making conclusions sound stronger than the evidence supports.
+
+Clear evidence
+Side-by-side comparisons
+Concrete next actions
+Suits
+People who can make complex findings easy to understand.
+What you’ll receive
+Summaries and data-quality findings tied to the frozen TCGA-BRCA release used by Track 1, with examples for the featured products.
+Example users, such as a data engineer, researcher, data-use reviewer, and program leader.
+Records describing each finding, its source, how serious it is, which part of the dataset it affects, its limitations, and a suggested next step.
+A short scenario asking the user to decide whether to proceed, fix a problem, narrow the question, or stop.
+What to submit
+A working interactive experience, not a static presentation.
+Views that give each type of user the detail they need while keeping the underlying facts consistent.
+A clear way to move from the overall result to the supporting evidence and its sources.
+Comparisons between datasets, groups within a dataset, or possible research questions.
+Easy-to-understand explanations of uncertainty, missing information, conflicting findings, and data limitations.
+A summary recording the chosen next step, the reasons for it, important limitations, and who needs to review it.
+Submit a Git repository with no private information, setup instructions that let judges run your project, a README with a short project summary, and a short demo video. No separate one-page brief is required.
+See how this track is scored
+
+How judging works
+100 points, 7 criteria per track
+The 2 tracks have different criteria. Judges score against these same words, so build to them from the first build day.
+
+Track 1 · Cohort Firewall
+100
+20
+Finding data problems. Finds material data problems in the supplied input without reporting problems the data does not support.
+20
+Reasoning for the research question. Changes its result appropriately when the research question or intended use changes.
+15
+Evidence and sources. Shows the checks, data fields, decision rules, and limitations behind each conclusion.
+15
+Safety and uncertainty. Avoids clinical claims, makes uncertainty visible, and requires human review.
+15
+Working tool and clear setup. Judges can run the core workflow from the submitted repository.
+10
+Useful next steps. Suggested fixes are specific and match the size and importance of the problem.
+5
+Communication. Someone without specialist knowledge can understand the result and next step.
+Basic requirements
+The prototype works with the additional dataset or changed research question.
+It does not expose sensitive data or make patient-level clinical recommendations.
+Full points for safety require a visible review step for a person and a record of the evidence behind the result.
+Track 2 · Evidence Navigator
+100
+20
+Decision usefulness. Helps the user make the decision in the scenario and clearly identifies the next step.
+20
+Understanding the evidence. Users can move from summary to source evidence without losing context.
+15
+Role fit. Gives technical and non-technical users the detail they need, based on the same evidence.
+15
+Safety and uncertainty. Limitations and conflicts are visible; the interface avoids unsupported clinical conclusions.
+15
+Usability and accessibility. People can find what they need, understand the wording, and use the tool under time pressure.
+10
+Working tool and clear setup. Judges can run and test the submitted experience.
+5
+Communication. The demo explains the problem, user, decision, and outcome clearly.
+Basic requirements
+A judge can complete the assigned decision scenario without presenter guidance.
+Each main conclusion links to supporting evidence or is clearly marked as an interpretation.
+The interface identifies when human review is required and never presents the prototype as a clinical decision system.
+How judges will try your prototype
+Both tracks
+Judges score your submitted prototype, then see how it handles an input you haven’t seen. Depending on the product, the input may be a changed release or question, a new user role, or conflicting findings. At the start of your team’s Q&A, a judge gives you an envelope number and a four-word code. Open your sealed envelope from the challenge repo and run your tool on the file for your product, live. If you pitched your own product, the judges tell you which file to use, if any. Link your required product outputs from your README. Answer keys stay with the organizers.
+
+Get ready this week: pull the latest repo, fetch the TCGA-BRCA data (release A), and rehearse with the practice envelope, using the repo’s envelope guide. Unsealing takes 10 to 20 seconds, so aim for your tool to finish within a minute after that.
+
+Saturday afternoon
+Saturday, 2:15 PM ET
+Code freeze
+Your demo video and Git repository are due. Each track’s full list is in the briefs.
+
+Saturday, 2:30 PM ET
+One live presentation
+Each team presents once, in its track’s room: 3 minutes to present, then 2 minutes of questions, starting with its sealed envelope.
+
+Saturday, 4:00 PM ET
+Each track on its own
+The judges deliberate track by track, and there’s no finalist round. Each track has one winner, announced at 4:30 PM ET.
+
+Schedule · All times ET
+Wednesday evening to Saturday afternoon
+The first 3 days are virtual. Saturday is in person at the Cabral Center, Northeastern University, 40 Leon Street, Boston.
+
+Wednesday, Nov. 11 · Virtual
+7:00 PM
+Virtual kickoff and challenge reveal
+Organizers reveal the challenge and the approved sample data, and teams get the rubric.
+
+Thursday-Friday, Nov. 12-13 · Virtual
+Thu, 1:30 PM
+Team details due
+Team names, members, and track. Organizers share the form directly with registered attendees.
+
+Nov. 12-13
+Build days
+Teams build from wherever suits them.
+
+Saturday, Nov. 14 · In person
+9:30 AM
+Doors open and breakfast
+10:00 AM
+Quick overview and introductions
+10:15 AM
+Working time, with lunch
+10:15 AM - 2:15 PM
+2:15 PM
+Code freeze
+Your demo video and Git repository are due.
+
+Submission deadline
+2:30 PM
+Team presentations
+3 minutes to present, then 2 minutes of questions, starting with your sealed envelope.
+
+2:30 PM - 4:00 PM
+4:00 PM
+Break and judges’ deliberation
+4:00 PM - 4:30 PM
+4:30 PM
+Awards
+One winner in each track.
+
+4:30 PM - 5:00 PM
+Data and safety
+Judged on TCGA-BRCA. No PHI. No clinical decisions.
+These tools are about whether oncology data can be trusted, so the rules are strict. They apply to both tracks, and they’re worth reading before you start.
+
+You don’t bring the data
+Both tracks
+Judged work uses the frozen TCGA-BRCA release in the Cancer AI Lab repository on GitHub. It’s real breast cancer data from The Cancer Genome Atlas, where the same patients appear across clinical records, survival, mutations, copy number, RNA, protein, and pathology slides. It’s de-identified but patient-derived, so use it for non-clinical research.
+
+Open the repository and select Run the starter to launch its notebook in Google Colab. In about 15 minutes, it downloads the data, checks each file against the event’s frozen checksums, shows how each join shrinks the cohort, and opens a pathology slide in your browser.
+
+Pitching your own product idea? You may add public, permissively licensed data if you tell organizers at the kickoff and cite it in your README.
+
+Open the repository →
+Show
+What your project shows
+Limitations, uncertainty, and data sources.
+When a person needs to review a result.
+A clean repository. Remove secrets, private links, proprietary datasets, and personal information before judging. Don’t commit raw TCGA files: fetch them with the provided script and verify the pinned checksums.
+Credit where it’s due. Follow the upstream licenses, notices, and attribution in the Cancer AI Lab repository.
+Never
+What stays out
+Patient data. No protected health information (PHI), and no identifiable or participant-supplied patient records. Trial-related products use fictional cases only.
+Restricted data. No confidential institutional information, production credentials, internal customer records, or controlled-access datasets.
+Re-identification. No attempt to re-identify people or infer sensitive patient attributes, and no linking records to outside sources about individuals.
+Clinical decisions. No diagnosis, treatment recommendation, or patient risk score.
+Overclaiming. No claim of clinical validity, regulatory compliance, or production readiness.
+Before you arrive: review our Code of Conduct
+We want every hacker, mentor, and judge to have a safe, welcoming, and productive event. Take a few minutes to read our community standards so we all know what to expect of each other.
+
+Read the Code of Conduct →
+Prep
+Get your team in by Thursday
+Team names, members, and track are due by 1:30 PM ET on Thursday, Nov. 12, the day after the reveal.
+
+Form a team of 3-5
+Due Thu, 1:30 PM ET
+Organizers share the team form directly with registered attendees. Haven’t seen it? Email hackathon@the-open-accelerator.com.
+
+Registered and still looking for teammates? Ask in the #oncosys-hackathon channel on Discord.
+
+Join the Discord →
+Pick
+Choose your track
+Cohort Firewall suits builders who like rules, logic, and data. Evidence Navigator suits people who can make complex findings easy to understand. Compare the tracks.
+
+Bring
+For Saturday
+A laptop, its charger, and your working prototype. Breakfast and lunch are provided.
+
+FAQ
+Questions we expect
+Can I still register?
+Does it cost anything?
+Is it in person or virtual?
+Do I need a team?
+I missed the kickoff. Is there a recording?
+Where do I get the data and the challenge package?
+Can I use my own data?
+Where’s the rubric?
+What do I submit?
+How many winners are there?
+Where can I ask a question?
+Registration is full. The waitlist is open.
+Wednesday, Nov. 11 to Saturday, Nov. 14, 2026. Virtual, then in person at the Cabral Center, Northeastern University, 40 Leon Street, Boston, Massachusetts.
+
+Join the waitlist on Luma →
+Join the Discord
+Questions? hackathon@the-open-accelerator.com
+
+Organized by
+
+Northeastern University College of Engineering
+OncoSys AI
+The Open Accelerator
+Red Hat
+The Open Accelerator
+About/Why
+Residency
+Mass AI Atlas
+Hackathons
+Code of Conduct
+Mission
+Connect
+hackathon@the-open-accelerator.com
+© 2026 The Open Accelerator. All rights reserved.

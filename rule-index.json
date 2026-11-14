@@ -1,0 +1,942 @@
+{
+  "medical72:R1": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 32,
+    "title": "Write the intended-use statement first."
+  },
+  "medical72:R2": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 34,
+    "title": "Define the target population and setting."
+  },
+  "medical72:R3": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 36,
+    "title": "Fix the unit of analysis."
+  },
+  "medical72:R4": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 38,
+    "title": "Define the label operationally."
+  },
+  "medical72:R5": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 40,
+    "title": "Name and rank the reference standard."
+  },
+  "medical72:R6": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 42,
+    "title": "Pre-register acceptance criteria."
+  },
+  "medical72:R7": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 48,
+    "title": "Every record is traceable."
+  },
+  "medical72:R8": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 50,
+    "title": "Document the selection mechanism."
+  },
+  "medical72:R9": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 52,
+    "title": "Count every exclusion."
+  },
+  "medical72:R10": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 54,
+    "title": "Keep an immutable raw layer."
+  },
+  "medical72:R11": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 56,
+    "title": "Version the dataset and bind models to it."
+  },
+  "medical72:R12": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 58,
+    "title": "Confirm the legal basis."
+  },
+  "medical72:R13": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 64,
+    "title": "Every file decodes."
+  },
+  "medical72:R14": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 66,
+    "title": "Check format conformance."
+  },
+  "medical72:R15": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 68,
+    "title": "Geometry is consistent."
+  },
+  "medical72:R16": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 70,
+    "title": "Intensities mean what you think."
+  },
+  "medical72:R17": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 72,
+    "title": "No degenerate images."
+  },
+  "medical72:R18": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 74,
+    "title": "Enforce uniqueness at every level."
+  },
+  "medical72:R19": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 76,
+    "title": "Check relational integrity."
+  },
+  "medical72:R20": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 78,
+    "title": "Check plausibility."
+  },
+  "medical72:R21": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 134,
+    "title": "Measure inter-rater agreement."
+  },
+  "medical72:R22": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 136,
+    "title": "Control what readers see."
+  },
+  "medical72:R23": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 138,
+    "title": "Audit how labels were produced."
+  },
+  "medical72:R24": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 140,
+    "title": "Hunt for label errors, then adjudicate."
+  },
+  "medical72:R25": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 142,
+    "title": "Check the timing of labels."
+  },
+  "medical72:R26": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 144,
+    "title": "Look for hidden stratification."
+  },
+  "medical72:R27": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 146,
+    "title": "Treat uncertainty as its own value."
+  },
+  "medical72:R28": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 148,
+    "title": "Audit segmentation masks as data."
+  },
+  "medical72:R29": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 150,
+    "title": "Track annotator identity."
+  },
+  "medical72:R30": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 182,
+    "title": "Split at the patient level or higher."
+  },
+  "medical72:R31": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 184,
+    "title": "Scan for near-duplicates across splits after splitting."
+  },
+  "medical72:R32": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 186,
+    "title": "Fit everything on training data only."
+  },
+  "medical72:R33": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 188,
+    "title": "Remove label proxies."
+  },
+  "medical72:R34": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 190,
+    "title": "Use temporal splits for anything deployed prospectively."
+  },
+  "medical72:R35": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 192,
+    "title": "Require an external test set for any generalization claim."
+  },
+  "medical72:R36": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 194,
+    "title": "Touch the test set once."
+  },
+  "medical72:R37": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 226,
+    "title": "Run the site-predictability probe."
+  },
+  "medical72:R38": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 228,
+    "title": "Run the metadata-only baseline."
+  },
+  "medical72:R39": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 230,
+    "title": "Cross-tabulate the label against every acquisition variable."
+  },
+  "medical72:R40": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 232,
+    "title": "Run intervention tests, not just inspections."
+  },
+  "medical72:R41": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 234,
+    "title": "Inventory non-anatomical signal."
+  },
+  "medical72:R42": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 236,
+    "title": "Treat saliency maps as hypotheses."
+  },
+  "medical72:R43": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 238,
+    "title": "Assume demographics are encoded in the pixels."
+  },
+  "medical72:R44": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 269,
+    "title": "Compare against real denominators."
+  },
+  "medical72:R45": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 271,
+    "title": "Compute the subgroup N you need, then check you have it."
+  },
+  "medical72:R46": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 273,
+    "title": "Check the disease spectrum."
+  },
+  "medical72:R47": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 275,
+    "title": "Know your prevalence and where it will move."
+  },
+  "medical72:R48": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 277,
+    "title": "Check acquisition diversity."
+  },
+  "medical72:R49": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 279,
+    "title": "Treat missingness as data."
+  },
+  "medical72:R50": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 281,
+    "title": "Check label rates by subgroup."
+  },
+  "medical72:R51": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 287,
+    "title": "Quantify image quality objectively."
+  },
+  "medical72:R52": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 289,
+    "title": "Catalog artifacts and set a policy."
+  },
+  "medical72:R53": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 291,
+    "title": "Document every preprocessing step and visualize it."
+  },
+  "medical72:R54": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 293,
+    "title": "Don't destroy signal in conversion."
+  },
+  "medical72:R55": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 295,
+    "title": "Verify orientation and laterality after every format conversion."
+  },
+  "medical72:R56": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 297,
+    "title": "Augmentations must preserve the label."
+  },
+  "medical72:R57": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 299,
+    "title": "Look at the data, on a schedule."
+  },
+  "medical72:R58": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 305,
+    "title": "Apply a standard de-identification profile and audit it."
+  },
+  "medical72:R59": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 307,
+    "title": "Scan pixel data for burned-in PHI."
+  },
+  "medical72:R60": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 309,
+    "title": "Deface head and neck imaging."
+  },
+  "medical72:R61": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 311,
+    "title": "Shift dates and remap UIDs consistently."
+  },
+  "medical72:R62": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 313,
+    "title": "Assess linkage risk, and watch for new shortcuts."
+  },
+  "medical72:R63": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 319,
+    "title": "Data checks are continuous, not a one-time gate."
+  },
+  "medical72:R64": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 321,
+    "title": "Log acquisition changes as events."
+  },
+  "medical72:R65": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 323,
+    "title": "Monitor label drift."
+  },
+  "medical72:R66": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 325,
+    "title": "Run a silent-mode prospective evaluation before clinical use."
+  },
+  "medical72:R67": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 327,
+    "title": "Expect feedback loops."
+  },
+  "medical72:R68": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 333,
+    "title": "Ship a datasheet with every dataset release."
+  },
+  "medical72:R69": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 335,
+    "title": "Report against the relevant checklist."
+  },
+  "medical72:R70": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 337,
+    "title": "Write a limitations section that names what you couldn't check."
+  },
+  "medical72:R71": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 339,
+    "title": "Separate builder from auditor."
+  },
+  "medical72:R72": {
+    "source": "sources/medical-quality-72-rules.md",
+    "line": 341,
+    "title": "Every rule produces an artifact."
+  },
+  "dashboard:R1": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 18,
+    "title": "Name the primary audience. Specify who will use the dashboard, their knowledge, their responsibilities, and the conditions under which they will view it. “Everyone in the organization” is usually too broad to guide design."
+  },
+  "dashboard:R2": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 19,
+    "title": "Write the intended use as a sentence. For example: “Each Monday, program managers identify overdue submissions and determine which fellows need follow-up.” This sentence should guide the content and interaction choices."
+  },
+  "dashboard:R3": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 20,
+    "title": "List the questions the dashboard must answer. Examples include “What changed?”, “Where is performance below target?”, and “Which cases require review?” Prioritize these questions before choosing charts."
+  },
+  "dashboard:R4": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 21,
+    "title": "Give every panel a purpose. A component should support a question, comparison, explanation, or action. Remove panels whose only justification is that the underlying data are available."
+  },
+  "dashboard:R5": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 22,
+    "title": "Match the update frequency to the decision. A monthly planning dashboard may need monthly data. An incident dashboard may need updates within seconds. Faster refresh is useful only when it improves the intended task."
+  },
+  "dashboard:R6": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 23,
+    "title": "Distinguish quick monitoring from extended analysis. A monitoring view should make important conditions immediately noticeable. An analytical view should support careful comparison and exploration. Provide separate views when these needs conflict."
+  },
+  "dashboard:R7": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 24,
+    "title": "Confirm that a dashboard is the appropriate format. A report may explain a complex finding better; a table may support lookup better; an alert may serve an urgent event better. ONS guidance explicitly recommends justifying dashboards through user needs and considering their maintenance and interpretation costs. Office for National Statistics"
+  },
+  "dashboard:R8": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 26,
+    "title": "Create a metric dictionary before building the interface. For each measure, define its name, formula, unit, population, exclusions, time basis, aggregation method, source, and owner. Terms such as “active,” “completed,” and “successful” require explicit definitions."
+  },
+  "dashboard:R9": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 27,
+    "title": "Treat the denominator as part of the result. “80% completed” is incomplete without explaining completed out of what. Where sample size matters, show both the percentage and the underlying count, such as “48 of 60.”"
+  },
+  "dashboard:R10": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 28,
+    "title": "Define what one record represents. A record might represent a person, transaction, event, organization, or daily snapshot. Establish this before joining or aggregating data so the dashboard does not accidentally count the same entity multiple times."
+  },
+  "dashboard:R11": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 29,
+    "title": "Make provenance inspectable. Users should be able to identify the source, responsible producer, and relevant methodology. Label provisional, revised, estimated, or modeled figures accurately. Official statistical dashboard guidance emphasizes source links, status, revisions, and responsible ownership. Office for Statistics Regulation"
+  },
+  "dashboard:R12": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 30,
+    "title": "Pair important values with a meaningful comparison. A KPI should usually include a target, previous period, benchmark, or historical range. Name the comparison explicitly; an unexplained upward arrow or “+12%” is insufficient."
+  },
+  "dashboard:R13": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 31,
+    "title": "Define what improvement means. Higher is desirable for some measures, lower for others, and a bounded range for others. Do not automatically color every increase green."
+  },
+  "dashboard:R14": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 32,
+    "title": "Balance activity measures with outcome and quality measures. Submissions, visits, and hours describe activity. Completion, usefulness, reliability, and successful outcomes answer different questions. Include measures that reveal the consequences of increasing volume."
+  },
+  "dashboard:R15": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 33,
+    "title": "Use appropriate numerical precision. Calculate using adequate precision, then format for the task. Avoid decimal places that imply unsupported accuracy. Keep rounding, separators, currency, and abbreviations consistent across cards, charts, tables, and exports."
+  },
+  "dashboard:R16": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 35,
+    "title": "Distinguish zero from missing and unavailable data. A measured zero, absent observation, suppressed value, pending report, and failed query mean different things. Give them different labels or states."
+  },
+  "dashboard:R17": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 36,
+    "title": "Aggregate percentages using the correct components. If one group succeeds in 9 of 10 cases and another in 1 of 100, the pooled rate is \\(10/110 = 9.1\\%\\). Averaging 90% and 1% gives 45.5%, which answers a different question."
+  },
+  "dashboard:R18": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 37,
+    "title": "Respect measures that cannot simply be added or averaged. Do not sum overlapping distinct-user counts, add inventory snapshots across time, or average daily percentiles and call the result a monthly percentile. Recompute from suitable underlying data."
+  },
+  "dashboard:R19": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 38,
+    "title": "Make periods and populations comparable. Check eligibility, coverage, units, collection methods, seasonality, and period length. Clearly flag a partial current month when comparing it with a complete previous month."
+  },
+  "dashboard:R20": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 39,
+    "title": "Distinguish percentage points from percentage change. Moving from 20% to 25% is an increase of 5 percentage points and a 25% relative increase. Relative change from a zero baseline is undefined under the usual formula."
+  },
+  "dashboard:R21": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 40,
+    "title": "Inspect what averages and totals conceal. Include distributions, subgroup results, or tail measures when variation affects the decision. An overall improvement may coexist with deterioration for an important subgroup."
+  },
+  "dashboard:R22": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 41,
+    "title": "Show uncertainty when it could change interpretation. Use appropriate intervals or bands and identify what they represent: confidence intervals, prediction intervals, credible intervals, or scenario ranges. Make the boundary between observations and forecasts visible. Office for National Statistics"
+  },
+  "dashboard:R23": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 42,
+    "title": "Separate statistical evidence from practical importance. A detectable difference may be too small to matter. An apparent difference may be too uncertain to support a conclusion. Overlapping individual confidence intervals alone do not establish that a difference is statistically insignificant. CDC"
+  },
+  "dashboard:R24": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 43,
+    "title": "Keep observations separate from causal explanations. A chart can show an association or a change following an event. Establishing that the event caused the change requires additional evidence. Annotations and summaries should preserve that distinction."
+  },
+  "dashboard:R25": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 45,
+    "title": "Choose the relationship before choosing the chart. Identify whether the user needs to compare magnitudes, inspect a trend, understand a distribution, examine a relationship, or locate a geographic pattern. Chart choice should follow that task. Office for National Statistics"
+  },
+  "dashboard:R26": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 46,
+    "title": "Prefer aligned positions for precise comparisons. Bars and dot plots on a common scale are strong defaults when users must judge small differences. Graphical-perception research supports common-position encodings over angle and area for the proportional judgments studied. hci.stanford.edu"
+  },
+  "dashboard:R27": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 47,
+    "title": "Use tables when exact lookup is the main task. Tables are appropriate for precise values, mixed units, record inspection, and operational lists. A dashboard does not need a chart for every dataset."
+  },
+  "dashboard:R28": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 48,
+    "title": "Use pie and doughnut charts selectively. They can communicate a few distinct parts of one meaningful whole. Avoid them for overlapping categories, separate group rates, incomplete totals, or close comparisons among similarly sized segments. Office for National Statistics"
+  },
+  "dashboard:R29": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 49,
+    "title": "Use maps when geography matters to the question. Geographic labels alone do not justify a map. A regional ranking may be clearer as bars. For shaded-area maps, choose an appropriately standardized measure and explain the denominator. Office for National Statistics"
+  },
+  "dashboard:R30": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 50,
+    "title": "Require a clear benefit from specialized charts. Consider small multiples before adding more overlapping series. Use gauges, radar charts, treemaps, and Sankey diagrams when their structure helps the intended audience answer the question."
+  },
+  "dashboard:R31": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 68,
+    "title": "Anchor ordinary magnitude bars at zero. Positive and negative bars should extend from a zero baseline. Interval displays, such as Gantt or range charts, encode something different and need appropriately explained endpoints."
+  },
+  "dashboard:R32": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 69,
+    "title": "Allow cropped line or scatterplot axes when justified. A nonzero origin can reveal meaningful variation. Keep bounds and reference values readable so the apparent change remains interpretable. ONS explicitly distinguishes these charts from magnitude bars and filled-area charts. Office for National Statistics"
+  },
+  "dashboard:R33": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 70,
+    "title": "Use common scales for direct magnitude comparisons. If neighboring charts use independent scales, make that obvious. Independent scales can support examination of shape, but they change what comparisons are valid."
+  },
+  "dashboard:R34": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 71,
+    "title": "Avoid dual axes as the default. Prefer aligned separate charts or an explicitly indexed comparison when appropriate. Two independently adjustable axes can make unrelated movements appear closely aligned. Office for National Statistics"
+  },
+  "dashboard:R35": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 72,
+    "title": "Explain nonlinear scales. Use logarithmic scales for suitable questions, such as comparing multiplicative change. Explain that equal distances represent equal ratios. Do not silently transform, omit, or replace values that the scale cannot represent."
+  },
+  "dashboard:R36": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 73,
+    "title": "Preserve time spacing and missingness. Unequal time intervals should occupy unequal distances on a continuous time axis. Leave visible gaps where regularly expected observations are missing instead of implying uninterrupted measurement. Office for National Statistics"
+  },
+  "dashboard:R37": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 74,
+    "title": "Scale area by area. If circles encode quantity through area, their radii must vary with the square root of the values. Doubling a circle’s radius quadruples its area."
+  },
+  "dashboard:R38": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 75,
+    "title": "Avoid visual effects that alter apparent quantities. Decorative 3D, perspective, excessive shadows, and inappropriate smoothing can change how values appear. Do not hide outliers or clip extremes without making the treatment clear."
+  },
+  "dashboard:R39": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 76,
+    "title": "Make ordering and grouping meaningful. Sort by value for ranking tasks, but preserve natural order for time, ages, or process stages. Explain histogram bins, map classes, and other group boundaries; keep them consistent across comparisons."
+  },
+  "dashboard:R40": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 78,
+    "title": "Put the primary question and most consequential information first. The initial view should establish the dashboard’s subject, scope, and main condition. Allocate prominence according to the user’s priorities."
+  },
+  "dashboard:R41": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 79,
+    "title": "Place evidence that must be compared near each other. Keep a KPI, its benchmark, and its historical trend together. Users should not have to remember a number from another tab to make an important comparison."
+  },
+  "dashboard:R42": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 80,
+    "title": "Allocate space according to the task. A detailed trend may deserve more room than a summary count. Equal-sized cards are appropriate only when they support the information hierarchy."
+  },
+  "dashboard:R43": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 81,
+    "title": "Use a consistent layout system. Align components, standardize spacing, and use clear headings. Let whitespace and grouping communicate relationships. Add borders and containers only when they clarify structure."
+  },
+  "dashboard:R44": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 82,
+    "title": "Preserve a logical reading order across devices. The mobile layout should retain the intended priority and relationships. The programmatic reading order should also make sense to someone using assistive technology."
+  },
+  "dashboard:R45": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 83,
+    "title": "Use progressive disclosure without hiding critical context. Put essential warnings and interpretation details next to the result. Move extended definitions and methodology into accessible supporting layers. OSR recommends this layered approach to communicating quality. Office for Statistics Regulation"
+  },
+  "dashboard:R46": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 84,
+    "title": "Treat a single-screen layout as a contextual goal. It can suit monitoring, but scrolling is acceptable when the important information remains prominent. Do not shrink text or remove necessary context to force everything into one viewport. Office for National Statistics"
+  },
+  "dashboard:R47": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 85,
+    "title": "Test typography at actual viewing sizes. Use readable labels, predictable heading levels, and adequate line spacing. In tables, align comparable numbers consistently, usually to the right, and consider tabular numerals to aid scanning."
+  },
+  "dashboard:R48": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 87,
+    "title": "Give color a defined job. Use it to distinguish categories, encode magnitude, indicate deviation, or direct attention. When position and labels already distinguish categories, a single color may be sufficient."
+  },
+  "dashboard:R49": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 88,
+    "title": "Match the palette to the data. Use distinct colors for unordered categories, ordered lightness for increasing magnitude, and a diverging palette around a meaningful midpoint. Avoid implying an order that does not exist."
+  },
+  "dashboard:R50": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 89,
+    "title": "Keep color meanings stable. A category should retain its color across panels, filters, and visits. Reserve status colors for consistent meanings. Check both light and dark themes if both are supported. Office for National Statistics"
+  },
+  "dashboard:R51": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 90,
+    "title": "Never make color the sole carrier of important meaning. Pair status colors with text or symbols, and distinguish series with labels, markers, or line styles where needed. This is an explicit WCAG requirement. W3C"
+  },
+  "dashboard:R52": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 91,
+    "title": "Avoid rainbow palettes for ordered quantitative values. Uneven perceptual gradients can create apparent boundaries and conceal real changes. Use a palette whose perceived ordering matches the numerical ordering. pmc.ncbi.nlm.nih.gov"
+  },
+  "dashboard:R53": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 92,
+    "title": "Write titles that establish the subject and scope. Identify the measure, relevant population, geography, and period through the title and subtitle. If a title states a finding, ensure it updates correctly when the data or filters change."
+  },
+  "dashboard:R54": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 93,
+    "title": "Make units and abbreviations unambiguous. Specify currency, percentage, count, duration, rate denominator, or index base. Explain unfamiliar acronyms. Use time zones where they affect interpretation."
+  },
+  "dashboard:R55": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 94,
+    "title": "Reduce unnecessary label lookup. Prefer direct labels when they remain legible. Keep legends close to their charts and ordered consistently. Use concise annotations for material events, definition changes, revisions, and unusual observations. Office for National Statistics"
+  },
+  "dashboard:R56": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 96,
+    "title": "Provide a useful initial view. Users should learn something before configuring controls. Choose sensible defaults and reveal the most important information immediately. Interactivity should serve a concrete user need. Office for National Statistics"
+  },
+  "dashboard:R57": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 97,
+    "title": "Make interactive elements recognizable. Users should be able to tell what can be selected, expanded, sorted, or opened. Avoid making unlabeled icons or invisible chart gestures the only route to essential functions."
+  },
+  "dashboard:R58": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 98,
+    "title": "Show which controls affect which panels. Distinguish dashboard-wide filters from local filters. If a comparison or benchmark remains fixed while other data change, label that behavior."
+  },
+  "dashboard:R59": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 99,
+    "title": "Keep the active scope visible. Show selected dates, geography, categories, and other important restrictions. Where useful, show how much data remains, such as “84 of 120 records.”"
+  },
+  "dashboard:R60": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 100,
+    "title": "Define filter behavior precisely. Clarify whether selections combine with AND or OR, what “All” means, whether dates include their endpoints, and when changes take effect. Prevent or explain incompatible combinations."
+  },
+  "dashboard:R61": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 101,
+    "title": "Make exploration reversible. Provide clear reset controls and predictable back behavior. Preserve relevant state when users move between overview and detail views."
+  },
+  "dashboard:R62": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 102,
+    "title": "Preserve context during drill-down. Identify the selected subset and its relationship to the whole. A user inspecting one team should still know the period, population, and comparison that led to that view."
+  },
+  "dashboard:R63": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 103,
+    "title": "Keep all representations synchronized. Charts, KPI cards, descriptions, tables, and exports must reflect the same selection. Handle delayed responses so an older query cannot overwrite a newer result."
+  },
+  "dashboard:R64": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 104,
+    "title": "Make shared views reproducible. Preserve relevant filter state in saved views or share links. Distinguish a live view from a frozen snapshot, and a rolling range such as “last 30 days” from fixed dates."
+  },
+  "dashboard:R65": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 107,
+    "title": "Make essential functions operable by keyboard. Include filtering, sorting, inspecting values, opening detail views, exporting, and dismissing overlays. Maintain a logical focus order, visible focus, and a clear way out of every component. W3C"
+  },
+  "dashboard:R66": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 108,
+    "title": "Meet text-contrast requirements. Ordinary text generally needs at least 4.5:1 contrast; large text needs 3:1. WCAG defines large text as at least 18 points, or 14 points bold, with relevant exceptions and equivalent provisions. W3C"
+  },
+  "dashboard:R67": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 109,
+    "title": "Check meaningful graphics and controls separately. Visual information needed to identify controls, their states, or essential graphical content generally needs 3:1 contrast against adjacent colors. This does not mean every decorative gridline needs that contrast. W3C"
+  },
+  "dashboard:R68": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 110,
+    "title": "Provide meaningful alternatives to charts. Include an accessible name and a description of important relationships or findings. Offer a properly structured data table when exact values matter. Keep these alternatives synchronized with the selected view. W3C"
+  },
+  "dashboard:R69": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 111,
+    "title": "Do not make essential information hover-only. Make equivalent information available through keyboard and touch. Custom hover or focus content generally needs to be dismissible, hoverable, and persistent under the conditions specified by WCAG. W3C"
+  },
+  "dashboard:R70": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 112,
+    "title": "Make controls large enough or sufficiently separated. WCAG 2.2 AA specifies 24 × 24 CSS pixels for pointer targets, with spacing and other exceptions. Larger controls are often preferable for frequent touch use. W3C"
+  },
+  "dashboard:R71": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 113,
+    "title": "Provide alternatives to dragging. Range selection, panel rearrangement, and similar interactions should also work through suitable buttons, fields, or simple pointer actions. Keyboard support alone does not satisfy the separate requirement for a non-dragging pointer alternative. W3C"
+  },
+  "dashboard:R72": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 114,
+    "title": "Support enlargement and reflow. Text should remain usable at 200% enlargement. Support reflow at a width equivalent to 320 CSS pixels; essential two-dimensional content has exceptions, but surrounding controls and explanations still need to adapt. W3C"
+  },
+  "dashboard:R73": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 115,
+    "title": "Make status and error messages accessible. Announce results such as “12 records found” or “Export ready” appropriately without taking focus. Describe errors and recovery in text. Avoid announcing every changing data point. W3C"
+  },
+  "dashboard:R74": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 117,
+    "title": "Separate the data period from the refresh time. “Updated today” does not establish that the underlying observations are current. Show the period represented, relevant source freshness, and last successful refresh; use panel-level dates when sources differ. Office for Statistics Regulation"
+  },
+  "dashboard:R75": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 118,
+    "title": "Define when data become stale. Set freshness expectations according to the decision. A missed update should produce a visible stale or incomplete state, including its effect on interpretation."
+  },
+  "dashboard:R76": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 119,
+    "title": "Design every important interface state. Specify loading, empty results, no source data, partial results, failed retrieval, stale data, and denied access. A failed request must never appear as a valid zero or successful “all clear.”"
+  },
+  "dashboard:R77": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 120,
+    "title": "Label demonstration data clearly. Keep sample and production data distinguishable. Loading placeholders should look like loading placeholders; they should not display plausible invented figures that users could mistake for measurements."
+  },
+  "dashboard:R78": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 121,
+    "title": "Give users control over automatic updates. Automatically updating information shown alongside other content generally needs pause, stop, hide, or update-frequency control unless essential. Clearly label a paused view. The five-second condition applies to moving content, not to this auto-update requirement. W3C"
+  },
+  "dashboard:R79": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 122,
+    "title": "Keep updates visually stable. Avoid moving rows beneath the pointer, changing panel sizes unexpectedly, or repeatedly restarting animations. Respect reduced-motion preferences. Use animation only when it helps users understand a change."
+  },
+  "dashboard:R80": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 123,
+    "title": "Measure performance against real tasks. Track time to useful data and time from filter selection to correct results. For web delivery, Google’s general “good” thresholds are LCP ≤ 2.5 seconds, INP ≤ 200 milliseconds, and CLS ≤ 0.1 at the 75th percentile. These do not replace dashboard-specific measures. web.dev"
+  },
+  "dashboard:R81": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 124,
+    "title": "Scale rendering without silently changing meaning. Aggregation, sampling, clustering, and downsampling should preserve the features relevant to the task. Disclose material reductions and provide suitable detail access. Check that performance optimizations do not conceal consequential spikes or rare cases."
+  },
+  "dashboard:R82": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 126,
+    "title": "Make alerts actionable. An alert should explain the condition, severity, responsible person or team, and next step. Reserve interruptions for conditions that warrant attention; Google’s SRE guidance emphasizes urgency and actionability in alert design. sre.google"
+  },
+  "dashboard:R83": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 127,
+    "title": "Distinguish targets from statistical limits. A desired target, a specification limit, a confidence interval, and a process-control limit have different meanings. A process can be stable while failing requirements. Explain what each threshold represents. itl.nist.gov"
+  },
+  "dashboard:R84": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 128,
+    "title": "Manage the alert lifecycle. Group duplicate alerts, distinguish acknowledged from resolved conditions, and show persistence or recurrence when relevant. Review alerts that repeatedly produce no useful response."
+  },
+  "dashboard:R85": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 129,
+    "title": "Give informational items enough context for action. A task, incident, approval, or document entry should identify what it is, who owns it, its status, relevant dates, and where supporting evidence can be inspected."
+  },
+  "dashboard:R86": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 130,
+    "title": "Base status and progress on observable conditions. Define what “complete,” “blocked,” “at risk,” and “approved” mean. Display the age of a status when it can become stale. Avoid unsupported percentages of completion."
+  },
+  "dashboard:R87": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 131,
+    "title": "Prioritize information according to the work. Urgency, deadlines, dependencies, and unresolved blockers may matter more than recency. Provide views that help users distinguish new information from work that still needs attention."
+  },
+  "dashboard:R88": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 133,
+    "title": "Enforce permissions where data are served. Check access for each request, including drill-downs, exports, and saved views. Hiding a control in the interface is insufficient. Apply appropriate permissions to cached and static outputs as well. OWASP Cheat Sheet Series"
+  },
+  "dashboard:R89": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 134,
+    "title": "Review disclosure through combinations of values. Sensitive information can become recoverable through totals, small groups, or repeated filtering. Suppressing one cell may be insufficient when its value can be deduced from other cells. Apply appropriate disclosure controls. census.gov"
+  },
+  "dashboard:R90": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 135,
+    "title": "Preserve context in exports and print views. Include titles, units, selected scope, date range, source, and relevant caveats. Make clear whether an export contains the displayed subset or a broader dataset."
+  },
+  "dashboard:R91": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 136,
+    "title": "Record consequential changes. Track changes to metric definitions, thresholds, source mappings, permissions, and editable records. Users should be able to understand why a historical value or status changed."
+  },
+  "dashboard:R92": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 137,
+    "title": "Assign ownership for the dashboard’s lifecycle. Name responsibility for data quality, refresh failures, user feedback, accessibility, and maintenance. Review relevance periodically and retire dashboards that no longer meet a useful need. Government Analysis Function"
+  },
+  "dashboard:R93": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 140,
+    "title": "Generate numerical claims from verified calculations. Bind summaries to the actual query results, filters, period, and metric definitions. Require a traceable calculation or source for every generated numerical statement."
+  },
+  "dashboard:R94": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 141,
+    "title": "Label the nature of generated content. Distinguish measured facts, model predictions, proposed explanations, and recommendations. A fluent explanation should not silently acquire the status of an observed fact."
+  },
+  "dashboard:R95": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 142,
+    "title": "Review AI-produced dashboards through their behavior and data. Check formulas, joins, denominators, permissions, interaction states, and accessibility. A convincing screenshot cannot establish that the underlying calculations and workflows are correct."
+  },
+  "dashboard:R96": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 144,
+    "title": "Prototype with realistic and difficult data. Include long labels, negative values, tiny and large values, missing periods, rare categories, empty selections, and extreme outliers. Neat demonstration data conceal design weaknesses."
+  },
+  "dashboard:R97": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 145,
+    "title": "Reconcile representative results independently. Trace selected values from source records through transformations to the dashboard and export. Check duplicates, join multiplication, time-zone boundaries, zero denominators, and late or corrected records."
+  },
+  "dashboard:R98": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 146,
+    "title": "Test whether users reach correct conclusions. Ask realistic questions: “Which team needs attention?”, “How much did performance change?”, and “What limits this comparison?” Observe their reasoning and errors without coaching them through the interface."
+  },
+  "dashboard:R99": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 147,
+    "title": "Combine automated checks with human accessibility testing. Test keyboard use, screen readers, zoom, touch, and meaningful task completion, ideally with people with disabilities. W3C explicitly states that automated tools alone cannot establish accessibility. W3C"
+  },
+  "dashboard:R100": {
+    "source": "sources/dashboard-100-rules.txt",
+    "line": 148,
+    "title": "Measure usefulness after launch. Review whether users can detect important conditions, interpret evidence correctly, and complete their work efficiently. Use those findings to simplify, revise, or remove components. Page views alone do not demonstrate usefulness."
+  },
+  "medical16:R1": {
+    "source": "sources/medical-quality-16-sections.md",
+    "line": 25,
+    "title": "Define “good” before inspecting the results"
+  },
+  "medical16:R2": {
+    "source": "sources/medical-quality-16-sections.md",
+    "line": 43,
+    "title": "Establish provenance, identity, and structural integrity"
+  },
+  "medical16:R3": {
+    "source": "sources/medical-quality-16-sections.md",
+    "line": 65,
+    "title": "Check measurement meaning, missingness, and plausibility"
+  },
+  "medical16:R4": {
+    "source": "sources/medical-quality-16-sections.md",
+    "line": 87,
+    "title": "Apply image-specific integrity and content checks"
+  },
+  "medical16:R5": {
+    "source": "sources/medical-quality-16-sections.md",
+    "line": 111,
+    "title": "Add medical-imaging geometry and acquisition checks"
+  },
+  "medical16:R6": {
+    "source": "sources/medical-quality-16-sections.md",
+    "line": 142,
+    "title": "Check the clinical meaning of medical records"
+  },
+  "medical16:R7": {
+    "source": "sources/medical-quality-16-sections.md",
+    "line": 162,
+    "title": "Treat labels and annotations as evidence that needs checking"
+  },
+  "medical16:R8": {
+    "source": "sources/medical-quality-16-sections.md",
+    "line": 184,
+    "title": "Assess population coverage, selection, and hidden bias"
+  },
+  "medical16:R9": {
+    "source": "sources/medical-quality-16-sections.md",
+    "line": 204,
+    "title": "Prevent leakage and verify evaluation independence"
+  },
+  "medical16:R10": {
+    "source": "sources/medical-quality-16-sections.md",
+    "line": 226,
+    "title": "Recheck transformations, augmentation, and synthetic data"
+  },
+  "medical16:R11": {
+    "source": "sources/medical-quality-16-sections.md",
+    "line": 242,
+    "title": "Check permissions, privacy, and de-identification"
+  },
+  "medical16:R12": {
+    "source": "sources/medical-quality-16-sections.md",
+    "line": 256,
+    "title": "Combine automated checks with a statistically honest human audit"
+  },
+  "medical16:R13": {
+    "source": "sources/medical-quality-16-sections.md",
+    "line": 296,
+    "title": "Make acceptance depend on evidence and consequences"
+  },
+  "medical16:R14": {
+    "source": "sources/medical-quality-16-sections.md",
+    "line": 330,
+    "title": "Separate data acceptance from claims about clinical performance"
+  },
+  "medical16:R15": {
+    "source": "sources/medical-quality-16-sections.md",
+    "line": 353,
+    "title": "Worked example: a dataset that looks clean but is not ready"
+  },
+  "medical16:R16": {
+    "source": "sources/medical-quality-16-sections.md",
+    "line": 370,
+    "title": "Continue checking after release"
+  }
+}

@@ -1,0 +1,43 @@
+[
+  {
+    "file": "sources/event-2026-11-14.txt",
+    "bytes": 15413,
+    "sha256": "aebda510dfc0eacc4c45135aa546d164951c5f4da09519f82ded70b1bd59d755",
+    "original_bytes": 15411,
+    "original_sha256": "d68b35f16884f4371d4f95f4fce6e8193393ebaaa223ff105c41686c39fd6f48",
+    "redactions": [
+      "Recording access passcode replaced with [REDACTED]"
+    ],
+    "source": "User-supplied Library attachment, 2026-11-14"
+  },
+  {
+    "file": "sources/medical-quality-72-rules.md",
+    "bytes": 34419,
+    "sha256": "bb93e192531e0fe013e29c4bd28045458f54b950b989aa2b7ee0b60448c13f88",
+    "original_bytes": 34419,
+    "original_sha256": "bb93e192531e0fe013e29c4bd28045458f54b950b989aa2b7ee0b60448c13f88",
+    "redactions": [],
+    "source": "User-supplied Library attachment, 2026-11-14"
+  },
+  {
+    "file": "sources/dashboard-100-rules.txt",
+    "bytes": 30190,
+    "sha256": "e24b57efcff50ff032f854ae6e3708be6514ad95764043fecd82517c200c461b",
+    "original_bytes": 30190,
+    "original_sha256": "e24b57efcff50ff032f854ae6e3708be6514ad95764043fecd82517c200c461b",
+    "redactions": [],
+    "source": "figma-data-visualization/references/sources/dashboard-rules-original.txt"
+  },
+  {
+    "file": "sources/medical-quality-16-sections.md",
+    "bytes": 33246,
+    "sha256": "83d894cdb409f579027269c8d908d152b9ae6878f789e40222bbcd7f6dd02115",
+    "source": "User message dated 2026-11-14, separate 16-section checklist; normalized transcription, not byte-identical attachment",
+    "redactions": [],
+    "normalization": [
+      "Markdown headings, lists, tables",
+      "Duplicate display-math artifacts reduced to one equation",
+      "Transport UI residue omitted"
+    ]
+  }
+]

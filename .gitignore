@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.DS_Store
+.env*
+work/
+reports/
+submissions.json
+*private*
+*.mp4
+*.zip
+*.dcm
+*.svs
+*.parquet
