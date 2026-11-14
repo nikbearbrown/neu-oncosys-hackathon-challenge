@@ -91,3 +91,7 @@ The signed-review finding is narrower: a deterministic approved-review AppTest r
 Update November 14, 2026, 21:12 UTC: the [Tripwire reconciliation](tripwire/runtime-reconciliation-codex-23484638.md) follows the separate browser observation through the actual review counter. Request more evidence produces zero open reviews, but the exported request is preserved and no repair is applied. The helper's decided-repair count and the UI's awaiting-review label have different implications; this is not proof of unauthorized approval.
 
 Passing controls include reason/role validation, visible question-specific states, schema-valid export, and clearing prior results after a replacement comparison fails. The no-linked-repair case remains helper-level. The note preserves that distinction and the earlier compatibility-versus-adequacy correction. Thirteen selected browser checks are not official rubric points, a representative accuracy estimate or 13 independent defects.
+
+## Expanded Nine-Entry Follow-Through
+
+The [expanded companion guide](expanded-review-guide-codex-23484638.md) adds the three later entries, current source/runtime reconciliation, direct PDF copies and the combined 73-slide presentation. It also records the later supported-importer browser evidence for Tripwire's no-repair case, superseding only the earlier helper-only limitation above. Earlier reports remain historical records of their own scope.

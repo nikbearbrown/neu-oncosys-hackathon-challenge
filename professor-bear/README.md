@@ -77,3 +77,7 @@ Latest additions: HIPPA-cratic has **170 submitted tests passed / 1 skipped**. C
 Latest runtime follow-through: [HIPPA reconstruction](hippa-cratic/TESTS.md), [Cohort Firewall suite and API](cohort-firewall/TESTS.md), [ClearAnswer suite and export](clearanswer/TESTS.md). [ClearAnswer parallel source audit](clearanswer/audit-codex-23484638-pass-01.md) and [companion deck](clearanswer/slides-codex-23484638-pass-01.html) are preserved alongside the main report. Read overlapping findings once, using the newest scoped evidence.
 
 [Cohort Firewall parallel source audit](cohort-firewall/audit-codex-23484638-pass-01.md) and [companion deck](cohort-firewall/slides-codex-23484638-pass-01.html) are also preserved. The primary report links the later executed suite/API evidence; overlapping concerns are not additional scored items.
+
+## Expanded Companion Review
+
+[The nine-entry companion guide](expanded-review-guide-codex-23484638.md) adds the Cohort Firewall, HIPPA-cratic and ClearAnswer source audits, PDF/browser decks, later runtime qualifications and the combined 73-slide presentation. Existing primary reports and all earlier supplements remain preserved. No official scores are assigned.
