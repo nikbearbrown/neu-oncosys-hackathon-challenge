@@ -1,0 +1,249 @@
+{
+  "mode": "judge",
+  "repo": "saigunavardhan/sns-cohort-control-tower",
+  "commit": "c1e8b79a2987cee6087d847867f9895deaa109a4",
+  "track": 1,
+  "reviewer": "Professor Bear / Codex source review",
+  "summary": "SNS connects content fingerprints, detected changes, per-analysis before/after results, repair simulations and a concrete cohort export. The key concerns are the authority boundary between proposed and approved repairs, flagging that also restores membership, a no-finding Ready branch that bypasses movement checks, and a hard size boundary in wide-table recognition. The retained parallel review provides targeted helper reproductions; this supplement traces their source and limits rather than claiming a full live-application exploit or a measured detection rate.",
+  "limitations": [
+    "Pinned local checkout, not a verified official final-submission receipt; branch names and later changes are outside this pass.",
+    "Static source analysis only. No submission code, tests, installers, workflows, notebook, server, hosted endpoint or model was executed.",
+    "No sealed envelopes, answer keys or raw clinical datasets were accessed. Numerical correctness, performance, accessibility and fresh-machine setup remain untested.",
+    "Source-derived control-flow consequences are labeled as such. Proposed acceptance checks are not observed test results.",
+    "The collected text budget is 160 files, 200 KB/file and 4 MB/entry. Complete_with_exclusions is not an exhaustive audit; exclusions and focused follow-ups are recorded.",
+    "No official score, cross-team ranking, clinical validity or regulatory/accessibility certification is asserted."
+  ],
+  "criteria": [
+    {
+      "id": "T1-1",
+      "status": "observed",
+      "assessment": "Layer recognition and the complete input inventory need explicit small-cohort checks. No unseen-input detection rate was measured.",
+      "findings": [
+        {
+          "kind": "gap",
+          "priority": "P2",
+          "title": "Wide-table recognition depends on having more than ten samples",
+          "observation": "load_layer recognizes a TCGA-wide layout only with more than ten TCGA-named columns and the stated proportion. A smaller wide table falls through to long-format ID detection and may return None. load_release retains only non-None layers, without an explicit unsupported-file result in that loop.",
+          "impact": "Small synthetic or research cohorts can be omitted from recognized input layers instead of being parsed or rejected with a reason. This is a supported-format boundary, not proof that all event files are affected.",
+          "recommendation": "Use declared schema or robust header semantics independent of sample count. Record every discovered but unsupported file and prevent omission from being mistaken for absence or a clean comparison.",
+          "acceptance_check": "Load otherwise equivalent invented wide matrices with 1, 10 and 11 samples. Each must be parsed consistently or explicitly rejected, and the release inventory must retain the file and reason.",
+          "confidence": "High for the hard boundary; the parallel TESTS.md reports 1/10/11-sample probes and the 11-sample positive control.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "sns/engine/release.py",
+              "start": 60,
+              "end": 85,
+              "quote": "def load_layer(path, sha=None):\n    path = Path(path)\n    raw = read_table(path)\n    tcga_cols = [c for c in raw.columns if str(c).startswith(TCGA_PREFIX)]\n    if len(tcga_cols) > 10 and len(tcga_cols) >= 0.5 * (raw.shape[1] - 1):\n        feature_field = str(raw.columns[0])\n        table = raw.set_index(raw.columns[0])[tcga_cols].T\n        layout, id_field = \"wide\", \"columns\"\n    else:\n        id_field = _pick_id_column(raw)\n        if id_field is None:\n            return None\n        table = raw.set_index(id_field)\n        layout, feature_field = \"long\", \"columns\"\n    table.index = table.index.astype(str)\n    table.index.name = \"sample_id\"\n    table.columns = [str(c) for c in table.columns]\n    return Layer(\n        name=path.name,\n        path=path,\n        layout=layout,\n        id_field=str(id_field),\n        feature_field=feature_field,\n        table=table,\n        sha256=sha or content_sha256(path),\n    )"
+            },
+            {
+              "path": "sns/engine/release.py",
+              "start": 88,
+              "end": 106,
+              "quote": "def load_release(folder, reuse=None, skip_files=None):\n    folder = Path(folder)\n    reuse = reuse or {}\n    skip = set(skip_files or [])\n    layers = {}\n    for path in sorted(folder.iterdir()):\n        if not (path.is_file() and path.name.lower().endswith(DATA_SUFFIXES)):\n            continue\n        if path.name in skip:\n            continue\n        sha = content_sha256(path)\n        prev = reuse.get(path.name)\n        if prev is not None and prev.sha256 == sha:\n            layers[path.name] = replace(prev, path=path)\n            continue\n        layer = load_layer(path, sha)\n        if layer is not None:\n            layers[path.name] = layer\n    return layers"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-2",
+      "status": "observed",
+      "assessment": "Analysis context is visible, but no-finding status must not override observed movement or adequacy. Token-derived dependencies also need review when analysis code changes.",
+      "findings": [
+        {
+          "kind": "gap",
+          "priority": "P1",
+          "title": "No detected finding bypasses movement and adequacy checks",
+          "observation": "verdict_for first handles an error in the new-release result, then returns Ready immediately when affected_by is empty. Minimum group size, sign changes and relative movement are tested only afterward. Exported analysis notes say unaffected analyses were rerun to confirm no movement, but this branch does not require that confirmation.",
+          "impact": "A missed dependency or detector miss can leave a changed result labeled Ready at this helper boundary. This differs from an intentionally verified stable result and from a guaranteed full-application bypass, which this reviewer did not demonstrate.",
+          "recommendation": "Assess result validity, required evidence and unexplained movement before the no-finding Ready return. Export both compatibility and adequacy states if they answer different questions.",
+          "acceptance_check": "Compare no-finding cases with an unchanged adequate result, an undersized result and a sign change. Keep the valid stable positive control, and ensure absence of a finding alone cannot override the latter evidence problems.",
+          "confidence": "High for precedence; the parallel review reports helper probes with a detected-sign-change positive control.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "sns/engine/impact.py",
+              "start": 187,
+              "end": 210,
+              "quote": "def verdict_for(affected_by, before, after, min_group=10):\n    if \"error\" in (after or {}):\n        return \"Insufficient Evidence\", f\"analysis failed on the new release: {after['error']}\"\n    if not affected_by:\n        return \"Ready\", \"no finding touches its input files, columns or samples\"\n    nb, na = numeric_fields(public(before)), numeric_fields(public(after))\n    small = {\n        k: v for k, v in na.items()\n        if k.split(\".\")[-1].startswith(\"n_\") and v < min_group\n    }\n    if small:\n        listed = \", \".join(f\"{k}={int(v)}\" for k, v in small.items())\n        return \"Insufficient Evidence\", f\"too few samples after the change: {listed} (minimum {min_group})\"\n    shifts = []\n    for k in sorted(nb.keys() & na.keys()):\n        if k.split(\".\")[-1].startswith(\"n_\"):\n            continue\n        b, a = nb[k], na[k]\n        if b == a:\n            continue\n        if b != 0 and a != 0 and (b > 0) != (a > 0):\n            return \"Blocked\", f\"{k} changed sign: {b:g} in the old release, {a:g} in the new release\"\n        rel = abs(a - b) / abs(b) if b else float(\"inf\")\n        shifts.append((rel, k, b, a))"
+            },
+            {
+              "path": "sns/engine/findings.py",
+              "start": 427,
+              "end": 450,
+              "quote": "    analyses, verdicts = [], []\n    for aid, c in b.ctx.items():\n        by = [f[\"id\"] for f in findings if aid in f[\"affects_analyses\"]]\n        before = impact[\"before\"].get(aid, {})\n        after = impact[\"after\"].get(aid, {})\n        rep = impact[\"repaired\"].get(aid, {})\n        verdict, reason = verdict_for(by, before, after)\n        verdicts.append(verdict)\n        entry = {\n            \"id\": aid,\n            \"status\": \"changed\" if public(before) != public(after) else \"unchanged\",\n            \"before\": public(before),\n            \"after\": public(after),\n            \"after_repair\": public(rep),\n            \"repair_restores_before\": public(rep) == public(before),\n            \"description\": c[\"description\"],\n            \"inputs\": c[\"inputs\"],\n            \"uses_columns\": c[\"used_features\"],\n            \"affected_by\": by,\n            \"verdict\": verdict,\n            \"reason\": reason,\n        }\n        if not by:\n            entry[\"note\"] = \"not affected by any finding; rerun only to confirm it did not move\""
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-3",
+      "status": "observed",
+      "assessment": "Named content hashes and per-analysis results help provenance. Unsupported inputs and approval digests should be included in the handoff.",
+      "findings": [
+        {
+          "kind": "strength",
+          "priority": "P2",
+          "title": "Release provenance includes named content hashes",
+          "observation": "load_release computes a content digest and can reuse a parsed layer only when its prior digest matches. The findings document emits each release's file names, SHA-256 values and hash_of=content. This distinguishes content identity from a directory label or mutable filename.",
+          "impact": "The export provides useful anchors for reproducing exactly which recognized files were compared. A hash is not a signature, a license check or proof that an earlier release is scientifically correct.",
+          "recommendation": "Keep content fingerprints and add a complete discovered-file inventory, including unsupported or skipped files. Bind review decisions and derived cohorts to the same evidence manifest.",
+          "acceptance_check": "Change one synthetic file byte and confirm its digest and run identity change. Verify a renamed identical file is handled according to the documented identity policy and that unsupported files remain visible.",
+          "confidence": "High for source construction; cache correctness and served artifact hashes were not verified in a running app.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "sns/engine/release.py",
+              "start": 88,
+              "end": 106,
+              "quote": "def load_release(folder, reuse=None, skip_files=None):\n    folder = Path(folder)\n    reuse = reuse or {}\n    skip = set(skip_files or [])\n    layers = {}\n    for path in sorted(folder.iterdir()):\n        if not (path.is_file() and path.name.lower().endswith(DATA_SUFFIXES)):\n            continue\n        if path.name in skip:\n            continue\n        sha = content_sha256(path)\n        prev = reuse.get(path.name)\n        if prev is not None and prev.sha256 == sha:\n            layers[path.name] = replace(prev, path=path)\n            continue\n        layer = load_layer(path, sha)\n        if layer is not None:\n            layers[path.name] = layer\n    return layers"
+            },
+            {
+              "path": "sns/engine/findings.py",
+              "start": 458,
+              "end": 470,
+              "quote": "    def files(rel):\n        return [{\"file\": n, \"sha256\": layer.sha256, \"hash_of\": \"content\"} for n, layer in sorted(rel.items())]\n\n    asked = _join(f\"{aid} ({c['description'].rstrip('.')})\" for aid, c in b.ctx.items())\n    return {\n        \"format_version\": \"0.2\",\n        \"producer\": {\"team\": team, \"product\": product, \"track\": \"cohort-firewall\"},\n        \"data\": {\n            \"dataset\": dataset,\n            \"releases\": [\n                {\"name\": a_name, \"files\": files(rel_a)},\n                {\"name\": b_name, \"files\": files(rel_b)},\n            ],"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-4",
+      "status": "observed",
+      "assessment": "Candidate errors explicitly become Insufficient Evidence. Proposed, rejected, awaiting-review and approved repairs must remain separate.",
+      "findings": [
+        {
+          "kind": "gap",
+          "priority": "P1",
+          "title": "Cohort repair parsing does not consult approval decisions",
+          "observation": "parse_repairs iterates every repair proposal and derives excluded, flagged, restored and relabeled sets without reading decisions. run_cohort calls that parser and applies its mapping during require_file steps. The parser does not distinguish an approved proposal from an explicitly rejected or undecided one.",
+          "impact": "A derived cohort can reflect a proposal that a reviewer rejected. Original source files remain separate; the concern is the authority and labeling of the derivative, not an allegation that source data were overwritten.",
+          "recommendation": "For approved exports, accept only explicit approved decisions bound to the exact findings digest. Retain a separately labeled simulation mode for proposals and make its non-approved status travel with every output file.",
+          "acceptance_check": "Provide a rejected exclusion, an undecided proposal and an approved repair. Only the approved action may affect an approved cohort; a preview may simulate others but must remain unmistakably unapproved.",
+          "confidence": "High for parser and caller control flow; the parallel TESTS.md reports a rejected-exclusion helper reproduction, not a complete UI run.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "sns/engine/cohort.py",
+              "start": 45,
+              "end": 69,
+              "quote": "def parse_repairs(findings_doc):\n    \"\"\"Return dict: file -> {excluded, flagged, restored, relabeled}.\"\"\"\n    result = {}\n    for rep in findings_doc.get(\"repairs\", []):\n        action = rep[\"action\"]\n        for t in rep[\"targets\"]:\n            if t[\"kind\"] != \"sample\":\n                continue\n            sid = str(t[\"id\"])\n            file = t.get(\"file\") or \"\"\n            if file not in result:\n                result[file] = {\"excluded\": set(), \"flagged\": set(),\n                                \"restored\": set(), \"relabeled\": {}}\n            if action == \"exclude\":\n                result[file][\"excluded\"].add(sid)\n            elif action == \"restore_from_previous_release\":\n                result[file][\"restored\"].add(sid)\n            elif action == \"flag_for_review\":\n                result[file][\"flagged\"].add(sid)\n            elif action == \"relabel\":\n                note = t.get(\"note\", \"\")\n                if \"rename back to\" in note:\n                    old_id = note.split(\"rename back to\")[-1].strip()\n                    result[file][\"relabeled\"][sid] = old_id\n    return result"
+            },
+            {
+              "path": "sns/engine/cohort.py",
+              "start": 123,
+              "end": 137,
+              "quote": "def run_cohort(spec, folder_b, folder_a, findings_doc, slides_path=None):\n    \"\"\"Execute spec steps. Return (samples_df, steps_log, applied_repairs).\"\"\"\n    repairs = parse_repairs(findings_doc)\n    all_applied = []\n\n    # Collect all samples from B to start\n    all_b = set()\n    for p in sorted(Path(folder_b).iterdir()):\n        if p.is_file() and p.name.lower().endswith((\".tsv\", \".tsv.gz\", \".csv\", \".csv.gz\")):\n            layer = load_layer(p)\n            if layer:\n                all_b.update(layer.table.index)\n\n    working = set(all_b)\n    flagged = set()"
+            },
+            {
+              "path": "sns/engine/cohort.py",
+              "start": 148,
+              "end": 160,
+              "quote": "        if step_name == \"require_file\":\n            fname = step_def[\"file\"]\n            step_rec[\"params\"][\"file\"] = fname\n            file_b = _file_samples(folder_b, fname)\n            repaired, new_flagged, applied = _apply_file_repairs(file_b, folder_a, fname, repairs)\n            all_applied.extend(applied)\n            flagged |= new_flagged\n            working &= repaired\n            # Flagged samples restored from A may not be in working after the intersect\n            # Add them back if they're in repaired (which they are)\n            for sid in new_flagged:\n                if sid in repaired:\n                    working.add(sid)"
+            }
+          ]
+        },
+        {
+          "kind": "strength",
+          "priority": "P2",
+          "title": "A failed candidate analysis has an explicit uncertainty route",
+          "observation": "Before the no-finding branch, verdict_for checks the candidate analysis error field and returns Insufficient Evidence with its reason. This prevents a known candidate execution failure from automatically taking the ordinary Ready route.",
+          "impact": "The explicit error state is worth retaining even while fixing movement precedence. It does not prove that all invalid numeric values or absent baselines are caught; those require separate coverage.",
+          "recommendation": "Preserve this error-first behavior and extend typed execution states to baseline failure, nonfinite results and missing expected analyses. Avoid interpreting a missing error key as proof that numerical outputs are valid.",
+          "acceptance_check": "Supply an explicit candidate error with no affecting findings and verify Insufficient Evidence. Add baseline-error, nonfinite-output and valid-result controls and document the intended policy for each.",
+          "confidence": "High for the inspected branch; runtime tests were not executed by this reviewer.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "sns/engine/impact.py",
+              "start": 187,
+              "end": 199,
+              "quote": "def verdict_for(affected_by, before, after, min_group=10):\n    if \"error\" in (after or {}):\n        return \"Insufficient Evidence\", f\"analysis failed on the new release: {after['error']}\"\n    if not affected_by:\n        return \"Ready\", \"no finding touches its input files, columns or samples\"\n    nb, na = numeric_fields(public(before)), numeric_fields(public(after))\n    small = {\n        k: v for k, v in na.items()\n        if k.split(\".\")[-1].startswith(\"n_\") and v < min_group\n    }\n    if small:\n        listed = \", \".join(f\"{k}={int(v)}\" for k, v in small.items())\n        return \"Insufficient Evidence\", f\"too few samples after the change: {listed} (minimum {min_group})\""
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-5",
+      "status": "not_tested",
+      "assessment": "The parallel review found no conventional submitted suite in its scope and reports targeted helper probes. This pass did not run the CLI, servers or hosted UI.",
+      "findings": [],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. This pass does not establish runtime behavior or user comprehension."
+    },
+    {
+      "id": "T1-6",
+      "status": "observed",
+      "assessment": "The cohort export is concrete, but flags must not implicitly restore membership and proposals must not override rejection.",
+      "findings": [
+        {
+          "kind": "gap",
+          "priority": "P1",
+          "title": "Flagging an absent sample can also restore it",
+          "observation": "_apply_file_repairs adds a flagged sample back when it is absent from B but present in A, recording flag_for_review_restored. The require_file caller then explicitly re-adds flagged samples after its intersection. The source therefore assigns a membership-changing behavior to a review flag.",
+          "impact": "A flag requests investigation; it does not establish that removal from the newer release was erroneous. A documented withdrawal or corrected inclusion can be reversed before the missing evidence is resolved.",
+          "recommendation": "Keep flagging and restoration as separate operations. An absent sample should remain absent unless an explicit restore proposal is approved with evidence explaining why the earlier membership is authoritative.",
+          "acceptance_check": "Use a synthetic sample deliberately absent from B. Flagging alone must not restore it; a separately authorized restore should be traceable and must not overwrite the original releases.",
+          "confidence": "High for the two membership-addition branches; the retained parallel review reports the helper effect with invented records.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "sns/engine/cohort.py",
+              "start": 89,
+              "end": 113,
+              "quote": "    # Flag-for-review: if sample is still in working, mark it; if dropped from B, add from A\n    samples_a = _file_samples(folder_a, file_name) if folder_a else set()\n    for sid in sorted(flagged_targets):\n        if sid in working:\n            flagged_out.add(sid)\n            applied.append({\"action\": \"flag_for_review\", \"sample\": sid, \"file\": file_name})\n        elif sid in samples_a:\n            working.add(sid)\n            flagged_out.add(sid)\n            applied.append({\"action\": \"flag_for_review_restored\", \"sample\": sid, \"file\": file_name})\n\n    for sid in sorted(restored):\n        if sid in working:\n            applied.append({\"action\": \"restore_from_previous_release\", \"sample\": sid, \"file\": file_name})\n\n    for new_id, old_id in sorted(relabeled.items()):\n        if new_id in working:\n            working.discard(new_id)\n            working.add(old_id)\n            if new_id in flagged_out:\n                flagged_out.discard(new_id)\n                flagged_out.add(old_id)\n            applied.append({\"action\": \"relabel\", \"sample\": new_id, \"renamed_to\": old_id})\n\n    return working, flagged_out, applied"
+            },
+            {
+              "path": "sns/engine/cohort.py",
+              "start": 148,
+              "end": 160,
+              "quote": "        if step_name == \"require_file\":\n            fname = step_def[\"file\"]\n            step_rec[\"params\"][\"file\"] = fname\n            file_b = _file_samples(folder_b, fname)\n            repaired, new_flagged, applied = _apply_file_repairs(file_b, folder_a, fname, repairs)\n            all_applied.extend(applied)\n            flagged |= new_flagged\n            working &= repaired\n            # Flagged samples restored from A may not be in working after the intersect\n            # Add them back if they're in repaired (which they are)\n            for sid in new_flagged:\n                if sid in repaired:\n                    working.add(sid)"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T1-7",
+      "status": "observed",
+      "assessment": "Before/after/repair numbers are useful when clearly labeled as simulations under baseline trust. Fresh-user comprehension and accessibility remain untested.",
+      "findings": [
+        {
+          "kind": "strength",
+          "priority": "P2",
+          "title": "Before, after and simulated repair results are inspectable",
+          "observation": "Each analysis entry includes baseline, candidate and simulated repaired output, inputs, used features, affecting findings and a repair_restores_before equality field. The assessment layer builds a temporary repaired release and removes that temporary directory in finally. These are simulations relative to the assumed baseline, not independent truth checks.",
+          "impact": "The comparison can help a reviewer understand the numerical consequence of a proposal. Recovering an old number does not establish that restoring old data is factually correct, especially when B contains a legitimate correction.",
+          "recommendation": "Label the third result as a baseline-recovery simulation and state the trust assumption beside it. Require independent evidence and human authorization before using simulated recovery as an approved repair.",
+          "acceptance_check": "Demonstrate a legitimate documented correction in B and a separate erroneous alteration. Both may differ from A, but only evidence and a reviewer decision should authorize reversal; equality with A must not substitute for that evidence.",
+          "confidence": "High for exported comparison fields and temporary simulation structure; numerical correctness and baseline truth remain untested.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "sns/engine/findings.py",
+              "start": 427,
+              "end": 450,
+              "quote": "    analyses, verdicts = [], []\n    for aid, c in b.ctx.items():\n        by = [f[\"id\"] for f in findings if aid in f[\"affects_analyses\"]]\n        before = impact[\"before\"].get(aid, {})\n        after = impact[\"after\"].get(aid, {})\n        rep = impact[\"repaired\"].get(aid, {})\n        verdict, reason = verdict_for(by, before, after)\n        verdicts.append(verdict)\n        entry = {\n            \"id\": aid,\n            \"status\": \"changed\" if public(before) != public(after) else \"unchanged\",\n            \"before\": public(before),\n            \"after\": public(after),\n            \"after_repair\": public(rep),\n            \"repair_restores_before\": public(rep) == public(before),\n            \"description\": c[\"description\"],\n            \"inputs\": c[\"inputs\"],\n            \"uses_columns\": c[\"used_features\"],\n            \"affected_by\": by,\n            \"verdict\": verdict,\n            \"reason\": reason,\n        }\n        if not by:\n            entry[\"note\"] = \"not affected by any finding; rerun only to confirm it did not move\""
+            },
+            {
+              "path": "sns/engine/impact.py",
+              "start": 237,
+              "end": 254,
+              "quote": "    before = run_analyses(module, funcs, folder_a)\n    after = run_analyses(module, funcs, folder_b)\n    repaired_dir = build_repaired_release(rel_a, rel_b, diff_report)\n    try:\n        repaired = run_analyses(module, funcs, repaired_dir)\n    finally:\n        shutil.rmtree(repaired_dir, ignore_errors=True)\n    for aid, ctx in context.items():\n        res_a, res_b = before.get(aid, {}), after.get(aid, {})\n        ctx[\"inputs\"] = res_a.get(\"inputs\") or res_b.get(\"inputs\") or sorted(ctx[\"used_features\"])\n        ctx[\"samples\"] = set(res_a.get(\"sample_ids\", [])) | set(res_b.get(\"sample_ids\", []))\n    return {\n        \"analysis_path\": str(analysis_path),\n        \"context\": context,\n        \"before\": before,\n        \"after\": after,\n        \"repaired\": repaired,\n    }"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    }
+  ],
+  "judge_scores": null
+}
