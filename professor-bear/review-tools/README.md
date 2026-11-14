@@ -19,3 +19,5 @@ The [third probe round](synthetic-probes-round3.py) adds full SNS engine cases, 
 [Studio browser checks](studio-browser-qa.py) require the documented isolated synthetic local server and recorded visual dependencies. They check visible results, exports and basic controls; they are not a general deployment test.
 
 [Sampling-unit audit](independence-audit.py) reports aggregate A1 sample/patient-prefix counts and an invented repeated-specimen control. It publishes no participant identifiers and qualifies a conditional statistical limitation.
+
+[Busy Beavers browser checks](busy-browser-qa.py) and [synthetic server setup](busy-browser-server.py) reproduce an invented sample swap through the actual local interface. They require the documented isolated environment and are not general safe executors.

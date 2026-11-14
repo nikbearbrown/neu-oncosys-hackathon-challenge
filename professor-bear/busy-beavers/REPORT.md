@@ -1,8 +1,8 @@
 # Busy Beavers Cohort Firewall: independent first-pass review
 
-Reviewed commit: `bfb369f231bf97a1d3aa21abade3ba4b1406a355`. Updated: **2026-11-14T20:19:23+00:00**. Track 1: Cohort Firewall.
+Reviewed commit: `bfb369f231bf97a1d3aa21abade3ba4b1406a355`. Updated: **2026-11-14T20:44:14+00:00**. Track 1: Cohort Firewall.
 
-**Status: source review plus isolated runtime checks; no verified hosted demo.** No official score is assigned. Runtime observations are labelled per issue; remaining source findings still require reproduction. Exact branches and limitations are stated. No student code or files were changed.
+**Status: source review plus isolated runtime and synthetic browser checks; no verified hosted demo.** No official score is assigned. Runtime observations are labelled per issue; remaining source findings still require reproduction. Exact branches and limitations are stated. No student code or files were changed.
 
 The architecture distinguishes detector output, validated API exports, labelled mocks and dashboard presentation. The most consequential first-pass findings concern the verdict logic, required-input preflight, and the route that turns proposed exclusions into a downloadable modified dataset.
 
@@ -19,6 +19,10 @@ Fixes are recorded separately and a derivative ZIP is built without overwriting 
 ### Deterministic evidence and analysis dependencies
 
 Events produce evidence pointers, limitations, proposed repairs and per-analysis impact reasons. [detection/engine.py:238](https://github.com/GiorgiKarazanashvili/BusyBeavers/blob/bfb369f231bf97a1d3aa21abade3ba4b1406a355/detection/engine.py#L238)
+
+### Local browser workflow observed
+
+Thirteen synthetic smoke checks passed: the actual interface exposed the swapped-profile evidence, showed A1 rerun/A2 unchanged, preserved pending researcher review, and downloaded consistent findings JSON. Search/reset and theme controls worked. No fixes were automatically applied in this tested swap path. This does not test every repair export path or resolve issues 1–7. See [browser evidence and limitations](TESTS.md#local-browser-workflow--synthetic-sample-swap).
 
 ## Issue-by-issue findings
 

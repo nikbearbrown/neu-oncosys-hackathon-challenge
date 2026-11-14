@@ -1,6 +1,6 @@
 # Cross-review status
 
-Updated 2026-11-14T20:23:17+00:00.
+Updated 2026-11-14T20:44:14+00:00.
 
 Each submission has a main REPORT.md, an evolving TESTS.md and HTML/PDF decks. Files named audit-codex-23484638-pass-01 are independent source-only supplements; their accompanying deck and structured review preserve that pass. They use the same pinned submission commits. No numeric scores are awarded here.
 
@@ -26,7 +26,7 @@ The companion source findings and later runtime probes agree. Current suite coun
 
 ## busy-beavers
 
-The companion adds duplicate-ID ordering and rounded-hash concerns. These are linked separately; targeted runtime corroboration now appears in main-report issues 6–7 and TESTS.md. Conditional versus Blocked remains a question-policy judgment, not a universal clinical threshold.
+The companion adds duplicate-ID ordering and rounded-hash concerns. These are linked separately; targeted runtime corroboration now appears in main-report issues 6–7 and TESTS.md. Conditional versus Blocked remains a question-policy judgment, not a universal clinical threshold. Thirteen local synthetic browser checks now corroborate the evidence drill-down, A1/A2 distinction, findings export and pending reviewer state; the hosted application remains unverified.
 
 [Main report](busy-beavers/REPORT.md) · [Current tests](busy-beavers/TESTS.md) · [Companion audit](busy-beavers/audit-codex-23484638-pass-01.md)
 

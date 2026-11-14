@@ -1,6 +1,6 @@
 # Tests and evidence: busy-beavers
 
-Updated 2026-11-14T19:51:28+00:00. The fixed source commit remains the one in [REPORT.md](REPORT.md).
+Updated 2026-11-14T20:44:14+00:00. The fixed source commit remains the one in [REPORT.md](REPORT.md).
 
 ## Submitted tests
 
@@ -59,3 +59,11 @@ The verified public Release A compared with itself returned Ready and zero findi
 ## Companion-audit reproductions
 
 [Exact observations](evidence/supplement-probes.json) · [source](../review-tools/supplement-probes.py). These independently execute the supplemental source concerns on invented fixtures. Busy Beavers has three proposed safeguards met and three unmet, plus a full-engine quantization observation. Cohort Studio has a passing unchanged control and a failed proposed strict-hash safeguard: it explicitly warns and continues. These are not official scoring requirements.
+
+## Local browser workflow — synthetic sample swap
+
+**13 checks passed; zero failed.** Actual Streamlit frontend and FastAPI detector, using two invented 40-sample releases in the same restricted disposable environment. A cross-group protein-profile swap produced one finding and Conditional; A1 reran, A2 remained unchanged. The browser exposed evidence and the limitation that matching profiles do not establish which release is correct. Filtering, reset, findings JSON export, pending researcher review and theme switching worked. No fixes were applied.
+
+[Exact checks and observations](evidence/browser-qa.json) · [desktop viewport](evidence/results-synthetic.png) · [review state](evidence/next-steps-synthetic.png) · [mobile viewport](evidence/mobile-synthetic.png) · [browser script](../review-tools/busy-browser-qa.py) · [synthetic server setup](../review-tools/busy-browser-server.py).
+
+No page script errors or document-level horizontal overflow were observed at 390 px. The mobile navigation occupies substantial vertical space; that remains a usability consideration. Screenshots are viewport observations, not a full responsive/accessibility audit. No hosted service or model provider was called. A first screenshot/check was refined to verify the expanded evidence panel itself; counts describe the final run, not retries. Streamlit's extracted-package development-mode heuristic required an explicit false setting in the test command; this was environment setup, not an application failure. Both temporary servers were stopped after testing.

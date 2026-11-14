@@ -1,7 +1,7 @@
 {
   "title": "Busy Beavers Cohort Firewall",
   "commit": "bfb369f231bf97a1d3aa21abade3ba4b1406a355",
-  "updated": "2026-11-14T20:19:23+00:00",
+  "updated": "2026-11-14T20:44:14+00:00",
   "slides": [
     {
       "title": "Busy Beavers Cohort Firewall",
@@ -86,10 +86,10 @@
     {
       "title": "What is verified so far",
       "before": "65 tests passed",
-      "after": "0 tests skipped",
+      "after": "13 browser checks passed",
       "fix": "Read TESTS.md for skips, positive controls and limits.",
       "source": "TESTS.md",
-      "notes": "65 passed, 0 skipped, 0 failed. Targeted synthetic observations are detailed in TESTS.md and are not a score.",
+      "notes": "65 submitted tests passed. Thirteen local synthetic browser checks passed using actual Streamlit and FastAPI code; evidence, filtering, export and pending review observed. No hosted, clinical or full accessibility validation.",
       "status": "LIMITS",
       "kind": "compare"
     }
