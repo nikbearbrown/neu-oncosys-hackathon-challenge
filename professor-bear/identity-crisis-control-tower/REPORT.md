@@ -133,3 +133,9 @@ A separate reviewer supplied [a detailed source audit](audit-codex-23484638-pass
 
 
 The companion also has a [concise revised deck](slides-codex-23484638-pass-02.html), [full slide notes](slides-codex-23484638-pass-02.md) and a [cross-review reading guide](../review-guide-codex-23484638.md). These preserve the source review; current runtime observations remain in TESTS.md.
+
+## Later UI-Scoped Qualification
+
+The earlier nondefault-bypass wording describes `assess` and `run_checks`, whose callable defaults are strict. It does not describe the fresh browser default: [app.py:495-501](https://github.com/AravindKumar2504/identity-crisis-control-tower/blob/380760dc3b7b61097756f2b85c0f462feadc802c/app.py#L495-L501) initializes `allow_missing=True` and the analysis caller passes it through. The UI discloses the option and pending-check meaning. This is a conditional policy concern when a required check is unavailable, not evidence that every current built-in card lacks checks.
+
+The [UI-state follow-through](audit-codex-23484638-pass-03.md) also narrows the broad input-change sign-off claim: stored receipt digests and the live invalidation signature are separate controls. Its cache, summary and signature consequences are source-derived and need targeted session tests. The [coverage qualification](coverage-note-codex-23484638.md) records declarations for every required check in all eight inspected built-in cards, without claiming successful imports or execution. Earlier tests and their API-level observations remain valid within their stated scope.

@@ -49,3 +49,7 @@ The first companion is a source review with attributed helper probes. Later main
 - Targeted synthetic probes are deliberately selected cases, not representative failure rates. Submitted test counts differ in scope and are not a leaderboard.
 - The public baseline is not a sealed challenge. No unseen judging input was opened.
 - Clinical meaning, sampling independence, deployment security and full accessibility still require qualified human review.
+
+## Later Entry-Point Qualification
+
+For Identity Crisis, the earlier "development bypass is non-default" statement applies to the callable API. The [later UI-state audit](identity-crisis-control-tower/audit-codex-23484638-pass-03.md) identifies the browser's explicit permissive initialization and separately traces cache and sign-off applicability. Those new session-level consequences remain source-derived in that reviewer's pass. The [declaration-coverage note](identity-crisis-control-tower/coverage-note-codex-23484638.md) confirms matching source declarations for all required names in eight inspected built-in cards, without proving runtime availability. These qualifications preserve the earlier API control rather than treating it as a fresh-session browser test.
