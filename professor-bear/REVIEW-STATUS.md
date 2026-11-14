@@ -38,7 +38,7 @@ The companion adds reconstruction after a hash mismatch. It distinguishes a perm
 
 ## sns-cohort-control-tower
 
-The first companion is a source review with attributed helper probes. Later main-report evidence adds the full small-matrix engine reproduction, the generated A2-script failure and a synthetic browser smoke test. The [20:19 UTC reconstruction supplement](sns-cohort-control-tower/audit-codex-23484638-pass-03.md) adds missing-filter and cross-release fallback concerns; its A2 serialization finding overlaps the already reproduced main-report issue 6.
+The first companion is a source review with attributed helper probes. Later main-report evidence adds the full small-matrix engine reproduction, the generated A2-script failure and a synthetic browser smoke test. The [20:19 UTC reconstruction supplement](sns-cohort-control-tower/audit-codex-23484638-pass-03.md) adds missing-filter and cross-release fallback concerns, now reproduced through four synthetic CLI/script cases; its A2 serialization finding overlaps the already reproduced main-report issue 6.
 
 [Main report](sns-cohort-control-tower/REPORT.md) · [Current tests](sns-cohort-control-tower/TESTS.md) · [Companion audit](sns-cohort-control-tower/audit-codex-23484638-pass-01.md)
 

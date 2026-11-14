@@ -1,7 +1,7 @@
 {
   "title": "SNS Cohort Control Tower",
   "commit": "c1e8b79a2987cee6087d847867f9895deaa109a4",
-  "updated": "2026-11-14T20:11:00+00:00",
+  "updated": "2026-11-14T20:26:17+00:00",
   "slides": [
     {
       "title": "SNS Cohort Control Tower",
@@ -71,6 +71,26 @@
       "source": "https://github.com/saigunavardhan/sns-cohort-control-tower/blob/c1e8b79a2987cee6087d847867f9895deaa109a4/sns/cohort.py#L27",
       "notes": "A2 generated script failed with NameError on true. A1 control exited successfully. Only invented data were used in the restricted sandbox.",
       "status": "REPRODUCED",
+      "kind": "compare"
+    },
+    {
+      "title": "7 \u00b7 Missing required filter evidence becomes a successful no-op",
+      "before": "Required field absent",
+      "after": "40 records exported",
+      "fix": "Validate required fields before export. Report missing prerequisites as unavailable and distinguish diagnostic output from an approved cohort.",
+      "source": "https://github.com/saigunavardhan/sns-cohort-control-tower/blob/c1e8b79a2987cee6087d847867f9895deaa109a4/sns/engine/cohort.py#L166",
+      "notes": "A1 requires a Positive or Negative ER status. On a synthetic 40-sample fixture with that column absent, the actual cohort CLI exited 0, exported all 40 records and logged require_value with an unchanged count and no unavailable/error flag. The normal control excluded the one Indeterminate record and exported 39. Matching the reconstruction to this permissive result does not establish eligibility.",
+      "status": "REPRODUCED \u00b7 SYNTHETIC CLI",
+      "kind": "compare"
+    },
+    {
+      "title": "8 \u00b7 Reconstruction does not use the same clinical inputs",
+      "before": "Main export: 39",
+      "after": "Reconstruction: 40",
+      "fix": "Use one shared transformation implementation or serialize the resolved input map, filenames, hashes and fallback policy. Require exact membership parity.",
+      "source": "https://github.com/saigunavardhan/sns-cohort-control-tower/blob/c1e8b79a2987cee6087d847867f9895deaa109a4/sns/cohort.py#L78",
+      "notes": "With clinical data absent from B, the main A1 CLI used A and exported 39 synthetic records; its generated script exited 0 but exported 40. With B clinical.csv instead of clinical.tsv, the main CLI again exported 39 and the script 40. The normal B clinical.tsv control matched at 39. Both mismatches added the same invented ineligible record. These are exact membership comparisons, not only a count mismatch.",
+      "status": "REPRODUCED \u00b7 SYNTHETIC CLI",
       "kind": "compare"
     },
     {

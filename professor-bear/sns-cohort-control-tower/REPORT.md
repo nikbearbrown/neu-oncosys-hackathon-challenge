@@ -1,6 +1,6 @@
 # SNS Cohort Control Tower: independent first-pass review
 
-Reviewed commit: `c1e8b79a2987cee6087d847867f9895deaa109a4`. Updated: **2026-11-14T20:11:00+00:00**. Track 1: Cohort Firewall.
+Reviewed commit: `c1e8b79a2987cee6087d847867f9895deaa109a4`. Updated: **2026-11-14T20:26:17+00:00**. Track 1: Cohort Firewall.
 
 **Status: source review plus isolated runtime checks; no verified hosted demo.** No official score is assigned. Runtime observations are labelled per issue; remaining source findings still require reproduction. Exact branches and limitations are stated. No student code or files were changed.
 
@@ -102,6 +102,30 @@ The generator places json.dumps(spec) directly into Python source. The built-in 
 
 **Acceptance check:** Execute the generated scripts for both built-in A1 and A2 and custom specs containing true/false/null equivalents. Syntax parsing alone is insufficient because lowercase true is a valid Python name.
 
+### 7. Missing required filter evidence becomes a successful no-op
+
+**Priority: high. Evidence: inspected source, actual CLI and generated-script execution on synthetic data.**
+
+A1 requires a Positive or Negative ER status. On a synthetic 40-sample fixture with that column absent, the actual cohort CLI exited 0, exported all 40 records and logged require_value with an unchanged count and no unavailable/error flag. The normal control excluded the one Indeterminate record and exported 39. Matching the reconstruction to this permissive result does not establish eligibility.
+
+**Evidence:** [sns/engine/cohort.py:166](https://github.com/saigunavardhan/sns-cohort-control-tower/blob/c1e8b79a2987cee6087d847867f9895deaa109a4/sns/engine/cohort.py#L166); [exact observations](evidence/reconstruction-parity.json); [source-only companion](audit-codex-23484638-pass-03.md).
+
+**Concrete change:** Validate required fields before export. Report missing prerequisites as unavailable and distinguish diagnostic output from an approved cohort.
+
+**Acceptance check:** A missing ER field cannot be reported as a successfully evaluated eligibility filter; the complete control should still select exactly 39 of 40 invented records.
+
+### 8. Reconstruction does not use the same clinical inputs
+
+**Priority: high. Evidence: inspected source, actual CLI and generated-script execution on synthetic data.**
+
+With clinical data absent from B, the main A1 CLI used A and exported 39 synthetic records; its generated script exited 0 but exported 40. With B clinical.csv instead of clinical.tsv, the main CLI again exported 39 and the script 40. The normal B clinical.tsv control matched at 39. Both mismatches added the same invented ineligible record. These are exact membership comparisons, not only a count mismatch.
+
+**Evidence:** [sns/cohort.py:78](https://github.com/saigunavardhan/sns-cohort-control-tower/blob/c1e8b79a2987cee6087d847867f9895deaa109a4/sns/cohort.py#L78); [exact observations](evidence/reconstruction-parity.json); [source-only companion](audit-codex-23484638-pass-03.md).
+
+**Concrete change:** Use one shared transformation implementation or serialize the resolved input map, filenames, hashes and fallback policy. Require exact membership parity.
+
+**Acceptance check:** Test ordinary TSV, CSV and explicitly permitted previous-release fallback. Generated reconstruction must match exact selected IDs and flags, or fail with an explicit unsupported-input message.
+
 ## Exact official rubric: evidence, not scores
 
 The maximum points below reproduce the official track weights. They are not points awarded. Supplemental dashboard and data-quality rules do not add scoring criteria.
@@ -152,4 +176,4 @@ A separate reviewer supplied [a detailed source audit](audit-codex-23484638-pass
 
 [Reconstruction follow-through audit](audit-codex-23484638-pass-03.md) · [Issue deck](slides-codex-23484638-pass-03.html) · [Markdown deck](slides-codex-23484638-pass-03.md)
 
-This separate source-only pass covers missing filter prerequisites, inconsistent cross-release fallback and A2 JSON serialization. The A2 serialization issue overlaps main-report issue 6, already reproduced at runtime; count it once. The two other findings remain source observations until their acceptance checks are executed.
+This separate source-only pass covers missing filter prerequisites, inconsistent cross-release fallback and A2 JSON serialization. The A2 serialization issue overlaps main-report issue 6, already reproduced at runtime; count it once. The two other findings are now reproduced through the actual CLI and generated scripts in main-report issues 7–8 and TESTS.md.

@@ -1,6 +1,7 @@
 {
-  "pages": 8,
-  "expected_pages": 8,
+  "pages": 10,
+  "expected_pages": 10,
   "nonempty_text": true,
-  "visual_review": "All rendered pages inspected, including the added SNS reproduction-script issue; no clipping or overlap observed."
+  "visual_review": "All ten rendered slides inspected; no clipped or overlapping content observed.",
+  "reviewed_at": "2026-11-14T20:27:41+00:00"
 }
