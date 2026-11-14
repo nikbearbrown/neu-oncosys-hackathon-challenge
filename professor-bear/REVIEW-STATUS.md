@@ -20,7 +20,7 @@ The companion predates the corrected four-sample full API case. The latest runti
 
 ## identity-crisis-control-tower
 
-The companion source findings and later runtime probes agree. Current suite counts are 96 passed and three skipped; development bypass is non-default and the default unknown-check path fails closed.
+The companion source findings and later runtime probes agree. Current suite counts are 96 passed and three skipped; development bypass is non-default and the default unknown-check path fails closed. The later public A1 audit found 698 eligible samples with 698 distinct patient prefixes, so the bootstrap concern is a conditional method note, not an observed repeated-patient defect in that cohort.
 
 [Main report](identity-crisis-control-tower/REPORT.md) · [Current tests](identity-crisis-control-tower/TESTS.md) · [Companion audit](identity-crisis-control-tower/audit-codex-23484638-pass-01.md)
 
@@ -32,7 +32,7 @@ The companion adds duplicate-ID ordering and rounded-hash concerns. These are li
 
 ## oncosys-cohort-studio
 
-The companion adds reconstruction after a hash mismatch. It distinguishes a permissive warning policy from strict reproducibility. The main report separately tests request serialization and unknown checksum states. New issue 6 reproduces the warning-and-continue policy using a changed synthetic manifest; these are different issues.
+The companion adds reconstruction after a hash mismatch. It distinguishes a permissive warning policy from strict reproducibility. The main report also records 13 passing synthetic local browser checks, with AI off and no hosted verification. It separately tests request serialization and unknown checksum states. New issue 6 reproduces the warning-and-continue policy using a changed synthetic manifest; these are different issues.
 
 [Main report](oncosys-cohort-studio/REPORT.md) · [Current tests](oncosys-cohort-studio/TESTS.md) · [Companion audit](oncosys-cohort-studio/audit-codex-23484638-pass-01.md)
 

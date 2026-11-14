@@ -42,3 +42,9 @@ The following are targeted recommendations and controls, not additional official
 | Count beside mean equals measured count | 19 | 20 | No |
 
 For Tripwire, release compatibility and question adequacy are distinct outputs. For Identity Crisis, the bypass is explicitly non-default. For export checks, a diagnostic export can be legitimate when its restrictions remain clear. See REPORT.md for these interpretation limits.
+
+## Sampling-unit qualification — 2026-11-14T20:35:36+00:00
+
+[Aggregate-only audit](evidence/independence-audit.json) · [Probe source](../review-tools/independence-audit.py). The checksum-verified public A1 selection contained 698 eligible samples and 698 distinct 12-character patient barcode prefixes; none had multiple eligible samples. All 698 values were measured (529 positive and 169 negative). This is an identifier-based check, not external verification of identity. It does not identify the repeated-patient problem in this actual cohort.
+
+A separate invented six-patient-per-group fixture repeated each value into ten specimens. The unchanged submitted resampling function produced a narrower interval (width 1.25 instead of 4.00) despite no additional independent patients. This supports documenting its sampling-unit assumption for future inputs; it is not an extra official failure or evidence of an invalid current interval. No raw patient record or identifier was published.

@@ -1,0 +1,33 @@
+{
+  "public_release_A": {
+    "eligible_samples": 698,
+    "barcode_derived_patients": 698,
+    "patients_with_multiple_eligible_samples": 0,
+    "maximum_samples_per_patient": 1,
+    "measured_positive": 529,
+    "measured_negative": 169
+  },
+  "method": {
+    "method": "percentile bootstrap: samples are redrawn with replacement within each ER group",
+    "resamples": 1000,
+    "seed": 7,
+    "interval": "2.5th to 97.5th percentile of the resampled differences",
+    "generator": "numpy.random.default_rng",
+    "numpy": "2.3.5"
+  },
+  "synthetic_repeated_specimens": {
+    "independent_patients_per_group": 6,
+    "specimens_per_patient": 10,
+    "base_interval": [
+      -0.9999999999999998,
+      3.0
+    ],
+    "repeated_specimen_interval": [
+      0.40000000000000013,
+      1.6500000000000001
+    ],
+    "base_width": 4.0,
+    "repeated_specimen_width": 1.25,
+    "interpretation": "The function treats supplied specimens as independent. This fixture shows the assumption matters; it is not evidence that the public cohort contains these repeats."
+  }
+}

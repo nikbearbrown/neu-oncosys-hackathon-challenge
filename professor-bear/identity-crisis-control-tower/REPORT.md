@@ -1,6 +1,6 @@
 # Identity Crisis Control Tower: independent first-pass review
 
-Reviewed commit: `380760dc3b7b61097756f2b85c0f462feadc802c`. Updated: **2026-11-14T20:04:21+00:00**. Track 1: Cohort Firewall.
+Reviewed commit: `380760dc3b7b61097756f2b85c0f462feadc802c`. Updated: **2026-11-14T20:35:36+00:00**. Track 1: Cohort Firewall.
 
 **Status: source review plus isolated runtime checks; no verified hosted demo.** No official score is assigned. Runtime observations are labelled per issue; remaining source findings still require reproduction. Exact branches and limitations are stated. No student code or files were changed.
 
@@ -80,7 +80,9 @@ A1 computes means with missing values skipped but reports n_positive and n_negat
 
 ### 5. Bootstrap independence needs a stated unit
 
-**Priority: medium. Evidence: source inspection; runtime reproduction pending.**
+**Priority: methodological note; no repeated-patient defect observed in the public A1 cohort. Evidence: source, aggregate public-input audit and synthetic repeated-specimen probe.**
+
+**Runtime qualification:** All 698 eligible public Release A samples had distinct 12-character patient barcode prefixes; 529 positive and 169 negative measurements were present. No repeated-patient issue was found in this selected cohort. An invented six-patient-per-group fixture, copied into ten specimens per patient, narrowed the sample-resampling interval from width 4.00 to 1.25 while adding no independent patients. That demonstrates the conditional assumption, not a defect in the event cohort. [Aggregate counts and synthetic result](evidence/independence-audit.json).
 
 The percentile bootstrap redraws observations within each ER group. The method, seed and repetitions are documented, which is good. If distinct sample IDs represent repeated specimens from a patient, independent observation resampling can overstate precision. This is a conditional statistical limitation, not an observed failure on the event dataset.
 
@@ -128,3 +130,6 @@ A statistician should review adequacy thresholds, interval assumptions and claim
 ## Companion source audit
 
 A separate reviewer supplied [a detailed source audit](audit-codex-23484638-pass-01.md) and [an issue deck](slides-codex-23484638-pass-01.html) ([Markdown version](slides-codex-23484638-pass-01.md)), committed 2026-11-14T15:04:09-05:00. The companion source findings and later runtime probes agree. Current suite counts are 96 passed and three skipped; development bypass is non-default and the default unknown-check path fails closed. The companion's “not run” statements describe that reviewer's pass, not all testing in this folder. [Cross-review status](../REVIEW-STATUS.md) explains the relationship.
+
+
+The companion also has a [concise revised deck](slides-codex-23484638-pass-02.html), [full slide notes](slides-codex-23484638-pass-02.md) and a [cross-review reading guide](../review-guide-codex-23484638.md). These preserve the source review; current runtime observations remain in TESTS.md.

@@ -160,3 +160,6 @@ Latest unchanged-public-input control: verified frozen Release A versus itself r
 ## Companion source audit
 
 A separate reviewer supplied [a detailed source audit](audit-codex-23484638-pass-01.md) and [an issue deck](slides-codex-23484638-pass-01.html) ([Markdown version](slides-codex-23484638-pass-01.md)), committed 2026-11-14T14:59:17-05:00. The companion adds duplicate-ID ordering and rounded-hash concerns. These are linked separately; targeted runtime corroboration now appears in main-report issues 6–7 and TESTS.md. Conditional versus Blocked remains a question-policy judgment, not a universal clinical threshold. The companion's “not run” statements describe that reviewer's pass, not all testing in this folder. [Cross-review status](../REVIEW-STATUS.md) explains the relationship.
+
+
+The companion also has a [concise revised deck](slides-codex-23484638-pass-02.html), [full slide notes](slides-codex-23484638-pass-02.md) and a [cross-review reading guide](../review-guide-codex-23484638.md). These preserve the source review; current runtime observations remain in TESTS.md.

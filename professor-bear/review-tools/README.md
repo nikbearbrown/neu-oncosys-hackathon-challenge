@@ -15,3 +15,7 @@ The [third probe round](synthetic-probes-round3.py) adds full SNS engine cases, 
 [Supplement probes](supplement-probes.py) corroborate selected findings from the independent source audit. Generated reconstruction code was inspected and executed only with invented data in the restricted environment.
 
 [SNS reconstruction probes](sns-reconstruction-probes.py) compare exact synthetic cohort membership between the actual CLI and its generated scripts, including a complete-input control, a missing eligibility column, cross-release fallback and a CSV clinical file.
+
+[Studio browser checks](studio-browser-qa.py) require the documented isolated synthetic local server and recorded visual dependencies. They check visible results, exports and basic controls; they are not a general deployment test.
+
+[Sampling-unit audit](independence-audit.py) reports aggregate A1 sample/patient-prefix counts and an invented repeated-specimen control. It publishes no participant identifiers and qualifies a conditional statistical limitation.

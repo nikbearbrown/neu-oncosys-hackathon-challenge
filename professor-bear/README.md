@@ -11,7 +11,7 @@ Read each detailed report and issue-by-issue deck together. Work through the iss
 | Cohort Studio | [Report](oncosys-cohort-studio/REPORT.md) | [PDF](oncosys-cohort-studio/slides.pdf) | [HTML](oncosys-cohort-studio/slides.html) | [Tests](oncosys-cohort-studio/TESTS.md) |
 | SNS Control Tower | [Report](sns-cohort-control-tower/REPORT.md) | [PDF](sns-cohort-control-tower/slides.pdf) | [HTML](sns-cohort-control-tower/slides.html) | [Tests](sns-cohort-control-tower/TESTS.md) |
 
-Updated 2026-11-14T20:26:17+00:00. Download HTML decks to open them locally; GitHub renders the PDFs directly. Each deck presents one issue at a time. No official numerical scores are assigned.
+Updated 2026-11-14T20:33:48+00:00. Download HTML decks to open them locally; GitHub renders the PDFs directly. Each deck presents one issue at a time. No official numerical scores are assigned.
 
 Submitted-suite results: ReadySet **107 unit tests plus 38 public mutation cases passed**; Tripwire **404 passed / 1 skipped**; Identity Crisis **96 passed / 3 skipped**; Busy Beavers **65 passed**; Cohort Studio **299 passed**. No submitted SNS test suite was found; its independent synthetic checks are documented. These suites cover different assertions and are not a ranking.
 
@@ -41,3 +41,5 @@ These independently authored supplements are preserved alongside the main runtim
 [Reconstruction follow-through audit](sns-cohort-control-tower/audit-codex-23484638-pass-03.md) · [Issue deck](sns-cohort-control-tower/slides-codex-23484638-pass-03.html) · [Markdown deck](sns-cohort-control-tower/slides-codex-23484638-pass-03.md)
 
 Source-only supplement. A2 serialization overlaps the main runtime finding; missing-filter and fallback concerns are now additionally reproduced in main-report issues 7–8. Do not double-count overlapping issues.
+
+Latest browser check: Cohort Studio passed 13 local smoke checks using invented data, with consistent cohort/audit exports and a visible Blocked result. See its TESTS.md and screenshots for scope and mobile-layout limits.

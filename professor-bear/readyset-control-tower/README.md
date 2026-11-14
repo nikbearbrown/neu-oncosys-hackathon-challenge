@@ -17,3 +17,6 @@ probes: they test recommended guards and include scoped limitations.
 ## Companion source audit
 
 A separate reviewer supplied [a detailed source audit](audit-codex-23484638-pass-01.md) and [an issue deck](slides-codex-23484638-pass-01.html) ([Markdown version](slides-codex-23484638-pass-01.md)), committed 2026-11-14T14:53:45-05:00. The companion is a source audit. The main report adds 107 submitted tests, synthetic regressions, a production build and browser checks, plus the later public unchanged-input control. The companion's “not run” statements describe that reviewer's pass, not all testing in this folder. [Cross-review status](../REVIEW-STATUS.md) explains the relationship.
+
+
+The companion also has a [concise revised deck](slides-codex-23484638-pass-02.html), [full slide notes](slides-codex-23484638-pass-02.md) and a [cross-review reading guide](../review-guide-codex-23484638.md). These preserve the source review; current runtime observations remain in TESTS.md.

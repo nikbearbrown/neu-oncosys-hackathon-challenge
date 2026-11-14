@@ -1,7 +1,7 @@
 {
   "title": "Identity Crisis Control Tower",
   "commit": "380760dc3b7b61097756f2b85c0f462feadc802c",
-  "updated": "2026-11-14T20:04:21+00:00",
+  "updated": "2026-11-14T20:35:36+00:00",
   "slides": [
     {
       "title": "Identity Crisis Control Tower",
@@ -55,12 +55,12 @@
     },
     {
       "title": "5 \u00b7 Bootstrap independence needs a stated unit",
-      "before": "Resample samples",
-      "after": "Check patient dependence",
+      "before": "698 eligible samples",
+      "after": "698 patient prefixes",
       "fix": "State the sampling unit and verify one independent patient per unit, or use patient-cluster resampling when the question requires it.",
       "source": "https://github.com/AravindKumar2504/identity-crisis-control-tower/blob/380760dc3b7b61097756f2b85c0f462feadc802c/tower/robustness.py#L43",
-      "notes": "The percentile bootstrap redraws observations within each ER group. The method, seed and repetitions are documented, which is good. If distinct sample IDs represent repeated specimens from a patient, independent observation resampling can overstate precision. This is a conditional statistical limitation, not an observed failure on the event dataset. Acceptance: A statistician reviews the interval and a repeated-patient synthetic example; document the supported independence assumption.",
-      "status": "SOURCE FINDING \u00b7 MEDIUM",
+      "notes": "No repeated-patient issue was found in the verified public A1 selection. A separate synthetic specimen-duplication probe narrows the sample bootstrap interval without adding patients. Document the independence assumption for future data; do not count this as an observed event-cohort defect.",
+      "status": "METHOD NOTE \u00b7 PUBLIC CONTROL",
       "kind": "compare"
     },
     {

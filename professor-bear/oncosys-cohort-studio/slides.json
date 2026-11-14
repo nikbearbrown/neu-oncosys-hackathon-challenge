@@ -1,7 +1,7 @@
 {
   "title": "Cohort Studio",
   "commit": "54aeacb6f6f355a1dcaa42d7abf2ce174315ad69",
-  "updated": "2026-11-14T20:19:23+00:00",
+  "updated": "2026-11-14T20:33:48+00:00",
   "slides": [
     {
       "title": "Cohort Studio",
@@ -76,10 +76,10 @@
     {
       "title": "What is verified so far",
       "before": "299 tests passed",
-      "after": "0 tests skipped",
+      "after": "13 browser checks passed",
       "fix": "Read TESTS.md for skips, positive controls and limits.",
       "source": "TESTS.md",
-      "notes": "299 passed, 0 skipped, 0 failed. Targeted synthetic observations are detailed in TESTS.md and are not a score.",
+      "notes": "299 submitted tests passed, zero skipped. Thirteen local browser smoke checks passed with invented data and AI off. Mobile labels still need layout review; no hosted or full accessibility verification.",
       "status": "LIMITS",
       "kind": "compare"
     }

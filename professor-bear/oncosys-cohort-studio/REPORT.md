@@ -1,8 +1,8 @@
 # Cohort Studio: independent first-pass review
 
-Reviewed commit: `54aeacb6f6f355a1dcaa42d7abf2ce174315ad69`. Updated: **2026-11-14T20:19:23+00:00**. Track 1: Cohort Firewall.
+Reviewed commit: `54aeacb6f6f355a1dcaa42d7abf2ce174315ad69`. Updated: **2026-11-14T20:33:48+00:00**. Track 1: Cohort Firewall.
 
-**Status: source review plus isolated runtime checks; no verified hosted demo.** No official score is assigned. Runtime observations are labelled per issue; remaining source findings still require reproduction. Exact branches and limitations are stated. No student code or files were changed.
+**Status: source review plus isolated runtime and browser checks; no verified hosted demo.** No official score is assigned. Runtime observations are labelled per issue; remaining source findings still require reproduction. Exact branches and limitations are stated. No student code or files were changed.
 
 This is a cohort-construction product, not a release-difference tower. Its strongest source features are explicit steps, row/sample/patient counts, join-inflation detection, composition shifts and reproducible exports. The first-pass review focuses on provenance truthfulness, safe generation of reproduction scripts and explicit approval of automated changes.
 
@@ -142,3 +142,10 @@ A statistician should review adequacy thresholds, interval assumptions and claim
 ## Companion source audit
 
 A separate reviewer supplied [a detailed source audit](audit-codex-23484638-pass-01.md) and [an issue deck](slides-codex-23484638-pass-01.html) ([Markdown version](slides-codex-23484638-pass-01.md)), committed 2026-11-14T15:08:02-05:00. The companion adds reconstruction after a hash mismatch. It distinguishes a permissive warning policy from strict reproducibility. The main report separately tests request serialization and unknown checksum states; these are different issues. The companion's “not run” statements describe that reviewer's pass, not all testing in this folder. [Cross-review status](../REVIEW-STATUS.md) explains the relationship.
+
+## Observed local browser workflow
+
+Thirteen smoke checks passed on the invented 12-sample fixture: the visible 12-to-8 flow, eight unique exported samples, 12-row audit trail, Blocked reason, separate verdict metadata and basic controls agreed. [Results and limits](TESTS.md) are recorded in TESTS.md; [desktop](evidence/result-synthetic.png) and [mobile](evidence/mobile-synthetic.png) screenshots show the actual interface. AI was off and external services were blocked. No horizontal page overflow occurred at 390px, but the mobile reason truncates and the status-chip column needs more space. This does not establish full accessibility or negate the separate data-integrity findings.
+
+
+The companion also has a [concise revised deck](slides-codex-23484638-pass-02.html), [full slide notes](slides-codex-23484638-pass-02.md) and a [cross-review reading guide](../review-guide-codex-23484638.md). These preserve the source review; current runtime observations remain in TESTS.md.

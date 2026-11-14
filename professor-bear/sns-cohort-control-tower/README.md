@@ -25,3 +25,6 @@ A separate reviewer supplied [a detailed source audit](audit-codex-23484638-pass
 [Reconstruction follow-through audit](audit-codex-23484638-pass-03.md) · [Issue deck](slides-codex-23484638-pass-03.html) · [Markdown deck](slides-codex-23484638-pass-03.md)
 
 This separate source-only pass covers missing filter prerequisites, inconsistent cross-release fallback and A2 JSON serialization. The A2 serialization issue overlaps main-report issue 6, already reproduced at runtime; count it once. The two other findings are now reproduced through the actual CLI and generated scripts in main-report issues 7–8 and TESTS.md.
+
+
+The companion also has a [concise revised deck](slides-codex-23484638-pass-02.html), [full slide notes](slides-codex-23484638-pass-02.md) and a [cross-review reading guide](../review-guide-codex-23484638.md). These preserve the source review; current runtime observations remain in TESTS.md.

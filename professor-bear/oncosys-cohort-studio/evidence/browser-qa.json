@@ -1,0 +1,81 @@
+{
+  "timestamp": "2026-11-14T20:32:02.013868+00:00",
+  "source_commit": "54aeacb6f6f355a1dcaa42d7abf2ce174315ad69",
+  "browser": "157.0.8103.51",
+  "fixture": "Submitted invented 12-sample/8-patient fixture; local-only AI disabled",
+  "external_requests_blocked": [
+    "https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&family=JetBrains+Mono:wght@400;500&display=swap"
+  ],
+  "checks": [
+    {
+      "check": "AI-off state visible",
+      "passed": true
+    },
+    {
+      "check": "Human can inspect protocol before running",
+      "passed": true
+    },
+    {
+      "check": "Eight samples and eight patients shown",
+      "passed": true
+    },
+    {
+      "check": "Small-cohort Blocked state visible",
+      "passed": true
+    },
+    {
+      "check": "12 to 8 flow and four exclusions visible",
+      "passed": true
+    },
+    {
+      "check": "Downloaded cohort has eight unique samples",
+      "passed": true
+    },
+    {
+      "check": "Audit export accounts for 12 input samples",
+      "passed": true
+    },
+    {
+      "check": "Separate verdict export retains Blocked",
+      "passed": true
+    },
+    {
+      "check": "Theme toggle changes theme",
+      "passed": true
+    },
+    {
+      "check": "Advanced-search dialog opens",
+      "passed": true
+    },
+    {
+      "check": "Advanced-search dialog closes",
+      "passed": true
+    },
+    {
+      "check": "No document horizontal overflow at 390px",
+      "passed": true
+    },
+    {
+      "check": "No browser script errors",
+      "passed": true
+    }
+  ],
+  "script_errors": [],
+  "observations": {
+    "verdict_export_keys": [
+      "verdict",
+      "reason",
+      "checks",
+      "human_review",
+      "decision_rule",
+      "limitations",
+      "headline"
+    ],
+    "verdict_export": "Blocked",
+    "mobile_dimensions": {
+      "width": 390,
+      "documentWidth": 390
+    }
+  },
+  "limits": "No hosted demo, real patient rows, external model or full accessibility audit. Four exact pinned CDN scripts were served from recorded local copies; Google fonts were blocked, with fallback fonts. Reduced motion enabled."
+}
