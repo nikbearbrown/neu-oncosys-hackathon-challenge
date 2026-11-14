@@ -1,0 +1,27 @@
+{
+  "repo": "identity-crisis-control-tower",
+  "exit": 0,
+  "seconds": 1.86,
+  "command": [
+    "/usr/bin/sandbox-exec",
+    "-f",
+    "/private/tmp/oncosys-runtime-k2vhjg41/sandbox.sb",
+    "/private/tmp/oncosys-runtime-k2vhjg41/venv/bin/python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-v"
+  ],
+  "env_keys": [
+    "PATH",
+    "TMPDIR",
+    "PYTHONPATH",
+    "PYTHONNOUSERSITE",
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD",
+    "COHORT_STUDIO_HOSTED",
+    "COHORT_STUDIO_NO_DOTENV",
+    "MPLCONFIGDIR"
+  ]
+}

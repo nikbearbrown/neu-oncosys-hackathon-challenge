@@ -1,8 +1,8 @@
 # Tripwire / Driftwire: independent first-pass review
 
-Reviewed commit: `45df43640836025b40e89fc190f913ad694a6011`. Updated: **2026-11-14T19:40:03+00:00**. Track 1: Cohort Firewall.
+Reviewed commit: `45df43640836025b40e89fc190f913ad694a6011`. Updated: **2026-11-14T19:51:28+00:00**. Track 1: Cohort Firewall.
 
-**Status: source review, not a verified live demo.** No official score is assigned. Source findings below are hypotheses about reachable runtime behavior unless labelled otherwise; exact branches and limitations are stated. No student code or files were changed.
+**Status: source review plus isolated runtime checks; no verified hosted demo.** No official score is assigned. Runtime observations are labelled per issue; remaining source findings still require reproduction. Exact branches and limitations are stated. No student code or files were changed.
 
 The code separates release-change compatibility from model-training readiness, includes question-specific dependencies, and reruns nominally unaffected analyses as a cross-check. The first priorities are verdict precedence and completeness of the human-review state. No claim about its real-data detection rate is independently verified in this first pass.
 
@@ -24,7 +24,9 @@ The helper rejects unknown repairs, unknown decisions, blank reasons and blank r
 
 ### 1. Insufficient samples are checked after the unaffected branch
 
-**Priority: high. Evidence: source inspection; runtime reproduction pending.**
+**Priority: high. Evidence: source and isolated runtime reproduction.**
+
+**Runtime update:** Direct helper reproduction returned Ready for an unmoved Movement with insufficient=True. Positive controls return Insufficient Evidence when affected=True and Blocked for unexplained movement. The first full API tiny-fixture control returned Blocked (A1 Blocked, A2 Ready), so this result proves the helper precedence defect, not that every small cohort escapes the outer guards. See [test evidence](TESTS.md).
 
 release_verdict returns Ready for an unaffected, unmoved result before it tests movement.insufficient. Thus the helper can report compatibility as Ready even when its movement object says the sample evidence is insufficient. The outer build guards empty cohorts, but an undersized nonempty cohort is a separate case. This is a source-identified path; an end-to-end reproduction is still needed.
 
@@ -36,7 +38,9 @@ release_verdict returns Ready for an unaffected, unmoved result before it tests 
 
 ### 2. A flagged finding without a repair appears fully decided
 
-**Priority: high. Evidence: source inspection; runtime reproduction pending.**
+**Priority: high. Evidence: source and isolated runtime reproduction.**
+
+**Runtime update:** Direct review_status calls returned an empty open list for a flagged finding without repairs and for a repair marked request_more_evidence. These are helper-level reproductions with invented review documents; no UI bypass was tested. See [test evidence](TESTS.md).
 
 review_status defines open findings using all(...) over associated repairs. For a flagged finding with no associated repair, all([]) is true, so it is excluded from the open list. This matters for imported findings and future checks even if the current builder normally emits a repair for each finding.
 
@@ -96,7 +100,11 @@ The maximum points below reproduce the official track weights. They are not poin
 | Useful next steps. Suggested fixes are specific and match the size and importance of the problem. | 10 | Repairs remain proposals; add history and evidence-needed states. |
 | Communication. Someone without specialist knowledge can understand the result and next step. | 5 | Explain the Ready scope and reconcile the optional AI documentation. |
 
-## Checks actually performed
+## Runtime update
+
+399 passed, 6 skipped, 0 failed, 0 errors. Independent safeguards: 4 met, 3 unmet. [Commands, limitations and concrete observations](TESTS.md). These counts are not scores.
+
+## Checks actually performed at first pass
 
 - Pinned and read source at `45df43640836025b40e89fc190f913ad694a6011`; original checkout was clean when inspected.
 - Parsed **91/91** selected Python source files with `ast.parse`; **0** syntax failures. Parsing does not execute or validate behavior.

@@ -1,8 +1,8 @@
 # SNS Cohort Control Tower: independent first-pass review
 
-Reviewed commit: `c1e8b79a2987cee6087d847867f9895deaa109a4`. Updated: **2026-11-14T19:40:03+00:00**. Track 1: Cohort Firewall.
+Reviewed commit: `c1e8b79a2987cee6087d847867f9895deaa109a4`. Updated: **2026-11-14T19:51:28+00:00**. Track 1: Cohort Firewall.
 
-**Status: source review, not a verified live demo.** No official score is assigned. Source findings below are hypotheses about reachable runtime behavior unless labelled otherwise; exact branches and limitations are stated. No student code or files were changed.
+**Status: source review plus isolated runtime checks; no verified hosted demo.** No official score is assigned. Runtime observations are labelled per issue; remaining source findings still require reproduction. Exact branches and limitations are stated. No student code or files were changed.
 
 The source connects file and profile fingerprints to per-analysis results, proposed repairs and a cohort export. The strongest first-pass concern is that the export consumes proposed repairs directly and can restore records merely flagged for review. Verdict precedence and small-cohort format recognition also warrant direct probes.
 
@@ -24,7 +24,9 @@ An error on the new-release analysis is explicitly mapped to Insufficient Eviden
 
 ### 1. Cohort export does not consult review decisions
 
-**Priority: high. Evidence: source inspection; runtime reproduction pending.**
+**Priority: high. Evidence: source and isolated runtime reproduction.**
+
+**Runtime update:** A synthetic exclude repair with an explicit reject decision was consumed by parse_repairs and removed the sample in _apply_file_repairs. The original source data were untouched; the problem is the derived export workflow ignoring the rejection. See [test evidence](TESTS.md).
 
 parse_repairs reads every proposed repair and run_cohort applies that mapping. Neither path checks the findings decisions section or an approval record. This converts proposals into cohort membership changes without a per-repair approval gate.
 
@@ -36,7 +38,9 @@ parse_repairs reads every proposed repair and run_cohort applies that mapping. N
 
 ### 2. Flag for review can restore a missing record
 
-**Priority: high. Evidence: source inspection; runtime reproduction pending.**
+**Priority: high. Evidence: source and isolated runtime reproduction.**
+
+**Runtime update:** A synthetic flag_for_review for a sample absent from B but present in A restored it and recorded action flag_for_review_restored, without an approval decision. See [test evidence](TESTS.md).
 
 If a flagged record is absent from B but found in A, _apply_file_repairs adds it back and labels it flag_for_review_restored. Flagging asks for investigation; it does not establish that removal was an error. A deliberate withdrawal or corrected membership should not be reversed implicitly.
 
@@ -48,7 +52,9 @@ If a flagged record is absent from B but found in A, _apply_file_repairs adds it
 
 ### 3. No affecting finding bypasses movement and minimum-group checks
 
-**Priority: high. Evidence: source inspection; runtime reproduction pending.**
+**Priority: high. Evidence: source and isolated runtime reproduction.**
+
+**Runtime update:** Direct verdict_for calls returned Ready for an undersized group and for an unexplained sign change when affected_by was empty. The same sign change returned Blocked with affected_by=[F1], confirming the branch distinction. This is helper-level evidence, not a full UI run. See [test evidence](TESTS.md).
 
 verdict_for returns Ready when affected_by is empty before comparing before/after values or sample adequacy. The report says unaffected analyses were rerun to confirm they did not move, but this branch does not enforce that confirmation. A detector miss or undersized unchanged cohort can therefore escape those safeguards at helper level.
 
@@ -60,7 +66,9 @@ verdict_for returns Ready when affected_by is empty before comparing before/afte
 
 ### 4. Small wide matrices are silently unrecognized
 
-**Priority: medium. Evidence: source inspection; runtime reproduction pending.**
+**Priority: medium. Evidence: source and isolated runtime reproduction.**
+
+**Runtime update:** Valid invented wide matrices with 1 and 10 samples returned None from load_layer; an otherwise equivalent 11-sample matrix was recognized. This confirms the hard size boundary. See [test evidence](TESTS.md).
 
 Wide layout recognition requires more than ten TCGA-named columns. A valid wide file with ten or fewer samples falls through to long-layout detection and may return None, after which load_release omits it. Small cohorts are precisely where explicit insufficient-evidence handling matters.
 
@@ -96,7 +104,11 @@ The maximum points below reproduce the official track weights. They are not poin
 | Useful next steps. Suggested fixes are specific and match the size and importance of the problem. | 10 | Cohort export is concrete, but approved corrections and simulated repairs must remain separate. |
 | Communication. Someone without specialist knowledge can understand the result and next step. | 5 | The README explains the workflow; clarify that repair recovery is conditional on baseline trust. |
 
-## Checks actually performed
+## Runtime update
+
+No submitted test suite identified in the inspected source; none claimed executed. Independent safeguards: 2 met, 6 unmet. [Commands, limitations and concrete observations](TESTS.md). These counts are not scores.
+
+## Checks actually performed at first pass
 
 - Pinned and read source at `c1e8b79a2987cee6087d847867f9895deaa109a4`; original checkout was clean when inspected.
 - Parsed **19/19** selected Python source files with `ast.parse`; **0** syntax failures. Parsing does not execute or validate behavior.

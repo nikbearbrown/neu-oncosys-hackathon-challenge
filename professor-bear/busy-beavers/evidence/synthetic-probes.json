@@ -1,0 +1,87 @@
+[
+  {
+    "check": "Empty release directories are not Ready",
+    "expected": false,
+    "observed": true,
+    "safeguard_met": false
+  },
+  {
+    "observation": "empty release analyses",
+    "analyses": [
+      {
+        "id": "A1",
+        "triggered_by": [],
+        "reads": "clinical[breast_carcinoma_estrogen_receptor_status] + protein[ERALPHA], primary tumors with Positive/Negative ER",
+        "status": "not_rerun",
+        "reason": "Left alone: its input files (clinical, protein_rppa) are byte-identical between releases (clinical[breast_carcinoma_estrogen_receptor_status] + protein[ERALPHA], primary tumors with Positive/Negative ER)"
+      },
+      {
+        "id": "A2",
+        "triggered_by": [],
+        "reads": "clinical[PAM50Call_RNAseq], primary tumors",
+        "status": "not_rerun",
+        "reason": "Left alone: its input files (clinical) are byte-identical between releases (clinical[PAM50Call_RNAseq], primary tumors)"
+      }
+    ]
+  },
+  {
+    "check": "Identical zero-byte required inputs are not Ready",
+    "expected": false,
+    "observed": true,
+    "safeguard_met": false
+  },
+  {
+    "check": "Sign-changing target shift is Blocked",
+    "expected": "Blocked",
+    "observed": "Conditional",
+    "safeguard_met": false
+  },
+  {
+    "observation": "shift analyses",
+    "analyses": [
+      {
+        "id": "A1",
+        "triggered_by": [
+          "F01"
+        ],
+        "reads": "clinical[breast_carcinoma_estrogen_receptor_status] + protein[ERALPHA], primary tumors with Positive/Negative ER",
+        "status": "changed",
+        "before": {
+          "analysis": "A1",
+          "inputs": [
+            "clinical.tsv",
+            "protein_rppa.tsv.gz"
+          ],
+          "n_samples": 40,
+          "n_positive": 20,
+          "n_negative": 20,
+          "mean_positive": 2.095,
+          "mean_negative": 0.095,
+          "difference": 2.0
+        },
+        "after": {
+          "analysis": "A1",
+          "inputs": [
+            "clinical.tsv",
+            "protein_rppa.tsv.gz"
+          ],
+          "n_samples": 40,
+          "n_positive": 20,
+          "n_negative": 20,
+          "mean_positive": -7.905,
+          "mean_negative": 0.095,
+          "difference": -8.0
+        },
+        "reason": "20 sample(s) changed inside the slice it reads (clinical[breast_carcinoma_estrogen_receptor_status] + protein[ERALPHA], primary tumors with Positive/Negative ER)"
+      },
+      {
+        "id": "A2",
+        "triggered_by": [],
+        "reads": "clinical[PAM50Call_RNAseq], primary tumors",
+        "status": "not_rerun",
+        "reason": "Left alone: slice it reads is identical after rounding across 40 samples (clinical[PAM50Call_RNAseq], primary tumors)"
+      }
+    ],
+    "finding_count": 1
+  }
+]

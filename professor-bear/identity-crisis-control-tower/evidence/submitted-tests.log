@@ -1,0 +1,104 @@
+test_a_change_that_does_not_touch_the_question_counts_as_unknown (test_ai_summary.AISummaryTest.test_a_change_that_does_not_touch_the_question_counts_as_unknown) ... ok
+test_a_patient_level_id_counts_as_found (test_ai_summary.AISummaryTest.test_a_patient_level_id_counts_as_found) ... ok
+test_citations_flag_ids_that_are_not_in_the_results (test_ai_summary.AISummaryTest.test_citations_flag_ids_that_are_not_in_the_results) ... ok
+test_context_holds_only_the_changes_that_touch_the_question (test_ai_summary.AISummaryTest.test_context_holds_only_the_changes_that_touch_the_question) ... ok
+test_no_model_gives_a_plain_message (test_ai_summary.AISummaryTest.test_no_model_gives_a_plain_message) ... ok
+test_summary_strips_thinking_and_checks_it (test_ai_summary.AISummaryTest.test_summary_strips_thinking_and_checks_it) ... ok
+test_cards (test_cli_and_plant.CommandLine.test_cards) ... ok
+test_check_with_and_without_a_comparison (test_cli_and_plant.CommandLine.test_check_with_and_without_a_comparison) ... ok
+test_compare (test_cli_and_plant.CommandLine.test_compare) ... ok
+test_compare_one_analysis (test_cli_and_plant.CommandLine.test_compare_one_analysis) ... ok
+test_wrong_input_is_a_message_not_a_traceback (test_cli_and_plant.CommandLine.test_wrong_input_is_a_message_not_a_traceback) ... ok
+test_planted_errors_are_found (test_cli_and_plant.FoolTheTower.test_planted_errors_are_found) ... skipped 'needs the challenge repo and release A next to this repo'
+test_copies_where_links_are_refused (test_cli_and_plant.Links.test_copies_where_links_are_refused) ... ok
+test_links_where_it_can (test_cli_and_plant.Links.test_links_where_it_can) ... ok
+test_site_shift (test_question_checks.Bias.test_site_shift) ... ok
+test_cards_list_only_checks_that_exist (test_question_checks.Cards.test_cards_list_only_checks_that_exist) ... ok
+test_questions_built_on_screen (test_question_checks.Cards.test_questions_built_on_screen) ... ok
+test_missing_values_counts_the_base_group (test_question_checks.Coverage.test_missing_values_counts_the_base_group) ... ok
+test_missing_values_edge_cases (test_question_checks.Coverage.test_missing_values_edge_cases) ... ok
+test_missing_values_one_issue_per_field (test_question_checks.Coverage.test_missing_values_one_issue_per_field) ... ok
+test_subtype_missing (test_question_checks.Coverage.test_subtype_missing) ... ok
+test_a2_robustness (test_question_checks.Design.test_a2_robustness) ... ok
+test_leakage_columns (test_question_checks.Design.test_leakage_columns) ... ok
+test_endpoint_suitability (test_question_checks.Fitness.test_endpoint_suitability) ... ok
+test_endpoint_suitability_when_it_cannot_tell (test_question_checks.Fitness.test_endpoint_suitability_when_it_cannot_tell) ... ok
+test_focus_subtype_column_missing (test_question_checks.Fitness.test_focus_subtype_column_missing) ... ok
+test_follow_up_that_cannot_be_estimated (test_question_checks.Fitness.test_follow_up_that_cannot_be_estimated) ... ok
+test_inputs_label_and_outcome (test_question_checks.Fitness.test_inputs_label_and_outcome) ... ok
+test_a_block_outranks_everything (test_question_checks.Verdicts.test_a_block_outranks_everything) ... ok
+test_a_check_that_crashes_is_reported_not_raised (test_question_checks.Verdicts.test_a_check_that_crashes_is_reported_not_raised) ... ok
+test_a_check_that_is_not_built (test_question_checks.Verdicts.test_a_check_that_is_not_built) ... ok
+test_a_release_change_makes_it_conditional (test_question_checks.Verdicts.test_a_release_change_makes_it_conditional) ... ok
+test_each_verdict (test_question_checks.Verdicts.test_each_verdict) ... ok
+test_the_verdict_follows_the_question (test_question_checks.Verdicts.test_the_verdict_follows_the_question) ... ok
+test_coverage_checks (test_release_a_checks.AllNineOnOneMadeUpRelease.test_coverage_checks) ... ok
+test_design_checks (test_release_a_checks.AllNineOnOneMadeUpRelease.test_design_checks) ... ok
+test_label_checks (test_release_a_checks.AllNineOnOneMadeUpRelease.test_label_checks) ... ok
+test_survival_checks (test_release_a_checks.AllNineOnOneMadeUpRelease.test_survival_checks) ... ok
+test_her2_field_conflict (test_release_a_checks.ReleaseANumbers.test_her2_field_conflict) ... skipped 'release A not found at /private/tmp/oncosys-runtime-k2vhjg41/oncosys-hackathon-challenge/data/tcga-brca/raw'
+test_patient_double_count (test_release_a_checks.ReleaseANumbers.test_patient_double_count) ... skipped 'release A not found at /private/tmp/oncosys-runtime-k2vhjg41/oncosys-hackathon-challenge/data/tcga-brca/raw'
+test_subtype_columns_disagree (test_release_a_checks.ReleaseANumbers.test_subtype_columns_disagree) ... skipped 'release A not found at /private/tmp/oncosys-runtime-k2vhjg41/oncosys-hackathon-challenge/data/tcga-brca/raw'
+test_survival_redacted (test_release_a_checks.ReleaseANumbers.test_survival_redacted) ... skipped 'release A not found at /private/tmp/oncosys-runtime-k2vhjg41/oncosys-hackathon-challenge/data/tcga-brca/raw'
+test_survival_zero_time (test_release_a_checks.ReleaseANumbers.test_survival_zero_time) ... skipped 'release A not found at /private/tmp/oncosys-runtime-k2vhjg41/oncosys-hackathon-challenge/data/tcga-brca/raw'
+test_a2_robustness (test_release_a_checks.ReleaseANumbersCoverageAndDesign.test_a2_robustness) ... skipped 'release A not found at /private/tmp/oncosys-runtime-k2vhjg41/oncosys-hackathon-challenge/data/tcga-brca/raw'
+test_leakage_columns (test_release_a_checks.ReleaseANumbersCoverageAndDesign.test_leakage_columns) ... skipped 'release A not found at /private/tmp/oncosys-runtime-k2vhjg41/oncosys-hackathon-challenge/data/tcga-brca/raw'
+test_missing_values_er_alpha_card (test_release_a_checks.ReleaseANumbersCoverageAndDesign.test_missing_values_er_alpha_card) ... skipped 'release A not found at /private/tmp/oncosys-runtime-k2vhjg41/oncosys-hackathon-challenge/data/tcga-brca/raw'
+test_missing_values_esr1_card (test_release_a_checks.ReleaseANumbersCoverageAndDesign.test_missing_values_esr1_card) ... skipped 'release A not found at /private/tmp/oncosys-runtime-k2vhjg41/oncosys-hackathon-challenge/data/tcga-brca/raw'
+test_missing_values_her2_card (test_release_a_checks.ReleaseANumbersCoverageAndDesign.test_missing_values_her2_card) ... skipped 'release A not found at /private/tmp/oncosys-runtime-k2vhjg41/oncosys-hackathon-challenge/data/tcga-brca/raw'
+test_subtype_missing (test_release_a_checks.ReleaseANumbersCoverageAndDesign.test_subtype_missing) ... skipped 'release A not found at /private/tmp/oncosys-runtime-k2vhjg41/oncosys-hackathon-challenge/data/tcga-brca/raw'
+test_blank_and_non_numeric_times (test_release_a_checks.SyntheticReleases.test_blank_and_non_numeric_times) ... ok
+test_card_without_endpoint (test_release_a_checks.SyntheticReleases.test_card_without_endpoint) ... ok
+test_empty_group (test_release_a_checks.SyntheticReleases.test_empty_group) ... ok
+test_her2_differences_without_positive_vs_negative (test_release_a_checks.SyntheticReleases.test_her2_differences_without_positive_vs_negative) ... ok
+test_missing_clinical_file (test_release_a_checks.SyntheticReleases.test_missing_clinical_file) ... ok
+test_missing_label_columns (test_release_a_checks.SyntheticReleases.test_missing_label_columns) ... ok
+test_missing_survival_columns (test_release_a_checks.SyntheticReleases.test_missing_survival_columns) ... ok
+test_missing_survival_file (test_release_a_checks.SyntheticReleases.test_missing_survival_file) ... ok
+test_no_zero_times (test_release_a_checks.SyntheticReleases.test_no_zero_times) ... ok
+test_patient_twice_in_group (test_release_a_checks.SyntheticReleases.test_patient_twice_in_group) ... ok
+test_unknown_subtype_code (test_release_a_checks.SyntheticReleases.test_unknown_subtype_code) ... ok
+test_chain_of_three (test_release_comparison.Changes.test_chain_of_three) ... ok
+test_column_order_is_not_a_change (test_release_comparison.Changes.test_column_order_is_not_a_change) ... ok
+test_copies_replace_samples (test_release_comparison.Changes.test_copies_replace_samples) ... ok
+test_edited_and_blanked_values (test_release_comparison.Changes.test_edited_and_blanked_values) ... ok
+test_no_change (test_release_comparison.Changes.test_no_change) ... ok
+test_only_planted_samples_are_cited (test_release_comparison.Changes.test_only_planted_samples_are_cited) ... ok
+test_relabel_a_column_no_analysis_reads (test_release_comparison.Changes.test_relabel_a_column_no_analysis_reads) ... ok
+test_relabel_er (test_release_comparison.Changes.test_relabel_er) ... ok
+test_relabel_subtype_touches_a2_only (test_release_comparison.Changes.test_relabel_subtype_touches_a2_only) ... ok
+test_rename (test_release_comparison.Changes.test_rename) ... ok
+test_sample_id_on_two_clinical_rows (test_release_comparison.Changes.test_sample_id_on_two_clinical_rows) ... ok
+test_samples_removed_and_added (test_release_comparison.Changes.test_samples_removed_and_added) ... ok
+test_survival_edit (test_release_comparison.Changes.test_survival_edit) ... ok
+test_swap_across_er_groups (test_release_comparison.Changes.test_swap_across_er_groups) ... ok
+test_swap_in_a_file_no_analysis_reads (test_release_comparison.Changes.test_swap_in_a_file_no_analysis_reads) ... ok
+test_swap_within_one_er_group (test_release_comparison.Changes.test_swap_within_one_er_group) ... ok
+test_damaged_files_are_refused_not_crashed (test_release_comparison.MissingAndDamaged.test_damaged_files_are_refused_not_crashed) ... ok
+test_missing_folder (test_release_comparison.MissingAndDamaged.test_missing_folder) ... ok
+test_missing_protein_file (test_release_comparison.MissingAndDamaged.test_missing_protein_file) ... ok
+test_no_rna_file_is_a_note_not_a_finding (test_release_comparison.MissingAndDamaged.test_no_rna_file_is_a_note_not_a_finding) ... ok
+test_er_group_with_no_values (test_release_comparison.Regressions.test_er_group_with_no_values) ... ok
+test_eralpha_blank_for_everyone (test_release_comparison.Regressions.test_eralpha_blank_for_everyone) ... ok
+test_file_by_file_counts (test_release_comparison.Regressions.test_file_by_file_counts) ... ok
+test_file_missing_from_the_new_release (test_release_comparison.Regressions.test_file_missing_from_the_new_release) ... ok
+test_finite (test_release_comparison.Regressions.test_finite) ... ok
+test_row_name_on_two_rows (test_release_comparison.Regressions.test_row_name_on_two_rows) ... ok
+test_sample_id_on_two_matrix_columns (test_release_comparison.Regressions.test_sample_id_on_two_matrix_columns) ... ok
+test_tumor_on_two_clinical_rows_is_not_counted_twice (test_release_comparison.Regressions.test_tumor_on_two_clinical_rows_is_not_counted_twice) ... ok
+test_a_failed_write_leaves_no_partial_file (test_review.SignOff.test_a_failed_write_leaves_no_partial_file) ... ok
+test_no_validator_to_ask (test_review.SignOff.test_no_validator_to_ask) ... ok
+test_nothing_is_saved_when_the_validator_rejects (test_review.SignOff.test_nothing_is_saved_when_the_validator_rejects) ... ok
+test_release_a_alone_has_no_findings_to_check (test_review.SignOff.test_release_a_alone_has_no_findings_to_check) ... ok
+test_saved_when_the_validator_passes (test_review.SignOff.test_saved_when_the_validator_passes) ... ok
+test_the_organizers_validator_accepts_the_reviewed_findings (test_review.SignOff.test_the_organizers_validator_accepts_the_reviewed_findings) ... skipped 'needs the challenge repo next to this repo'
+test_empty_start (test_screen.Screen.test_empty_start) ... skipped 'needs Streamlit, the challenge repo and release A next to this repo'
+test_every_page_on_release_a (test_screen.Screen.test_every_page_on_release_a) ... skipped 'needs Streamlit, the challenge repo and release A next to this repo'
+test_every_page_on_the_practice_envelope (test_screen.Screen.test_every_page_on_the_practice_envelope) ... skipped 'needs Streamlit, the challenge repo and release A next to this repo'
+test_every_question_on_release_a (test_screen.Screen.test_every_question_on_release_a) ... skipped 'needs Streamlit, the challenge repo and release A next to this repo'
+test_review_and_sign_off (test_screen.Screen.test_review_and_sign_off) ... skipped 'needs Streamlit, the challenge repo and release A next to this repo'
+
+----------------------------------------------------------------------
+Ran 99 tests in 1.022s
+
+OK (skipped=18)

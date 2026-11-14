@@ -1,0 +1,28 @@
+{
+  "repo": "BusyBeavers",
+  "exit": 0,
+  "seconds": 3.62,
+  "command": [
+    "/usr/bin/sandbox-exec",
+    "-f",
+    "/private/tmp/oncosys-runtime-k2vhjg41/sandbox.sb",
+    "/private/tmp/oncosys-runtime-k2vhjg41/venv/bin/python3",
+    "-m",
+    "pytest",
+    "-q",
+    "--tb=short",
+    "--disable-warnings",
+    "--junitxml=/private/tmp/oncosys-runtime-k2vhjg41/BusyBeavers-junit.xml",
+    "tests"
+  ],
+  "env_keys": [
+    "PATH",
+    "TMPDIR",
+    "PYTHONPATH",
+    "PYTHONNOUSERSITE",
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD",
+    "COHORT_STUDIO_HOSTED",
+    "COHORT_STUDIO_NO_DOTENV",
+    "MPLCONFIGDIR"
+  ]
+}

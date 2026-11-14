@@ -1,0 +1,60 @@
+[
+  {
+    "check": "No detected finding does not override undersized group",
+    "expected": "Insufficient Evidence",
+    "observed": "Ready",
+    "safeguard_met": false
+  },
+  {
+    "check": "Unexplained sign change is blocked",
+    "expected": "Blocked",
+    "observed": "Ready",
+    "safeguard_met": false
+  },
+  {
+    "check": "Detected sign change is blocked",
+    "expected": "Blocked",
+    "observed": "Blocked",
+    "safeguard_met": true
+  },
+  {
+    "check": "Valid 1-sample wide matrix is recognized",
+    "expected": true,
+    "observed": false,
+    "safeguard_met": false
+  },
+  {
+    "check": "Valid 10-sample wide matrix is recognized",
+    "expected": true,
+    "observed": false,
+    "safeguard_met": false
+  },
+  {
+    "check": "Valid 11-sample wide matrix is recognized",
+    "expected": true,
+    "observed": true,
+    "safeguard_met": true
+  },
+  {
+    "check": "Rejected exclusion is not applied",
+    "expected": true,
+    "observed": false,
+    "safeguard_met": false
+  },
+  {
+    "check": "Flag-for-review does not restore absent record",
+    "expected": false,
+    "observed": true,
+    "safeguard_met": false
+  },
+  {
+    "observation": "flag repair actions",
+    "actions": [
+      {
+        "action": "flag_for_review_restored",
+        "sample": "TCGA-ZZ-0001-01",
+        "file": "clinical.tsv"
+      }
+    ]
+  }
+]
