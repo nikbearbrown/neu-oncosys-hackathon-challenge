@@ -28,3 +28,13 @@ has been verified. No organizer keys were accessed. No submitted code was run.
 Source inspection and citation consistency cannot establish the correctness of
 reviewer reasoning, authenticity of a human sign-off, or absence of every secret.
 Generated reports remain ignored by Git and need human review before sharing.
+
+## Publication status
+
+The independent local repository was committed on `main`. GitHub creation and
+push were **not executed**: automatic approval review rejected the requested
+private `nikbearbrown/neu-ai-healthcare-hackathon` publication, stating that
+uploading the supplied source materials to the external destination needed more
+explicit authorization. The message-history evidence lookup was temporarily
+unavailable. No workaround or repeat publication attempt was made. Publication
+remains blocked pending authorization that explicitly covers those materials.
