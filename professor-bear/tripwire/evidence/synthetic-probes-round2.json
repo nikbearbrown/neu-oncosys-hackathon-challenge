@@ -1,0 +1,58 @@
+[
+  {
+    "check": "Full API unchanged 4-sample release is correctly scoped",
+    "expected": "Insufficient Evidence",
+    "observed": "Ready",
+    "safeguard_met": false
+  },
+  {
+    "observation": "4-sample analysis verdicts",
+    "analyses": {
+      "A1": "Ready",
+      "A2": "Ready"
+    },
+    "questions": {
+      "er_protein_by_er_status": "Insufficient Evidence",
+      "subtype_mix": "Insufficient Evidence",
+      "os_by_subtype": "Insufficient Evidence",
+      "predict_er_from_protein": "Insufficient Evidence",
+      "predict_subtype_from_copy_number": "Insufficient Evidence",
+      "predict_er_from_rna": "Insufficient Evidence",
+      "predict_subtype_from_rna": "Blocked"
+    }
+  },
+  {
+    "check": "Full API unchanged 40-sample release is correctly scoped",
+    "expected": "Ready",
+    "observed": "Ready",
+    "safeguard_met": true
+  },
+  {
+    "observation": "40-sample analysis verdicts",
+    "analyses": {
+      "A1": "Ready",
+      "A2": "Ready"
+    },
+    "questions": {
+      "er_protein_by_er_status": "Ready",
+      "subtype_mix": "Insufficient Evidence",
+      "os_by_subtype": "Insufficient Evidence",
+      "predict_er_from_protein": "Insufficient Evidence",
+      "predict_subtype_from_copy_number": "Insufficient Evidence",
+      "predict_er_from_rna": "Insufficient Evidence",
+      "predict_subtype_from_rna": "Blocked"
+    }
+  },
+  {
+    "check": "Revision retains both review events",
+    "expected": 2,
+    "observed": 1,
+    "safeguard_met": false
+  },
+  {
+    "check": "Revision leaves prior object unchanged",
+    "expected": "approve",
+    "observed": "approve",
+    "safeguard_met": true
+  }
+]

@@ -4,9 +4,9 @@ Updated 2026-11-14T19:51:28+00:00. The fixed source commit remains the one in [R
 
 ## Submitted tests
 
-**399 passed, 6 skipped, 0 failed, 0 errors.** Reported final test duration: 9.56 seconds.
+**404 passed, 1 skipped, 0 failed, 0 errors.** Recorded command duration: 11.9 seconds.
 
-Raw TCGA data and sealed envelopes were absent. Data-dependent checks were skipped by the submitted suite where reported.
+The six checksum-verified public Release A files were available for this final run. Sealed envelopes were absent. The earlier synthetic/committed-manifest run had 399 passed and 6 skipped; its log remains below. [Public input provenance and limits](../review-tools/PUBLIC-RELEASE.md).
 
 The first isolated attempts exposed missing environment dependencies (pandas/pytz and child-process dependency paths), not submission failures. Those were corrected in the disposable environment. Cohort Studio initially also lacked copied manifest/media files; those prerequisites were restored from its pinned Git commit and the complete suite was rerun. Final counts above describe the final command, not a sum of retries. Dependencies differ from Tripwire’s exact pinned Python 3.11/3.13 environment; this was Python 3.14.6 on macOS ARM64. No student code was modified to make tests pass.
 
@@ -30,6 +30,21 @@ Git blobs were copied into a disposable directory, without hooks, secrets or sea
 
 No hosted application, real provider call, clinical validity, production authorization, screen-reader usability or real-world accuracy was verified. Passing tests demonstrates the assertions in those tests, not all rubric requirements. The issue decks distinguish source findings from independently reproduced behavior. No official score is assigned.
 
-[Final submitted-test log](evidence/submitted-tests.log) · [Recorded command](evidence/submitted-test-command.json)
+[Earlier synthetic-run log](evidence/submitted-tests.log) · [Earlier command](evidence/submitted-test-command.json)
 
 [Recorded dependency versions and isolation probes](../review-tools/environment.json). The final profile explicitly permits loopback only; external probes returned PermissionError.
+
+[Final public-release test log, identifiers redacted](evidence/public-release-tests.log) · [Final command](evidence/public-release-command.json)
+
+## Second independent synthetic round
+
+The following are targeted recommendations and controls, not additional official judging requirements. Read [exact observations](evidence/synthetic-probes-round2.json) and [reproduction source](../review-tools/synthetic-probes-round2.py).
+
+| Check | Expected | Observed | Proposed safeguard met? |
+|---|---|---|---|
+| Full API unchanged 4-sample release is correctly scoped | "Insufficient Evidence" | "Ready" | No |
+| Full API unchanged 40-sample release is correctly scoped | "Ready" | "Ready" | Yes |
+| Revision retains both review events | 2 | 1 | No |
+| Revision leaves prior object unchanged | "approve" | "approve" | Yes |
+
+For Tripwire, release compatibility and question adequacy are distinct outputs. For Identity Crisis, the bypass is explicitly non-default. For export checks, a diagnostic export can be legitimate when its restrictions remain clear. See REPORT.md for these interpretation limits.

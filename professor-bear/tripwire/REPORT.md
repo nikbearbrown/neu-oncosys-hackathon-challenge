@@ -1,6 +1,6 @@
 # Tripwire / Driftwire: independent first-pass review
 
-Reviewed commit: `45df43640836025b40e89fc190f913ad694a6011`. Updated: **2026-11-14T19:51:28+00:00**. Track 1: Cohort Firewall.
+Reviewed commit: `45df43640836025b40e89fc190f913ad694a6011`. Updated: **2026-11-14T20:04:21+00:00**. Track 1: Cohort Firewall.
 
 **Status: source review plus isolated runtime checks; no verified hosted demo.** No official score is assigned. Runtime observations are labelled per issue; remaining source findings still require reproduction. Exact branches and limitations are stated. No student code or files were changed.
 
@@ -26,9 +26,9 @@ The helper rejects unknown repairs, unknown decisions, blank reasons and blank r
 
 **Priority: high. Evidence: source and isolated runtime reproduction.**
 
-**Runtime update:** Direct helper reproduction returned Ready for an unmoved Movement with insufficient=True. Positive controls return Insufficient Evidence when affected=True and Blocked for unexplained movement. The first full API tiny-fixture control returned Blocked (A1 Blocked, A2 Ready), so this result proves the helper precedence defect, not that every small cohort escapes the outer guards. See [test evidence](TESTS.md).
+**Runtime update:** A corrected, well-formed four-sample release passed through the full check API: release verdict and A1/A2 were Ready, while the ER-protein question correctly returned Insufficient Evidence. A 40-sample control returned Ready for that question. This confirms the separate meanings of compatibility and question adequacy; it does not invalidate the question-readiness checks. See [second-round evidence](evidence/synthetic-probes-round2.json).
 
-release_verdict returns Ready for an unaffected, unmoved result before it tests movement.insufficient. Thus the helper can report compatibility as Ready even when its movement object says the sample evidence is insufficient. The outer build guards empty cohorts, but an undersized nonempty cohort is a separate case. This is a source-identified path; an end-to-end reproduction is still needed.
+release_verdict returns Ready for an unaffected, unmoved result before it tests movement.insufficient. Thus the helper can report compatibility as Ready even when its movement object says the sample evidence is insufficient. The outer build guards empty cohorts, but an undersized nonempty cohort is a separate case. A later end-to-end synthetic reproduction below confirms the headline can remain Ready while question-specific adequacy is Insufficient Evidence. The README explicitly defines release Ready as unchanged dependency inputs; therefore this is chiefly a scope/communication and precedence concern, not evidence that its separate question-readiness engine ignores sample size.
 
 **Evidence:** [tripwire/verdicts.py:24](https://github.com/Adhithyan245/tripwire/blob/45df43640836025b40e89fc190f913ad694a6011/tripwire/verdicts.py#L24); [tripwire/analyses.py:122](https://github.com/Adhithyan245/tripwire/blob/45df43640836025b40e89fc190f913ad694a6011/tripwire/analyses.py#L122).
 
@@ -64,7 +64,9 @@ A1 returns means and differences rounded to three decimals before movement is co
 
 ### 4. New review calls replace prior decisions
 
-**Priority: medium. Evidence: source inspection; runtime reproduction pending.**
+**Priority: medium. Evidence: source and isolated runtime reproduction.**
+
+**Runtime update:** Two apply_decisions calls (approve, then reject) retained one latest decision rather than two events. The original first-returned object was unchanged. This verifies snapshot semantics, not an immutable history. See [second-round evidence](evidence/synthetic-probes-round2.json).
 
 apply_decisions creates a new decisions list from the supplied mapping and replaces the previous list. The helper records neither decision time nor a stable reviewer identity. This is suitable for a current-state document, but is not an immutable approval history.
 
@@ -80,11 +82,15 @@ apply_decisions creates a new decisions list from the supplied mapping and repla
 
 The README says there are no AI features or AI-service calls, while the optional intake prototype implements consent-gated OpenAI mapping suggestions. The consent gate is a positive control; its presence makes the blanket claim inaccurate. No network call was made in this review.
 
-**Evidence:** [README.md:1](https://github.com/Adhithyan245/tripwire/blob/45df43640836025b40e89fc190f913ad694a6011/README.md#L1); [intake_prototype/ai_suggest.py:48](https://github.com/Adhithyan245/tripwire/blob/45df43640836025b40e89fc190f913ad694a6011/intake_prototype/ai_suggest.py#L48).
+**Evidence:** [README.md:343](https://github.com/Adhithyan245/tripwire/blob/45df43640836025b40e89fc190f913ad694a6011/README.md#L343); [intake_prototype/ai_suggest.py:48](https://github.com/Adhithyan245/tripwire/blob/45df43640836025b40e89fc190f913ad694a6011/intake_prototype/ai_suggest.py#L48).
 
 **Concrete change:** Scope the claim to the deterministic core and explain the optional intake route, transmitted metadata, and opt-in control.
 
 **Acceptance check:** Documentation and UI agree about which route sends information; a no-consent test verifies no request occurs.
+
+## Interpretation boundary
+
+The organizer’s Control Tower product protects analyses across releases; it is not a requirement to revalidate every unchanged measurement against clinical truth. Tripwire’s README explicitly defines release Ready as “Nothing this result depends on changed” ([README.md:189](https://github.com/Adhithyan245/tripwire/blob/45df43640836025b40e89fc190f913ad694a6011/README.md#L189)). Its question-readiness cards are a separate, stronger check. Judges should assess whether users can distinguish those meanings, and should not treat an unchanged baseline as proof of fitness or a disagreement over labels as a failed detector. Proposed safeguards in this review are review recommendations, not additional official scoring rules.
 
 ## Exact official rubric: evidence, not scores
 
@@ -96,27 +102,27 @@ The maximum points below reproduce the official track weights. They are not poin
 | Reasoning for the research question. Changes its result appropriately when the research question or intended use changes. | 20 | Distinct description/training cards are a strength; inspect the adequacy precedence in issue 1. |
 | Evidence and sources. Shows the checks, data fields, decision rules, and limitations behind each conclusion. | 15 | Hashes, field dependencies and documented thresholds aid traceability; preserve raw precision. |
 | Safety and uncertainty. Avoids clinical claims, makes uncertainty visible, and requires human review. | 15 | Reason/role validation helps; issue 2 can hide an unresolved review obligation. |
-| Working tool and clear setup. Judges can run the core workflow from the submitted repository. | 15 | CLI, API, Streamlit and static site are present; no application execution in this first pass. |
+| Working tool and clear setup. Judges can run the core workflow from the submitted repository. | 15 | CLI, API, Streamlit and static site are present; 404 submitted tests passed in isolation with the frozen public release; the hosted application was not verified. |
 | Useful next steps. Suggested fixes are specific and match the size and importance of the problem. | 10 | Repairs remain proposals; add history and evidence-needed states. |
 | Communication. Someone without specialist knowledge can understand the result and next step. | 5 | Explain the Ready scope and reconcile the optional AI documentation. |
 
 ## Runtime update
 
-399 passed, 6 skipped, 0 failed, 0 errors. Independent safeguards: 4 met, 3 unmet. [Commands, limitations and concrete observations](TESTS.md). These counts are not scores.
+404 passed, 1 skipped, 0 failed, 0 errors. Independent safeguards: 4 met, 3 unmet. [Commands, limitations and concrete observations](TESTS.md). These counts are not scores.
 
-## Checks actually performed at first pass
+## Initial static pass (historical scope)
 
 - Pinned and read source at `45df43640836025b40e89fc190f913ad694a6011`; original checkout was clean when inspected.
 - Parsed **91/91** selected Python source files with `ast.parse`; **0** syntax failures. Parsing does not execute or validate behavior.
 - Counted **276** `test_` function definitions in the inspected source set. This is a source count, not collected tests or passed tests.
 - Validated every cited source path and starting line against the pinned commit.
 - Rendered deck QA is recorded separately in `evidence/deck-qa.json` after rendering.
-- No application builds, dependency installs, submitted runtime tests, live deployment checks, real-data evaluation, sealed-envelope runs or model-provider calls in this first pass.
+- The initial pass was static only. Later isolated runtime checks are reported above and in TESTS.md; this historical scope is not the current verification status.
 
 [Machine-readable static checks](evidence/static-checks.json). No raw TCGA records, answer keys or credentials are included.
 
-## Next investigation
+## Follow-up and review limits
 
-Work through the issues above in order. Reproduce them in an isolated copy with invented inputs, including positive controls. Retain the recorded commit when comparing results. Changes after this review require a new commit-specific update; they do not retroactively change the evidence.
+Work through the issues above in order. Use the supplied reproductions for confirmed issues; reproduce the remaining source-only concerns in isolation with positive controls. Retain the recorded commit when comparing results. Changes after this review require a new commit-specific update; they do not retroactively change the evidence.
 
 A statistician should review adequacy thresholds, interval assumptions and claims of bias or representativeness. A domain expert should review clinical meaning. Neither source inspection nor passing software tests establishes clinical validity.

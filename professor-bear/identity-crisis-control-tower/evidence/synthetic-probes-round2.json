@@ -1,0 +1,26 @@
+[
+  {
+    "check": "Default unknown-required-check fails closed",
+    "expected": "Insufficient Evidence",
+    "observed": "Insufficient Evidence",
+    "safeguard_met": true
+  },
+  {
+    "check": "Development bypass cannot report ordinary Ready",
+    "expected": "Insufficient Evidence",
+    "observed": "Ready",
+    "safeguard_met": false
+  },
+  {
+    "observation": "partial missing measurement denominator",
+    "n_positive_reported": 20,
+    "actual_positive_measured": 19,
+    "mean_positive": 2.001
+  },
+  {
+    "check": "Count beside mean equals measured count",
+    "expected": 19,
+    "observed": 20,
+    "safeguard_met": false
+  }
+]

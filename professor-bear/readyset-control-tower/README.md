@@ -11,3 +11,5 @@ Pinned submission: `a7ussein/readyset-control-tower@4dd07736e99f96dd46cb6199c32b
 All reproduced inputs are invented. This is independent feedback for judges and
 students, not an official score. Read the report before interpreting failed
 probes: they test recommended guards and include scoped limitations.
+
+[PDF deck](slides.pdf) — view directly on GitHub. The HTML version includes presenter notes and keyboard navigation.

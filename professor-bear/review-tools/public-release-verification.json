@@ -1,0 +1,44 @@
+[
+  {
+    "file": "clinical.tsv",
+    "bytes": 1698413,
+    "sha256": "39eb3be0fb86e6a577bd2cc01502a7fa5a271e1e1cba294e9dc644ad99580d7f",
+    "matches_frozen_manifest": true,
+    "source_url": "https://tcga-xena-hub.s3.us-east-1.amazonaws.com/download/TCGA.BRCA.sampleMap%2FBRCA_clinicalMatrix"
+  },
+  {
+    "file": "survival.tsv",
+    "bytes": 67919,
+    "sha256": "6c9e18ae9c2b8bacc48cd5a60cde97e8880ae2e84e48df437a0378b17e659b73",
+    "matches_frozen_manifest": true,
+    "source_url": "https://tcga-xena-hub.s3.us-east-1.amazonaws.com/download/survival%2FBRCA_survival.txt"
+  },
+  {
+    "file": "mutation_gene_level.tsv.gz",
+    "bytes": 534415,
+    "sha256": "ceaf6a01fd983cefc7fca8b52f6c65121acc87b75f4d170b9fcdc07ee16a3813",
+    "matches_frozen_manifest": true,
+    "source_url": "https://tcga-xena-hub.s3.us-east-1.amazonaws.com/download/mc3_gene_level%2FBRCA_mc3_gene_level.txt.gz"
+  },
+  {
+    "file": "protein_rppa.tsv.gz",
+    "bytes": 740774,
+    "sha256": "7823a7a375495f7e5f114d0c7ec8773e070cb9ac409785f98045d12ab71195e6",
+    "matches_frozen_manifest": true,
+    "source_url": "https://tcga-xena-hub.s3.us-east-1.amazonaws.com/download/TCGA.BRCA.sampleMap%2FRPPA_RBN.gz"
+  },
+  {
+    "file": "copy_number_gistic.tsv.gz",
+    "bytes": 2364989,
+    "sha256": "c45b1f8ea19c8dc20bd614d0863a40cccc633518d0ad05d2c7fff5f75781e980",
+    "matches_frozen_manifest": true,
+    "source_url": "https://tcga-xena-hub.s3.us-east-1.amazonaws.com/download/TCGA.BRCA.sampleMap%2FGistic2_CopyNumber_Gistic2_all_thresholded.by_genes.gz"
+  },
+  {
+    "file": "rna_hiseq.tsv.gz",
+    "bytes": 64286337,
+    "sha256": "263bf67245cc4b9062676583c0ff0306f08471a26aafd5504037e1da22133746",
+    "matches_frozen_manifest": true,
+    "source_url": "https://tcga-xena-hub.s3.us-east-1.amazonaws.com/download/TCGA.BRCA.sampleMap%2FHiSeqV2.gz"
+  }
+]

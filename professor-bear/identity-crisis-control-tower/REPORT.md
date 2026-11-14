@@ -1,6 +1,6 @@
 # Identity Crisis Control Tower: independent first-pass review
 
-Reviewed commit: `380760dc3b7b61097756f2b85c0f462feadc802c`. Updated: **2026-11-14T19:51:28+00:00**. Track 1: Cohort Firewall.
+Reviewed commit: `380760dc3b7b61097756f2b85c0f462feadc802c`. Updated: **2026-11-14T20:04:21+00:00**. Track 1: Cohort Firewall.
 
 **Status: source review plus isolated runtime checks; no verified hosted demo.** No official score is assigned. Runtime observations are labelled per issue; remaining source findings still require reproduction. Exact branches and limitations are stated. No student code or files were changed.
 
@@ -38,7 +38,9 @@ validate returns None when the organizer validator is absent. save rejects only 
 
 ### 2. Development bypass can allow Ready with pending required checks
 
-**Priority: high. Evidence: source inspection; runtime reproduction pending.**
+**Priority: high. Evidence: source and isolated runtime reproduction.**
+
+**Runtime update:** With a synthetic unknown required check, default assess returned Insufficient Evidence. Setting the explicit development-only allow_missing=True option returned Ready. The test card omitted analyses to isolate this check. The default path therefore fails closed; the recommendation concerns labelling and approval of development output. See [second-round evidence](evidence/synthetic-probes-round2.json).
 
 allow_missing=True marks unknown checks nonmaterial. assess starts at Ready and excludes these pending checks from the deciding set. The bypass is explicitly documented and is not the default; the risk is presenting its output as normal readiness.
 
@@ -64,7 +66,9 @@ Exceptions from the conclusion/uncertainty calculation and error-budget calculat
 
 ### 4. Reported group size includes unmeasured values
 
-**Priority: medium. Evidence: source inspection; runtime reproduction pending.**
+**Priority: medium. Evidence: source and isolated runtime reproduction.**
+
+**Runtime update:** With 20 eligible positive samples and one missing measurement, run_a1 reported n_positive=20, actual measured count=19, and a mean of 2.001. This matches the documented reference convention; add the measured denominator rather than silently changing reference-compatible fields. See [second-round evidence](evidence/synthetic-probes-round2.json).
 
 A1 computes means with missing values skipped but reports n_positive and n_negative using Series.size. The robustness code explicitly acknowledges this reference-compatible convention. The count can therefore exceed the actual denominator of the mean and bootstrap.
 
@@ -92,31 +96,31 @@ The maximum points below reproduce the official track weights. They are not poin
 
 | Criterion | Maximum | Evidence and question for judges |
 |---|---:|---|
-| Finding data problems. Finds material data problems in the supplied input without reporting problems the data does not support. | 20 | Detailed baseline and change checks exist; reported 99 tests and scorecard results are author claims until rerun. |
+| Finding data problems. Finds material data problems in the supplied input without reporting problems the data does not support. | 20 | Detailed baseline and change checks exist; 96 submitted tests passed and three practice-envelope tests remain skipped; author scorecards are not independent accuracy estimates. |
 | Reasoning for the research question. Changes its result appropriately when the research question or intended use changes. | 20 | Cards make intended use explicit; missing-check bypass needs stronger output qualification. |
 | Evidence and sources. Shows the checks, data fields, decision rules, and limitations behind each conclusion. | 15 | File digests, issue lineage and range-method metadata are strong; surface missing computations. |
 | Safety and uncertainty. Avoids clinical claims, makes uncertainty visible, and requires human review. | 15 | Review receipts are explicit, but missing validation must not count as validated sign-off. |
-| Working tool and clear setup. Judges can run the core workflow from the submitted repository. | 15 | Fresh-machine instructions and test modules exist; no live app verification in this pass. |
+| Working tool and clear setup. Judges can run the core workflow from the submitted repository. | 15 | Fresh-machine instructions and test modules exist; submitted Streamlit AppTest checks ran locally; no hosted deployment was verified. |
 | Useful next steps. Suggested fixes are specific and match the size and importance of the problem. | 10 | Next steps include evidence needed; preserve that distinction when proposing restored values. |
 | Communication. Someone without specialist knowledge can understand the result and next step. | 5 | Glossary and staged views are described; denominators and incomplete results need plain-language labels. |
 
 ## Runtime update
 
-81 passed, 18 skipped, 0 failed, 0 errors. Independent safeguards: 0 met, 2 unmet. [Commands, limitations and concrete observations](TESTS.md). These counts are not scores.
+96 passed, 3 skipped, 0 failed, 0 errors. Independent safeguards: 0 met, 2 unmet. [Commands, limitations and concrete observations](TESTS.md). These counts are not scores.
 
-## Checks actually performed at first pass
+## Initial static pass (historical scope)
 
 - Pinned and read source at `380760dc3b7b61097756f2b85c0f462feadc802c`; original checkout was clean when inspected.
 - Parsed **36/36** selected Python source files with `ast.parse`; **0** syntax failures. Parsing does not execute or validate behavior.
 - Counted **99** `test_` function definitions in the inspected source set. This is a source count, not collected tests or passed tests.
 - Validated every cited source path and starting line against the pinned commit.
 - Rendered deck QA is recorded separately in `evidence/deck-qa.json` after rendering.
-- No application builds, dependency installs, submitted runtime tests, live deployment checks, real-data evaluation, sealed-envelope runs or model-provider calls in this first pass.
+- The initial pass was static only. Later isolated runtime checks are reported above and in TESTS.md; this historical scope is not the current verification status.
 
 [Machine-readable static checks](evidence/static-checks.json). No raw TCGA records, answer keys or credentials are included.
 
-## Next investigation
+## Follow-up and review limits
 
-Work through the issues above in order. Reproduce them in an isolated copy with invented inputs, including positive controls. Retain the recorded commit when comparing results. Changes after this review require a new commit-specific update; they do not retroactively change the evidence.
+Work through the issues above in order. Use the supplied reproductions for confirmed issues; reproduce the remaining source-only concerns in isolation with positive controls. Retain the recorded commit when comparing results. Changes after this review require a new commit-specific update; they do not retroactively change the evidence.
 
 A statistician should review adequacy thresholds, interval assumptions and claims of bias or representativeness. A domain expert should review clinical meaning. Neither source inspection nor passing software tests establishes clinical validity.

@@ -1,6 +1,6 @@
 # Busy Beavers Cohort Firewall: independent first-pass review
 
-Reviewed commit: `bfb369f231bf97a1d3aa21abade3ba4b1406a355`. Updated: **2026-11-14T19:51:28+00:00**. Track 1: Cohort Firewall.
+Reviewed commit: `bfb369f231bf97a1d3aa21abade3ba4b1406a355`. Updated: **2026-11-14T20:04:21+00:00**. Track 1: Cohort Firewall.
 
 **Status: source review plus isolated runtime checks; no verified hosted demo.** No official score is assigned. Runtime observations are labelled per issue; remaining source findings still require reproduction. Exact branches and limitations are stated. No student code or files were changed.
 
@@ -42,7 +42,7 @@ The final decision is Insufficient Evidence on rerun failure, Conditional for an
 
 **Runtime update:** The real analyze_releases engine returned Ready for two empty directories and again for two directories with identical zero-byte clinical.tsv and protein_rppa.tsv.gz. Both analyses were marked not_rerun with an identical-input explanation. The inspected reference-analysis Python module was present; it was not a missing-dependency failure. See [test evidence](TESTS.md).
 
-changed_stems examines the union of files found. Two absent required files produce no changed stem. compare then says analysis inputs are byte-identical without loading them. The engine can reach Ready when no rerun failed and no affecting finding exists. Reproduction is still pending; source logic does not establish baseline fitness.
+changed_stems examines the union of files found. Two absent required files produce no changed stem. compare then says analysis inputs are byte-identical without loading them. The engine can reach Ready when no rerun failed and no affecting finding exists. The reproduced shortcut does not establish baseline fitness.
 
 **Evidence:** [cfw/compare.py:34](https://github.com/GiorgiKarazanashvili/BusyBeavers/blob/bfb369f231bf97a1d3aa21abade3ba4b1406a355/cfw/compare.py#L34); [cfw/compare.py:48](https://github.com/GiorgiKarazanashvili/BusyBeavers/blob/bfb369f231bf97a1d3aa21abade3ba4b1406a355/cfw/compare.py#L48); [detection/engine.py:288](https://github.com/GiorgiKarazanashvili/BusyBeavers/blob/bfb369f231bf97a1d3aa21abade3ba4b1406a355/detection/engine.py#L288).
 
@@ -52,7 +52,9 @@ changed_stems examines the union of files found. Two absent required files produ
 
 ### 3. Easy export applies exclusion proposals without per-repair approval
 
-**Priority: high. Evidence: source inspection; runtime reproduction pending.**
+**Priority: high. Evidence: source and isolated runtime reproduction.**
+
+**Runtime update:** The actual build_dataset easy route removed one synthetic record even though the supplied decision explicitly rejected its exclusion. Storage lookup was mocked; dataset construction and ZIP contents were real. The original four-row file was unchanged. This tests export semantics, not a deployed authorization bypass. See [second-round evidence](evidence/synthetic-probes-round2.json).
 
 The easy mode calls _suggested_removals, whose own description says no person is involved, and builds a derivative from every exclude proposal. Clicking download is a user action, but it is not an evidence-bound decision on each proposed repair. Original files remain safe; the concern is the status of the derivative.
 
@@ -64,7 +66,9 @@ The easy mode calls _suggested_removals, whose own description says no person is
 
 ### 4. Evidence and repair targets are truncated to 500
 
-**Priority: medium. Evidence: source inspection; runtime reproduction pending.**
+**Priority: medium. Evidence: source and isolated runtime reproduction.**
+
+**Runtime update:** A synthetic 620-sample change produced a summary naming 620 affected samples but only 500 evidence entries and 500 unique repair targets. The truncation affects the machine-consumed repair set as well as display evidence. See [second-round evidence](evidence/synthetic-probes-round2.json).
 
 Both evidence and repair targets are sliced to MAX_EVIDENCE=500. A large finding can describe more affected records than the exported repair covers. The easy export later consumes those targets. A presentation limit must not silently become the scope of a repair.
 
@@ -86,6 +90,10 @@ build_context includes up to 40 sample identifiers and ten evidence notes per fi
 
 **Acceptance check:** Use a mocked transport and synthetic markers to verify the payload and consent path. Do not test with real records or credentials.
 
+## Interpretation boundary
+
+A proposed fix can justify Conditional when a reviewer has the evidence needed to approve it. A sign change is not a universal clinical blocking threshold. Issue 1 concerns the absence of any output-level severity policy: the engine uses whether a finding affects an analysis, not how the result changed, to choose Conditional. Judges should ask the team to explain and demonstrate its policy rather than award or deduct points solely for one chosen threshold. No clinical cutoff is proposed here.
+
 ## Exact official rubric: evidence, not scores
 
 The maximum points below reproduce the official track weights. They are not points awarded. Supplemental dashboard and data-quality rules do not add scoring criteria.
@@ -96,7 +104,7 @@ The maximum points below reproduce the official track weights. They are not poin
 | Reasoning for the research question. Changes its result appropriately when the research question or intended use changes. | 20 | A1/A2 dependencies are explicit; the final policy lacks a Blocked branch. |
 | Evidence and sources. Shows the checks, data fields, decision rules, and limitations behind each conclusion. | 15 | Validated exports and preserved originals help; truncated target sets need explicit coverage. |
 | Safety and uncertainty. Avoids clinical claims, makes uncertainty visible, and requires human review. | 15 | Easy export needs review semantics; optional model routing needs clear outbound-data context. |
-| Working tool and clear setup. Judges can run the core workflow from the submitted repository. | 15 | API, dashboard and infrastructure tests exist; no app runtime tested in this first pass. |
+| Working tool and clear setup. Judges can run the core workflow from the submitted repository. | 15 | API, dashboard and infrastructure tests exist; isolated engine and backend tests ran; no hosted deployment was verified. |
 | Useful next steps. Suggested fixes are specific and match the size and importance of the problem. | 10 | Repair ZIPs are practical, but proposals must not imply approved corrections. |
 | Communication. Someone without specialist knowledge can understand the result and next step. | 5 | README demo placeholder and upstream clone instructions should be reconciled with the submitted repository. |
 
@@ -104,19 +112,19 @@ The maximum points below reproduce the official track weights. They are not poin
 
 65 passed, 0 skipped, 0 failed, 0 errors. Independent safeguards: 0 met, 3 unmet. [Commands, limitations and concrete observations](TESTS.md). These counts are not scores.
 
-## Checks actually performed at first pass
+## Initial static pass (historical scope)
 
 - Pinned and read source at `bfb369f231bf97a1d3aa21abade3ba4b1406a355`; original checkout was clean when inspected.
 - Parsed **45/45** selected Python source files with `ast.parse`; **0** syntax failures. Parsing does not execute or validate behavior.
 - Counted **45** `test_` function definitions in the inspected source set. This is a source count, not collected tests or passed tests.
 - Validated every cited source path and starting line against the pinned commit.
 - Rendered deck QA is recorded separately in `evidence/deck-qa.json` after rendering.
-- No application builds, dependency installs, submitted runtime tests, live deployment checks, real-data evaluation, sealed-envelope runs or model-provider calls in this first pass.
+- The initial pass was static only. Later isolated runtime checks are reported above and in TESTS.md; this historical scope is not the current verification status.
 
 [Machine-readable static checks](evidence/static-checks.json). No raw TCGA records, answer keys or credentials are included.
 
-## Next investigation
+## Follow-up and review limits
 
-Work through the issues above in order. Reproduce them in an isolated copy with invented inputs, including positive controls. Retain the recorded commit when comparing results. Changes after this review require a new commit-specific update; they do not retroactively change the evidence.
+Work through the issues above in order. Use the supplied reproductions for confirmed issues; reproduce the remaining source-only concerns in isolation with positive controls. Retain the recorded commit when comparing results. Changes after this review require a new commit-specific update; they do not retroactively change the evidence.
 
 A statistician should review adequacy thresholds, interval assumptions and claims of bias or representativeness. A domain expert should review clinical meaning. Neither source inspection nor passing software tests establishes clinical validity.

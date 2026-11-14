@@ -1,7 +1,7 @@
 {
   "title": "Busy Beavers Cohort Firewall",
   "commit": "bfb369f231bf97a1d3aa21abade3ba4b1406a355",
-  "updated": "2026-11-14T19:51:28+00:00",
+  "updated": "2026-11-14T20:04:21+00:00",
   "slides": [
     {
       "title": "Busy Beavers Cohort Firewall",
@@ -15,7 +15,7 @@
     },
     {
       "title": "1 \u00b7 The detector cannot return Blocked",
-      "before": "Large harmful change",
+      "before": "Effect sign reverses",
       "after": "Conditional only",
       "fix": "Add explicit blocking conditions tied to the research question, measured effects and unresolved integrity failures.",
       "source": "https://github.com/GiorgiKarazanashvili/BusyBeavers/blob/bfb369f231bf97a1d3aa21abade3ba4b1406a355/detection/engine.py#L270",
@@ -39,18 +39,18 @@
       "after": "Applied in easy export",
       "fix": "Treat this as a clearly labelled unapproved preview, or require recorded review decisions before an approved repaired-data export.",
       "source": "https://github.com/GiorgiKarazanashvili/BusyBeavers/blob/bfb369f231bf97a1d3aa21abade3ba4b1406a355/backend/services/fixes.py#L229",
-      "notes": "The easy mode calls _suggested_removals, whose own description says no person is involved, and builds a derivative from every exclude proposal. Clicking download is a user action, but it is not an evidence-bound decision on each proposed repair. Original files remain safe; the concern is the status of the derivative. Acceptance: Reject or leave a repair undecided and verify an approved export cannot silently apply it. Preview exports retain explicit unapproved status.",
-      "status": "SOURCE FINDING \u00b7 HIGH",
+      "notes": "The actual build_dataset easy route removed one synthetic record even though the supplied decision explicitly rejected its exclusion. Storage lookup was mocked; dataset construction and ZIP contents were real. The original four-row file was unchanged. This tests export semantics, not a deployed authorization bypass.",
+      "status": "REPRODUCED \u00b7 SEE SCOPE",
       "kind": "compare"
     },
     {
       "title": "4 \u00b7 Evidence and repair targets are truncated to 500",
-      "before": "501 affected records",
+      "before": "620 affected records",
       "after": "500 repair targets",
       "fix": "Keep a bounded display sample plus total count, truncation marker and complete separately addressable target set.",
       "source": "https://github.com/GiorgiKarazanashvili/BusyBeavers/blob/bfb369f231bf97a1d3aa21abade3ba4b1406a355/detection/engine.py#L26",
-      "notes": "Both evidence and repair targets are sliced to MAX_EVIDENCE=500. A large finding can describe more affected records than the exported repair covers. The easy export later consumes those targets. A presentation limit must not silently become the scope of a repair. Acceptance: Create 501 synthetic affected targets. Verify all intended targets are represented or the export explicitly refuses/labels a partial operation.",
-      "status": "SOURCE FINDING \u00b7 MEDIUM",
+      "notes": "A synthetic 620-sample change produced a summary naming 620 affected samples but only 500 evidence entries and 500 unique repair targets. The truncation affects the machine-consumed repair set as well as display evidence.",
+      "status": "REPRODUCED \u00b7 SEE SCOPE",
       "kind": "compare"
     },
     {
@@ -66,10 +66,10 @@
     {
       "title": "What is verified so far",
       "before": "65 tests passed",
-      "after": "3 unmet safeguards",
+      "after": "0 tests skipped",
       "fix": "Read TESTS.md for skips, positive controls and limits.",
       "source": "TESTS.md",
-      "notes": "65 passed, 0 skipped, 0 failed, 0 errors; independent safeguards are targeted probes, not a score.",
+      "notes": "65 passed, 0 skipped, 0 failed. Targeted synthetic observations are detailed in TESTS.md and are not a score.",
       "status": "LIMITS",
       "kind": "compare"
     }

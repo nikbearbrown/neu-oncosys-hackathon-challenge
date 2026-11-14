@@ -1,0 +1,40 @@
+[
+  {
+    "check": "All 620 affected repair targets retained",
+    "expected": 620,
+    "observed": 500,
+    "safeguard_met": false
+  },
+  {
+    "observation": "large repair summary",
+    "findings": [
+      {
+        "summary": "protein_rppa.tsv.gz: values changed in place for 620 sample(s) (fields: ERALPHA).",
+        "evidence_count": 500
+      }
+    ]
+  },
+  {
+    "check": "Easy export respects explicit rejection",
+    "expected": true,
+    "observed": false,
+    "safeguard_met": false
+  },
+  {
+    "observation": "easy export audit",
+    "changed": {
+      "clinical.tsv": {
+        "rows_removed": 1,
+        "cells_relabelled": 0
+      }
+    },
+    "mode": "easy",
+    "note": "Copy of synthetic-B with the fixes below; the original release was not modified."
+  },
+  {
+    "check": "Original file preserved",
+    "expected": true,
+    "observed": true,
+    "safeguard_met": true
+  }
+]

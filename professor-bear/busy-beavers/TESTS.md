@@ -29,3 +29,15 @@ No hosted application, real provider call, clinical validity, production authori
 [Final submitted-test log](evidence/submitted-tests.log) · [Recorded command](evidence/submitted-test-command.json)
 
 [Recorded dependency versions and isolation probes](../review-tools/environment.json). The final profile explicitly permits loopback only; external probes returned PermissionError.
+
+## Second independent synthetic round
+
+The following are targeted recommendations and controls, not additional official judging requirements. Read [exact observations](evidence/synthetic-probes-round2.json) and [reproduction source](../review-tools/synthetic-probes-round2.py).
+
+| Check | Expected | Observed | Proposed safeguard met? |
+|---|---|---|---|
+| All 620 affected repair targets retained | 620 | 500 | No |
+| Easy export respects explicit rejection | true | false | No |
+| Original file preserved | true | true | Yes |
+
+For Tripwire, release compatibility and question adequacy are distinct outputs. For Identity Crisis, the bypass is explicitly non-default. For export checks, a diagnostic export can be legitimate when its restrictions remain clear. See REPORT.md for these interpretation limits.

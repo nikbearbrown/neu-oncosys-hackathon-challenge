@@ -1,6 +1,6 @@
 # Cohort Studio: independent first-pass review
 
-Reviewed commit: `54aeacb6f6f355a1dcaa42d7abf2ce174315ad69`. Updated: **2026-11-14T19:51:28+00:00**. Track 1: Cohort Firewall.
+Reviewed commit: `54aeacb6f6f355a1dcaa42d7abf2ce174315ad69`. Updated: **2026-11-14T20:04:21+00:00**. Track 1: Cohort Firewall.
 
 **Status: source review plus isolated runtime checks; no verified hosted demo.** No official score is assigned. Runtime observations are labelled per issue; remaining source findings still require reproduction. Exact branches and limitations are stated. No student code or files were changed.
 
@@ -64,7 +64,9 @@ build_cohort defaults fix=True, applies inflation fixes and exports the resultin
 
 ### 4. Blocked outputs are exported beside ordinary cohorts
 
-**Priority: medium. Evidence: source inspection; runtime reproduction pending.**
+**Priority: medium. Evidence: source and isolated runtime reproduction.**
+
+**Runtime update:** The actual write_all function exported cohort_samples.csv for a Blocked synthetic join-inflation example. verdict.json was also present and retained Blocked. Diagnostic exports are useful; the concern is preserving the restriction when a CSV is separated from its accompanying evidence. See [second-round evidence](evidence/synthetic-probes-round2.json).
 
 write_all writes cohort_samples.csv regardless of the verdict; the verdict is in a separate JSON. Exporting blocked cohorts can be useful for diagnosis, but the CSV alone loses the restriction. The report must not imply that a generated file is approved for use.
 
@@ -96,27 +98,27 @@ The maximum points below reproduce the official track weights. They are not poin
 | Reasoning for the research question. Changes its result appropriately when the research question or intended use changes. | 20 | Cohort steps encode the question; review automatic fix semantics and missing request meaning. |
 | Evidence and sources. Shows the checks, data fields, decision rules, and limitations behind each conclusion. | 15 | Reproduction hashes are strong; issue 1 overstates verification and issue 2 endangers generated code. |
 | Safety and uncertainty. Avoids clinical claims, makes uncertainty visible, and requires human review. | 15 | Review messages exist; distinguish automated preview from approved cohort and outbound routing. |
-| Working tool and clear setup. Judges can run the core workflow from the submitted repository. | 15 | CLI, Streamlit, frontend and MCP interfaces exist; no live execution in this pass. |
+| Working tool and clear setup. Judges can run the core workflow from the submitted repository. | 15 | CLI, Streamlit, frontend and MCP interfaces exist; submitted interface tests ran locally; no hosted deployment was verified. |
 | Useful next steps. Suggested fixes are specific and match the size and importance of the problem. | 10 | Fixes and per-step losses are concrete; retain user choice and blocked-export context. |
 | Communication. Someone without specialist knowledge can understand the result and next step. | 5 | Show rows versus independent patients clearly; give provenance states distinct labels. |
 
 ## Runtime update
 
-279 passed, 20 skipped, 0 failed, 0 errors. Independent safeguards: 1 met, 3 unmet. [Commands, limitations and concrete observations](TESTS.md). These counts are not scores.
+299 passed, 0 skipped, 0 failed, 0 errors. Independent safeguards: 1 met, 3 unmet. [Commands, limitations and concrete observations](TESTS.md). These counts are not scores.
 
-## Checks actually performed at first pass
+## Initial static pass (historical scope)
 
 - Pinned and read source at `54aeacb6f6f355a1dcaa42d7abf2ce174315ad69`; original checkout was clean when inspected.
 - Parsed **65/65** selected Python source files with `ast.parse`; **0** syntax failures. Parsing does not execute or validate behavior.
 - Counted **209** `test_` function definitions in the inspected source set. This is a source count, not collected tests or passed tests.
 - Validated every cited source path and starting line against the pinned commit.
 - Rendered deck QA is recorded separately in `evidence/deck-qa.json` after rendering.
-- No application builds, dependency installs, submitted runtime tests, live deployment checks, real-data evaluation, sealed-envelope runs or model-provider calls in this first pass.
+- The initial pass was static only. Later isolated runtime checks are reported above and in TESTS.md; this historical scope is not the current verification status.
 
 [Machine-readable static checks](evidence/static-checks.json). No raw TCGA records, answer keys or credentials are included.
 
-## Next investigation
+## Follow-up and review limits
 
-Work through the issues above in order. Reproduce them in an isolated copy with invented inputs, including positive controls. Retain the recorded commit when comparing results. Changes after this review require a new commit-specific update; they do not retroactively change the evidence.
+Work through the issues above in order. Use the supplied reproductions for confirmed issues; reproduce the remaining source-only concerns in isolation with positive controls. Retain the recorded commit when comparing results. Changes after this review require a new commit-specific update; they do not retroactively change the evidence.
 
 A statistician should review adequacy thresholds, interval assumptions and claims of bias or representativeness. A domain expert should review clinical meaning. Neither source inspection nor passing software tests establishes clinical validity.

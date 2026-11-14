@@ -1,7 +1,7 @@
 {
   "title": "Cohort Studio",
   "commit": "54aeacb6f6f355a1dcaa42d7abf2ce174315ad69",
-  "updated": "2026-11-14T19:51:28+00:00",
+  "updated": "2026-11-14T20:04:21+00:00",
   "slides": [
     {
       "title": "Cohort Studio",
@@ -10,7 +10,7 @@
       "fix": "Professor Bear \u00b7 14 November 2026",
       "source": "REPORT.md",
       "notes": "Pinned source; isolated tests and detailed limits in TESTS.md. No hosted demo or official score.",
-      "status": "SOURCE + SYNTHETIC CHECKS",
+      "status": "SOURCE + PUBLIC-DATA TESTS",
       "kind": "cover"
     },
     {
@@ -49,8 +49,8 @@
       "after": "Ordinary CSV filename",
       "fix": "Bundle a manifest binding files to verdict, limitations, review state and hashes.",
       "source": "https://github.com/tammy357/oncosys-cohort-studio/blob/54aeacb6f6f355a1dcaa42d7abf2ce174315ad69/cohort_studio/api.py#L151",
-      "notes": "write_all writes cohort_samples.csv regardless of the verdict; the verdict is in a separate JSON. Exporting blocked cohorts can be useful for diagnosis, but the CSV alone loses the restriction. The report must not imply that a generated file is approved for use. Acceptance: Produce a blocked cohort, move its CSV alone and inspect the export contract. Ensure downstream tools can detect missing approval metadata.",
-      "status": "SOURCE FINDING \u00b7 MEDIUM",
+      "notes": "The actual write_all function exported cohort_samples.csv for a Blocked synthetic join-inflation example. verdict.json was also present and retained Blocked. Diagnostic exports are useful; the concern is preserving the restriction when a CSV is separated from its accompanying evidence.",
+      "status": "REPRODUCED \u00b7 SEE SCOPE",
       "kind": "compare"
     },
     {
@@ -65,11 +65,11 @@
     },
     {
       "title": "What is verified so far",
-      "before": "279 tests passed",
-      "after": "3 unmet safeguards",
+      "before": "299 tests passed",
+      "after": "0 tests skipped",
       "fix": "Read TESTS.md for skips, positive controls and limits.",
       "source": "TESTS.md",
-      "notes": "279 passed, 20 skipped, 0 failed, 0 errors; independent safeguards are targeted probes, not a score.",
+      "notes": "299 passed, 0 skipped, 0 failed. Targeted synthetic observations are detailed in TESTS.md and are not a score.",
       "status": "LIMITS",
       "kind": "compare"
     }
