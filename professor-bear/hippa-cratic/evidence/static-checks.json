@@ -1,0 +1,140 @@
+{
+  "commit": "9f0ad46f32a1a76af25baf1aa621ab862f991c45",
+  "files": [
+    {
+      "path": "app.py",
+      "parsed": true,
+      "test_defs": 0
+    },
+    {
+      "path": "cohort_studio/__init__.py",
+      "parsed": true,
+      "test_defs": 0
+    },
+    {
+      "path": "cohort_studio/advice.py",
+      "parsed": true,
+      "test_defs": 0
+    },
+    {
+      "path": "cohort_studio/builder.py",
+      "parsed": true,
+      "test_defs": 0
+    },
+    {
+      "path": "cohort_studio/custom.py",
+      "parsed": true,
+      "test_defs": 0
+    },
+    {
+      "path": "cohort_studio/data.py",
+      "parsed": true,
+      "test_defs": 0
+    },
+    {
+      "path": "cohort_studio/engine.py",
+      "parsed": true,
+      "test_defs": 0
+    },
+    {
+      "path": "cohort_studio/export.py",
+      "parsed": true,
+      "test_defs": 0
+    },
+    {
+      "path": "cohort_studio/llm.py",
+      "parsed": true,
+      "test_defs": 0
+    },
+    {
+      "path": "cohort_studio/llm_nvidia.py",
+      "parsed": true,
+      "test_defs": 0
+    },
+    {
+      "path": "cohort_studio/makeup.py",
+      "parsed": true,
+      "test_defs": 0
+    },
+    {
+      "path": "cohort_studio/sqlcheck.py",
+      "parsed": true,
+      "test_defs": 0
+    },
+    {
+      "path": "cohort_studio/versions.py",
+      "parsed": true,
+      "test_defs": 0
+    },
+    {
+      "path": "run_cohort.py",
+      "parsed": true,
+      "test_defs": 0
+    },
+    {
+      "path": "scripts/run_ai_eval.py",
+      "parsed": true,
+      "test_defs": 0
+    },
+    {
+      "path": "scripts/sql.py",
+      "parsed": true,
+      "test_defs": 0
+    },
+    {
+      "path": "tests/test_advice.py",
+      "parsed": true,
+      "test_defs": 6
+    },
+    {
+      "path": "tests/test_app.py",
+      "parsed": true,
+      "test_defs": 16
+    },
+    {
+      "path": "tests/test_builder.py",
+      "parsed": true,
+      "test_defs": 5
+    },
+    {
+      "path": "tests/test_custom.py",
+      "parsed": true,
+      "test_defs": 9
+    },
+    {
+      "path": "tests/test_engine.py",
+      "parsed": true,
+      "test_defs": 21
+    },
+    {
+      "path": "tests/test_makeup.py",
+      "parsed": true,
+      "test_defs": 5
+    },
+    {
+      "path": "tests/test_rebuild.py",
+      "parsed": true,
+      "test_defs": 1
+    },
+    {
+      "path": "tests/test_release.py",
+      "parsed": true,
+      "test_defs": 4
+    },
+    {
+      "path": "tests/test_trap_requests.py",
+      "parsed": true,
+      "test_defs": 3
+    },
+    {
+      "path": "tests/test_verify.py",
+      "parsed": true,
+      "test_defs": 14
+    },
+    {
+      "path": "tests/test_versions.py",
+      "parsed": true,
+      "test_defs": 5
+    }
+  ]
+}
