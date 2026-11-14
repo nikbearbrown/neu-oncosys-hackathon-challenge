@@ -1,0 +1,386 @@
+{
+  "mode": "judge",
+  "repo": "GauravBohra2001/clearanswer",
+  "commit": "7ede1f8fb84b6d23f3dba13a7c77688b32eab7b8",
+  "track": 2,
+  "reviewer": "Professor Bear / Codex source review",
+  "summary": "ClearAnswer is an Evidence Navigator / Research Claim Auditor, so this review uses the seven Track 2 criteria. Its source separates claim extraction, bounded tool queries, semantic scope checks, review and shared-format export. The most consequential gaps are at the handoff from computation to trusted verdict: a supported result can be assembled without a successful query, export unconditionally raises confidence to high, and a first-number tolerance shortcut can override a compound contradiction without checking every part. Manifest-driven answers also lack complete input fingerprint coverage, and malformed review objects can clear the human-review flag. These are inspected control-flow findings, not observed provider or browser failures. The review does not establish extraction recall, claim-verification accuracy, hosted usability or clinical validity.",
+  "limitations": [
+    "Pinned local checkout, not a verified official final-submission receipt; branch names and later changes are outside this pass.",
+    "Static source analysis only. No submission code, tests, installers, workflows, notebook, server, hosted endpoint or model was executed.",
+    "No sealed envelopes, answer keys or raw clinical datasets were accessed. Numerical correctness, performance, accessibility and fresh-machine setup remain untested.",
+    "Source-derived control-flow consequences are labeled as such. Proposed acceptance checks are not observed test results.",
+    "The collected text budget is 160 files, 200 KB/file and 4 MB/entry. Complete_with_exclusions is not an exhaustive audit; exclusions and focused follow-ups are recorded.",
+    "No official score, cross-team ranking, clinical validity or regulatory/accessibility certification is asserted."
+  ],
+  "criteria": [
+    {
+      "id": "T2-1",
+      "status": "observed",
+      "assessment": "The audit queue aims to support a report-trust decision and supplies next-step fields. First-number tolerance and unverified supported paths can change that decision without adequate evidence. No claim-verification accuracy was measured.",
+      "findings": [
+        {
+          "kind": "gap",
+          "priority": "P1",
+          "title": "The tolerance shortcut checks only the first number",
+          "observation": "check_tolerance extracts the first number from the entire claim and the first number from correct_value, determines percentage/approximation flags from the whole strings, and returns a tolerance note when that pair is close. _build_result uses any such note to replace a contradicted verdict with supported and severity none. This does not align values with the same measure, unit or denominator and does not verify the remaining subclaims. It conflicts with the verifier prompt's own worst-part-wins rule for compound sentences. The source permits a close first pair to mask a different contradicted part; no live erroneous audit was observed here.",
+          "impact": "Approximate language is useful, but tolerance must apply to the relevant quantity. A multi-number sentence can contain a year, a total, a subgroup count and a percentage. A global first-number comparison can change the decision for the wrong reason and erase the contradiction the model had already identified.",
+          "recommendation": "Represent numeric subclaims structurally, with measure, value, unit, population, denominator and a matching computed result. Apply tolerance to each matched pair and retain contradicted if any material subclaim fails. If matching is ambiguous, request review instead of upgrading the sentence. Keep exact counts and percentage-point/relative conventions distinct.",
+          "acceptance_check": "Use invented compound claims where an approximate first total is close but a later share is wrong, where a leading year is unrelated, and where counts and percentages differ in units. A genuine single-percentage rounding control may pass. Reordering sentence clauses must not change the verdict when the asserted facts are the same.",
+          "confidence": "High for first-number extraction and unconditional whole-verdict promotion; actual extraction/model behavior remains untested.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "core/tolerance.py",
+              "start": 21,
+              "end": 34,
+              "quote": "def extract_first_number(text: str) -> Optional[float]:\n    \"\"\"Pull the first numeric value from a string.\"\"\"\n    m = _NUMBER_RE.search(text)\n    if m:\n        return float(m.group().replace(\",\", \"\"))\n    return None\n\n\ndef is_percentage(text: str) -> bool:\n    return bool(_PERCENT_RE.search(text))\n\n\ndef is_approximate(text: str) -> bool:\n    return bool(_APPROX_RE.search(text))"
+            },
+            {
+              "path": "core/tolerance.py",
+              "start": 62,
+              "end": 90,
+              "quote": "def check_tolerance(\n    claim_text: str,\n    correct_value_str: str,\n) -> Optional[str]:\n    \"\"\"Compare numbers in a claim against correct_value.\n\n    Returns a note string if values are within tolerance (meaning\n    verdict should be 'supported' not 'contradicted'), or None if\n    genuinely different.\n    \"\"\"\n    claimed_num = extract_first_number(claim_text)\n    actual_num = extract_first_number(correct_value_str)\n\n    if claimed_num is None or actual_num is None:\n        return None\n\n    is_pct = is_percentage(claim_text) or is_percentage(correct_value_str)\n    is_approx = is_approximate(claim_text)\n\n    if within_tolerance(claimed_num, actual_num, is_pct, is_approx):\n        if claimed_num == actual_num:\n            return None  # Exact match, should not be contradicted anyway\n        return (\n            f\"Claimed {claimed_num}{'%' if is_pct else ''} vs actual \"\n            f\"{actual_num}{'%' if is_pct else ''} - within \"\n            f\"{'approximate ' if is_approx else ''}tolerance\"\n            f\"{' (+/- 1.5pp / 5%)' if is_approx else ' (+/- 0.5pp)' if is_pct else ''}. \"\n            f\"Treating as supported.\"\n        )"
+            },
+            {
+              "path": "agents/verifier.py",
+              "start": 431,
+              "end": 440,
+              "quote": "        # Tolerance safety net: if Claude says contradicted but the numbers\n        # are within rounding tolerance, upgrade to supported with a note.\n        if verdict == \"contradicted\" and correct_value:\n            tolerance_note = check_tolerance(claim_text, correct_value)\n            if tolerance_note:\n                verdict = \"supported\"\n                severity = \"none\"\n                reasoning = f\"{reasoning} [Tolerance: {tolerance_note}]\"\n                if not limitation:\n                    limitation = tolerance_note"
+            },
+            {
+              "path": "agents/verifier.py",
+              "start": 49,
+              "end": 64,
+              "quote": "COMPOUND SENTENCES (worst-part-wins rule):\nA sentence can carry several numbers (\"Of the 1,101 primary tumors in the\nrelease, 535 have survival, mutation, copy number, RNA and protein data\").\nCheck EVERY number in the sentence. The sentence gets ONE verdict:\n- supported: every sub-claim matched the data within reasonable rounding.\n- contradicted: AT LEAST ONE sub-claim disagrees. correct_value must list\n  what the data shows for the wrong sub-claim(s). If more than one is wrong,\n  list all of them, separated by '; '.\n\nVerdict rules:\n- supported: every checkable part of the sentence agrees with the data.\n- contradicted: any part disagrees. You MUST provide correct_value. For\n  distributional claims (\"largest subtype at 62%\") include the correct share\n  AND the full distribution in correct_value, e.g.\n  '49.9% (421 of 844); full distribution: LumA 49.9%, LumB 22.7%, Basal 16.7%,\n   Her2 7.9%, Normal 2.7%'."
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T2-2",
+      "status": "observed",
+      "assessment": "Bounded deterministic tools, source fields and report text pointers support drill-down. Unqueried evidence pointers and omitted manifest fingerprints weaken reproducibility; inspect actual calculation receipts rather than pointer counts.",
+      "findings": [
+        {
+          "kind": "gap",
+          "priority": "P1",
+          "title": "A supported verdict does not require a successful computation",
+          "observation": "The verifier accepts finalize_verdict as soon as the model supplies it, without first requiring successful data or manifest queries. _build_result then permits supported with no evidence and creates an analysis pointer named model_asserted_match. Model-declared evidence filenames are also accepted even when no successful tool touched them. The ClaimResult contract only requires a nonempty evidence list, not proof of a relevant computation. A later guard marks sparse evidence for human review, which is useful, but does not change the supported verdict. Thus the source does not enforce the stated guarantee that every supported numerical result is backed by a deterministic calculation.",
+          "impact": "A pointer-shaped record can satisfy structural validation while representing an assertion rather than execution. A reviewer needs to distinguish a tool result, a static scope rule and an unverified model statement before relying on a supported badge. This is a reachable source path, not evidence that a live model actually took it in the submitted demo.",
+          "recommendation": "Require a successful, claim-relevant computation receipt before supported or contradicted. Bind tool arguments, resolved inputs, denominator and returned values to the claim and validate the final verdict against that receipt. Keep schema-only refusals as a separately labelled insufficient-evidence path. Model-declared but unqueried files should remain proposed sources, not executed evidence.",
+          "acceptance_check": "In an authorized follow-up using mock model responses and invented tool results, finalize supported before any query, after an errored query and after an unrelated successful query. All must remain unverified/Insufficient Evidence or explicitly awaiting review. A relevant successful numerical query is the positive control. Inspect the exported evidence type, not only its nonempty length.",
+          "confidence": "High for the inspected branch ordering and evidence construction; no model call or mocked submission execution occurred in this pass.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "agents/verifier.py",
+              "start": 301,
+              "end": 321,
+              "quote": "            tool_results_block: list[dict] = []\n            finalized = False\n            for tu in tool_use_blocks:\n                name = tu.name\n                tool_input = tu.input or {}\n                if name == \"finalize_verdict\":\n                    final_input = tool_input\n                    with self.trace_collector.start_step(self.name, \"interpret\") as step:\n                        step.input_data = {\n                            \"verdict\": tool_input.get(\"verdict\"),\n                            \"correct_value\": tool_input.get(\"correct_value\"),\n                        }\n                        step.output_data = _verdict_summary(tool_input)\n                        step.reasoning = tool_input.get(\"reasoning\") or \"\"\n                    tool_results_block.append({\n                        \"type\": \"tool_result\",\n                        \"tool_use_id\": tu.id,\n                        \"content\": \"Verdict recorded.\",\n                    })\n                    finalized = True\n                    continue"
+            },
+            {
+              "path": "agents/verifier.py",
+              "start": 455,
+              "end": 467,
+              "quote": "        elif verdict == \"supported\":\n            if not evidence:\n                # output.py always prepends a claim pointer; use a distinct\n                # analysis marker here so the two do not duplicate on screen.\n                evidence = [Evidence(kind=\"analysis\", id=\"model_asserted_match\")]\n            result = supported(\n                claim_text=claim_text,\n                evidence=evidence,\n                reasoning=reasoning,\n                confidence=confidence,\n                severity=severity or \"none\",\n                limitation=limitation,\n            )"
+            },
+            {
+              "path": "agents/verifier.py",
+              "start": 519,
+              "end": 525,
+              "quote": "        # Any files the model explicitly cited but no successful tool touched.\n        for fname in declared_files:\n            if (\"file\", fname) not in seen:\n                evidence.append(Evidence(kind=\"file\", id=fname))\n                seen.add((\"file\", fname))\n\n        return evidence"
+            },
+            {
+              "path": "core/evidence.py",
+              "start": 86,
+              "end": 94,
+              "quote": "        if self.claim_verdict == \"contradicted\" and not self.correct_value:\n            raise ValueError(\n                \"A contradicted claim requires a non-empty correct_value \"\n                \"(e.g. '49.9% (421 of 844)').\"\n            )\n        if self.claim_verdict in (\"supported\", \"contradicted\") and not self.evidence:\n            raise ValueError(\n                f\"A {self.claim_verdict!r} claim requires at least one evidence entry.\"\n            )"
+            },
+            {
+              "path": "core/guard.py",
+              "start": 107,
+              "end": 113,
+              "quote": "    if result.confidence == \"low\":\n        result.needs_human_review = True\n    # Raw verifier evidence of 1 means the model relied on a single tool call;\n    # worth a human glance even if the verdict is otherwise clean.\n    if result.claim_verdict in (\"supported\", \"contradicted\") and len(result.evidence) < 2:\n        result.needs_human_review = True\n    return result"
+            }
+          ]
+        },
+        {
+          "kind": "gap",
+          "priority": "P1",
+          "title": "Manifest-based answers omit their manifests from file fingerprints",
+          "observation": "ManifestTool computes cohort counts, layer availability and overlap from sample_manifest.csv. TCGARelease can locate manifests outside the selected release directory. However, file_checksums iterates only LAYER_FILES, omitting sample_manifest.csv and slide_manifest.csv, and build_audit_json exports only that checksum mapping. ManifestTool results also omit a source_file field, while the verifier's automatic file-evidence path expects one. The selected manifest can therefore materially determine an answer without receiving the same content-bound provenance as molecular/clinical layer files.",
+          "impact": "A future reviewer may reproduce all listed layer hashes and still use a different manifest, yielding a different cohort denominator or availability answer. A release label or model-declared filename does not establish the exact external metadata bytes used. This is an input-identity gap, not proof that the frozen official manifest is incorrect.",
+          "recommendation": "Track every actually consumed file, including manifests, with its resolved path, role and content hash. Have manifest tools return explicit source and query metadata just as data_query does. Distinguish release-specific measurements from shared baseline metadata and verify those identities on rerun.",
+          "acceptance_check": "Use two invented manifests with identical layer files but different cohort membership or availability flags. The answer's provenance must differ, name the manifest and reproduce the correct denominator. Keep a same-manifest positive control and a missing-manifest explicit error.",
+          "confidence": "High for omitted files and tool metadata in the complete inspected functions; no manifest or raw dataset was opened.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "tools/manifest_tool.py",
+              "start": 47,
+              "end": 77,
+              "quote": "    def _a_count_samples(self, query: dict) -> dict:\n        sm = self.release.load_layer(\"sample_manifest\")\n        st = query.get(\"sample_type\")\n        df = sm if not st else sm[sm[\"sample_type\"] == st]\n        return {\n            \"ok\": True,\n            \"action\": \"count_samples\",\n            \"sample_type\": st,\n            \"count\": int(len(df)),\n            \"total_in_manifest\": int(len(sm)),\n        }\n\n    def _a_count_with_layers(self, query: dict) -> dict:\n        sm = self.release.load_layer(\"sample_manifest\")\n        st = query.get(\"sample_type\", \"Primary Tumor\")\n        df = sm[sm[\"sample_type\"] == st] if st else sm\n        layers = query.get(\"layers\") or list(ALL_LAYER_FLAGS)\n        missing = [col for col in layers if col not in df.columns]\n        if missing:\n            raise KeyError(f\"unknown layer flags: {missing}\")\n        mask = df[layers[0]].astype(bool).copy()\n        for col in layers[1:]:\n            mask &= df[col].astype(bool)\n        return {\n            \"ok\": True,\n            \"action\": \"count_with_layers\",\n            \"sample_type\": st,\n            \"layers_required\": layers,\n            \"count\": int(mask.sum()),\n            \"denominator\": int(len(df)),\n        }"
+            },
+            {
+              "path": "core/loader.py",
+              "start": 56,
+              "end": 72,
+              "quote": "    def _find_manifest_dir(self) -> Path:\n        \"\"\"Walk up until we find a directory containing sample_manifest.csv.\"\"\"\n        candidates = [self.release_dir.parent, self.release_dir]\n        # Also try data/tcga-brca/ relative to the repo root.\n        for ancestor in self.release_dir.parents:\n            if (ancestor / \"sample_manifest.csv\").exists():\n                return ancestor\n            # Catch envelopes/opened/<n>/release/ \u2192 repo/data/tcga-brca/\n            cand = ancestor.parent.parent / \"data\" / \"tcga-brca\"\n            if cand.exists() and (cand / \"sample_manifest.csv\").exists():\n                return cand\n        for c in candidates:\n            if (c / \"sample_manifest.csv\").exists():\n                return c\n        # Fall back to release_dir.parent even if missing - callers that need\n        # manifests will get a clear FileNotFoundError.\n        return self.release_dir.parent"
+            },
+            {
+              "path": "core/loader.py",
+              "start": 206,
+              "end": 213,
+              "quote": "    def file_checksums(self) -> dict[str, str]:\n        \"\"\"SHA-256 of each layer file as downloaded (for audit.json `data`).\"\"\"\n        out: dict[str, str] = {}\n        for name, fname in LAYER_FILES.items():\n            path = self._layer_path(name)\n            if path.exists():\n                out[fname] = _sha256(path)\n        return out"
+            },
+            {
+              "path": "output.py",
+              "start": 64,
+              "end": 75,
+              "quote": "        \"data\": {\n            \"dataset\": \"TCGA-BRCA\",\n            \"releases\": [\n                {\n                    \"name\": release_name,\n                    \"files\": [\n                        {\"file\": fname, \"sha256\": sha, \"hash_of\": \"file\"}\n                        for fname, sha in release.file_checksums().items()\n                    ],\n                }\n            ],\n        },"
+            },
+            {
+              "path": "agents/verifier.py",
+              "start": 491,
+              "end": 504,
+              "quote": "        # Every successful tool call that cites a source file becomes a file\n        # evidence pointer, so a reviewer can retrace exactly what was queried.\n        for entry in tool_history:\n            result = entry.get(\"result\") or {}\n            if not result.get(\"ok\"):\n                continue\n            source = result.get(\"source_file\")\n            if source and (ident := (\"file\", source)) not in seen:\n                evidence.append(Evidence(\n                    kind=\"file\",\n                    id=source,\n                    note=result.get(\"query_description\"),\n                ))\n                seen.add(ident)"
+            }
+          ]
+        },
+        {
+          "kind": "strength",
+          "priority": "P2",
+          "title": "Queries use a bounded operation vocabulary with source metadata",
+          "observation": "DataTool exposes enumerated layers and operations instead of asking the model to execute arbitrary Python. It validates known layers, dispatches the selected operation, reports errors explicitly, and attaches source_file and query_description. Value counts include total_counted and row_count, and group comparisons report measured sample sizes. These are useful ingredients for checking denominators and following the calculation rather than trusting prose alone. Their presence does not enforce the finalization boundary discussed in CA-01.",
+          "impact": "The source separates the model's query choice from the deterministic calculation, making a human audit possible. Typed operations and explicit errors reduce the ambiguity of an unconstrained code-execution agent.",
+          "recommendation": "Retain this separation and expose the exact query/result receipt per claim. Extend the same metadata to manifest lookups and require receipt relevance before assigning a supported verdict. Test semantic field selection independently of arithmetic correctness.",
+          "acceptance_check": "With invented data, trace count, distribution and grouped comparison from requested filters through row_count/total_counted to the displayed answer. Unknown columns/layers must remain errors rather than guessed values. Confirm that each final claim points to the computation that actually supports it.",
+          "confidence": "High for the operation vocabulary and response fields; no numerical query was executed.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "tools/data_tool.py",
+              "start": 69,
+              "end": 94,
+              "quote": "    def schema(self) -> dict:\n        \"\"\"JSON schema for Anthropic tool_use input_schema.\"\"\"\n        return {\n            \"type\": \"object\",\n            \"required\": [\"operation\", \"layer\"],\n            \"properties\": {\n                \"operation\": {\n                    \"type\": \"string\",\n                    \"enum\": [\"count\", \"filter\", \"aggregate\", \"value_counts\",\n                             \"describe\", \"compare\", \"unique\"],\n                },\n                \"layer\": {\"type\": \"string\", \"enum\": _LAYER_NAMES},\n                \"column\": {\"type\": \"string\"},\n                \"columns\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}},\n                \"where\": {\"type\": \"object\"},\n                \"filter\": {\"type\": \"object\"},\n                \"agg\": {\n                    \"type\": \"string\",\n                    \"enum\": [\"mean\", \"sum\", \"min\", \"max\", \"median\", \"count\"],\n                },\n                \"group_by\": {\"type\": \"string\"},\n                \"primary_only\": {\"type\": \"boolean\"},\n                \"dropna\": {\"type\": \"boolean\"},\n                \"limit\": {\"type\": \"integer\", \"minimum\": 1, \"maximum\": 1000},\n            },\n        }"
+            },
+            {
+              "path": "tools/data_tool.py",
+              "start": 98,
+              "end": 125,
+              "quote": "    def execute(self, query: dict) -> dict:\n        try:\n            op = query.get(\"operation\")\n            layer = query.get(\"layer\")\n            if not op:\n                return self._err(\"missing 'operation'\", query)\n            if not layer:\n                return self._err(\"missing 'layer'\", query)\n            if layer not in _LAYER_NAMES:\n                return self._err(\n                    f\"unknown layer {layer!r}; available: {_LAYER_NAMES}\", query\n                )\n            df = self._select(layer, query)\n            method = getattr(self, f\"_op_{op}\", None)\n            if method is None:\n                return self._err(f\"unknown operation {op!r}\", query)\n            result = method(df, query)\n            source = LAYER_FILES.get(layer, MANIFEST_FILES.get(layer, layer))\n            return {\n                \"ok\": True,\n                \"operation\": op,\n                \"layer\": layer,\n                \"source_file\": source,\n                \"query_description\": _describe(query),\n                **result,\n            }\n        except Exception as e:  # noqa: BLE001 - surfaced to the agent\n            return self._err(f\"{type(e).__name__}: {e}\", query)"
+            },
+            {
+              "path": "tools/data_tool.py",
+              "start": 206,
+              "end": 218,
+              "quote": "    def _op_value_counts(self, df: pd.DataFrame, query: dict) -> dict:\n        column = query[\"column\"]\n        if column not in df.columns:\n            raise KeyError(f\"column {column!r} not in layer\")\n        dropna = bool(query.get(\"dropna\", True))\n        counts = df[column].value_counts(dropna=dropna)\n        total = int(counts.sum())\n        return {\n            \"result\": {str(k): int(v) for k, v in counts.items()},\n            \"row_count\": int(len(df)),\n            \"total_counted\": total,\n            \"percent\": {str(k): round(100 * int(v) / total, 2) for k, v in counts.items()} if total else {},\n        }"
+            },
+            {
+              "path": "tools/data_tool.py",
+              "start": 248,
+              "end": 264,
+              "quote": "    def _op_compare(self, df: pd.DataFrame, query: dict) -> dict:\n        column = query[\"column\"]\n        group_by = query[\"group_by\"]\n        agg = query.get(\"agg\", \"mean\")\n        if column not in df.columns:\n            raise KeyError(f\"column {column!r} not in layer\")\n        if group_by not in df.columns:\n            raise KeyError(f\"group_by {group_by!r} not in layer\")\n        series = pd.to_numeric(df[column], errors=\"coerce\")\n        summary = {}\n        for key, sub in series.groupby(df[group_by]):\n            s = sub.dropna()\n            summary[str(key)] = {\n                \"n\": int(s.size),\n                agg: _num(getattr(s, agg)()) if s.size else None,\n            }\n        return {\"result\": summary, \"row_count\": int(series.notna().sum())}"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T2-3",
+      "status": "observed",
+      "assessment": "Summary/detail and original-versus-override views use the same finding records. No distinct role modes are required for this product; whether actual reviewers receive the right depth remains an unguided-use question.",
+      "findings": [
+        {
+          "kind": "strength",
+          "priority": "P2",
+          "title": "The interface preserves the tool verdict beside a human override",
+          "observation": "The extractor filters candidate claims to normalized substrings actually present in the report, reducing unsupported paraphrase pointers. The UI stores per-finding review state and shows the original and replacement verdicts side by side. The export helper also retains tool_verdict when a reviewer touches a finding. This supports a summary-to-detail review workflow grounded in the report's words, although normalized substring matching does not establish complete sentence extraction or recall, and the review record still needs CA-05's validation.",
+          "impact": "Technical and nontechnical reviewers can distinguish the claim, the tool's conclusion and their own decision. Keeping both verdicts is specifically relevant to the Research Claim Auditor product and avoids silently presenting an override as the model's original answer.",
+          "recommendation": "Preserve the original text and both verdicts. Add stable sentence/page offsets, explicit extraction omissions and validated decision metadata. Keep the same underlying evidence across summary and detailed views rather than generating independent narratives for each audience.",
+          "acceptance_check": "Use a short invented report with duplicate sentences, wrapped lines and a compound sentence. Verify each retained finding maps to its source span and compare accept/override displays with both export formats. Measure omitted/duplicated claims separately; a substring check alone does not establish complete coverage.",
+          "confidence": "High for the inspected source-linking and verdict-preservation paths; no usability, extraction-recall or browser test was performed.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "agents/extractor.py",
+              "start": 92,
+              "end": 102,
+              "quote": "            raw = _first_text_block(response)\n            claims = _parse_claims(raw)\n            # Keep only sentences the model actually quoted from the report.\n            # Paraphrases would make later evidence pointers unreliable.\n            verified = [c for c in claims if _appears_in(report_text, c)]\n            step.reasoning = (\n                f\"Model returned {len(claims)} candidate sentences; \"\n                f\"{len(verified)} matched the report verbatim.\"\n            )\n            step.output_data = {\"claims\": verified}\n            return verified"
+            },
+            {
+              "path": "agents/extractor.py",
+              "start": 141,
+              "end": 151,
+              "quote": "def _appears_in(report: str, sentence: str) -> bool:\n    \"\"\"True when the model's sentence is really a substring of the report.\n\n    Whitespace is collapsed on both sides because Markdown wrapping often\n    inserts line breaks inside what logically reads as one sentence.\n    \"\"\"\n    norm_report = re.sub(r\"\\s+\", \" \", report).strip().lower()\n    norm_claim = re.sub(r\"\\s+\", \" \", sentence).strip().lower()\n    if not norm_claim:\n        return False\n    return norm_claim in norm_report"
+            },
+            {
+              "path": "templates/index.html",
+              "start": 1718,
+              "end": 1738,
+              "quote": "    // Apply styling for an override: both verdicts stay visible side by side\n    // so the reviewer can see what the tool said and what they chose instead.\n    function applyOverrideUI(claim, newVerdict, reason, verdictStack, origBadge, acceptBtn, overrideBtn, needsBadge, body) {\n      // Strike the original and prepend an arrow + new badge.\n      origBadge.classList.add('strike');\n      // Clear anything added by a previous override attempt.\n      verdictStack.querySelectorAll('.badge:not(:first-child), .arrow').forEach(n => n.remove());\n      const arrow = document.createElement('span');\n      arrow.className = 'arrow';\n      arrow.textContent = '\\u2192';\n      const newBadge = makeBadge(newVerdict, true);\n      verdictStack.appendChild(arrow);\n      verdictStack.appendChild(newBadge);\n\n      overrideBtn.textContent = '\\u270e Overridden';\n      overrideBtn.classList.add('muted');\n      acceptBtn.style.display = 'none';\n      if (needsBadge) needsBadge.remove();\n\n      const reasonLine = document.getElementById('reason-' + claim.id);\n      if (reasonLine) reasonLine.textContent = reason ? 'Reason: ' + reason : '';"
+            },
+            {
+              "path": "app.py",
+              "start": 442,
+              "end": 453,
+              "quote": "        ov = override_map.get(fid)\n        if ov:\n            finding[\"tool_verdict\"] = verdict\n            decision = ov.get(\"decision\", \"accept\")\n            finding[\"reviewer_decision\"] = decision\n            if decision == \"override\" and ov.get(\"verdict\"):\n                finding[\"claim_verdict\"] = ov[\"verdict\"]\n                verdict = ov[\"verdict\"]\n            if ov.get(\"reason\"):\n                finding[\"reviewer_reason\"] = ov[\"reason\"]\n            # A claim the reviewer touched no longer needs review.\n            finding[\"needs_human_review\"] = False"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T2-4",
+      "status": "observed",
+      "assessment": "Static cannot-answer and incomplete-verification paths are constructive. Export confidence promotion and weak review-payload validation can obscure those safeguards. No privacy breach, clinical validity or deployment-security certification is asserted.",
+      "findings": [
+        {
+          "kind": "gap",
+          "priority": "P1",
+          "title": "Export replaces every confidence value with high",
+          "observation": "The internal finding conversion retains each ClaimResult confidence. The web export conversion then unconditionally sets every finding's confidence to high, including low-confidence budget-exhaustion results or model-asserted matches. The code comment attributes this policy to deterministic pandas computation, but CA-01 shows that not every accepted verdict requires such a computation. The same conversion feeds JSON and standalone HTML exports. A high confidence in a well-established inability to answer can be legitimate; the problem is replacing the original confidence without inspecting why it was low.",
+          "impact": "An uncertainty signal shown during analysis can disappear from the artifact a reviewer circulates. Determinism of a calculation does not establish correct claim extraction, field selection, denominator, interpretation or complete evidence. The original trace is stripped from the submission copy, making this silent promotion harder to reconstruct from the exported artifact alone.",
+          "recommendation": "Preserve tool confidence and its stated basis through export. If confidence in execution is a separate concept, expose it under a distinct field and keep evidence/interpretation uncertainty unchanged. Do not let format preparation increase epistemic confidence by default. Preserve enough provenance to explain any deliberate human reassessment.",
+          "acceptance_check": "Compare stored and exported findings for low/medium/high confidence, budget exhaustion, static cannot-answer, successful computation and unqueried supported cases. Confidence must remain faithful to its basis; JSON and HTML must agree. A reviewer override should retain both tool and reviewer confidence rather than rewriting history.",
+          "confidence": "High for the unconditional assignment and both export callers; no endpoint was exercised.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "output.py",
+              "start": 106,
+              "end": 120,
+              "quote": "    finding: dict = {\n        \"id\": finding_id,\n        \"kind\": \"claim_check\",\n        \"summary\": _summary_for(result),\n        \"severity\": result.severity,\n        \"confidence\": result.confidence,\n        \"evidence\": _build_evidence(result, finding_id, release_name, limitation),\n        \"claim_text\": result.claim_text,\n        \"claim_verdict\": verdict,\n        \"needs_human_review\": bool(result.needs_human_review),\n    }\n    if result.correct_value:\n        finding[\"correct_value\"] = result.correct_value\n    if limitation:\n        finding[\"limitation\"] = limitation"
+            },
+            {
+              "path": "app.py",
+              "start": 409,
+              "end": 425,
+              "quote": "def _prepare_for_submission(audit: dict, overrides: list[dict] | None = None) -> dict:\n    \"\"\"Return a copy of the audit dict shaped for the judges' checker.\n\n    Changes vs the stored audit:\n    - drops the private _trace key the shared format does not define\n    - applies reviewer accept/override decisions so the shipped verdict is\n      the one the human confirmed, while preserving the tool's original\n      verdict under tool_verdict for provenance\n    - applies the submission severity policy to the FINAL verdict: high for\n      contradicted, medium for insufficient_evidence, none for supported\n    - sets confidence to high on every finding, because the verdict comes\n      from a deterministic pandas computation, not from model sampling\n    - guarantees every finding carries at least one evidence entry, since\n      the schema requires it\n    \"\"\"\n    submission = copy.deepcopy(audit)\n    submission.pop(\"_trace\", None)"
+            },
+            {
+              "path": "app.py",
+              "start": 438,
+              "end": 459,
+              "quote": "    for finding in submission.get(\"findings\", []):\n        fid = finding.get(\"id\")\n        verdict = finding.get(\"claim_verdict\", \"\")\n\n        ov = override_map.get(fid)\n        if ov:\n            finding[\"tool_verdict\"] = verdict\n            decision = ov.get(\"decision\", \"accept\")\n            finding[\"reviewer_decision\"] = decision\n            if decision == \"override\" and ov.get(\"verdict\"):\n                finding[\"claim_verdict\"] = ov[\"verdict\"]\n                verdict = ov[\"verdict\"]\n            if ov.get(\"reason\"):\n                finding[\"reviewer_reason\"] = ov[\"reason\"]\n            # A claim the reviewer touched no longer needs review.\n            finding[\"needs_human_review\"] = False\n\n        finding[\"severity\"] = severity_by_verdict.get(verdict, finding.get(\"severity\", \"none\"))\n        finding[\"confidence\"] = \"high\"\n        if not finding.get(\"evidence\"):\n            finding[\"evidence\"] = [{\"kind\": \"claim\", \"id\": finding.get(\"claim_text\", \"\")[:60]}]\n    return submission"
+            },
+            {
+              "path": "agents/verifier.py",
+              "start": 348,
+              "end": 373,
+              "quote": "        if final_input is None:\n            # The model exhausted its budget without finalizing. Return a\n            # defensive insufficient_evidence verdict rather than crashing,\n            # but keep pointers to whatever files the verifier DID check\n            # before it ran out of steps. A reviewer needs to see what we\n            # looked at, not just a bare \"budget_exhausted\" marker.\n            partial_evidence = self._build_evidence(tool_history, declared_files=[])\n            partial_evidence.append(\n                Evidence(\n                    kind=\"analysis\",\n                    id=\"budget_exhausted\",\n                    note=(\n                        f\"Verifier gave up after {_MAX_STEPS} tool calls without \"\n                        f\"emitting finalize_verdict. Evidence above lists the \"\n                        f\"files and queries it did run.\"\n                    ),\n                )\n            )\n            fallback = insufficient(\n                claim_text=claim_text,\n                reason=\"Verifier exhausted its reasoning budget without reaching a verdict.\",\n                confidence=\"low\",\n                evidence=partial_evidence,\n            )\n            fallback.reasoning = \"Verifier did not emit finalize_verdict within the step budget.\"\n            return fallback"
+            },
+            {
+              "path": "app.py",
+              "start": 263,
+              "end": 273,
+              "quote": "    overrides = None\n    body = request.get_json(silent=True)\n    if isinstance(body, dict):\n        candidate = body.get(\"overrides\")\n        if isinstance(candidate, list):\n            overrides = candidate\n\n    audit = _prepare_for_submission(job[\"result\"], overrides=overrides)\n    from html_report import build_html_report\n\n    html_bytes = build_html_report(audit).encode(\"utf-8\")"
+            }
+          ]
+        },
+        {
+          "kind": "gap",
+          "priority": "P1",
+          "title": "Malformed review objects can clear the review requirement",
+          "observation": "The export helper indexes any dictionary containing a finding_id. Any matching nonempty object is treated as a touched review: decision defaults to accept, arbitrary decision strings are retained, a replacement verdict is applied when supplied, and needs_human_review is set false. There is no decision-enum, allowed-verdict or required-reason validation before this state change. The ordinary UI also forwards an override reason even when blank and omits the browser timestamp from the export payload. The original tool verdict is retained, which is a useful control. This source finding is about review-state validation and record completeness, not demonstrated remote exploitation or a requirement for enterprise authentication.",
+          "impact": "A malformed client payload can be interpreted as a completed human decision, and an unexplained override can be difficult to audit after the browser session ends. Structural schema validation may catch an invalid claim_verdict later, but it does not validate the added reviewer_decision field or restore the cleared review state.",
+          "recommendation": "Validate the review payload before modifying findings: known finding IDs, explicit supported decisions, allowed replacement verdicts and an appropriate recorded reason for overrides. Preserve the original verdict and record actor/role as self-attested if this is a local prototype, with time and evidence identity. Invalid payloads should leave the review state unchanged. Do not impose a login service merely to repair these local semantics.",
+          "acceptance_check": "Submit a finding-id-only object, an unknown decision, a blank-reason override, an invalid replacement verdict and a valid accept/override pair using invented audits. Invalid records must not clear needs_human_review. Verify both tool and final verdicts remain visible and that JSON and HTML export the same complete decision record.",
+          "confidence": "High for the export helper and browser payload construction; API/UI behavior was not run.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "app.py",
+              "start": 432,
+              "end": 458,
+              "quote": "    override_map: dict[str, dict] = {}\n    if overrides:\n        for o in overrides:\n            if isinstance(o, dict) and o.get(\"finding_id\"):\n                override_map[o[\"finding_id\"]] = o\n\n    for finding in submission.get(\"findings\", []):\n        fid = finding.get(\"id\")\n        verdict = finding.get(\"claim_verdict\", \"\")\n\n        ov = override_map.get(fid)\n        if ov:\n            finding[\"tool_verdict\"] = verdict\n            decision = ov.get(\"decision\", \"accept\")\n            finding[\"reviewer_decision\"] = decision\n            if decision == \"override\" and ov.get(\"verdict\"):\n                finding[\"claim_verdict\"] = ov[\"verdict\"]\n                verdict = ov[\"verdict\"]\n            if ov.get(\"reason\"):\n                finding[\"reviewer_reason\"] = ov[\"reason\"]\n            # A claim the reviewer touched no longer needs review.\n            finding[\"needs_human_review\"] = False\n\n        finding[\"severity\"] = severity_by_verdict.get(verdict, finding.get(\"severity\", \"none\"))\n        finding[\"confidence\"] = \"high\"\n        if not finding.get(\"evidence\"):\n            finding[\"evidence\"] = [{\"kind\": \"claim\", \"id\": finding.get(\"claim_text\", \"\")[:60]}]"
+            },
+            {
+              "path": "templates/index.html",
+              "start": 1808,
+              "end": 1811,
+              "quote": "      confirm.addEventListener('click', (e) => {\n        e.stopPropagation();\n        handlers.onConfirm(selected, reason.value.trim());\n      });"
+            },
+            {
+              "path": "templates/index.html",
+              "start": 2075,
+              "end": 2086,
+              "quote": "      try {\n        // Pack reviewer decisions into the shape the backend expects.\n        const overrides = Object.entries(reviewState).map(([id, r]) => {\n          const o = { finding_id: id, decision: r.decision };\n          if (r.verdict) o.verdict = r.verdict;\n          if (r.reason)  o.reason  = r.reason;\n          return o;\n        });\n        const res = await fetch('/api/export/' + currentJobId, {\n          method: 'POST',\n          headers: { 'Content-Type': 'application/json' },\n          body: JSON.stringify({ overrides }),"
+            },
+            {
+              "path": "app.py",
+              "start": 209,
+              "end": 221,
+              "quote": "    overrides = None\n    body = request.get_json(silent=True)\n    if isinstance(body, dict):\n        candidate = body.get(\"overrides\")\n        if isinstance(candidate, list):\n            overrides = candidate\n\n    audit = _prepare_for_submission(job[\"result\"], overrides=overrides)\n    OUTPUTS_DIR.mkdir(parents=True, exist_ok=True)\n    out_path = OUTPUTS_DIR / f\"audit-{job_id}.json\"\n    out_path.write_text(json.dumps(audit, indent=2), encoding=\"utf-8\")\n\n    valid, validator_output = _run_validator(out_path)"
+            }
+          ]
+        },
+        {
+          "kind": "strength",
+          "priority": "P2",
+          "title": "Unsupported topics and incomplete verification have explicit evidence-gap paths",
+          "observation": "The verifier short-circuits topics matched by its semantic cannot-answer layer to insufficient_evidence with a reason and labelled schema evidence. If the model never finalizes within the bounded loop, it returns low-confidence insufficient evidence with partial query pointers rather than manufacturing a numerical answer. The post-check marks low-confidence and sparse-evidence results for human review. These controls are explicit source behavior, but the topic dictionary is a static scope model and the export policy must preserve the resulting uncertainty.",
+          "impact": "Missing data and an incomplete reasoning process are distinguishable from a contradicted factual claim. This supports a safe research-auditing workflow, provided users can see what was not checked and export does not erase the limits.",
+          "recommendation": "Retain the fail-incomplete paths, label schema-only evidence accurately and test static topic assumptions against authorized release schemas. Do not equate a regex match with a full clinical scope assessment. Preserve original confidence and review flags as in CA-02 and CA-05.",
+          "acceptance_check": "Use authorized invented unsupported-topic claims, a no-finalization mock, failed-query mocks and a normal successful calculation. Verify different reasons remain visible through UI, JSON and HTML, with no unsupported clinical conclusion and no claim that file rows were scanned when only schema metadata was used.",
+          "confidence": "High for the explicit fallback branches; no model response or clinical scenario was evaluated.",
+          "rules": [],
+          "evidence": [
+            {
+              "path": "agents/verifier.py",
+              "start": 239,
+              "end": 265,
+              "quote": "    def run(self, claim_text: str) -> ClaimResult:\n        # Semantic-layer pre-check: if the claim's topic is in cannot_answer\n        # (hormone therapy, treatment response, drug efficacy, causal claims)\n        # we short-circuit instead of burning tool calls. This is what turns\n        # a 24-step fumble into a single decisive step.\n        blocked = check_cannot_answer(claim_text)\n        if blocked:\n            with self.trace_collector.start_step(self.name, \"plan\") as step:\n                step.input_data = {\"claim\": claim_text}\n                step.reasoning = (\n                    f\"Semantic pre-check: claim matches cannot_answer topic \"\n                    f\"'{blocked['topic']}'. Skipping tool calls.\"\n                )\n                step.output_data = {\"short_circuit\": True, \"topic\": blocked[\"topic\"]}\n            with self.trace_collector.start_step(self.name, \"interpret\") as step:\n                step.input_data = {\"verdict\": \"insufficient_evidence\"}\n                step.output_data = {\n                    \"verdict\": \"insufficient_evidence\",\n                    \"confidence\": \"high\",\n                }\n                step.reasoning = blocked[\"reason\"]\n            return insufficient(\n                claim_text=claim_text,\n                reason=blocked[\"reason\"],\n                confidence=\"high\",\n                evidence=self._pre_check_evidence(blocked),\n            )"
+            },
+            {
+              "path": "agents/verifier.py",
+              "start": 348,
+              "end": 373,
+              "quote": "        if final_input is None:\n            # The model exhausted its budget without finalizing. Return a\n            # defensive insufficient_evidence verdict rather than crashing,\n            # but keep pointers to whatever files the verifier DID check\n            # before it ran out of steps. A reviewer needs to see what we\n            # looked at, not just a bare \"budget_exhausted\" marker.\n            partial_evidence = self._build_evidence(tool_history, declared_files=[])\n            partial_evidence.append(\n                Evidence(\n                    kind=\"analysis\",\n                    id=\"budget_exhausted\",\n                    note=(\n                        f\"Verifier gave up after {_MAX_STEPS} tool calls without \"\n                        f\"emitting finalize_verdict. Evidence above lists the \"\n                        f\"files and queries it did run.\"\n                    ),\n                )\n            )\n            fallback = insufficient(\n                claim_text=claim_text,\n                reason=\"Verifier exhausted its reasoning budget without reaching a verdict.\",\n                confidence=\"low\",\n                evidence=partial_evidence,\n            )\n            fallback.reasoning = \"Verifier did not emit finalize_verdict within the step budget.\"\n            return fallback"
+            },
+            {
+              "path": "agents/verifier.py",
+              "start": 377,
+              "end": 405,
+              "quote": "    def _pre_check_evidence(self, blocked: dict) -> list[Evidence]:\n        \"\"\"Evidence for a cannot_answer short-circuit.\n\n        The pre-check didn't run any tools, but a reviewer still needs to see\n        what the semantic layer looked at and found lacking. We point at the\n        clinical and protein files (the two that most topics would need) plus\n        a schema-layer analysis pointer naming the blocked topic.\n        \"\"\"\n        topic = blocked.get(\"topic\", \"unknown\")\n        reason = blocked.get(\"reason\", \"\")\n        evidence = [\n            Evidence(\n                kind=\"analysis\",\n                id=\"semantic_pre_check\",\n                note=f\"Topic '{topic}' is in cannot_answer. Reason: {reason}\",\n            ),\n            Evidence(\n                kind=\"file\",\n                id=LAYER_FILES[\"clinical\"],\n                note=\"Schema inspected; no matching column for the claimed topic.\",\n            ),\n        ]\n        # Protein-specific topics also benefit from naming the RPPA file,\n        # even though we did not scan its rows.\n        if any(k in topic.lower() for k in (\"protein\", \"er-alpha\", \"er alpha\", \"hormone\", \"response\")):\n            evidence.append(Evidence(\n                kind=\"file\",\n                id=LAYER_FILES[\"protein\"],\n                note=\"RPPA protein file available but carries no treatment-response data.\","
+            },
+            {
+              "path": "core/guard.py",
+              "start": 99,
+              "end": 113,
+              "quote": "def post_check(result: \"ClaimResult\") -> \"ClaimResult\":\n    \"\"\"Flag findings that warrant a human look.\n\n    Sets needs_human_review on weak verdicts. We no longer stamp the limitation\n    field with an \"Auto-guard:\" prefix because the final finding is enriched\n    downstream (see output._build_evidence) and adding the prefix here\n    duplicates or confuses a reviewer looking at the UI.\n    \"\"\"\n    if result.confidence == \"low\":\n        result.needs_human_review = True\n    # Raw verifier evidence of 1 means the model relied on a single tool call;\n    # worth a human glance even if the verdict is otherwise clean.\n    if result.claim_verdict in (\"supported\", \"contradicted\") and len(result.evidence) < 2:\n        result.needs_human_review = True\n    return result"
+            }
+          ]
+        }
+      ],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. Prioritize the acceptance checks attached to this criterion."
+    },
+    {
+      "id": "T2-5",
+      "status": "not_tested",
+      "assessment": "Source includes progress, review controls and drill-down, but this reviewer ran no browser, keyboard, screen-reader, contrast, mobile or time-pressure task. The report-upload and export workflows need observed user checks.",
+      "findings": [],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. This pass does not establish runtime behavior or user comprehension."
+    },
+    {
+      "id": "T2-6",
+      "status": "not_tested",
+      "assessment": "README describes Flask/CLI setup and a provider key requirement. No installer, model call, submitted test, hosted endpoint, PDF parser or export validator was executed in this pass. Claimed helper tests do not establish orchestration correctness.",
+      "findings": [],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. This pass does not establish runtime behavior or user comprehension."
+    },
+    {
+      "id": "T2-7",
+      "status": "not_tested",
+      "assessment": "The README names the user, decision, workflow and export. This pass did not observe a demo; the inspected README contains a demo-video placeholder. Communicate the distinction between schema-valid output and a verified factual claim.",
+      "findings": [],
+      "next_check": "Demonstrate this criterion with authorized synthetic inputs and record the exact command, environment, input hashes, output and reviewer-observed result. This pass does not establish runtime behavior or user comprehension."
+    }
+  ],
+  "judge_scores": null
+}
