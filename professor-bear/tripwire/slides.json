@@ -1,7 +1,7 @@
 {
   "title": "Tripwire / Driftwire",
   "commit": "45df43640836025b40e89fc190f913ad694a6011",
-  "updated": "2026-11-14T21:04:04+00:00",
+  "updated": "2026-11-14T21:18:40+00:00",
   "slides": [
     {
       "title": "Tripwire / Driftwire",
@@ -25,11 +25,11 @@
     },
     {
       "title": "2 \u00b7 Decisions recorded is not concerns resolved",
-      "before": "More evidence requested",
+      "before": "Evidence requested / no repair",
       "after": "Review: 0 open",
-      "fix": "Show separate counts for decisions recorded and unresolved concerns.",
+      "fix": "Track unresolved findings separately from recorded repair decisions.",
       "source": "https://github.com/Adhithyan245/tripwire/blob/45df43640836025b40e89fc190f913ad694a6011/tripwire/review.py#L37",
-      "notes": "Actual synthetic browser flow showed zero open after request_more_evidence; export retained that decision and no repair was applied. Separate helper test covered a flagged finding without a repair.",
+      "notes": "Two local browser paths show zero open: request more evidence on a repair, and schema-valid import of a review-required finding with no repair. Exports preserve the decisions/flag. No repair approval or application is claimed.",
       "status": "REPRODUCED \u00b7 SEE SCOPE",
       "kind": "compare"
     },
@@ -69,7 +69,7 @@
       "after": "12 of 13 browser checks met",
       "fix": "Read TESTS.md for skips, positive controls and limits.",
       "source": "TESTS.md",
-      "notes": "404 submitted tests passed, one skipped. Twelve of thirteen local browser checks met reviewer-proposed safeguards. Actual export validator and failed-replacement clearing passed; review-counter concern remained. No hosted/clinical/accessibility certification.",
+      "notes": "404 submitted tests passed, one skipped. Twelve of thirteen local browser checks met reviewer-proposed safeguards. Actual export validator and failed-replacement clearing passed; review-counter concern remained. No hosted/clinical/accessibility certification. The same 404 passed/one skipped under Python 3.13 and declared direct requirements. Separate importer checks: four met, one unmet; corroborates issue 2.",
       "status": "LIMITS",
       "kind": "compare"
     }

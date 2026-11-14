@@ -1,6 +1,6 @@
 # Tripwire / Driftwire: independent review
 
-Reviewed commit: `45df43640836025b40e89fc190f913ad694a6011`. Updated: **2026-11-14T21:11:39+00:00**. Track 1: Cohort Firewall.
+Reviewed commit: `45df43640836025b40e89fc190f913ad694a6011`. Updated: **2026-11-14T21:18:40+00:00**. Track 1: Cohort Firewall.
 
 **Status: source review plus isolated runtime checks; no verified hosted demo.** No official score is assigned. Runtime observations are labelled per issue; remaining source findings still require reproduction. Exact branches and limitations are stated. No student code or files were changed.
 
@@ -44,9 +44,9 @@ release_verdict returns Ready for an unaffected, unmoved result before it tests 
 
 **Priority: high. Evidence: source and isolated runtime reproduction.**
 
-**Runtime update:** Direct review_status calls returned an empty open list for a flagged finding without repairs and for a repair marked request_more_evidence. The no-repair case is a helper-level reproduction. A later actual local browser test recorded Request more evidence and observed Review (0 open) plus zero awaiting human review; the exported decision correctly remained request_more_evidence and no repair was applied. The counter tracks decisions recorded rather than concerns resolved. See [test evidence](TESTS.md).
+**Runtime update:** Direct review_status calls returned an empty open list for a flagged finding without repairs and for a repair marked request_more_evidence. The no-repair case was first a helper reproduction; the later supported-importer browser test accepted a schema-valid invented document with needs_human_review=true and no repairs, displayed zero open and Nothing to review, and preserved the review flag in export. A later actual local browser test recorded Request more evidence and observed Review (0 open) plus zero awaiting human review; the exported decision correctly remained request_more_evidence and no repair was applied. The counter tracks decisions recorded rather than concerns resolved. See [test evidence](TESTS.md).
 
-review_status defines open findings using all(...) over associated repairs. For a flagged finding with no associated repair, all([]) is true, so it is excluded from the open list. This matters for imported findings and future checks even if the current builder normally emits a repair for each finding.
+review_status defines open findings using all(...) over associated repairs. For a flagged finding with no associated repair, all([]) is true, so it is excluded from the open list. The supported-importer test demonstrates this path for a valid invented input; it does not establish that the built-in detector generates it.
 
 **Evidence:** [tripwire/review.py:37](https://github.com/Adhithyan245/tripwire/blob/45df43640836025b40e89fc190f913ad694a6011/tripwire/review.py#L37).
 
@@ -116,7 +116,7 @@ The maximum points below reproduce the official track weights. They are not poin
 
 ## Runtime update
 
-404 passed, 1 skipped, 0 failed, 0 errors. Initial independent probe round: 4 met, 3 unmet. Later rounds and 13 browser checks (12 met, one unmet) are separately recorded; do not treat the initial round as the complete total. [Commands, limitations and concrete observations](TESTS.md). These counts are not scores.
+404 passed, 1 skipped, 0 failed, 0 errors, also reproduced under Python 3.13 with all six declared direct dependency versions. Initial independent probe round: 4 met, 3 unmet. Later rounds and 13 browser checks (12 met, one unmet) are separately recorded; do not treat the initial round as the complete total. [Commands, limitations and concrete observations](TESTS.md). These counts are not scores.
 
 ## Initial static pass (historical scope)
 
@@ -141,3 +141,5 @@ A separate reviewer supplied [a detailed source audit](audit-codex-23484638-pass
 
 
 The companion also has a [concise revised deck](slides-codex-23484638-pass-02.html), [full slide notes](slides-codex-23484638-pass-02.md) and a [cross-review reading guide](../review-guide-codex-23484638.md). These preserve the source review; current runtime observations remain in TESTS.md.
+
+[Source/runtime reconciliation](runtime-reconciliation-codex-23484638.md) explains why the zero-open counter is a communication issue and does not establish repair approval.

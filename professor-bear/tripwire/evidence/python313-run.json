@@ -1,0 +1,46 @@
+{
+  "timestamp": "2026-11-14T21:16:28.605425+00:00",
+  "commit": "45df43640836025b40e89fc190f913ad694a6011",
+  "exit_code": 0,
+  "seconds": 20.83,
+  "suites": [
+    {
+      "tests": "405",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "1",
+      "time": "9.758"
+    }
+  ],
+  "environment": {
+    "python": "3.13.13 (main, Apr  7 2026, 18:19:01) [Clang 21.0.0 (clang-2100.0.123.102)]",
+    "packages": {
+      "pandas": "2.2.3",
+      "numpy": "2.1.3",
+      "jsonschema": "4.26.0",
+      "cryptography": "49.0.0",
+      "streamlit": "1.67.0",
+      "pytest": "9.1.1"
+    }
+  },
+  "command": [
+    "/usr/bin/sandbox-exec",
+    "-f",
+    "/tmp/oncosys-runtime-k2vhjg41/sandbox.sb",
+    "/tmp/oncosys-runtime-k2vhjg41/venv313/bin/python3",
+    "-m",
+    "pytest",
+    "-q",
+    "--tb=short",
+    "--disable-warnings",
+    "--junitxml=/tmp/oncosys-runtime-k2vhjg41/tripwire313-junit.xml",
+    "tests"
+  ],
+  "env_keys": [
+    "PATH",
+    "TMPDIR",
+    "PYTHONNOUSERSITE",
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD"
+  ],
+  "scope": "Same submitted suite and verified frozen public files in isolated disposable copy; exact six direct requirements, Python3.13 macOS ARM64; transitive packages resolved today; no hosted or sealed inputs."
+}

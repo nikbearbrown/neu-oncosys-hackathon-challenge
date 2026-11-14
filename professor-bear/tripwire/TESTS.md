@@ -65,3 +65,15 @@ For Tripwire, release compatibility and question adequacy are distinct outputs. 
 The interface showed Conditional compatibility and separate question-level Blocked/Insufficient Evidence results. Evidence expansion, reason/role requirements, organizer schema validation and JSON export worked. Request more evidence became Review (0 open), while the JSON correctly retained the request and original_preserved=true; no repair was applied. This is a distinction between decisions recorded and concerns resolved, not evidence of an unauthorized repair.
 
 A failed replacement comparison removed the previous result and download controls, a useful positive control. No page script errors or document-level horizontal overflow were observed at 390px. These do not establish full accessibility or hosted behavior. The radio was exercised by keyboard because its styled input is covered by its label. An early screenshot omitted the tracked theme configuration; that harness omission was corrected, the completed workflow rerun, and only the final captures/counts are reported. Temporary server shutdown is recorded in the review completion notes.
+
+## Declared Python/dependency control
+
+At 21:16 UTC, reran the full submitted suite under **Python 3.13.13** on macOS ARM64 with all six direct requirements exactly as committed: pandas 2.2.3, numpy 2.1.3, jsonschema 4.26.0, cryptography 49.0.0, streamlit 1.67.0 and pytest 9.1.1. **404 passed, one skipped, zero failures/errors**, matching the earlier Python 3.14 result. Do not add these repeated tests to the unique test count. Transitive packages were resolved today; this is not a recreation of the author's complete historical lock environment.
+
+[Environment and exact command](evidence/python313-run.json) · [test log](evidence/python313-tests.log) · [runner](../review-tools/tripwire-python313-suite.py). Binary wheels only were installed in a separate disposable venv; tests then ran under the same credential-free restricted sandbox. No sealed input or provider call occurred.
+
+## Supported-importer no-repair browser control
+
+At 21:17 UTC, uploaded an invented findings document with one finding marked needs_human_review=true, zero repairs and no decisions. The actual importer accepted it and displayed its provenance warning. The organizer format validator passed. The interface nevertheless showed Review (0 open), zero awaiting human review and Nothing to review: no repairs were proposed. Export preserved the review flag and empty repairs/decisions; no repair was approved or applied.
+
+**Five targeted checks: four met, one unmet.** This extends the earlier helper observation to the supported browser import path. It does not establish that a built-in detector generates this shape. [Exact observations](evidence/no-repair-browser.json) · [screenshot](evidence/no-repair-synthetic.png) · [runner](../review-tools/tripwire-no-repair-browser.py). This used the Python 3.13 environment above; no browser script errors or external requests occurred. Count this as corroboration of issue 2, not a new independent defect or official deduction.

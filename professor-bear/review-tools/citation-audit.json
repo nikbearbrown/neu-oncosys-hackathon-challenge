@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-11-14T21:12:10.662779+00:00",
+  "timestamp": "2026-11-14T21:17:57.196028+00:00",
   "scope": "All recognized pinned GitHub blob links in primary reports, companion audits, coverage notes and runtime reconciliation notes. Verifies local Git object/path and cited line bounds, not scientific correctness or whether claims follow from cited code.",
-  "references": 228,
-  "distinct_files": 64,
+  "references": 231,
+  "distinct_files": 65,
   "invalid": [],
   "checks": [
     {
@@ -879,6 +879,24 @@
       "document": "tripwire/REPORT.md",
       "url": "https://github.com/Adhithyan245/tripwire/blob/45df43640836025b40e89fc190f913ad694a6011/tripwire/verdicts.py#L50",
       "line_count": 91,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "tripwire/runtime-reconciliation-codex-23484638.md",
+      "url": "https://github.com/Adhithyan245/tripwire/blob/45df43640836025b40e89fc190f913ad694a6011/app/dashboard.py#L367-L389",
+      "line_count": 555,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "tripwire/runtime-reconciliation-codex-23484638.md",
+      "url": "https://github.com/Adhithyan245/tripwire/blob/45df43640836025b40e89fc190f913ad694a6011/tripwire/review.py#L14-L34",
+      "line_count": 46,
+      "valid_path_and_lines": true
+    },
+    {
+      "document": "tripwire/runtime-reconciliation-codex-23484638.md",
+      "url": "https://github.com/Adhithyan245/tripwire/blob/45df43640836025b40e89fc190f913ad694a6011/tripwire/review.py#L37-L46",
+      "line_count": 46,
       "valid_path_and_lines": true
     },
     {

@@ -21,3 +21,5 @@ A separate reviewer supplied [a detailed source audit](audit-codex-23484638-pass
 
 
 The companion also has a [concise revised deck](slides-codex-23484638-pass-02.html), [full slide notes](slides-codex-23484638-pass-02.md) and a [cross-review reading guide](../review-guide-codex-23484638.md). These preserve the source review; current runtime observations remain in TESTS.md.
+
+[Source/runtime reconciliation](runtime-reconciliation-codex-23484638.md) explains why the zero-open counter is a communication issue and does not establish repair approval.

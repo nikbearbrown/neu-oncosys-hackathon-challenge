@@ -1,6 +1,6 @@
 # Cross-review status
 
-Updated 2026-11-14T21:11:39+00:00.
+Updated 2026-11-14T21:18:40+00:00.
 
 Each submission has a main REPORT.md, an evolving TESTS.md and HTML/PDF decks. Files named audit-codex-23484638-pass-01 are independent source-only supplements; their accompanying deck and structured review preserve that pass. They use the same pinned submission commits. No numeric scores are awarded here.
 
@@ -55,3 +55,5 @@ The first companion is a source review with attributed helper probes. Later main
 For Identity Crisis, the earlier "development bypass is non-default" statement applies to the callable API. The [later UI-state audit](identity-crisis-control-tower/audit-codex-23484638-pass-03.md) identifies the browser's explicit permissive initialization and separately traces cache and sign-off applicability. That reviewer's pass remains source-derived. Later main-report issues 6–7 reproduce stale cohort caching and a stale approved receipt through distinct browser/AppTest paths, with positive controls and a different browser path that withdrew the receipt. The [declaration-coverage note](identity-crisis-control-tower/coverage-note-codex-23484638.md) confirms matching source declarations for all required names in eight inspected built-in cards, and the later isolated import control confirms all 14 registrations load with no errors. These qualifications preserve the earlier API control rather than treating it as a fresh-session browser test.
 
 [Identity Crisis source/runtime reconciliation](identity-crisis-control-tower/runtime-reconciliation-codex-23484638.md) consolidates the later evidence without assigning a new score or double-counting findings.
+
+Tripwire follow-through at 21:17 UTC: the declared Python 3.13/direct-dependency suite also gives 404 passed/one skipped. A separate supported-importer browser case confirms zero-open review for a schema-valid flagged finding without a repair. This extends the earlier helper evidence; it does not imply a repair was approved. See [current test evidence](tripwire/TESTS.md).

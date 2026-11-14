@@ -55,10 +55,7 @@ isolated run. It is not a one-command production installation script.
 
 No raw event records, organizer answer keys or envelope credentials are included.
 No actual envelope was opened: the suite's two unsealing tests use fake scripts
-and invented inputs. The separate 15 event-data recipe files under tests/releases,
-real-data reference analyses, hosted deployment, paid API calls, performance at
-full scale, screen-reader tasks and complete accessibility/clinical validation
-were not tested. The screenshot shows only invented fixture values.
+and invented inputs. The initial unit/browser pass did not run the 15 public recipe files or real-data reference analyses; the later public mutation round below did. Hosted deployment, paid API calls, performance benchmarking at full scale, screen-reader tasks and complete accessibility/clinical validation remain untested. Screenshots show only invented fixture values.
 
 ## Frozen public baseline control
 

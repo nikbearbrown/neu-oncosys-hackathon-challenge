@@ -1,0 +1,37 @@
+{
+  "timestamp": "2026-11-14T21:17:51.724599+00:00",
+  "commit": "45df43640836025b40e89fc190f913ad694a6011",
+  "checks": [
+    {
+      "check": "Upload accepted and its provenance limitation shown",
+      "passed": true
+    },
+    {
+      "check": "Flagged finding without a repair remains open",
+      "passed": false
+    },
+    {
+      "check": "No-repair document passes actual organizer format validator",
+      "passed": true
+    },
+    {
+      "check": "Export retains review flag and no applied or proposed repair",
+      "passed": true
+    },
+    {
+      "check": "No page script errors",
+      "passed": true
+    }
+  ],
+  "observations": {
+    "review_tab": "Review (0 open)",
+    "imported_findings": 1,
+    "needs_human_review": true,
+    "repairs": 0,
+    "decisions": [],
+    "review_view_excerpt": "Skip to main content\nDriftwire\nCohort Control Tower \u00b7 team Skill issue\n\nView\n\nRelease check\n\nRun on your data\n\nMutation Lab\n\nPrepare data with AI\n\nTake the tour\n\nPractice demo\n\n1 \u00b7 SOURCE\n\nCompare releases\n\nUpload findings.json\n\nSynthetic example\n\n2 \u00b7 RELEASES\n\nRelease A (trusted baseline)\n\nkeyboard_arrow_right\n\nOpen a sealed envelope\n\nRelease B (new)\n\n3 \u00b7 QUESTION\n\nResearch question\n\nkeyboard_arrow_right\n\nAdvanced\n\nCompare releases\n\nUpload findings.json\n\ninput-synthetic.json\n4.7KB\nadd icon\nadd\n\nResearch use only. Not a diagnosis, treatment advice, risk score or clinical claim.\n\nRelease check\nSame sample count, different data. What changed, what it breaks, and what it can't see.\nResearch use only\n\nUploaded findings: displaying the supplied results; structural checks do not verify their correctness.\n\n!\nOVERALL VERDICT\nConditional\nIts inputs changed, but the result stayed within the stated tolerance. Usable, with care.\nSynthetic import control: investigate a finding before a repair is known.\nraw \u2192 synthetic-swap\n1\nfindings\n0\nawaiting human review\n2\nanalyses checked\n0\nrepairs applied automatically\nResearch use only. Every swap or duplicate needs a curator's review. Repairs are proposals and are never applied automatically.\n\nVerdicts\n\nFindings & evidence\n\nReview (0 open)\n\nWhat Driftwire can't see\n\nData & export\n\nA reviewer decides on each proposed repair. Recording a decision never applies the repair or changes source data.\n\nYour role\n\nNothing to review: no repairs were proposed."
+  },
+  "script_errors": [],
+  "blocked_external": [],
+  "limits": "Synthetic imported JSON, actual local Streamlit and organizer validator, Python3.13 and declared direct dependencies. No built-in detector created this no-repair case. This tests the supported importer, not factual accuracy, hosted behavior or approval of a repair."
+}

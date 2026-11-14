@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-14T21:14:04.247622+00:00",
+  "timestamp": "2026-11-14T21:19:28.365173+00:00",
   "scope": "Current six primary review packages; source-only companion decks retain separate QA and review scope. Hashes identify these artifact bytes, not an official submission freeze.",
   "review_repository_base_commit": "fd027a853879d2535539c992f8a46320c5828490",
   "packages": [
@@ -65,7 +65,7 @@
       "visual_review_record": "All 15 slides inspected in the rendered contact sheet; no overlapping or clipped content observed.",
       "artifacts": {
         "REPORT.md": "26f10f14fe1c1cd5ee241bdf157d833618d93bb1fd1313398e21b7273b3d64eb",
-        "TESTS.md": "9a10c74b73d7838dcbcaeeb18ef7330e3642e531e8d32c1c7a95cac42cbff28b",
+        "TESTS.md": "89ef24b4db81899d188b0a0d0d8354e0bf4deb15d6b96242aae22d2f3df7d5b3",
         "slides.json": "721422b2ad2b432cff2b877782e562fdbee5cec05771be460f84fb1e228acbf8",
         "slides.html": "01a4d31365c29fd179b2b1b9773f02ada805ae49efec837ff6d3f37895c3e4bd",
         "slides.pdf": "42fb47f913fafae8c10b59896e190aaa825ac852a29b0e072e370dfd5fe50c33"
@@ -96,13 +96,13 @@
       "all_pdf_pages_nonempty": true,
       "html_overflow_checks_pass": true,
       "browser_script_errors": [],
-      "visual_review_record": "All seven slides inspected in rendered contact sheet; no clipping or overlap observed. 2026-11-14T21:07:19.306191+00:00",
+      "visual_review_record": "All seven rendered slides inspected; no clipping or overlap observed. 2026-11-14T21:19:28.365173+00:00",
       "artifacts": {
-        "REPORT.md": "3e9cb9ddbb23841e94e0d8d320746fc0e9c7127484cde0331b8a2bad1886e334",
-        "TESTS.md": "c3242f7fde057fa568275dfecead48a4ec0a58e70387a668089192c30ec3806f",
-        "slides.json": "5f6aa516e231e027585e09adb9306030fe6937b470b987ace2422281181dc196",
-        "slides.html": "a8b2e78047507db8e946d9e5aefcf480a5dfbe8c59c9d3aa8ba26280cdfac567",
-        "slides.pdf": "2bb436fe1f1a587903481d57b7446d45fe67bf07e3eae5a048b64d073fc33a4a"
+        "REPORT.md": "f778999b4ca25876fc91e714cb690124678deacb2dfbe38e55722bd8c07814e6",
+        "TESTS.md": "cbfc30529f7fcbe4a6e4e32eb5d465636ce54fba7fd96a38c8b1b03b9bb13398",
+        "slides.json": "17b025c11ae32f6d747b85e4db02f168d97ee94896d6a814fec1d45e15252699",
+        "slides.html": "ad3120d4f1905f2bce61724595370a4b6491165c7e602cec8dfa929f06c9b384",
+        "slides.pdf": "0259cf8426f8ad2544f9a25979dbce0638459561203e3c8a320dd45a18b151c2"
       }
     }
   ]
