@@ -12,3 +12,5 @@ First pass: no runtime tests or live-site verification. No official score. Work 
 ## Runtime update
 
 No submitted test suite identified in the inspected source; none claimed executed. [Detailed tests and independent reproductions](TESTS.md). No official score.
+
+[PDF deck](slides.pdf) — view directly on GitHub. The HTML version includes presenter notes and keyboard navigation.

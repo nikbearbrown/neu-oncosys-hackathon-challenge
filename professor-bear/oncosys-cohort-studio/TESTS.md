@@ -4,7 +4,7 @@ Updated 2026-11-14T19:51:28+00:00. The fixed source commit remains the one in [R
 
 ## Submitted tests
 
-**279 passed, 20 skipped, 0 failed, 0 errors.** Reported final test duration: 17.02 seconds.
+**299 passed, 0 skipped, 0 failed, 0 errors.** Recorded command duration: 52.64 seconds.
 
 The complete submitted suite was run. Its 20 skips require raw TCGA release files. The suite used the repository’s committed public sample/slide manifests and tutorial media in the disposable copy; these were not republished. No raw TCGA tables or slides were loaded.
 
@@ -27,6 +27,19 @@ Git blobs were copied into a disposable directory, without hooks, secrets or sea
 
 No hosted application, real provider call, clinical validity, production authorization, screen-reader usability or real-world accuracy was verified. Passing tests demonstrates the assertions in those tests, not all rubric requirements. The issue decks distinguish source findings from independently reproduced behavior. No official score is assigned.
 
-[Final submitted-test log](evidence/submitted-tests.log) · [Recorded command](evidence/submitted-test-command.json)
+[Earlier synthetic-run log](evidence/submitted-tests.log) · [Earlier command](evidence/submitted-test-command.json)
 
 [Recorded dependency versions and isolation probes](../review-tools/environment.json). The final profile explicitly permits loopback only; external probes returned PermissionError.
+
+[Final public-release test log, identifiers redacted](evidence/public-release-tests.log) · [Final command](evidence/public-release-command.json)
+
+## Second independent synthetic round
+
+The following are targeted recommendations and controls, not additional official judging requirements. Read [exact observations](evidence/synthetic-probes-round2.json) and [reproduction source](../review-tools/synthetic-probes-round2.py).
+
+| Check | Expected | Observed | Proposed safeguard met? |
+|---|---|---|---|
+| Blocked export is clearly separated from usable cohort file | false | true | No |
+| Blocked result retains verdict metadata | true | true | Yes |
+
+For Tripwire, release compatibility and question adequacy are distinct outputs. For Identity Crisis, the bypass is explicitly non-default. For export checks, a diagnostic export can be legitimate when its restrictions remain clear. See REPORT.md for these interpretation limits.

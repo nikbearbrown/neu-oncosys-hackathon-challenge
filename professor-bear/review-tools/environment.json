@@ -15,11 +15,11 @@
   },
   "isolation": {
     "user_file_read_blocked": true,
-    "external_network_result": "TimeoutError",
     "network_probe": {
       "1.1.1.1": "PermissionError: [Errno 1] Operation not permitted",
       "93.184.216.34": "PermissionError: [Errno 1] Operation not permitted",
       "127.0.0.1": "ConnectionRefusedError: [Errno 61] Connection refused"
-    }
+    },
+    "initial_profile_external_probe": "TimeoutError; not relied upon as proof of blocking"
   }
 }

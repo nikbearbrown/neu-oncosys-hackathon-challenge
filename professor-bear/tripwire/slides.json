@@ -1,7 +1,7 @@
 {
   "title": "Tripwire / Driftwire",
   "commit": "45df43640836025b40e89fc190f913ad694a6011",
-  "updated": "2026-11-14T19:51:28+00:00",
+  "updated": "2026-11-14T20:04:21+00:00",
   "slides": [
     {
       "title": "Tripwire / Driftwire",
@@ -10,16 +10,16 @@
       "fix": "Professor Bear \u00b7 14 November 2026",
       "source": "REPORT.md",
       "notes": "Pinned source; isolated tests and detailed limits in TESTS.md. No hosted demo or official score.",
-      "status": "SOURCE + SYNTHETIC CHECKS",
+      "status": "SOURCE + PUBLIC-DATA TESTS",
       "kind": "cover"
     },
     {
       "title": "1 \u00b7 Insufficient samples are checked after the unaffected branch",
       "before": "Unchanged inputs",
-      "after": "Insufficient flag bypassed",
+      "after": "Compatibility \u2260 adequacy",
       "fix": "Evaluate insufficiency before the unaffected return, or return separate compatibility and adequacy results with an explicit trusted-baseline requirement.",
       "source": "https://github.com/Adhithyan245/tripwire/blob/45df43640836025b40e89fc190f913ad694a6011/tripwire/verdicts.py#L24",
-      "notes": "Direct helper reproduction returned Ready for an unmoved Movement with insufficient=True. Positive controls return Insufficient Evidence when affected=True and Blocked for unexplained movement. The first full API tiny-fixture control returned Blocked (A1 Blocked, A2 Ready), so this result proves the helper precedence defect, not that every small cohort escapes the outer guards.",
+      "notes": "A corrected, well-formed four-sample release passed through the full check API: release verdict and A1/A2 were Ready, while the ER-protein question correctly returned Insufficient Evidence. A 40-sample control returned Ready for that question. This confirms the separate meanings of compatibility and question adequacy; it does not invalidate the question-readiness checks.",
       "status": "REPRODUCED \u00b7 SEE SCOPE",
       "kind": "compare"
     },
@@ -47,10 +47,10 @@
       "title": "4 \u00b7 New review calls replace prior decisions",
       "before": "Review revision",
       "after": "Previous state replaced",
-      "fix": "Document snapshot semantics.",
+      "fix": "Retain a timestamped history as well as the current decision.",
       "source": "https://github.com/Adhithyan245/tripwire/blob/45df43640836025b40e89fc190f913ad694a6011/tripwire/review.py#L14",
-      "notes": "apply_decisions creates a new decisions list from the supplied mapping and replaces the previous list. The helper records neither decision time nor a stable reviewer identity. This is suitable for a current-state document, but is not an immutable approval history. Acceptance: Approve, revise, and request evidence on the same repair. Export the complete history without changing the original evidence.",
-      "status": "SOURCE FINDING \u00b7 MEDIUM",
+      "notes": "Two apply_decisions calls (approve, then reject) retained one latest decision rather than two events. The original first-returned object was unchanged. This verifies snapshot semantics, not an immutable history.",
+      "status": "REPRODUCED \u00b7 SEE SCOPE",
       "kind": "compare"
     },
     {
@@ -58,18 +58,18 @@
       "before": "Deterministic core",
       "after": "Optional AI intake exists",
       "fix": "Scope the claim to the deterministic core and explain the optional intake route, transmitted metadata, and opt-in control.",
-      "source": "https://github.com/Adhithyan245/tripwire/blob/45df43640836025b40e89fc190f913ad694a6011/README.md#L1",
+      "source": "https://github.com/Adhithyan245/tripwire/blob/45df43640836025b40e89fc190f913ad694a6011/README.md#L343",
       "notes": "The README says there are no AI features or AI-service calls, while the optional intake prototype implements consent-gated OpenAI mapping suggestions. The consent gate is a positive control; its presence makes the blanket claim inaccurate. No network call was made in this review. Acceptance: Documentation and UI agree about which route sends information; a no-consent test verifies no request occurs.",
       "status": "SOURCE FINDING \u00b7 LOW",
       "kind": "compare"
     },
     {
       "title": "What is verified so far",
-      "before": "399 tests passed",
-      "after": "3 unmet safeguards",
+      "before": "404 tests passed",
+      "after": "1 tests skipped",
       "fix": "Read TESTS.md for skips, positive controls and limits.",
       "source": "TESTS.md",
-      "notes": "399 passed, 6 skipped, 0 failed, 0 errors; independent safeguards are targeted probes, not a score.",
+      "notes": "404 passed, 1 skipped, 0 failed. Targeted synthetic observations are detailed in TESTS.md and are not a score.",
       "status": "LIMITS",
       "kind": "compare"
     }

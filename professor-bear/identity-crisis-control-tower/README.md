@@ -7,8 +7,10 @@ Pinned source: `380760dc3b7b61097756f2b85c0f462feadc802c`. Updated 2026-11-14T19
 - [Editable slide data](slides.json).
 - [Actual static checks](evidence/static-checks.json).
 
-First pass: no runtime tests or live-site verification. No official score. Work through the issues one at a time, then update this evidence at a stated commit.
+The initial pass was static; current runtime evidence is linked below. No hosted deployment was verified. No official score. Work through the issues one at a time, then update this evidence at a stated commit.
 
 ## Runtime update
 
-81 passed, 18 skipped, 0 failed, 0 errors. [Detailed tests and independent reproductions](TESTS.md). No official score.
+96 passed, 3 skipped, 0 failed, 0 errors. [Detailed tests and independent reproductions](TESTS.md). No official score.
+
+[PDF deck](slides.pdf) — view directly on GitHub. The HTML version includes presenter notes and keyboard navigation.

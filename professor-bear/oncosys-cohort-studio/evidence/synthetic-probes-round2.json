@@ -1,0 +1,31 @@
+[
+  {
+    "check": "Blocked export is clearly separated from usable cohort file",
+    "expected": false,
+    "observed": true,
+    "safeguard_met": false
+  },
+  {
+    "observation": "export context exists separately",
+    "verdict": "Blocked",
+    "verdict_json_present": true,
+    "files": [
+      "coverage.csv",
+      "ledger.csv",
+      "audit_trail.csv",
+      "verdict.json",
+      "reproduce_cohort.py",
+      "findings.json",
+      "cohort_spec.json",
+      "cohort_samples.csv",
+      "exclusions.csv",
+      "sample_selection.csv"
+    ]
+  },
+  {
+    "check": "Blocked result retains verdict metadata",
+    "expected": true,
+    "observed": true,
+    "safeguard_met": true
+  }
+]
