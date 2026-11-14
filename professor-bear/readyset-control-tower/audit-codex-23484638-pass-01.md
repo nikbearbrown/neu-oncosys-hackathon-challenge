@@ -1,5 +1,9 @@
 # Professor Bear Audit: ReadySet Control Tower
 
+## Supplement To Existing Parallel Review
+
+Read the retained [existing report](REPORT.md) first. This pass independently corroborates its required-input and identical-invalid-input concerns (Issue 1) and timestamp-based file selection (Issue 5); these are not claimed as newly discovered issues. It adds criterion-level exact excerpts and explicit acceptance checks. The existing report also records another agent's isolated runtime and browser results. Those results were not rerun by this reviewer and remain separately attributed; this supplement's own checks are static only. No existing report, test record or deck was replaced.
+
 ## Review Identity
 
 This is an independent, provisional source-code audit for judge deliberation. It is not an official grade.
