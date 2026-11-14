@@ -1,0 +1,69 @@
+{
+  "pdf_pages": 9,
+  "visual_review": "All nine rendered PDF slides visually inspected; no clipping or overlap observed. Embedded DejaVu font.",
+  "html_browser_verified": false,
+  "html_browser_limitation": "Chromium launch blocked by process singleton socket permissions. PDF independently generated with same slide content.",
+  "citation_bounds": [
+    {
+      "file": "core/tolerance.py",
+      "start": 19,
+      "end": 91,
+      "valid_bounds": true
+    },
+    {
+      "file": "agents/verifier.py",
+      "start": 403,
+      "end": 456,
+      "valid_bounds": true
+    },
+    {
+      "file": "app.py",
+      "start": 409,
+      "end": 459,
+      "valid_bounds": true
+    },
+    {
+      "file": "agents/verifier.py",
+      "start": 444,
+      "end": 525,
+      "valid_bounds": true
+    },
+    {
+      "file": "app.py",
+      "start": 432,
+      "end": 458,
+      "valid_bounds": true
+    },
+    {
+      "file": "agents/orchestrator.py",
+      "start": 44,
+      "end": 66,
+      "valid_bounds": true
+    },
+    {
+      "file": "agents/base.py",
+      "start": 38,
+      "end": 68,
+      "valid_bounds": true
+    },
+    {
+      "file": "core/semantic.py",
+      "start": 340,
+      "end": 366,
+      "valid_bounds": true
+    },
+    {
+      "file": "core/loader.py",
+      "start": 47,
+      "end": 75,
+      "valid_bounds": true
+    },
+    {
+      "file": "core/loader.py",
+      "start": 206,
+      "end": 216,
+      "valid_bounds": true
+    }
+  ],
+  "limits": "Source line bounds are not semantic verification. Full application, model and browser workflows not tested."
+}

@@ -11,8 +11,10 @@ Read each detailed report and issue-by-issue deck together. Work through the iss
 | Cohort Studio | [Report](oncosys-cohort-studio/REPORT.md) | [PDF](oncosys-cohort-studio/slides.pdf) | [HTML](oncosys-cohort-studio/slides.html) | [Tests](oncosys-cohort-studio/TESTS.md) |
 | SNS Control Tower | [Report](sns-cohort-control-tower/REPORT.md) | [PDF](sns-cohort-control-tower/slides.pdf) | [HTML](sns-cohort-control-tower/slides.html) | [Tests](sns-cohort-control-tower/TESTS.md) |
 | HIPPA-cratic / Cohort Studio | [Report](hippa-cratic/REPORT.md) | [PDF](hippa-cratic/slides.pdf) | [HTML](hippa-cratic/slides.html) | [Tests](hippa-cratic/TESTS.md) |
+| Cohort Firewall | [Report](cohort-firewall/REPORT.md) | [PDF](cohort-firewall/slides.pdf) | [HTML](cohort-firewall/slides.html) | [Tests](cohort-firewall/TESTS.md) |
+| ClearAnswer | [Report](clearanswer/report.md) | [PDF](clearanswer/slides.pdf) | [HTML](clearanswer/slides.html) | [Tests](clearanswer/TESTS.md) |
 
-Updated 2026-11-14T21:18:40+00:00. Download HTML decks to open them locally; GitHub renders the PDFs directly. Each deck presents one issue at a time. No official numerical scores are assigned.
+Updated 2026-11-14T21:31:58+00:00. Download HTML decks to open them locally; GitHub renders the PDFs directly. Each deck presents one issue at a time. No official numerical scores are assigned.
 
 Submitted-suite results: ReadySet **107 unit tests plus 38 public mutation cases passed**; Tripwire **404 passed / 1 skipped**; Identity Crisis **96 passed / 3 skipped**; Busy Beavers **65 passed**; Cohort Studio **299 passed**. No submitted SNS test suite was found; its independent synthetic checks are documented. These suites cover different assertions and are not a ranking.
 
@@ -69,3 +71,5 @@ Latest Tripwire browser pass: 12 of 13 proposed checks met; evidence requests re
 [Tripwire source/runtime reconciliation](tripwire/runtime-reconciliation-codex-23484638.md) preserves the passing consent and export controls alongside the review-counter finding.
 
 Tripwire follow-through at 21:17 UTC: the declared Python 3.13/direct-dependency suite also gives 404 passed/one skipped. A separate supported-importer browser case confirms zero-open review for a schema-valid flagged finding without a repair. This extends the earlier helper evidence; it does not imply a repair was approved. See [current test evidence](tripwire/TESTS.md).
+
+Latest additions: HIPPA-cratic has **170 submitted tests passed / 1 skipped**. Cohort Firewall has **12 independent synthetic probes and six passing submitted disclosure cases**; ClearAnswer has **four narrow synthetic probes**. Neither new package claims full application or model verification. Their reports and decks are now linked above.
