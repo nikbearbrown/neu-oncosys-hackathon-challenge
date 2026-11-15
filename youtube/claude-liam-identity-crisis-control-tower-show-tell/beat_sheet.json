@@ -35,9 +35,17 @@
     "team": "Team Identity_Crisis",
     "brand_confirmation": "confirmed",
     "pronounce": {
-      "SEIS": "s\u02c8e\u026as"
+      "SEIS": "sˈeɪs"
     },
-    "render_concurrency": 4
+    "render_concurrency": 4,
+    "build": {
+      "at": "2026-11-14T18:44:53",
+      "cut": "master",
+      "filled": 13,
+      "of": 13,
+      "slates": [],
+      "skin_warnings": []
+    }
   },
   "beats": [
     {
@@ -83,11 +91,15 @@
               "oncosys-films/brand/northeastern_university_seis_logo.jpeg",
               "oncosys-films/brand/red-hat-logo.png"
             ],
-            "durationSeconds": 9.194667
+            "durationSeconds": 9.642667
+          },
+          "rendered": {
+            "out": "media/BOPEN.mp4",
+            "at": "2026-11-14T23:38:17.082963+00:00"
           }
         }
       },
-      "actual_duration_s": 9.194667,
+      "actual_duration_s": 9.642667,
       "audio_file": "mp3/beat-BOPEN.mp3",
       "qc": {
         "typography_reason": "Inventory of all authored title/team/description and organizer-credit text. Supplied trademark images and label-free conceptual animation are imagery, not authored typography; Gate V inspects the unmasked composition.",
@@ -106,12 +118,19 @@
             "label": "Written organizer credits",
             "box": [
               0.055,
-              0.74,
-              0.34,
+              0.71,
+              0.36,
               0.94
             ]
           }
         ]
+      },
+      "render_duration_s": 9.666666666666666,
+      "build": {
+        "status": "VIDEO",
+        "src": "media/BOPEN.mp4",
+        "filled_by": "remotion:OncosysLecture",
+        "at": "2026-11-14T18:44:53"
       }
     },
     {
@@ -155,6 +174,10 @@
             "credit": "Northeastern SEIS",
             "logos": [],
             "durationSeconds": 14.154667
+          },
+          "rendered": {
+            "out": "media/BIDEA.mp4",
+            "at": "2026-11-14T23:38:38.774850+00:00"
           }
         }
       },
@@ -197,6 +220,13 @@
         ],
         "typography_fill": "#FFFFFF",
         "typography_reason": "Complete authored-text inventory. Isometric document hatch marks and box edges are graphical imagery, not overlapping text; actual unmasked frames are inspected separately and remain subject to Gate V."
+      },
+      "render_duration_s": 14.166666666666666,
+      "build": {
+        "status": "VIDEO",
+        "src": "media/BIDEA.mp4",
+        "filled_by": "remotion:OncosysLecture",
+        "at": "2026-11-14T18:44:53"
       }
     },
     {
@@ -242,11 +272,22 @@
             "credit": "Northeastern SEIS",
             "logos": [],
             "durationSeconds": 11.072
+          },
+          "rendered": {
+            "out": "media/BDEFS.mp4",
+            "at": "2026-11-14T23:38:57.292960+00:00"
           }
         }
       },
       "actual_duration_s": 11.072,
-      "audio_file": "mp3/beat-BDEFS.mp3"
+      "audio_file": "mp3/beat-BDEFS.mp3",
+      "render_duration_s": 11.083333333333334,
+      "build": {
+        "status": "VIDEO",
+        "src": "media/BDEFS.mp4",
+        "filled_by": "remotion:OncosysLecture",
+        "at": "2026-11-14T18:44:53"
+      }
     },
     {
       "beat_id": "B01",
@@ -296,6 +337,10 @@
               0.82
             ],
             "durationSeconds": 11.285333
+          },
+          "rendered": {
+            "out": "media/B01.mp4",
+            "at": "2026-11-14T23:39:13.670158+00:00"
           }
         }
       },
@@ -353,7 +398,14 @@
         "typography_reason": "Complete authored-text inventory. Isometric document hatch marks and box edges are graphical imagery, not overlapping text; actual unmasked frames are inspected separately and remain subject to Gate V."
       },
       "actual_duration_s": 11.285333,
-      "audio_file": "mp3/beat-B01.mp3"
+      "audio_file": "mp3/beat-B01.mp3",
+      "render_duration_s": 11.291666666666666,
+      "build": {
+        "status": "VIDEO",
+        "src": "media/B01.mp4",
+        "filled_by": "remotion:OncosysProcess",
+        "at": "2026-11-14T18:44:53"
+      }
     },
     {
       "beat_id": "B02",
@@ -367,7 +419,7 @@
       "shot": {
         "type": "REMOTION",
         "source": "own",
-        "visual_intent": "Actual A2-only result \u00b7 synthetic data",
+        "visual_intent": "Actual A2-only result · synthetic data",
         "motion_claim": "Reveal the named evidence or process on the narrated cue",
         "show": [
           {
@@ -384,7 +436,7 @@
           "props": {
             "image": "oncosys-films/claude-liam-identity-crisis-control-tower-show-tell/overview-synthetic.png",
             "imageAspect": 1.44,
-            "caption": "Identity Crisis \u00b7 actual local synthetic demo",
+            "caption": "Identity Crisis · actual local synthetic demo",
             "moves": [
               {
                 "at": 0,
@@ -403,11 +455,22 @@
             "frame": "app",
             "durationSeconds": 12.416,
             "brand": "neu"
+          },
+          "rendered": {
+            "out": "media/B02.mp4",
+            "at": "2026-11-14T23:39:43.226631+00:00"
           }
         }
       },
       "actual_duration_s": 12.416,
-      "audio_file": "mp3/beat-B02.mp3"
+      "audio_file": "mp3/beat-B02.mp3",
+      "render_duration_s": 12.416666666666666,
+      "build": {
+        "status": "VIDEO",
+        "src": "media/B02.mp4",
+        "filled_by": "remotion:BrowserCapture",
+        "at": "2026-11-14T18:44:53"
+      }
     },
     {
       "beat_id": "B03",
@@ -421,7 +484,7 @@
       "shot": {
         "type": "REMOTION",
         "source": "own",
-        "visual_intent": "Actual A2-only result \u00b7 synthetic data",
+        "visual_intent": "Actual A2-only result · synthetic data",
         "motion_claim": "Reveal the named evidence or process on the narrated cue",
         "show": [
           {
@@ -438,7 +501,7 @@
           "props": {
             "image": "oncosys-films/claude-liam-identity-crisis-control-tower-show-tell/signed-synthetic.png",
             "imageAspect": 1.44,
-            "caption": "Identity Crisis \u00b7 actual local synthetic demo",
+            "caption": "Identity Crisis · actual local synthetic demo",
             "moves": [
               {
                 "at": 0,
@@ -457,11 +520,22 @@
             "frame": "app",
             "durationSeconds": 13.738667,
             "brand": "neu"
+          },
+          "rendered": {
+            "out": "media/B03.mp4",
+            "at": "2026-11-14T23:40:09.680890+00:00"
           }
         }
       },
       "actual_duration_s": 13.738667,
-      "audio_file": "mp3/beat-B03.mp3"
+      "audio_file": "mp3/beat-B03.mp3",
+      "render_duration_s": 13.75,
+      "build": {
+        "status": "VIDEO",
+        "src": "media/B03.mp4",
+        "filled_by": "remotion:BrowserCapture",
+        "at": "2026-11-14T18:44:53"
+      }
     },
     {
       "beat_id": "B10",
@@ -511,6 +585,10 @@
               0.82
             ],
             "durationSeconds": 13.333333
+          },
+          "rendered": {
+            "out": "media/B10.mp4",
+            "at": "2026-11-14T23:40:28.885275+00:00"
           }
         }
       },
@@ -568,7 +646,14 @@
         "typography_reason": "Complete authored-text inventory. Isometric document hatch marks and box edges are graphical imagery, not overlapping text; actual unmasked frames are inspected separately and remain subject to Gate V."
       },
       "actual_duration_s": 13.333333,
-      "audio_file": "mp3/beat-B10.mp3"
+      "audio_file": "mp3/beat-B10.mp3",
+      "render_duration_s": 13.333333333333334,
+      "build": {
+        "status": "VIDEO",
+        "src": "media/B10.mp4",
+        "filled_by": "remotion:OncosysProcess",
+        "at": "2026-11-14T18:44:53"
+      }
     },
     {
       "beat_id": "B11",
@@ -610,7 +695,7 @@
             ],
             "diagramStyle": "show-tell-isometric",
             "mode": "flow",
-            "note": "Proposed next step \u00b7 not a completed feature",
+            "note": "Proposed next step · not a completed feature",
             "cues": [
               0.1,
               0.28,
@@ -618,6 +703,10 @@
               0.82
             ],
             "durationSeconds": 13.056
+          },
+          "rendered": {
+            "out": "media/B11.mp4",
+            "at": "2026-11-14T23:40:48.542262+00:00"
           }
         }
       },
@@ -675,7 +764,14 @@
         "typography_reason": "Complete authored-text inventory. Isometric document hatch marks and box edges are graphical imagery, not overlapping text; actual unmasked frames are inspected separately and remain subject to Gate V."
       },
       "actual_duration_s": 13.056,
-      "audio_file": "mp3/beat-B11.mp3"
+      "audio_file": "mp3/beat-B11.mp3",
+      "render_duration_s": 13.083333333333334,
+      "build": {
+        "status": "VIDEO",
+        "src": "media/B11.mp4",
+        "filled_by": "remotion:OncosysProcess",
+        "at": "2026-11-14T18:44:53"
+      }
     },
     {
       "beat_id": "B12",
@@ -717,7 +813,7 @@
             ],
             "diagramStyle": "show-tell-isometric",
             "mode": "flow",
-            "note": "Proposed next step \u00b7 not a completed feature",
+            "note": "Proposed next step · not a completed feature",
             "cues": [
               0.1,
               0.28,
@@ -725,6 +821,10 @@
               0.82
             ],
             "durationSeconds": 12.885333
+          },
+          "rendered": {
+            "out": "media/B12.mp4",
+            "at": "2026-11-14T23:41:06.346642+00:00"
           }
         }
       },
@@ -782,7 +882,14 @@
         "typography_reason": "Complete authored-text inventory. Isometric document hatch marks and box edges are graphical imagery, not overlapping text; actual unmasked frames are inspected separately and remain subject to Gate V."
       },
       "actual_duration_s": 12.885333,
-      "audio_file": "mp3/beat-B12.mp3"
+      "audio_file": "mp3/beat-B12.mp3",
+      "render_duration_s": 12.916666666666666,
+      "build": {
+        "status": "VIDEO",
+        "src": "media/B12.mp4",
+        "filled_by": "remotion:OncosysProcess",
+        "at": "2026-11-14T18:44:53"
+      }
     },
     {
       "beat_id": "B13",
@@ -811,7 +918,7 @@
         "remotion": {
           "pattern": "OncosysProcess",
           "props": {
-            "title": "A Foundation To Build On",
+            "title": "A Promising Foundation",
             "labels": [
               "Inspect",
               "Learn",
@@ -824,7 +931,7 @@
             ],
             "diagramStyle": "show-tell-isometric",
             "mode": "flow",
-            "note": "Research prototype \u00b7 not clinical or production validation",
+            "note": "Research prototype · not clinical or production validation",
             "cues": [
               0.1,
               0.28,
@@ -832,6 +939,10 @@
               0.82
             ],
             "durationSeconds": 12.629333
+          },
+          "rendered": {
+            "out": "media/B13.mp4",
+            "at": "2026-11-14T23:41:23.809451+00:00"
           }
         }
       },
@@ -889,7 +1000,14 @@
         "typography_reason": "Complete authored-text inventory. Isometric document hatch marks and box edges are graphical imagery, not overlapping text; actual unmasked frames are inspected separately and remain subject to Gate V."
       },
       "actual_duration_s": 12.629333,
-      "audio_file": "mp3/beat-B13.mp3"
+      "audio_file": "mp3/beat-B13.mp3",
+      "render_duration_s": 12.666666666666666,
+      "build": {
+        "status": "VIDEO",
+        "src": "media/B13.mp4",
+        "filled_by": "remotion:OncosysProcess",
+        "at": "2026-11-14T18:44:53"
+      }
     },
     {
       "beat_id": "BVDT",
@@ -935,6 +1053,10 @@
             "credit": "Northeastern SEIS",
             "logos": [],
             "durationSeconds": 10.996
+          },
+          "rendered": {
+            "out": "media/BVDT.mp4",
+            "at": "2026-11-14T23:41:38.578941+00:00"
           }
         }
       },
@@ -944,6 +1066,13 @@
       "audio_padding_applied": {
         "lead": 0.5,
         "tail": 0
+      },
+      "render_duration_s": 11.0,
+      "build": {
+        "status": "VIDEO",
+        "src": "media/BVDT.mp4",
+        "filled_by": "remotion:OncosysLecture",
+        "at": "2026-11-14T18:44:53"
       }
     },
     {
@@ -987,11 +1116,22 @@
             "credit": "Northeastern SEIS",
             "logos": [],
             "durationSeconds": 12.522667
+          },
+          "rendered": {
+            "out": "media/BHTF.mp4",
+            "at": "2026-11-14T23:41:58.103925+00:00"
           }
         }
       },
       "actual_duration_s": 12.522667,
-      "audio_file": "mp3/beat-BHTF.mp3"
+      "audio_file": "mp3/beat-BHTF.mp3",
+      "render_duration_s": 12.541666666666666,
+      "build": {
+        "status": "VIDEO",
+        "src": "media/BHTF.mp4",
+        "filled_by": "remotion:OncosysLecture",
+        "at": "2026-11-14T18:44:53"
+      }
     },
     {
       "beat_id": "BOUT",
@@ -1036,13 +1176,17 @@
               "oncosys-films/brand/northeastern_university_seis_logo.jpeg",
               "oncosys-films/brand/red-hat-logo.png"
             ],
-            "durationSeconds": 9.192
+            "durationSeconds": 9.64
+          },
+          "rendered": {
+            "out": "media/BOUT.mp4",
+            "at": "2026-11-14T23:42:14.430522+00:00"
           }
         }
       },
       "kind": "outro_voice",
       "tail_silence_s": 1,
-      "actual_duration_s": 9.192,
+      "actual_duration_s": 9.64,
       "audio_file": "mp3/beat-BOUT.mp3",
       "qc": {
         "typography_reason": "Inventory of all authored title/team/description and organizer-credit text. Supplied trademark images and label-free conceptual animation are imagery, not authored typography; Gate V inspects the unmasked composition.",
@@ -1061,12 +1205,23 @@
             "label": "Written organizer credits",
             "box": [
               0.055,
-              0.74,
-              0.34,
+              0.71,
+              0.36,
               0.94
             ]
           }
         ]
+      },
+      "audio_padding_applied": {
+        "lead": 0,
+        "tail": 1
+      },
+      "render_duration_s": 9.666666666666666,
+      "build": {
+        "status": "VIDEO",
+        "src": "media/BOUT.mp4",
+        "filled_by": "remotion:OncosysLecture",
+        "at": "2026-11-14T18:44:53"
       }
     }
   ]

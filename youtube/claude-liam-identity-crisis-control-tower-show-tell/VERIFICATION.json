@@ -1,0 +1,40 @@
+{
+  "file": "exports/landscape/claude-liam-identity-crisis-control-tower-show-tell.mp4",
+  "bytes": 11970953,
+  "video": [
+    3840,
+    2160
+  ],
+  "audio_codec": "aac",
+  "duration_s": 157.583,
+  "audio_timeline_s": 157.37199999999999,
+  "sampled_frames": 315,
+  "blank_samples": [
+    46.25
+  ],
+  "explained_capture_entrances": [
+    {
+      "time_s": 46.25,
+      "beat": "B02"
+    }
+  ],
+  "decoded_without_errors": true,
+  "errors": [],
+  "visual_review": "Inspected all 13 final beat midpoints, opening and closing sponsor cards, and both actual application captures at 1280x720. The camera emphasizes the question and review controls; the signed-workflow claim is supported by the linked runtime review, not a new on-screen signing action.",
+  "sha256": "0766df5b7bf9fedfa17d3af1d67d9a1ad1fccc2a00debc847aa862ece5b7cf15",
+  "gate_t": "PASS: 13 beats",
+  "gate_v": "PASS: zero blockers and zero major findings on the clean master",
+  "audio_check": "Local narration, measured per beat, AAC stream decoded. Opening/closing checked by cached local Whisper; ASR spellings of proper names are approximate.",
+  "audio_signal_check": {
+    "file": "exports/landscape/claude-liam-identity-crisis-control-tower-show-tell.mp4",
+    "threshold_db": -45,
+    "minimum_gap_s": 2,
+    "long_gap_starts_s": [],
+    "long_gap_durations_s": [],
+    "mean_volume_db": "-27.1",
+    "peak_volume_db": "-2.8",
+    "errors": [],
+    "scope": "Signal continuity only; does not establish correct pronunciation or replace listening."
+  },
+  "loudness_check": "PASS; measured integrated loudness, true peak and every narration beat in LOUDNESS.md"
+}

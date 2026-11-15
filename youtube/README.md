@@ -1,25 +1,37 @@
 # Hackathon project films
 
-Nine promotional Show Tell lectures, narrated locally by Liam (Kokoro am_onyx). Authored visuals use Northeastern/SEIS red, black, white and Lato; actual tools retain their own interface appearance. The first and last beats credit the verified project team, The Open Accelerator, OncoSys AI, Northeastern University/SEIS and Red Hat.
+**All nine local 4K review masters are complete.** These promotional Show Tell lectures use Liam's local Kokoro am_onyx narration, verified strengths, real captured tools and constructive next steps. Detailed independent reviews remain unchanged in [professor-bear](../professor-bear/README.md).
 
-**Build status: ReadySet is complete as a local 4K review master (2:36). Eight further films are rendering and undergoing checks. No film has been uploaded to YouTube.**
+[Full-path open commands for all nine films](WATCH.md) · [Verified team credits](CREDITS.md) · [Delivery manifest](DELIVERY.json)
 
-Each project folder contains its script, measured beat sheet, source notes and conceptual/actual-demonstration distinction. Full independent reviews remain unchanged in ../professor-bear. MP4/MP3 files and render intermediates are local, ignored by Git, and are not uploaded to YouTube.
+The MP4s stay on the Mac and are excluded from GitHub. This repository contains the scripts, measured beat sheets, source notes, captured frames, preview sheets and verification records. No YouTube upload or cluster transfer is claimed.
 
-- [Busy Beavers: From Finding To Review](claude-liam-busy-beavers-show-tell/SCRIPT.md)
-- [ClearAnswer: Turn Claims Into Checks](claude-liam-clearanswer-show-tell/SCRIPT.md)
-- [Cohort Firewall: Evidence And Policy](claude-liam-cohort-firewall-show-tell/SCRIPT.md)
-- [HIPPA-cratic: Build And Cross-Check](claude-liam-hippa-cratic-show-tell/SCRIPT.md)
-- [Identity Crisis: Trace The Decision](claude-liam-identity-crisis-control-tower-show-tell/SCRIPT.md)
-- [Cohort Studio: See Who Remains](claude-liam-oncosys-cohort-studio-show-tell/SCRIPT.md)
-- [ReadySet: Evidence Before Action](claude-liam-readyset-show-tell/SCRIPT.md)
-- [SNS Control Tower: Explain The Change](claude-liam-sns-cohort-control-tower-show-tell/SCRIPT.md)
-- [Tripwire: Make Readiness Inspectable](claude-liam-tripwire-show-tell/SCRIPT.md)
+| Film | Length | Materials | Checks |
+|---|---:|---|---|
+| ReadySet: Evidence Before Action | 2:36 | [Script](claude-liam-readyset-show-tell/SCRIPT.md) · [Preview](claude-liam-readyset-show-tell/PREVIEW.jpg) | [Verification](claude-liam-readyset-show-tell/VERIFICATION.json) · [Type size](claude-liam-readyset-show-tell/TYPECHECK.md) · [Visual](claude-liam-readyset-show-tell/VISUAL-QC.md) · [Audio](claude-liam-readyset-show-tell/LOUDNESS.md) |
+| Busy Beavers: From Finding To Review | 2:40 | [Script](claude-liam-busy-beavers-show-tell/SCRIPT.md) · [Preview](claude-liam-busy-beavers-show-tell/PREVIEW.jpg) | [Verification](claude-liam-busy-beavers-show-tell/VERIFICATION.json) · [Type size](claude-liam-busy-beavers-show-tell/TYPECHECK.md) · [Visual](claude-liam-busy-beavers-show-tell/VISUAL-QC.md) · [Audio](claude-liam-busy-beavers-show-tell/LOUDNESS.md) |
+| ClearAnswer: Turn Claims Into Checks | 2:28 | [Script](claude-liam-clearanswer-show-tell/SCRIPT.md) · [Preview](claude-liam-clearanswer-show-tell/PREVIEW.jpg) | [Verification](claude-liam-clearanswer-show-tell/VERIFICATION.json) · [Type size](claude-liam-clearanswer-show-tell/TYPECHECK.md) · [Visual](claude-liam-clearanswer-show-tell/VISUAL-QC.md) · [Audio](claude-liam-clearanswer-show-tell/LOUDNESS.md) |
+| Cohort Firewall: Evidence And Policy | 2:47 | [Script](claude-liam-cohort-firewall-show-tell/SCRIPT.md) · [Preview](claude-liam-cohort-firewall-show-tell/PREVIEW.jpg) | [Verification](claude-liam-cohort-firewall-show-tell/VERIFICATION.json) · [Type size](claude-liam-cohort-firewall-show-tell/TYPECHECK.md) · [Visual](claude-liam-cohort-firewall-show-tell/VISUAL-QC.md) · [Audio](claude-liam-cohort-firewall-show-tell/LOUDNESS.md) |
+| HIPPA-cratic: Build And Cross-Check | 2:56 | [Script](claude-liam-hippa-cratic-show-tell/SCRIPT.md) · [Preview](claude-liam-hippa-cratic-show-tell/PREVIEW.jpg) | [Verification](claude-liam-hippa-cratic-show-tell/VERIFICATION.json) · [Type size](claude-liam-hippa-cratic-show-tell/TYPECHECK.md) · [Visual](claude-liam-hippa-cratic-show-tell/VISUAL-QC.md) · [Audio](claude-liam-hippa-cratic-show-tell/LOUDNESS.md) |
+| Identity Crisis: Trace The Decision | 2:38 | [Script](claude-liam-identity-crisis-control-tower-show-tell/SCRIPT.md) · [Preview](claude-liam-identity-crisis-control-tower-show-tell/PREVIEW.jpg) | [Verification](claude-liam-identity-crisis-control-tower-show-tell/VERIFICATION.json) · [Type size](claude-liam-identity-crisis-control-tower-show-tell/TYPECHECK.md) · [Visual](claude-liam-identity-crisis-control-tower-show-tell/VISUAL-QC.md) · [Audio](claude-liam-identity-crisis-control-tower-show-tell/LOUDNESS.md) |
+| Cohort Studio: See Who Remains | 2:43 | [Script](claude-liam-oncosys-cohort-studio-show-tell/SCRIPT.md) · [Preview](claude-liam-oncosys-cohort-studio-show-tell/PREVIEW.jpg) | [Verification](claude-liam-oncosys-cohort-studio-show-tell/VERIFICATION.json) · [Type size](claude-liam-oncosys-cohort-studio-show-tell/TYPECHECK.md) · [Visual](claude-liam-oncosys-cohort-studio-show-tell/VISUAL-QC.md) · [Audio](claude-liam-oncosys-cohort-studio-show-tell/LOUDNESS.md) |
+| SNS Control Tower: Explain The Change | 2:44 | [Script](claude-liam-sns-cohort-control-tower-show-tell/SCRIPT.md) · [Preview](claude-liam-sns-cohort-control-tower-show-tell/PREVIEW.jpg) | [Verification](claude-liam-sns-cohort-control-tower-show-tell/VERIFICATION.json) · [Type size](claude-liam-sns-cohort-control-tower-show-tell/TYPECHECK.md) · [Visual](claude-liam-sns-cohort-control-tower-show-tell/VISUAL-QC.md) · [Audio](claude-liam-sns-cohort-control-tower-show-tell/LOUDNESS.md) |
+| Tripwire: Make Readiness Inspectable | 2:38 | [Script](claude-liam-tripwire-show-tell/SCRIPT.md) · [Preview](claude-liam-tripwire-show-tell/PREVIEW.jpg) | [Verification](claude-liam-tripwire-show-tell/VERIFICATION.json) · [Type size](claude-liam-tripwire-show-tell/TYPECHECK.md) · [Visual](claude-liam-tripwire-show-tell/VISUAL-QC.md) · [Audio](claude-liam-tripwire-show-tell/LOUDNESS.md) |
+
+## What was checked
+
+The nine masters contain 118 filled beats and 24.2 minutes of material. All are 3840×2160 with AAC narration. Every complete file decoded without errors. Automated sampling covered 2,898 frames at two frames per second; bounded entrance transitions are identified in each verification record. Every final beat midpoint was visually inspected, with larger inspection of application details and sponsor cards. The type-size check and final-frame checks passed; no final-frame blocker or major finding remains.
+
+Audio checks measured integrated loudness and true peak and confirmed narration in every beat. No gap of two seconds or longer was detected at the documented −45 dB threshold. Cached local Whisper checked the opening and closing audio; its approximate proper-name spellings in narration-asr.json are not canonical credits. The scripts and CREDITS.md retain the verified spellings. This is not a claim of full human listening or a pronunciation audit.
+
+## Visuals and scope
+
+Authored visuals use Northeastern/SEIS red, black, white and Lato. Actual applications retain their own appearance. First and last beats identify the project and verified team and credit Northeastern University/SEIS, OncoSys AI, The Open Accelerator and Red Hat, using the supplied marks with their proportions preserved.
+
+Application footage presents real captured synthetic sessions with editorial camera movement. ClearAnswer shows its landing interface only, without an external model audit. Cohort Firewall shows literal local CLI outputs. HIPPA-cratic's Cohort Studio is a different submission from the other Cohort Studio; their teams and captures are kept distinct. Conceptual animations and suggested next steps are labeled. No clinical validity, production readiness, implemented fixes or official judging scores are claimed.
+
+The event-specific six-role bookend contract is checked by build-tools/verify_films.py. The legacy Claude-only bookend-template check does not recognize these requested event cards and is not claimed as a pass. Definition and recap cards retain non-blocking narration-redundancy advisories. Pixel typography and full-frame checks remain active. Declared contrast regions evaluate actual text instead of treating beige panels or dark buttons as glyphs; they do not certify the whole captured application's accessibility.
 
 ## Rebuild
 
-Use the established Brutalist Show Tell and Lecture skills. Sources in render-source describe the registered event compositions. Generate local narration first, use build-tools/lock_audio.py to measure it, then render through canonical remotion_scenes.py. Run the final-frame visual check and the type-size check; inspect actual frames before compiling a clean master. Do not rerun the initial authoring scripts over finished work. The scripts are development records, while the current beat sheets are the final authored source.
-
-## First completed master
-
-ReadySet: [verification](claude-liam-readyset-show-tell/VERIFICATION.json). The MP4 is local at `youtube/claude-liam-readyset-show-tell/exports/landscape/claude-liam-readyset-show-tell.mp4` under this checkout. Media files are intentionally excluded from GitHub.
+Use the established Brutalist Show Tell and Lecture skills and the integration notes in [render-source](render-source/README.md). Generate local narration, measure it with build-tools/lock_audio.py, and render through canonical remotion_scenes.py. Run the type-size check, final-frame checks and audio checks, and inspect actual frames before recording a verified master. The current beat sheets are the final authored source; do not rerun the initial authoring scripts over finished work. Do not edit a sheet while its renderer or compiler is active.

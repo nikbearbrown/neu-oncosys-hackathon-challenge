@@ -1,7 +1,7 @@
 # Event-brand revision
 
-User requested event branding throughout, project and verified team in the first beat, a small project animation, and credits for The Open Accelerator (TOA), OncoSys AI, and Northeastern SEIS.
+Credits: **Northeastern University · OncoSys AI · The Open Accelerator · Red Hat**. The film also identifies **Northeastern SEIS**, pronounced like Spanish six. Opening narration names the project and team and says it is sponsored by SEIS, OncoSys AI, The Open Accelerator and Red Hat. Closing narration thanks participants and sponsors. All four supplied sponsor marks plus the official Northeastern university mark appear on the first and last beats.
 
-Team identity comes from the pinned submission README. No nickname is invented where only members are listed. Northeastern logo is the existing supplied official vector. Supplied SEIS, OncoSys AI, and The Open Accelerator marks are now included in opening/closing credits; the original SEIS black background is preserved. SEIS is pronounced like Spanish six using a local phoneme entry. Actual app screenshots retain their source colors. The body uses a project-specific Northeastern retint of the existing Show Tell isometric geometry; it does not alter the shared Claude brand. Original audit reports are unchanged.
+The team comes from its pinned submission README. No nickname is invented where only members are listed. Supplied marks retain their artwork and aspect ratio; SEIS retains its black background. Actual applications retain their source colors. Authored visuals use Northeastern red, black, white and Lato with the established Show Tell geometry. The full independent reports remain unchanged.
 
-Final sponsor update: Red Hat is included alongside Northeastern University/SEIS, OncoSys AI and The Open Accelerator using the supplied original logo. Opening sponsorship and closing thanks are narrated.
+See [all project credits](../CREDITS.md) and [asset provenance](../assets/README.md). This event-branded six-role spine is validated by build-tools/verify_films.py; the legacy Claude-only template check is not reported as passing.

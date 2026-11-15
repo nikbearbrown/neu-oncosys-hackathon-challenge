@@ -11,3 +11,5 @@ The event-specific six-beat contract is checked by `build-tools/verify_films.py`
 The local typography integration uses the unmasked source frame for declared regional contrast (masking a browser screenshot first incorrectly reports its text as absent). A synthetic regression confirmed real black-on-white heading passes while the masked placeholder fails. Explicit text inventories retain all designed headings, labels, notes and footers while excluding isometric hatching/edges that are not glyphs. Gate V still inspects the full composition.
 
 `metadata.render_concurrency: 4` is an opt-in extension to the canonical renderer; legacy default remains 1, accepted values are integers 1–8. It changes throughput, not resolution, PNG sampling, CRF or measured clocks.
+
+The local renderer also locks its shared consumers index, reloads the latest contents inside that lock, and replaces the index atomically. Different reels can render concurrently without overwriting each other's index entries. Never edit an individual beat sheet while its renderer or compiler is running: those tools update the sheet after completing work.

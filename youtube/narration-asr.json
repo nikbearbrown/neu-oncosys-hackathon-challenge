@@ -1,0 +1,95 @@
+{
+  "method": "Local cached Whisper base.en. ASR spelling of proper names is approximate, not an audio quality certification.",
+  "results": {
+    "claude-liam-cohort-firewall-show-tell": {
+      "BOPEN": {
+        "sha256": "90b72704758a9d834ae082d9168fa1e0d9bfe06bc7b40ea532bf48e3e36869e1",
+        "asr_text": " Cohort Firewall Evidence and Policy by Ninad Rao, Carrie Sarau, Esrilyssia Changelazity, and Sanica Shohari, sponsored by Northeastern SACE, Oncos' AI, the Open Accelerator, and Red Hat."
+      },
+      "BOUT": {
+        "sha256": "57b512ec54e5f1fa36b1716f4aba8737c718ac759081276b5dcf4d48d0f505cd",
+        "asr_text": " Thank you to the participants and sponsors, Northeastern SACE, Oncos' AI, the Open Accelerator, and Red Hat. This is LAM in for bear."
+      }
+    },
+    "claude-liam-readyset-show-tell": {
+      "BOPEN": {
+        "sha256": "26d9389acb546098c024083c8581fbcf23ee7754087c9e98b4390951333d072f",
+        "asr_text": " Ready Set Evidence Before Action by Team AutoMite, sponsored by Northeastern SACE, Onco Ciz AI, the Open Accelerator and Red Hat."
+      },
+      "BOUT": {
+        "sha256": "57b512ec54e5f1fa36b1716f4aba8737c718ac759081276b5dcf4d48d0f505cd",
+        "asr_text": " Thank you to the participants and sponsors, Northeastern SACE, Oncos' AI, the Open Accelerator, and Red Hat. This is LAM in for bear."
+      }
+    },
+    "claude-liam-clearanswer-show-tell": {
+      "BOPEN": {
+        "sha256": "d62be1c039fa0d43bff6fe9781f542e88d6fa17ab97e16e83d7b6ede6a257aab",
+        "asr_text": " Clear answer turn claims into checks by team clear answer. Sponsored by Northeastern SACE, Onco Cisei, the Open Accelerator and Red Hat."
+      },
+      "BOUT": {
+        "sha256": "57b512ec54e5f1fa36b1716f4aba8737c718ac759081276b5dcf4d48d0f505cd",
+        "asr_text": " Thank you to the participants and sponsors, Northeastern SACE, Oncos' AI, the Open Accelerator, and Red Hat. This is LAM in for bear."
+      }
+    },
+    "claude-liam-busy-beavers-show-tell": {
+      "BOPEN": {
+        "sha256": "efc1ab5b5991c23d783973e784dd108489cc644b354a84995ac55d04c934c3d9",
+        "asr_text": " Busy Beavers from Finding to Review by Team Busy Beavers, sponsored by Northeastern SACE, Onco Ciz AI, the Open Accelerator and Red Hat."
+      },
+      "BOUT": {
+        "sha256": "57b512ec54e5f1fa36b1716f4aba8737c718ac759081276b5dcf4d48d0f505cd",
+        "asr_text": " Thank you to the participants and sponsors, Northeastern SACE, Oncos' AI, the Open Accelerator, and Red Hat. This is LAM in for bear."
+      }
+    },
+    "claude-liam-identity-crisis-control-tower-show-tell": {
+      "BOPEN": {
+        "sha256": "0b193b8dbbe137690f7242e6d12a08fcd06361ef55d85a9de9fb15643ae2d044",
+        "asr_text": " Identity Crisis traced the decision by Team Identity Crisis, sponsored by Northeastern SACE, Onco Cisei, the open accelerator and red hat."
+      },
+      "BOUT": {
+        "sha256": "57b512ec54e5f1fa36b1716f4aba8737c718ac759081276b5dcf4d48d0f505cd",
+        "asr_text": " Thank you to the participants and sponsors, Northeastern SACE, Oncos' AI, the Open Accelerator, and Red Hat. This is LAM in for bear."
+      }
+    },
+    "claude-liam-hippa-cratic-show-tell": {
+      "BOPEN": {
+        "sha256": "b02522ce55308e5cbeee7de576706756bef02ee2612e86c85ef97641251bc33c",
+        "asr_text": " Hippocratic Build and Crosscheck by Team Hippocratic's, sponsored by Northeastern SACE, Onco Cisei, the Open Accelerator in Red Hat."
+      },
+      "BOUT": {
+        "sha256": "57b512ec54e5f1fa36b1716f4aba8737c718ac759081276b5dcf4d48d0f505cd",
+        "asr_text": " Thank you to the participants and sponsors, Northeastern SACE, Oncos' AI, the Open Accelerator, and Red Hat. This is LAM in for bear."
+      }
+    },
+    "claude-liam-oncosys-cohort-studio-show-tell": {
+      "BOPEN": {
+        "sha256": "4158e138be923279528ab72befc5220ca4b90c7ffb96f182ea5f8cdde10751fe",
+        "asr_text": " Cohort Studio See Who Remains by Lily Tammy Seth Baribao Ride Desai I Am Rod Shakya and Yannion Ma. Sponsored by Northeastern Seis Onkos' AI, The Open Accelerator and Red Hat."
+      },
+      "BOUT": {
+        "sha256": "57b512ec54e5f1fa36b1716f4aba8737c718ac759081276b5dcf4d48d0f505cd",
+        "asr_text": " Thank you to the participants and sponsors, Northeastern SACE, Oncos' AI, the Open Accelerator, and Red Hat. This is LAM in for bear."
+      }
+    },
+    "claude-liam-sns-cohort-control-tower-show-tell": {
+      "BOPEN": {
+        "sha256": "1eda30648ee0a7fe2ab39868024721addd16f50cd7d6cd6fdbd0cd1e70c747b3",
+        "asr_text": " SNS Control Tower explained the change. By Team SNS, sponsored by Northeastern SACE, Onco Ciz AI, the Open Accelerator and Red Hat."
+      },
+      "BOUT": {
+        "sha256": "57b512ec54e5f1fa36b1716f4aba8737c718ac759081276b5dcf4d48d0f505cd",
+        "asr_text": " Thank you to the participants and sponsors, Northeastern SACE, Oncos' AI, the Open Accelerator, and Red Hat. This is LAM in for bear."
+      }
+    },
+    "claude-liam-tripwire-show-tell": {
+      "BOPEN": {
+        "sha256": "721f6bec33d0e4ac2d2d7fe88e2330056822fc9ad20c94f57ef6f4bebe85b7c3",
+        "asr_text": " Tripwire make readiness inspectable by Team Skill Issue, sponsored by Northeastern SACE, Onco Cisei, the Open Accelerator and Red Hat."
+      },
+      "BOUT": {
+        "sha256": "57b512ec54e5f1fa36b1716f4aba8737c718ac759081276b5dcf4d48d0f505cd",
+        "asr_text": " Thank you to the participants and sponsors, Northeastern SACE, Oncos' AI, the Open Accelerator, and Red Hat. This is LAM in for bear."
+      }
+    }
+  }
+}

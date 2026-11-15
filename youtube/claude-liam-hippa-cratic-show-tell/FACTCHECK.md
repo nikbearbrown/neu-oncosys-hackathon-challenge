@@ -19,8 +19,8 @@ This selective promotional introduction does not replace the independent review.
 | BHTF | Help me test HIPPA-cratic Cohort Studio with invented tables. Build one sample-level join and one patient-level join. Compare the engine with the SQL check, then change an input and explain what must be refreshed or rejected. | Proposed development or suggested exercise, not a completed feature |
 | BOUT | Thank you to the participants and sponsors: Northeastern SEIS, OncoSys AI, The Open Accelerator, and Red Hat. This is Liam, in for Bear. | Supplied sponsor identity and pinned README team attribution |
 
-## Scope
+## Scope for this film
 
-All demonstrated data are invented/synthetic. ClearAnswer shows its actual landing interface only; no model-driven audit or external model call was run for its film. Cohort Firewall shows verbatim local CLI result excerpts, not a browser demo. HIPPA-cratic's SQL cross-check returned 16 matching sample identifiers and step counts in the observed synthetic example. Other browser demonstrations are the actual captured synthetic sessions described in the linked review/test records.
+All demonstrated data are invented/synthetic. HIPPA-cratic's SQL cross-check returned 16 matching sample identifiers and step counts in the observed synthetic example. This is distinct from the other team's Cohort Studio. Camera movement presents captured frames, not newly executed interaction.
 
 The suggested prompt is not shown as an executed agent response. Conceptual animations explain structure; they are not simulated app results. Next steps preserve the concerns in the full reviews and do not imply fixes have been implemented.

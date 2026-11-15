@@ -1,0 +1,33 @@
+{
+  "file": "exports/landscape/claude-liam-hippa-cratic-show-tell.mp4",
+  "bytes": 13308480,
+  "video": [
+    3840,
+    2160
+  ],
+  "audio_codec": "aac",
+  "duration_s": 176.166667,
+  "audio_timeline_s": 175.761334,
+  "sampled_frames": 352,
+  "blank_samples": [],
+  "explained_capture_entrances": [],
+  "decoded_without_errors": true,
+  "errors": [],
+  "visual_review": "Inspected all 14 final beat midpoints, opening and closing sponsor cards, and the three actual application captures at 1280x720. The cohort-step counts and independent SQL comparison are visible. This is the HIPPA-cratics project, kept separate from the other Cohort Studio team.",
+  "sha256": "1036e8fd22d77f6a0a58e407f7335c0303dcd1cec915006e0952412c55f2397b",
+  "gate_t": "PASS: 14 beats",
+  "gate_v": "PASS: zero blockers and zero major findings on the clean master",
+  "audio_check": "Local narration, measured per beat, AAC stream decoded. Opening/closing checked by cached local Whisper; ASR spellings of proper names are approximate.",
+  "audio_signal_check": {
+    "file": "exports/landscape/claude-liam-hippa-cratic-show-tell.mp4",
+    "threshold_db": -45,
+    "minimum_gap_s": 2,
+    "long_gap_starts_s": [],
+    "long_gap_durations_s": [],
+    "mean_volume_db": "-27.0",
+    "peak_volume_db": "-3.5",
+    "errors": [],
+    "scope": "Signal continuity only; does not establish correct pronunciation or replace listening."
+  },
+  "loudness_check": "PASS; measured integrated loudness, true peak and every narration beat in LOUDNESS.md"
+}

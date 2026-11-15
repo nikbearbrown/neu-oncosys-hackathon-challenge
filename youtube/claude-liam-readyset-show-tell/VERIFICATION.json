@@ -20,8 +20,21 @@
   ],
   "decoded_without_errors": true,
   "errors": [],
-  "visual_review": "Inspected opening/closing at 1280x720, actual UI detail frames and every beat midpoint in three contact sheets; preflight sampled 25/50/95%. The brief B02 entrance fade was inspected and is not a missing scene.",
-  "gate_t": "PASS: 14 beats, 0 failures",
-  "gate_v": "PASS on clean master: 28 samples, 0 blockers, 0 major",
-  "audio_check": "Local Whisper transcription checked opening/greeting/closing; spelling approximations for SEIS and proper names are not a pronunciation certification."
+  "visual_review": "Inspected every final beat midpoint, opening/closing at 1280x720 and actual UI detail frames. Inspected the brief B02 entrance fade separately. Compared with three-sample preflight.",
+  "sha256": "73c64a30987a655ddb7df417af2204bc07bf8b877cdb5db879a0183901480e05",
+  "gate_t": "PASS: 14 beats",
+  "gate_v": "PASS: zero blockers and zero major findings on the clean master",
+  "audio_check": "Local narration, measured per beat, AAC stream decoded. Opening/closing checked by cached local Whisper; ASR spellings of proper names are approximate.",
+  "audio_signal_check": {
+    "file": "exports/landscape/claude-liam-readyset-show-tell.mp4",
+    "threshold_db": -45,
+    "minimum_gap_s": 2,
+    "long_gap_starts_s": [],
+    "long_gap_durations_s": [],
+    "mean_volume_db": "-27.0",
+    "peak_volume_db": "-4.7",
+    "errors": [],
+    "scope": "Signal continuity only; does not establish correct pronunciation or replace listening."
+  },
+  "loudness_check": "PASS; measured integrated loudness, true peak and every narration beat in LOUDNESS.md"
 }

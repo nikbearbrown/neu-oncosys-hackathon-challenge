@@ -1,0 +1,95 @@
+{
+  "completed_utc": "2026-11-14T23:59:30.294560+00:00",
+  "films": [
+    {
+      "folder": "claude-liam-readyset-show-tell",
+      "title": "ReadySet: Evidence Before Action",
+      "beats": 14,
+      "duration_s": 155.75,
+      "bytes": 13261232,
+      "sampled_frames": 312,
+      "sha256": "73c64a30987a655ddb7df417af2204bc07bf8b877cdb5db879a0183901480e05"
+    },
+    {
+      "folder": "claude-liam-busy-beavers-show-tell",
+      "title": "Busy Beavers: From Finding To Review",
+      "beats": 13,
+      "duration_s": 159.541667,
+      "bytes": 9874658,
+      "sampled_frames": 319,
+      "sha256": "d7df0a94f098d1e34914baecd3298f6916caf8e605e8227282e6e9f2708ace6e"
+    },
+    {
+      "folder": "claude-liam-clearanswer-show-tell",
+      "title": "ClearAnswer: Turn Claims Into Checks",
+      "beats": 12,
+      "duration_s": 147.875,
+      "bytes": 7057515,
+      "sampled_frames": 296,
+      "sha256": "f9c24adce76dec712b44f2961d98f5b19e83aa4ac593e85adc864205a9fc6b9b"
+    },
+    {
+      "folder": "claude-liam-cohort-firewall-show-tell",
+      "title": "Cohort Firewall: Evidence And Policy",
+      "beats": 13,
+      "duration_s": 166.875,
+      "bytes": 7606870,
+      "sampled_frames": 334,
+      "sha256": "7801b18638198dd3a45baf2e5efd495cf3cce7f2bd228d96d085bdb494c43966"
+    },
+    {
+      "folder": "claude-liam-hippa-cratic-show-tell",
+      "title": "HIPPA-cratic: Build And Cross-Check",
+      "beats": 14,
+      "duration_s": 176.166667,
+      "bytes": 13308480,
+      "sampled_frames": 352,
+      "sha256": "1036e8fd22d77f6a0a58e407f7335c0303dcd1cec915006e0952412c55f2397b"
+    },
+    {
+      "folder": "claude-liam-identity-crisis-control-tower-show-tell",
+      "title": "Identity Crisis: Trace The Decision",
+      "beats": 13,
+      "duration_s": 157.583,
+      "bytes": 11970953,
+      "sampled_frames": 315,
+      "sha256": "0766df5b7bf9fedfa17d3af1d67d9a1ad1fccc2a00debc847aa862ece5b7cf15"
+    },
+    {
+      "folder": "claude-liam-oncosys-cohort-studio-show-tell",
+      "title": "Cohort Studio: See Who Remains",
+      "beats": 13,
+      "duration_s": 163.166667,
+      "bytes": 12857337,
+      "sampled_frames": 326,
+      "sha256": "fd1698c89e4345b2ab1a973979dfc75a79e0cfee4ba648c5860f3354f8f08119"
+    },
+    {
+      "folder": "claude-liam-sns-cohort-control-tower-show-tell",
+      "title": "SNS Control Tower: Explain The Change",
+      "beats": 13,
+      "duration_s": 163.958,
+      "bytes": 9919592,
+      "sampled_frames": 328,
+      "sha256": "7bc23f3eb70006e6b95f29d9922262a20ad86c092c8f98bfa1b483717ae26412"
+    },
+    {
+      "folder": "claude-liam-tripwire-show-tell",
+      "title": "Tripwire: Make Readiness Inspectable",
+      "beats": 13,
+      "duration_s": 158.125,
+      "bytes": 12664545,
+      "sampled_frames": 316,
+      "sha256": "cb874cba9a95f01409958f59c1e2622051f09c7be01b4b7ffbaf73a9bc299861"
+    }
+  ],
+  "total_duration_s": 1449.041001,
+  "total_beats": 118,
+  "total_master_bytes": 98521182,
+  "video_dimensions": [
+    3840,
+    2160
+  ],
+  "uploaded_to_youtube": false,
+  "transferred_to_cluster": false
+}

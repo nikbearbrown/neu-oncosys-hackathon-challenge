@@ -1,0 +1,33 @@
+{
+  "file": "exports/landscape/claude-liam-clearanswer-show-tell.mp4",
+  "bytes": 7057515,
+  "video": [
+    3840,
+    2160
+  ],
+  "audio_codec": "aac",
+  "duration_s": 147.875,
+  "audio_timeline_s": 147.601332,
+  "sampled_frames": 296,
+  "blank_samples": [],
+  "explained_capture_entrances": [],
+  "decoded_without_errors": true,
+  "errors": [],
+  "visual_review": "Inspected all final beat midpoints, opening/closing sponsor cards and actual interface capture; compared with the three-sample preflight. No fabricated audit output is shown.",
+  "sha256": "f9c24adce76dec712b44f2961d98f5b19e83aa4ac593e85adc864205a9fc6b9b",
+  "gate_t": "PASS: 12 beats",
+  "gate_v": "PASS: zero blockers and zero major findings on the clean master",
+  "audio_check": "Local narration, measured per beat, AAC stream decoded. Opening/closing checked by cached local Whisper; ASR spellings of proper names are approximate.",
+  "audio_signal_check": {
+    "file": "exports/landscape/claude-liam-clearanswer-show-tell.mp4",
+    "threshold_db": -45,
+    "minimum_gap_s": 2,
+    "long_gap_starts_s": [],
+    "long_gap_durations_s": [],
+    "mean_volume_db": "-27.1",
+    "peak_volume_db": "-4.1",
+    "errors": [],
+    "scope": "Signal continuity only; does not establish correct pronunciation or replace listening."
+  },
+  "loudness_check": "PASS; measured integrated loudness, true peak and every narration beat in LOUDNESS.md"
+}

@@ -1,0 +1,33 @@
+{
+  "file": "exports/landscape/claude-liam-tripwire-show-tell.mp4",
+  "bytes": 12664545,
+  "video": [
+    3840,
+    2160
+  ],
+  "audio_codec": "aac",
+  "duration_s": 158.125,
+  "audio_timeline_s": 157.862666,
+  "sampled_frames": 316,
+  "blank_samples": [],
+  "explained_capture_entrances": [],
+  "decoded_without_errors": true,
+  "errors": [],
+  "visual_review": "Inspected all 13 final beat midpoints, project/team and sponsor cards, and both actual application views at 1280x720. The overview and next-action evidence remain distinguishable from conceptual diagrams and proposed development. Detailed review-validation claims are grounded in the linked runtime record.",
+  "sha256": "cb874cba9a95f01409958f59c1e2622051f09c7be01b4b7ffbaf73a9bc299861",
+  "gate_t": "PASS: 13 beats",
+  "gate_v": "PASS: zero blockers and zero major findings on the clean master",
+  "audio_check": "Local narration, measured per beat, AAC stream decoded. Opening/closing checked by cached local Whisper; ASR spellings of proper names are approximate.",
+  "audio_signal_check": {
+    "file": "exports/landscape/claude-liam-tripwire-show-tell.mp4",
+    "threshold_db": -45,
+    "minimum_gap_s": 2,
+    "long_gap_starts_s": [],
+    "long_gap_durations_s": [],
+    "mean_volume_db": "-27.0",
+    "peak_volume_db": "-4.1",
+    "errors": [],
+    "scope": "Signal continuity only; does not establish correct pronunciation or replace listening."
+  },
+  "loudness_check": "PASS; measured integrated loudness, true peak and every narration beat in LOUDNESS.md"
+}

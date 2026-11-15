@@ -10,11 +10,13 @@ if abs(duration-expected)>len(s['beats'])/24+.25:errors.append('duration mismatc
 decode=subprocess.run(['ffmpeg','-v','error','-i',str(f),'-f','null','-'],capture_output=True,text=True)
 if decode.returncode or decode.stderr.strip():errors.append('decode errors: '+decode.stderr[-1000:])
 raw=subprocess.check_output(['ffmpeg','-v','error','-i',str(f),'-vf','fps=2,scale=320:180,format=gray','-f','rawvideo','-']);frames=np.frombuffer(raw,dtype=np.uint8).reshape((-1,180,320));blank=[i/2+.25 for i,frame in enumerate(frames) if frame.std()<3]
-# fps=2 selects around half-second-bin centers. BrowserCapture intentionally
-# springs from zero opacity during its first ~0.3 s; do not call that a missing scene.
+# fps=2 selects around half-second-bin centers. BrowserCapture and CCPlainShell
+# intentionally spring from zero opacity during their first ~0.3 s. The latter
+# was inspected at 52.25 s in Cohort Firewall: title bar entering before text.
+# Only this bounded entrance is explained; later blank frames still fail.
 starts=[];clock=0
 for beat in s['beats']:
- if beat['shot']['remotion']['pattern']=='BrowserCapture':starts.append((clock,beat['beat_id']))
+ if beat['shot']['remotion']['pattern'] in ('BrowserCapture','CCPlainShell'):starts.append((clock,beat['beat_id']))
  clock+=math.ceil(beat['actual_duration_s']*24)/24
 transitions=[{'time_s':t,'beat':bid} for t in blank for start,bid in starts if 0<=t-start<=.35]
 persistent=[t for t in blank if not any(x['time_s']==t for x in transitions)]

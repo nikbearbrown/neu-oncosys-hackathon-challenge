@@ -1,0 +1,40 @@
+{
+  "file": "exports/landscape/claude-liam-busy-beavers-show-tell.mp4",
+  "bytes": 9874658,
+  "video": [
+    3840,
+    2160
+  ],
+  "audio_codec": "aac",
+  "duration_s": 159.541667,
+  "audio_timeline_s": 159.271291,
+  "sampled_frames": 319,
+  "blank_samples": [
+    63.75
+  ],
+  "explained_capture_entrances": [
+    {
+      "time_s": 63.75,
+      "beat": "B03"
+    }
+  ],
+  "decoded_without_errors": true,
+  "errors": [],
+  "visual_review": "Inspected every final beat midpoint and sponsor cards. Corrected and inspected B02 camera to preserve analysis labels; inspected B03 actual researcher-review text. Compared with three-sample preflight.",
+  "sha256": "d7df0a94f098d1e34914baecd3298f6916caf8e605e8227282e6e9f2708ace6e",
+  "gate_t": "PASS: 13 beats",
+  "gate_v": "PASS: zero blockers and zero major findings on the clean master",
+  "audio_check": "Local narration, measured per beat, AAC stream decoded. Opening/closing checked by cached local Whisper; ASR spellings of proper names are approximate.",
+  "audio_signal_check": {
+    "file": "exports/landscape/claude-liam-busy-beavers-show-tell.mp4",
+    "threshold_db": -45,
+    "minimum_gap_s": 2,
+    "long_gap_starts_s": [],
+    "long_gap_durations_s": [],
+    "mean_volume_db": "-27.0",
+    "peak_volume_db": "-3.3",
+    "errors": [],
+    "scope": "Signal continuity only; does not establish correct pronunciation or replace listening."
+  },
+  "loudness_check": "PASS; measured integrated loudness, true peak and every narration beat in LOUDNESS.md"
+}

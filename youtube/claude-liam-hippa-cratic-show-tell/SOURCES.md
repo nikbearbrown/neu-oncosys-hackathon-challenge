@@ -4,7 +4,7 @@ Pinned submission: https://github.com/roh9031/HIPPA-cratic/tree/9f0ad46f32a1a76a
 
 Independent review: https://github.com/nikbearbrown/neu-oncosys-hackathon-challenge/tree/main/professor-bear/hippa-cratic
 
-Actual local captures: captures/overview.png, captures/steps.png, captures/sql.png. All demonstrated inputs are synthetic. ClearAnswer shows its interface only, without a model audit. Diagrams are conceptual; next-step diagrams are proposals. No clinical validation or official judging score.
+Actual local captures: captures/overview.png, captures/steps.png, captures/sql.png. All demonstrated inputs are synthetic. Diagrams are conceptual; next-step diagrams are proposals. No clinical validation or official judging score.
 
 Liam: local Kokoro am_onyx; registered event-branded Show Tell components. No paid generation or new stock imagery.
 

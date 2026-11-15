@@ -1,0 +1,40 @@
+{
+  "file": "exports/landscape/claude-liam-oncosys-cohort-studio-show-tell.mp4",
+  "bytes": 12857337,
+  "video": [
+    3840,
+    2160
+  ],
+  "audio_codec": "aac",
+  "duration_s": 163.166667,
+  "audio_timeline_s": 162.897332,
+  "sampled_frames": 326,
+  "blank_samples": [
+    49.75
+  ],
+  "explained_capture_entrances": [
+    {
+      "time_s": 49.75,
+      "beat": "B02"
+    }
+  ],
+  "decoded_without_errors": true,
+  "errors": [],
+  "visual_review": "Inspected all 13 final beat midpoints, sponsor/team cards, and both real application captures at 1280x720. The cohort selection, eight retained patients and flow diagram remain legible. Contrast checks distinguish panel and button geometry from the actual title, notice, protocol and count text. Kept this team separate from HIPPA-cratics.",
+  "sha256": "fd1698c89e4345b2ab1a973979dfc75a79e0cfee4ba648c5860f3354f8f08119",
+  "gate_t": "PASS: 13 beats",
+  "gate_v": "PASS: zero blockers and zero major findings on the clean master",
+  "audio_check": "Local narration, measured per beat, AAC stream decoded. Opening/closing checked by cached local Whisper; ASR spellings of proper names are approximate.",
+  "audio_signal_check": {
+    "file": "exports/landscape/claude-liam-oncosys-cohort-studio-show-tell.mp4",
+    "threshold_db": -45,
+    "minimum_gap_s": 2,
+    "long_gap_starts_s": [],
+    "long_gap_durations_s": [],
+    "mean_volume_db": "-27.1",
+    "peak_volume_db": "-4.4",
+    "errors": [],
+    "scope": "Signal continuity only; does not establish correct pronunciation or replace listening."
+  },
+  "loudness_check": "PASS; measured integrated loudness, true peak and every narration beat in LOUDNESS.md"
+}

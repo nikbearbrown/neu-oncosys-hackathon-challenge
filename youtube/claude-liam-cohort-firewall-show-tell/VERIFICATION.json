@@ -1,0 +1,40 @@
+{
+  "file": "exports/landscape/claude-liam-cohort-firewall-show-tell.mp4",
+  "bytes": 7606870,
+  "video": [
+    3840,
+    2160
+  ],
+  "audio_codec": "aac",
+  "duration_s": 166.875,
+  "audio_timeline_s": 166.673333,
+  "sampled_frames": 334,
+  "blank_samples": [
+    52.25
+  ],
+  "explained_capture_entrances": [
+    {
+      "time_s": 52.25,
+      "beat": "B02"
+    }
+  ],
+  "decoded_without_errors": true,
+  "errors": [],
+  "visual_review": "Inspected all 13 final beat midpoints, sponsor cards and literal CLI result excerpts. Inspected the short shell entrance at 52.25 seconds against the component timing; it is a bounded animation, not a missing result. No browser or clinical workflow is claimed.",
+  "sha256": "7801b18638198dd3a45baf2e5efd495cf3cce7f2bd228d96d085bdb494c43966",
+  "gate_t": "PASS: 13 beats",
+  "gate_v": "PASS: zero blockers and zero major findings on the clean master",
+  "audio_check": "Local narration, measured per beat, AAC stream decoded. Opening/closing checked by cached local Whisper; ASR spellings of proper names are approximate.",
+  "audio_signal_check": {
+    "file": "exports/landscape/claude-liam-cohort-firewall-show-tell.mp4",
+    "threshold_db": -45,
+    "minimum_gap_s": 2,
+    "long_gap_starts_s": [],
+    "long_gap_durations_s": [],
+    "mean_volume_db": "-27.1",
+    "peak_volume_db": "-4.9",
+    "errors": [],
+    "scope": "Signal continuity only; does not establish correct pronunciation or replace listening."
+  },
+  "loudness_check": "PASS; measured integrated loudness, true peak and every narration beat in LOUDNESS.md"
+}

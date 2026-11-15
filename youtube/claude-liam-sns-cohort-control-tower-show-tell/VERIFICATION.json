@@ -1,0 +1,33 @@
+{
+  "file": "exports/landscape/claude-liam-sns-cohort-control-tower-show-tell.mp4",
+  "bytes": 9919592,
+  "video": [
+    3840,
+    2160
+  ],
+  "audio_codec": "aac",
+  "duration_s": 163.958,
+  "audio_timeline_s": 163.665332,
+  "sampled_frames": 328,
+  "blank_samples": [],
+  "explained_capture_entrances": [],
+  "decoded_without_errors": true,
+  "errors": [],
+  "visual_review": "Inspected all 13 final beat midpoints and sponsor cards, the comparison at 1280x720, and the corrected final B03 export view. Removed a small editorial zoom so the Export heading is intact; the original app pixels and observed output are unchanged. Repair simulation remains distinct from approval.",
+  "sha256": "7bc23f3eb70006e6b95f29d9922262a20ad86c092c8f98bfa1b483717ae26412",
+  "gate_t": "PASS: 13 beats",
+  "gate_v": "PASS: zero blockers and zero major findings on the clean master",
+  "audio_check": "Local narration, measured per beat, AAC stream decoded. Opening/closing checked by cached local Whisper; ASR spellings of proper names are approximate.",
+  "audio_signal_check": {
+    "file": "exports/landscape/claude-liam-sns-cohort-control-tower-show-tell.mp4",
+    "threshold_db": -45,
+    "minimum_gap_s": 2,
+    "long_gap_starts_s": [],
+    "long_gap_durations_s": [],
+    "mean_volume_db": "-27.1",
+    "peak_volume_db": "-3.0",
+    "errors": [],
+    "scope": "Signal continuity only; does not establish correct pronunciation or replace listening."
+  },
+  "loudness_check": "PASS; measured integrated loudness, true peak and every narration beat in LOUDNESS.md"
+}

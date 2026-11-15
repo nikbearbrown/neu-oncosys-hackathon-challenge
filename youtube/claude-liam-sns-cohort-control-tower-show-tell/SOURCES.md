@@ -4,7 +4,7 @@ Pinned submission: https://github.com/saigunavardhan/sns-cohort-control-tower/tr
 
 Independent review: https://github.com/nikbearbrown/neu-oncosys-hackathon-challenge/tree/main/professor-bear/sns-cohort-control-tower
 
-Actual local captures: professor-bear/sns-cohort-control-tower/evidence/results-synthetic.png, professor-bear/sns-cohort-control-tower/evidence/export-synthetic.png. All demonstrated inputs are synthetic. ClearAnswer shows its interface only, without a model audit. Diagrams are conceptual; next-step diagrams are proposals. No clinical validation or official judging score.
+Actual local captures: professor-bear/sns-cohort-control-tower/evidence/results-synthetic.png, professor-bear/sns-cohort-control-tower/evidence/export-synthetic.png. All demonstrated inputs are synthetic. Diagrams are conceptual; next-step diagrams are proposals. No clinical validation or official judging score.
 
 Liam: local Kokoro am_onyx; registered event-branded Show Tell components. No paid generation or new stock imagery.
 

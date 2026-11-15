@@ -14,3 +14,5 @@ beat_sheet.pre-event-brand.json
 batch-status.json
 qc-sheet.png
 build-state.json
+master-qa-status.json
+todo.json

@@ -44,7 +44,7 @@
     "team": "Team Automyte",
     "brand_confirmation": "confirmed",
     "pronounce": {
-      "SEIS": "sˈeɪs"
+      "SEIS": "s\u02c8e\u026as"
     },
     "render_concurrency": 4
   },
@@ -126,8 +126,8 @@
             "label": "Written organizer credits",
             "box": [
               0.055,
-              0.74,
-              0.34,
+              0.71,
+              0.36,
               0.94
             ]
           }
@@ -420,7 +420,7 @@
       "shot": {
         "type": "REMOTION",
         "source": "own",
-        "visual_intent": "ReadySet · synthetic local demonstration · 14 Nov 2026",
+        "visual_intent": "ReadySet \u00b7 synthetic local demonstration \u00b7 14 Nov 2026",
         "motion_claim": "Reveal the named evidence or process on the narrated cue",
         "show": [
           {
@@ -437,7 +437,7 @@
           "props": {
             "image": "oncosys-films/claude-liam-readyset-show-tell/overview.png",
             "imageAspect": 1.7777777777777777,
-            "caption": "ReadySet · synthetic local demonstration · 14 Nov 2026",
+            "caption": "ReadySet \u00b7 synthetic local demonstration \u00b7 14 Nov 2026",
             "moves": [
               {
                 "at": 0,
@@ -508,7 +508,7 @@
       "shot": {
         "type": "REMOTION",
         "source": "own",
-        "visual_intent": "Actual A2-only result · synthetic data",
+        "visual_intent": "Actual A2-only result \u00b7 synthetic data",
         "motion_claim": "Reveal the named evidence or process on the narrated cue",
         "show": [
           {
@@ -525,7 +525,7 @@
           "props": {
             "image": "oncosys-films/claude-liam-readyset-show-tell/question-a2.png",
             "imageAspect": 1.7777777777777777,
-            "caption": "Actual A2-only result · synthetic data",
+            "caption": "Actual A2-only result \u00b7 synthetic data",
             "moves": [
               {
                 "at": 0,
@@ -573,7 +573,7 @@
       "shot": {
         "type": "REMOTION",
         "source": "own",
-        "visual_intent": "Actual finding and evidence · synthetic data",
+        "visual_intent": "Actual finding and evidence \u00b7 synthetic data",
         "motion_claim": "Reveal the named evidence or process on the narrated cue",
         "show": [
           {
@@ -590,7 +590,7 @@
           "props": {
             "image": "oncosys-films/claude-liam-readyset-show-tell/evidence.png",
             "imageAspect": 1.7777777777777777,
-            "caption": "Actual finding and evidence · synthetic data",
+            "caption": "Actual finding and evidence \u00b7 synthetic data",
             "moves": [
               {
                 "at": 0,
@@ -807,7 +807,7 @@
             ],
             "diagramStyle": "show-tell-isometric",
             "mode": "gate",
-            "note": "Proposed next step · not a completed feature",
+            "note": "Proposed next step \u00b7 not a completed feature",
             "cues": [
               0.1,
               0.28,
@@ -926,7 +926,7 @@
             ],
             "diagramStyle": "show-tell-isometric",
             "mode": "flow",
-            "note": "Proposed next step · immutable review events",
+            "note": "Proposed next step \u00b7 immutable review events",
             "cues": [
               0.1,
               0.28,
@@ -1044,7 +1044,7 @@
             ],
             "diagramStyle": "show-tell-isometric",
             "mode": "flow",
-            "note": "Research prototype · detailed review linked with this film",
+            "note": "Research prototype \u00b7 detailed review linked with this film",
             "cues": [
               0.1,
               0.28,
@@ -1325,8 +1325,8 @@
             "label": "Written organizer credits",
             "box": [
               0.055,
-              0.74,
-              0.34,
+              0.71,
+              0.36,
               0.94
             ]
           }
